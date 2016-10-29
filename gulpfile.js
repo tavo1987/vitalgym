@@ -1,5 +1,6 @@
-var elixir = require('laravel-elixir');
+const elixir = require('laravel-elixir');
 
+require('laravel-elixir-vue-2');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -12,7 +13,20 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.less('app.less');
+
+    mix.copy('node_modules/toastr/build/toastr.min.css', 'resources/assets/sass/toastr.scss')
+        .copy('node_modules/toastr/build/toastr.min.js', 'public/js/toastr.min.js');
+
     mix.less('admin-lte/AdminLTE.less');
     mix.less('bootstrap/bootstrap.less');
+
+    mix.sass('app.scss')
+        .webpack('app.js');
+
+    mix.browserSync({
+        proxy: 'http://vitalgym.dev',
+        injectChanges: true,
+        notify: true,
+    })
 });
+
