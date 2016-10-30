@@ -18,7 +18,7 @@ elixir(function(mix) {
         .copy('node_modules/toastr/build/toastr.min.js', 'resources/assets/js/plugins/toastr.js');
 
 
-    mix.sass('app.scss')
+    mix.sass(['*.scss','app.scss'])
         .webpack([
             'app.js',
             'plugins/toastr.js',
@@ -32,7 +32,6 @@ elixir(function(mix) {
     })
 
     mix.less('admin-lte/AdminLTE.less');
-    mix.less('bootstrap/bootstrap.less');
 
 });
 
