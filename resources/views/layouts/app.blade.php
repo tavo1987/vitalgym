@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<!--
+{{--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
--->
+--}}
 <html lang="es">
 
 @section('htmlheader')
     @include('layouts.partials.htmlheader')
 @show
 
-<!--
+{{--
 BODY TAG OPTIONS:
 =================
 Apply one or more of the following classes to get the
@@ -28,9 +28,9 @@ desired effect
 |               | sidebar-collapse                        |
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
--->
-<body class="skin-red sidebar-mini">
-<div class="wrapper">
+--}}
+<body class="skin-black fixed">
+<div class="wrapper" id="app">
 
     @include('layouts.partials.mainheader')
 
