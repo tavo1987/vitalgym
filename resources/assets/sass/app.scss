@@ -6,10 +6,14 @@
     ============================================================================
  */
 
+//Base
+@import "base/bootstrap";
+@import "base/site";
+
 //Variables
 @import "variables";
 
 //PLUGINS
-@import "plugins/toastr"
+@import "plugins/toastr";
 
 
