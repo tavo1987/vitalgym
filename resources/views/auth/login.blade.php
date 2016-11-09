@@ -50,7 +50,7 @@
 
 
 
-    <a href="{{ url('/password/reset') }}">{{ trans('adminlte_lang::message.forgotpassword') }}</a><br>
+    <a href="{{ url('/password/reset') }}"><strong>{{ trans('adminlte_lang::message.forgotpassword') }}</strong></a><br>
 
 </div><!-- /.login-box-body -->
 
