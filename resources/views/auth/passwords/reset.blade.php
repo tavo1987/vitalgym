@@ -60,8 +60,7 @@
                 </div>
             </form>
 
-            <a href="{{ url('/login') }}">Log in</a><br>
-            <a href="{{ url('/register') }}" class="text-center">{{ trans('adminlte_lang::message.membreship') }}</a>
+            <a href="{{ url('/login') }}">Log In</a><br>
 
         </div><!-- /.login-box-body -->
 
