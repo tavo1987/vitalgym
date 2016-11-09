@@ -184,6 +184,12 @@ a:focus {
   display: block;
   margin-top: 5px;
 }
+@media (min-width: 767px) {
+  .content-wrapper {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
 /*
  * Component: Main Header
  * ----------------------
@@ -310,7 +316,7 @@ a:focus {
   padding: 15px 15px 0 15px;
 }
 .content-header > h1 {
-  margin: 0;
+  margin: 1.25rem 0 0 0;
   font-size: 24px;
 }
 .content-header > h1 > small {
