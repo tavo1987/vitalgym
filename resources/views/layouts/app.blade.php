@@ -31,6 +31,9 @@ desired effect
 --}}
 <body class="skin-black fixed">
 <div class="wrapper" id="app">
+    <div id="loader">
+        <img src="{{ asset('/img/loading.gif') }}" alt="loader">
+    </div>
 
     @include('layouts.partials.mainheader')
 
@@ -38,7 +41,6 @@ desired effect
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-
         @include('layouts.partials.contentheader')
 
         <!-- Main content -->
