@@ -28,7 +28,7 @@ elixir(function(mix) {
     mix.browserSync({
         proxy: 'http://vitalgym.dev',
         injectChanges: true,
-        notify: true,
+        notify: false,
     })
 
     mix.less('admin-lte/AdminLTE.less');
