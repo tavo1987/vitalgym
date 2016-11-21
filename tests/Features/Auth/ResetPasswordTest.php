@@ -9,17 +9,6 @@ class ResetPasswordTest extends TestCase
 {
     use DatabaseTransactions, InteractsWithMail;
 
-    public function createNewUser() : User
-    {
-        $user = factory(User::class)->create([
-            'name'     => 'Edwin',
-            'email'    => 'tavo198718@gmail.com',
-            'password' => bcrypt('secret'),
-        ]);
-
-        return $user;
-    }
-
     public function test_password_reset_email()
     {
         $user = $this->createNewUser();
