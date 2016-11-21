@@ -1,7 +1,5 @@
 <?php
 
-use App\User;
-
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use MailThief\Testing\InteractsWithMail;
 
@@ -15,7 +13,7 @@ class AuthenticationUserTest extends TestCase
 
         $this->visit('/')
             ->seePageIs('/login')
-            ->type('tavo198718@gmail.com', 'email')
+            ->type($user->email, 'email')
             ->type('secret', 'password')
             ->press(trans('login.buttonsign'));
 
