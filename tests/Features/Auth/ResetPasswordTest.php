@@ -1,6 +1,5 @@
 <?php
 
-use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\DB;
 use MailThief\Testing\InteractsWithMail;
