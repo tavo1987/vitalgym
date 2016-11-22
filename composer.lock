@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "550aeb72226320abfd31269bc8a0a332",
-    "content-hash": "cbeebdce0b8fdfdfcc645a3d997d7a26",
+    "hash": "39350bf94813407affb6544cc86447b1",
+    "content-hash": "420854a0dd557a4c7e3126f09f723c3c",
     "packages": [
         {
             "name": "acacha/admin-lte-template-laravel",
@@ -3438,6 +3438,48 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2016-10-24 18:41:13"
+        },
+        {
+            "name": "tightenco/mailthief",
+            "version": "v0.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tightenco/mailthief.git",
+                "reference": "a42277459092ae87f5ac11271f969625509f7f49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tightenco/mailthief/zipball/a42277459092ae87f5ac11271f969625509f7f49",
+                "reference": "a42277459092ae87f5ac11271f969625509f7f49",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/mail": "^5.0",
+                "illuminate/view": "^5.0"
+            },
+            "require-dev": {
+                "laravel/framework": "^5.1",
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "^5.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MailThief\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adam Wathan",
+                    "email": "adam.wathan@gmail.com"
+                }
+            ],
+            "description": "A fake Mailer for Laravel applications that takes the pain out of testing mail.",
+            "time": "2016-10-12 22:32:47"
         },
         {
             "name": "webmozart/assert",

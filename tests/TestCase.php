@@ -1,5 +1,7 @@
 <?php
 
+use App\User;
+
 abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
@@ -21,5 +23,24 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
         return $app;
+    }
+
+    public function createNewUser($data = []) : User
+    {
+
+        $userData = collect([
+            'name'     => 'Edwin',
+            'email'    => 'tavo198718@gmail.com',
+            'password' => bcrypt('secret'),
+            'active'   => true,
+        ]);
+
+        if (!empty($data)) {
+            foreach ($data as $key => $value) {
+                $userData->put($key, $value);
+            }
+        }
+
+        return factory(User::class)->create($userData->toArray());
     }
 }

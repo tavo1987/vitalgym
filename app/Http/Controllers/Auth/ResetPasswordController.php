@@ -25,7 +25,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -35,5 +35,21 @@ class ResetPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    /**
+     * Get the response for a successful password reset.
+     *
+     * @param  string  $response
+     * @return \Illuminate\Http\Response
+     */
+    protected function sendResetResponse($response)
+    {
+        if (!$this->guard()->user()->active) {
+            $this->guard()->logout();
+            return redirect('/login')->withInfo('Your password has been changed but you still need to activate.');
+        }
+
+        return redirect($this->redirectPath())->with('status', trans($response));
     }
 }
