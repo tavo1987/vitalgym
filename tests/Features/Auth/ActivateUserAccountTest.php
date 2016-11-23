@@ -24,13 +24,13 @@ class ActionAccountTest extends TestCase
     public function test_inactive_user_cannot_login_even_if_reset_his_password()
     {
         $user = $this->createNewUser([
-            'active' => false
+            'active' => false,
         ]);
 
         $token = str_random(60);
         DB::table('password_resets')->insert(['email' => $user->email, 'token' => $token]);
 
-        $this->visit('/password/reset/' . $token)
+        $this->visit('/password/reset/'.$token)
             ->type($user->email, 'email')
             ->type('laravel', 'password')
             ->type('laravel', 'password_confirmation')
@@ -38,7 +38,5 @@ class ActionAccountTest extends TestCase
 
         $this->dontSeeIsAuthenticated()
             ->seePageIs('/login');
-
     }
-
 }

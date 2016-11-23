@@ -40,13 +40,15 @@ class ResetPasswordController extends Controller
     /**
      * Get the response for a successful password reset.
      *
-     * @param  string  $response
+     * @param string $response
+     *
      * @return \Illuminate\Http\Response
      */
     protected function sendResetResponse($response)
     {
         if (!$this->guard()->user()->active) {
             $this->guard()->logout();
+
             return redirect('/login')->withInfo('Your password has been changed but you still need to activate.');
         }
 

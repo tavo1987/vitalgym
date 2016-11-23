@@ -27,7 +27,6 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 
     public function createNewUser($data = []) : User
     {
-
         $userData = collect([
             'name'     => 'Edwin',
             'email'    => 'tavo198718@gmail.com',
