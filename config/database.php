@@ -72,7 +72,7 @@ return [
             'port' => env('DB_TEST_PORT', '3306'),
             'database' => env('DB_TEST_DATABASE', 'forge'),
             'username' => env('MYSQL_USER', env('DB_TEST_USERNAME', 'forge')),
-            'password' => ENV('MYSQL_PASSWORD', env('DB_TEST_PASSWORD', '')),
+            'password' => env('MYSQL_PASSWORD', env('DB_TEST_PASSWORD', '')),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
