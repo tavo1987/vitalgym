@@ -13,17 +13,17 @@
 
 
 /**
- * Removed routes belonging to admin lte package
+ * Removed routes belonging to admin lte package.
  */
-Route::get('/home', function(){
+Route::get('/home', function () {
     abort(404);
 });
 
-Route::get('register', function(){
+Route::get('register', function () {
     abort(404);
 });
 
-Route::post('register', function(){
+Route::post('register', function () {
     abort(404);
 });
 
