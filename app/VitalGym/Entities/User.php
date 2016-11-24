@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\VitalGym\Entities;
 
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Notifications\Notifiable;

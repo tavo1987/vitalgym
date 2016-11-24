@@ -1,6 +1,6 @@
 <?php
 
-use App\User;
+use App\VitalGym\Entities\User;
 
 abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
