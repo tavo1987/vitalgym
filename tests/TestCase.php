@@ -27,7 +27,6 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
 
     public function createNewUser($data = []) : User
     {
-
         $userData = collect([
             'name'     => 'Edwin',
             'email'    => 'tavo198718@gmail.com',
@@ -35,7 +34,7 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
             'active'   => true,
         ]);
 
-        if (!empty($data)) {
+        if (! empty($data)) {
             foreach ($data as $key => $value) {
                 $userData->put($key, $value);
             }
