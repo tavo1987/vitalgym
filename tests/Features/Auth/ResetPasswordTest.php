@@ -24,7 +24,6 @@ class ResetPasswordTest extends TestCase
             ->seeMessageWithSubject('Restablecer Contraseña')
             ->assertTrue($this->lastMessage()->contains('Usted esta recibiendo este correo porque hemos recibido un solicitud para restablecer su contraseña'));
         $this->seeText('¡Te hemos enviado por correo el enlace para restablecer tu contraseña!');
-
     }
 
     public function test_password_reset_email_not_received()
@@ -41,12 +40,12 @@ class ResetPasswordTest extends TestCase
 
     public function test_user_can_reset_password()
     {
-        $user  = $this->createNewUser();
+        $user = $this->createNewUser();
         $token = str_random(60);
         DB::table('password_resets')->insert(['email' => $user->email, 'token' => $token]);
 
 
-        $this->visit('/password/reset/' . $token)
+        $this->visit('/password/reset/'.$token)
             ->seeText('Restablecer la contraseña')
             ->type($user->email, 'email')
             ->type('laravel', 'password')
@@ -56,14 +55,13 @@ class ResetPasswordTest extends TestCase
         $this->seeIsAuthenticated()
             ->seeCredentials(['password' => 'laravel'])
             ->seeText('Bienvenido');
-
     }
 
     public function test_unregistered_user_cannot_reset_password()
     {
         $token = str_random(60);
 
-        $this->visit('/password/reset/' . $token)
+        $this->visit('/password/reset/'.$token)
             ->seeText('Restablecer la contraseña')
             ->type('fake@email.com', 'email')
             ->type('laravel', 'password')
@@ -77,13 +75,13 @@ class ResetPasswordTest extends TestCase
 
     public function test_invalid_token_to_password_reset()
     {
-        $user       = $this->createNewUser();
-        $token      = str_random(60);
+        $user = $this->createNewUser();
+        $token = str_random(60);
         $fake_token = str_random(60);
 
         DB::table('password_resets')->insert(['email' => $user->email, 'token' => $token]);
 
-        $this->visit('/password/reset/' . $fake_token)
+        $this->visit('/password/reset/'.$fake_token)
             ->seeText('Restablecer la contraseña')
             ->type($user->email, 'email')
             ->type('laravel', 'password')
@@ -104,6 +102,5 @@ class ResetPasswordTest extends TestCase
 
         $this->seeText('El campo correo electrónico es obligatorio.')
             ->seeText('El campo contraseña es obligatorio.');
-
     }
 }
