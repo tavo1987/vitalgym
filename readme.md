@@ -1,27 +1,19 @@
-# Laravel PHP Framework
+# Vital Gym
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+[ ![Codeship Status for tavo1987/vitalgym](https://app.codeship.com/projects/d7e4e1d0-8da3-0134-4014-0298e52abb1b/status?branch=master)](https://app.codeship.com/projects/185064) [![StyleCI](https://styleci.io/repos/72246573/shield?branch=master)](https://styleci.io/repos/72246573)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+Aplicativo web para el control administrativo y seguimiento del progreso físico de los clientes del gimnasio Vital GYM.
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+Actualmente el gimnasio Vital GYM no dispone de ningún software o aplicativo web enfocado al control administrativo y al seguimiento físico de usuarios, todo se lo lleva de una manera rudimentaria, es decir mediante el uso de lápiz y papel, y por ende esto hace mucho más difícil el trabajo para el personal encargado.
 
-## Official Documentation
+Una gran parte de personas, en busca de cuidar su salud y su apariencia acuden regularmente a gimnasios tratando de encontrar ayuda profesional, por esta razón el mercado actual ha creado este tipo de negocios en la ciudad de Quito, los mismos que tratan de ofrecer los mejores precios y servicios al cliente, pero la gran mayoría de gimnasios no cuentan con ningún tipo de aplicativo, que gestione correctamente todos los procesos y las tareas comunes que se hacen día a día en los mismos. Es por esto que se genera la necesidad de crear un aplicativo que administre y automatice las actividades de gimnasios. 
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+Este será accesible desde cualquier computador, estará disponible las 24 horas del día los 365 días del año, a través de internet y su propio servidor. Esto es una gran ventaja, tanto para el propietario como para clientes e instructores del gimnasio. Todos estos podrán acceder al aplicativo desde cualquier lugar y la hora que deseen, para Consultar pagos, asistencia y su progreso. El aplicativo será accesible desde tablets, smartphones, ipads, smarts TV etc. ya que el mismo de adaptará a cualquier tamaño de pantalla o resolución.
 
-## Contributing
+## Vulnerabilidades de Seguridad
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+Si descubre una vulnerabilidad de seguridad dentro de este software, envía un correo electrónico a Soporte a support@vitalgymecuador.com Todas las vulnerabilidades de seguridad serán tratadas los más rápido posible.
 
-## Security Vulnerabilities
+## Licencia
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Vital Gym es un software de código abierto bajo licencia [MIT license](http://opensource.org/licenses/MIT). Desarrollado bajo el Framework [Laravel](https://laravel.com/)
