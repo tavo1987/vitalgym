@@ -47,5 +47,4 @@ class AuthenticationUserTest extends TestCase
             ->visit('/')
             ->seePageIs('login');
     }
-
 }
