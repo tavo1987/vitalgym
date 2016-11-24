@@ -42,15 +42,17 @@ class LoginController extends Controller
      * The user has been authenticated.
      *
      * @param Request $request
+     *
      * @return mixed
+     *
      * @internal param mixed $user
      */
     protected function authenticated(Request $request)
     {
         if (!$request->user()->active) {
             auth()->logout();
+
             return redirect('/login')->withError('Por favor verifica tu email para activar tu cuenta. <a href="#">Reenviar</a>');
         }
     }
 }
-
