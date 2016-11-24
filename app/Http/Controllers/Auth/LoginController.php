@@ -47,10 +47,10 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request)
     {
-        if (!$request->user()->active) {
+        if (! $request->user()->active) {
             auth()->logout();
+
             return redirect('/login')->withError('Por favor verifica tu email para activar tu cuenta. <a href="#">Reenviar</a>');
         }
     }
 }
-
