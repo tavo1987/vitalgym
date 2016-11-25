@@ -15,21 +15,21 @@ require('laravel-elixir-vue-2');
 elixir(function(mix) {
 
     mix.copy('node_modules/toastr/build/toastr.css', 'resources/assets/sass/plugins/_toastr.scss')
-        .copy('node_modules/toastr/build/toastr.min.js', 'resources/assets/js/plugins/toastr.js');
+        .copy('node_modules/toastr/build/toastr.min.js', 'public/plugins/toastr/toastr.js');
 
 
     mix.sass(['*.scss','app.scss'])
         .webpack([
             'app.js',
-            'plugins/toastr.js',
-            'admin-lte.js',
-        ], 'public/js/app.js');
+            'plugins/toastr.js'
+            ],
+            'admin-lte.js', 'public/js/app.js');
 
     mix.browserSync({
         proxy: 'http://vitalgym.dev',
         injectChanges: true,
         notify: false,
-    })
+    });
 
     mix.less('admin-lte/AdminLTE.less');
 

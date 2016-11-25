@@ -28,3 +28,10 @@ Route::post('register', function () {
 });
 
 Route::get('/', 'HomeController@index');
+
+
+/**
+ * Activate account routes
+ */
+
+Route::get('/activation/account/{token}', 'Auth\ActivationController@activate')->name('auth.activate.account');
