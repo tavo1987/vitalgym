@@ -30,7 +30,7 @@ Route::post('register', function () {
 Route::get('/', 'HomeController@index');
 
 
-/**
+/*
  * Activate account routes
  */
 

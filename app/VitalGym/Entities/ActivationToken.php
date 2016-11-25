@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ActivationToken extends Model
 {
-    protected $table = "activation_tokens";
+    protected $table = 'activation_tokens';
 
     protected $fillable = ['token'];
 
