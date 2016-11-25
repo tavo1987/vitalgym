@@ -16,7 +16,6 @@ class ActivationController extends Controller
 
         Auth::login($token->user);
 
-        return redirect('/')->with(['message'=> 'Gracias por activar tu cuenta', 'alert-type' => 'success']);
-
+        return redirect('/')->with(['message' => 'Gracias por activar tu cuenta', 'alert-type' => 'success']);
     }
 }

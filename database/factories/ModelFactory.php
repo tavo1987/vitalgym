@@ -27,11 +27,10 @@ $factory->define(User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(ActivationToken::class, function (Faker\Generator $faker) {
-
     return [
         'token'   => str_random(128),
         'user_id' => function () {
             return factory(User::class)->create()->id;
-        }
+        },
     ];
 });

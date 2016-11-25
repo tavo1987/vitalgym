@@ -31,7 +31,7 @@ class ActionAccountTest extends TestCase
         $token = str_random(60);
         DB::table('password_resets')->insert(['email' => $user->email, 'token' => $token]);
 
-        $this->visit('/password/reset/' . $token)
+        $this->visit('/password/reset/'.$token)
             ->type($user->email, 'email')
             ->type('laravel', 'password')
             ->type('laravel', 'password_confirmation')
@@ -43,7 +43,7 @@ class ActionAccountTest extends TestCase
 
     public function test_user_can_activate_account()
     {
-        $user  = $this->createNewUser(['active' => false]);
+        $user = $this->createNewUser(['active' => false]);
         $token = factory(ActivationToken::class, 1)->create([
             'user_id' => $user->id,
         ]);
@@ -64,6 +64,5 @@ class ActionAccountTest extends TestCase
         $this->seeIsAuthenticated();
         $this->seePageIs('/')
             ->seeText('Gracias por activar tu cuenta');
-
     }
 }
