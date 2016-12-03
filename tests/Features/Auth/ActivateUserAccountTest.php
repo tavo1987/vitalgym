@@ -43,7 +43,7 @@ class ActionAccountTest extends TestCase
 
     public function test_user_can_activate_account()
     {
-        $user = $this->createNewUser(['active' => false]);
+        $user  = $this->createNewUser(['active' => false]);
         $token = factory(ActivationToken::class, 1)->create([
             'user_id' => $user->id,
         ]);
@@ -64,5 +64,24 @@ class ActionAccountTest extends TestCase
         $this->seeIsAuthenticated();
         $this->seePageIs('/')
             ->seeText('Gracias por activar tu cuenta');
+    }
+
+    public function test_user_cannot_activate_account()
+    {
+        $user  = $this->createNewUser(['active' => false]);
+        $token = str_random(128);
+
+        $this->get(route('auth.activate.account', $token));
+
+        $this->assertResponseStatus(404);
+
+        $this->seeInDatabase('users', [
+            'id'     => $user->id,
+            'active' => false,
+        ]);
+
+        $this->dontSeeIsAuthenticated();
+        $this->seeText('Página no encontrada');
+
     }
 }
