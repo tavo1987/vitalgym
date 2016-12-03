@@ -31,7 +31,8 @@ Route::get('/', 'HomeController@index');
 
 
 /*
- * Activate account routes
+ * Activate account
  */
 
 Route::get('/activation/account/{token}', 'Auth\ActivationController@activate')->name('auth.activate.account');
+Route::get('/activate/resend/{email}', 'Auth\ActivationController@resend')->name('auth.activate.resend');
