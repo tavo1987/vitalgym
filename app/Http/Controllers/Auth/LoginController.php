@@ -45,12 +45,12 @@ class LoginController extends Controller
      * @return mixed
      * @internal param mixed $user
      */
-    protected function authenticated(Request $request)
+    protected function authenticated(Request $request, $user)
     {
         if (! $request->user()->active) {
             auth()->logout();
-
-            return redirect('/login')->withError('Por favor verifica tu email para activar tu cuenta. <a href="#">Reenviar</a>');
+            return redirect('/login')
+                ->withInfo('Por favor verifica tu email para activar tu cuenta. <a href="'.route('auth.activate.resend', $user->email).'">Reenviar email de verificación</a>');
         }
     }
 }
