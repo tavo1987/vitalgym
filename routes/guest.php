@@ -11,7 +11,6 @@
 |
 */
 
-
 /**
  * Removed routes belonging to admin lte package.
  */
@@ -28,7 +27,6 @@ Route::post('register', function () {
 });
 
 Route::get('/', 'HomeController@index');
-
 
 /*
  * Activate account

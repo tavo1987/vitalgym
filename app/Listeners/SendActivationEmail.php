@@ -2,14 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Events\UserRequestedActivationEmail;
-use App\Mail\ActivationToken;
 use App\Mail\SendActivationToken;
 use Illuminate\Support\Facades\Mail;
+use App\Events\UserRequestedActivationEmail;
 
 class SendActivationEmail
 {
-
     /**
      * Handle the event.
      *
@@ -18,6 +16,6 @@ class SendActivationEmail
      */
     public function handle(UserRequestedActivationEmail $event)
     {
-        Mail::to($event->user)->send(New SendActivationToken($event->user->token));
+        Mail::to($event->user)->send(new SendActivationToken($event->user->token));
     }
 }

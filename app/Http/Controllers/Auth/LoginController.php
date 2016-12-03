@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -49,6 +49,7 @@ class LoginController extends Controller
     {
         if (! $request->user()->active) {
             auth()->logout();
+
             return redirect('/login')
                 ->withInfo('Por favor verifica tu email para activar tu cuenta. <a href="'.route('auth.activate.resend', $user->email).'">Reenviar email de verificación</a>');
         }

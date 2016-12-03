@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use MailThief\Testing\InteractsWithMail;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthenticationUserTest extends TestCase
 {

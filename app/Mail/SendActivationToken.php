@@ -2,9 +2,9 @@
 
 namespace App\Mail;
 
-use App\VitalGym\Entities\ActivationToken;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\VitalGym\Entities\ActivationToken;
 
 class SendActivationToken extends Mailable
 {
@@ -28,6 +28,6 @@ class SendActivationToken extends Mailable
      */
     public function build()
     {
-         $this->subject('Activar Cuenta.')->view('emails.auth.activation');
+        $this->subject('Activar Cuenta.')->view('emails.auth.activation');
     }
 }
