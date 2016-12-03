@@ -1,7 +1,7 @@
 <?php
 
-use App\VitalGym\Entities\ActivationToken;
 use App\VitalGym\Entities\User;
+use App\VitalGym\Entities\ActivationToken;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +13,6 @@ use App\VitalGym\Entities\User;
 | database. Just tell the factory how a default model should look.
 |
 */
-
 
 $factory->define(User::class, function (Faker\Generator $faker) {
     static $password;

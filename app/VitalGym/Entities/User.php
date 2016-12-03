@@ -2,8 +2,8 @@
 
 namespace App\VitalGym\Entities;
 
-use App\Notifications\ResetPasswordNotification;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable

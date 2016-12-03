@@ -1,11 +1,11 @@
 <?php
 
-use App\Events\UserRequestedActivationEmail;
-use App\Listeners\SendActivationEmail;
 use App\Mail\SendActivationToken;
-use App\VitalGym\Entities\ActivationToken;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Mail;
+use App\Listeners\SendActivationEmail;
+use App\VitalGym\Entities\ActivationToken;
+use App\Events\UserRequestedActivationEmail;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ActivationAccountTokenTest extends TestCase
 {
@@ -51,7 +51,7 @@ class ActivationAccountTokenTest extends TestCase
             ->seeText('Por favor verifica tu email para activar tu cuenta')
             ->click('Reenviar email de verificación');
 
-        $listener->shouldHaveReceived('handle')->with(Mockery::on(function ($event) use ($user){
+        $listener->shouldHaveReceived('handle')->with(Mockery::on(function ($event) use ($user) {
             return $event->user->id == $user->id;
         }))->once();
 
@@ -60,10 +60,9 @@ class ActivationAccountTokenTest extends TestCase
 
     public function test_user_can_receive_email_with_activation_token()
     {
-
         Mail::fake();
-        $user   = $this->createNewUser(['active' => false]);
-        $token  = factory(ActivationToken::class, 1)->create([
+        $user = $this->createNewUser(['active' => false]);
+        $token = factory(ActivationToken::class, 1)->create([
             'user_id' => $user->id,
         ]);
 
@@ -78,9 +77,9 @@ class ActivationAccountTokenTest extends TestCase
     public function test_user_dit_not_receive_activation_correct_token()
     {
         Mail::fake();
-        $user   = $this->createNewUser(['active' => false]);
-        factory(ActivationToken::class, 1)->create(['user_id' => $user->id,]);
-        $token_fake = factory(ActivationToken::class, 1)->create();;
+        $user = $this->createNewUser(['active' => false]);
+        factory(ActivationToken::class, 1)->create(['user_id' => $user->id]);
+        $token_fake = factory(ActivationToken::class, 1)->create();
 
         $this->get(route('auth.activate.resend', $user->email));
 
