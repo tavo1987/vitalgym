@@ -1,22 +1,8 @@
 const elixir = require('laravel-elixir');
 
-require('laravel-elixir-vue-2');
-/*
- |--------------------------------------------------------------------------
- | Elixir Asset Management
- |--------------------------------------------------------------------------
- |
- | Elixir provides a clean, fluent API for defining some basic Gulp tasks
- | for your Laravel application. By default, we are compiling the Less
- | file for our application, as well as publishing vendor resources.
- |
- */
-
 elixir(function(mix) {
 
-    mix.copy('node_modules/toastr/build/toastr.css', 'resources/assets/sass/plugins/_toastr.scss')
-        .copy('node_modules/toastr/build/toastr.min.js', 'public/plugins/toastr/toastr.js');
-
+    mix.copy('node_modules/toastr/build/toastr.min.js', 'public/plugins/toastr/toastr.js');
 
     mix.sass(['*.scss','app.scss'])
         .webpack([
@@ -32,6 +18,5 @@ elixir(function(mix) {
     });
 
     mix.less('admin-lte/AdminLTE.less');
-
 });
 
