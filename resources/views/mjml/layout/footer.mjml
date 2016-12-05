@@ -1,0 +1,6 @@
+<mj-section background-color="#F2F2FC" border-radius="0 0 20px 20px">
+    <mj-column>
+        <mj-text align="center" color="#557CB3"> &copy; {{ date('Y') }} Vital Gym Todos los derechos reservados </mj-text>
+        <mj-social mode="vertical" display="facebook:url" facebook-content='Síguenos' facebook-href="https://www.facebook.com/edwin.ramirez.923"/>
+    </mj-column>
+</mj-section>
