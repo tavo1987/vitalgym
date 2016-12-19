@@ -2,13 +2,10 @@
 
 namespace App\VitalGym\Repositories;
 
-
-
 use App\VitalGym\Entities\ActivationToken;
 
 class ActivationTokenRepository extends BaseRepository
 {
-
     /**
      * @return \App\VitalGym\Entities\ActivationToken;
      */
@@ -27,5 +24,4 @@ class ActivationTokenRepository extends BaseRepository
 
         return $token->user;
     }
-
 }
