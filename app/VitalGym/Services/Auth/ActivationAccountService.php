@@ -11,7 +11,6 @@ class ActivationAccountService
      */
     protected $tokenRepository;
 
-
     public function __construct(ActivationTokenRepository $tokenRepository)
     {
         $this->tokenRepository = $tokenRepository;
@@ -21,9 +20,8 @@ class ActivationAccountService
     {
         $user = $this->tokenRepository->activateUserAccount($token);
 
-        if ( $user ) {
+        if ($user) {
             auth()->login($user);
         }
     }
-
 }

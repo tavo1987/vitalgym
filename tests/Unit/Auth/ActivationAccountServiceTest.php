@@ -1,8 +1,8 @@
 <?php
 
 use App\VitalGym\Entities\ActivationToken;
-use App\VitalGym\Services\Auth\ActivationAccountService;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\VitalGym\Services\Auth\ActivationAccountService;
 
 class ActivationAccountServiceTest extends TestCase
 {
@@ -13,10 +13,9 @@ class ActivationAccountServiceTest extends TestCase
         return app(ActivationAccountService::class);
     }
 
-
     public function test_it_active_user_account_if_token_exist()
     {
-        $service =  $this->makeService();
+        $service = $this->makeService();
         $user = $this->createNewUser(['active' => false]);
         $token = factory(ActivationToken::class, 1)->create(['user_id' => $user->id]);
 
@@ -30,11 +29,10 @@ class ActivationAccountServiceTest extends TestCase
         $this->seeIsAuthenticated();
     }
 
-
     public function test_it_cannot_active_user_account_if_token_does_not_exist()
     {
-        $service =  $this->makeService();
-        $user = $this->createNewUser(['active' => false,]);
+        $service = $this->makeService();
+        $user = $this->createNewUser(['active' => false]);
         $token = factory(ActivationToken::class, 1)->create(['user_id' => $user->id]);
         $fake_token = str_random(128);
 

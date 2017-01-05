@@ -2,13 +2,10 @@
 
 namespace App\VitalGym\Repositories;
 
-
-
 use App\VitalGym\Entities\ActivationToken;
 
 class ActivationTokenRepository extends BaseRepository
 {
-
     /**
      * @return \App\VitalGym\Entities\ActivationToken;
      */
@@ -24,6 +21,7 @@ class ActivationTokenRepository extends BaseRepository
         if ($token) {
             $token->user()->update(['active' => true]);
             $token->delete();
+
             return $token->user;
         }
 
@@ -32,7 +30,6 @@ class ActivationTokenRepository extends BaseRepository
 
     public function tokenExists($token)
     {
-        return $this->model->where('token',$token)->first();
+        return $this->model->where('token', $token)->first();
     }
-
 }

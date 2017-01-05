@@ -2,7 +2,6 @@
 
 namespace App\VitalGym\Repositories;
 
-
 abstract class BaseRepository
 {
     protected $model;
@@ -14,6 +13,7 @@ abstract class BaseRepository
     {
         $this->model = $this->getModel();
     }
+
     /**
      * @return mixed
      */
