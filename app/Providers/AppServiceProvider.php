@@ -23,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('App\VitalGym\Contracts\ActivationAccountServiceContract', 'App\VitalGym\Service\Auth\ActivationAccountService');
     }
 }
