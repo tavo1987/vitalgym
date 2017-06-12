@@ -17,19 +17,13 @@ class ActivationTokenRepository extends BaseRepository
     public function activateUserAccount($token)
     {
         $token = $this->tokenExists($token);
-
-        if ($token) {
-            $token->user()->update(['active' => true]);
-            $token->delete();
-
-            return $token->user;
-        }
-
-        return false;
+        $token->user()->update(['active' => true]);
+        $token->delete();
+        return $token->user;
     }
 
     public function tokenExists($token)
     {
-        return $this->model->where('token', $token)->first();
+        return $this->model->where('token', $token)->firstOrFail();
     }
 }
