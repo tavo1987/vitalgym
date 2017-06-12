@@ -4,20 +4,26 @@ namespace App\Http\Controllers\Auth;
 
 use App\VitalGym\Entities\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use App\VitalGym\Entities\ActivationToken;
+use App\VitalGym\Services\Auth\ActivationAccountService;
 use App\Events\UserRequestedActivationEmail;
 
 class ActivationController extends Controller
 {
-    public function activate(ActivationToken $token)
+
+    /**
+     * @var ActivationAccountService
+     */
+    protected $service;
+
+    public function __construct(ActivationAccountService $service)
     {
-        $token->user()->update(['active' => true]);
+        $this->service = $service;
+    }
 
-        $token->delete();
 
-        Auth::login($token->user);
-
+    public function activate($token)
+    {
+        $this->service->activate($token);
         return redirect('/')->with(['message' => 'Gracias por activar tu cuenta', 'alert-type' => 'success']);
     }
 
