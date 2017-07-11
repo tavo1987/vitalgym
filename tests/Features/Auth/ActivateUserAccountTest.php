@@ -3,7 +3,7 @@
 use App\VitalGym\Entities\ActivationToken;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ActionAccountTest extends TestCase
+class ActionAccountTest extends BrowserKitTestCase
 {
     use  DatabaseTransactions;
 
@@ -37,14 +37,14 @@ class ActionAccountTest extends TestCase
             ->type('laravel', 'password_confirmation')
             ->press('Restablecer la contraseña');
 
-        $this->dontSeeIsAuthenticated()
-            ->seePageIs('/login');
+        $this->dontSeeIsAuthenticated();
     }
 
     public function test_user_can_activate_account()
     {
         $user = $this->createNewUser(['active' => false]);
-        $token = factory(ActivationToken::class, 1)->create([
+
+        $token = factory(ActivationToken::class)->create([
             'user_id' => $user->id,
         ]);
 

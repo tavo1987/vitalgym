@@ -5,7 +5,7 @@ use App\VitalGym\Entities\ActivationToken;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\VitalGym\Services\Auth\ActivationAccountService;
 
-class ActivationAccountServiceTest extends TestCase
+class ActivationAccountServiceTest extends BrowserKitTestCase
 {
     use  DatabaseTransactions;
 
@@ -18,7 +18,7 @@ class ActivationAccountServiceTest extends TestCase
     {
         $service = $this->makeService();
         $user = $this->createNewUser(['active' => false]);
-        $token = factory(ActivationToken::class, 1)->create(['user_id' => $user->id]);
+        $token = factory(ActivationToken::class)->create(['user_id' => $user->id]);
 
         $service->activate($token->token);
 
@@ -49,7 +49,7 @@ class ActivationAccountServiceTest extends TestCase
         $service = $this->makeService();
         $user = $this->createNewUser(['email' => 'edwin@gmail.com', 'active' => false]);
 
-        factory(ActivationToken::class, 1)->create(['user_id' => $user->id]);
+        factory(ActivationToken::class)->create(['user_id' => $user->id]);
 
         $service->resend('edwin@gmail.com');
 
