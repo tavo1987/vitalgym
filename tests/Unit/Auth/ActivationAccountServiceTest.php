@@ -56,6 +56,5 @@ class ActivationAccountServiceTest extends BrowserKitTestCase
         $listener->shouldHaveReceived('handle')->with(Mockery::on(function ($event) use ($user) {
             return $event->user->id == $user->id;
         }))->once();
-
     }
 }

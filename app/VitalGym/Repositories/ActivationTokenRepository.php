@@ -19,6 +19,7 @@ class ActivationTokenRepository extends BaseRepository
         $token = $this->tokenExists($token);
         $token->user()->update(['active' => true]);
         $token->delete();
+
         return $token->user;
     }
 
