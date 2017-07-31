@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\DB;
 use MailThief\Testing\InteractsWithMail;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-
 class ResetPasswordTest extends BrowserKitTestCase
 {
     use DatabaseTransactions, InteractsWithMail;

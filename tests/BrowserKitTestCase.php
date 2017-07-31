@@ -1,8 +1,8 @@
 <?php
 
+use Tests\CreatesApplication;
 use App\VitalGym\Entities\User;
 use Laravel\BrowserKitTesting\TestCase as BaseTestCase;
-use Tests\CreatesApplication;
 
 abstract class BrowserKitTestCase extends BaseTestCase
 {
