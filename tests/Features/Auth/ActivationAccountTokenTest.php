@@ -7,7 +7,7 @@ use App\VitalGym\Entities\ActivationToken;
 use App\Events\UserRequestedActivationEmail;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ActivationAccountTokenTest extends TestCase
+class ActivationAccountTokenTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
@@ -38,7 +38,7 @@ class ActivationAccountTokenTest extends TestCase
         app()->instance(SendActivationEmail::class, $listener);
 
         $user = $this->createNewUser(['active' => false]);
-        factory(ActivationToken::class, 1)->create([
+        factory(ActivationToken::class)->create([
             'user_id' => $user->id,
         ]);
 
@@ -62,15 +62,15 @@ class ActivationAccountTokenTest extends TestCase
     {
         Mail::fake();
         $user = $this->createNewUser(['active' => false]);
-        $token = factory(ActivationToken::class, 1)->create([
+
+        $token = factory(ActivationToken::class)->create([
             'user_id' => $user->id,
         ]);
 
         $this->get(route('auth.activate.resend', $user->email));
 
-        Mail::assertSentTo([$user], SendActivationToken::class);
-        Mail::assertSent(SendActivationToken::class, function ($mail) use ($token) {
-            return $mail->token->token === $token->token;
+        Mail::assertSent(SendActivationToken::class, function ($mail) use ($token, $user) {
+            return $mail->hasTo($user->email) && $mail->token->token === $token->token;
         });
     }
 
@@ -78,8 +78,8 @@ class ActivationAccountTokenTest extends TestCase
     {
         Mail::fake();
         $user = $this->createNewUser(['active' => false]);
-        factory(ActivationToken::class, 1)->create(['user_id' => $user->id]);
-        $token_fake = factory(ActivationToken::class, 1)->create();
+        factory(ActivationToken::class)->create(['user_id' => $user->id]);
+        $token_fake = factory(ActivationToken::class)->create();
 
         $this->get(route('auth.activate.resend', $user->email));
 

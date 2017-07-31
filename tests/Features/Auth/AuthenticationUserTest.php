@@ -3,7 +3,8 @@
 use MailThief\Testing\InteractsWithMail;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class AuthenticationUserTest extends TestCase
+
+class AuthenticationUserTest extends BrowserKitTestCase
 {
     use DatabaseTransactions, InteractsWithMail;
 
