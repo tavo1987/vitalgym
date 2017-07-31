@@ -6,7 +6,6 @@ use App\VitalGym\Entities\User;
 
 class UserRepository extends BaseRepository
 {
-
     /**
      * @return mixed
      */
@@ -14,7 +13,6 @@ class UserRepository extends BaseRepository
     {
         return new User();
     }
-
 
     public function findByEmail($email)
     {

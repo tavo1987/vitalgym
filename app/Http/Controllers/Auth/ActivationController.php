@@ -4,12 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\VitalGym\Entities\User;
 use App\Http\Controllers\Controller;
-use App\VitalGym\Services\Auth\ActivationAccountService;
 use App\Events\UserRequestedActivationEmail;
+use App\VitalGym\Services\Auth\ActivationAccountService;
 
 class ActivationController extends Controller
 {
-
     /**
      * @var ActivationAccountService
      */
@@ -20,10 +19,10 @@ class ActivationController extends Controller
         $this->service = $service;
     }
 
-
     public function activate($token)
     {
         $this->service->activate($token);
+
         return redirect('/')->with(['message' => 'Gracias por activar tu cuenta', 'alert-type' => 'success']);
     }
 

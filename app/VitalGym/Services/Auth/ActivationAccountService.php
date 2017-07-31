@@ -3,9 +3,9 @@
 namespace App\VitalGym\Services\Auth;
 
 use App\Events\UserRequestedActivationEmail;
-use App\VitalGym\Contracts\ActivationAccountServiceInterface;
-use App\VitalGym\Repositories\ActivationTokenRepository;
 use App\VitalGym\Repositories\UserRepository;
+use App\VitalGym\Repositories\ActivationTokenRepository;
+use App\VitalGym\Contracts\ActivationAccountServiceInterface;
 
 class ActivationAccountService implements ActivationAccountServiceInterface
 {
@@ -23,7 +23,6 @@ class ActivationAccountService implements ActivationAccountServiceInterface
         $this->tokenRepository = $tokenRepository;
         $this->userRepository = $userRepository;
     }
-
 
     /**
      * @param $token
