@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\VitalGym\Contracts\ActivationAccountServiceContract;
-use App\VitalGym\Services\Auth\ActivationAccountService;
 use Illuminate\Support\ServiceProvider;
+use App\VitalGym\Services\Auth\ActivationAccountService;
+use App\VitalGym\Contracts\ActivationAccountServiceContract;
 
 class AppServiceProvider extends ServiceProvider
 {
