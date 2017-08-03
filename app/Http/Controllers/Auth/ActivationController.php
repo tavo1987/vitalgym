@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\VitalGym\Entities\User;
 use App\Http\Controllers\Controller;
-use App\Events\UserRequestedActivationEmail;
-use App\VitalGym\Services\Auth\ActivationAccountService;
+use App\VitalGym\Contracts\ActivationAccountServiceContract as ActivationAccountService;
 
 class ActivationController extends Controller
 {
@@ -28,13 +26,7 @@ class ActivationController extends Controller
 
     public function resend($email)
     {
-        $user = User::where('email', $email)->firstOrFail();
-
-        if ($user->active) {
-            return redirect('/');
-        }
-
-        event(new UserRequestedActivationEmail($user));
+        $this->service->resend($email);
 
         return redirect('/login')->withInfo('Email de verificación enviado.');
     }

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\VitalGym\Contracts\ActivationAccountServiceContract;
+use App\VitalGym\Services\Auth\ActivationAccountService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App\VitalGym\Contracts\ActivationAccountServiceContract', 'App\VitalGym\Service\Auth\ActivationAccountService');
+        $this->app->bind(ActivationAccountServiceContract::class, ActivationAccountService::class);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\VitalGym\Contracts;
 
-interface ActivationAccountServiceInterface
+interface ActivationAccountServiceContract
 {
     public function activate($token);
 
