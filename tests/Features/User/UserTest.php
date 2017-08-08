@@ -3,7 +3,6 @@
 namespace Tests\Features\User;
 
 use BrowserKitTestCase;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserTest extends BrowserKitTestCase
@@ -23,5 +22,4 @@ class UserTest extends BrowserKitTestCase
             ->seeText('admin')
             ->seeText('last login');
     }
-
 }
