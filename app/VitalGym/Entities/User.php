@@ -44,7 +44,6 @@ class User extends Authenticatable
         return $this->hasOne(ActivationToken::class);
     }
 
-
     public function getStatusAttribute()
     {
         return $this->attributes['active'] === 1 ? 'activo' : 'inactivo';
