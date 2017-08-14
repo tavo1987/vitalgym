@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
+use Laravel\Dusk\DuskServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use App\VitalGym\Services\Auth\ActivationAccountService;
 use App\VitalGym\Contracts\ActivationAccountServiceContract;
-use Laravel\Dusk\DuskServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
