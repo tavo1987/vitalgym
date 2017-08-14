@@ -11,7 +11,7 @@ trait CreatesApplication
      *
      * @var string
      */
-    public $baseUrl = 'http://localhost';
+    protected $baseUrl;
 
     /**
      * Creates the application.
@@ -23,6 +23,8 @@ trait CreatesApplication
         $app = require __DIR__.'/../bootstrap/app.php';
 
         $app->make(Kernel::class)->bootstrap();
+
+        $this->baseUrl = $app->make('config')->get('app.url');
 
         return $app;
     }
