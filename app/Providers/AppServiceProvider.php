@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\VitalGym\Services\Auth\ActivationAccountService;
 use App\VitalGym\Contracts\ActivationAccountServiceContract;
+use Laravel\Dusk\DuskServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,5 +27,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(ActivationAccountServiceContract::class, ActivationAccountService::class);
+        if ($this->app->environment('local', 'testing')) {
+            $this->app->register(DuskServiceProvider::class);
+        }
     }
 }
