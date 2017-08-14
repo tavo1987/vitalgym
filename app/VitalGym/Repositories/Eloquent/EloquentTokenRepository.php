@@ -1,17 +1,18 @@
 <?php
 
-namespace App\VitalGym\Repositories;
+namespace App\VitalGym\Repositories\Eloquent;
 
 use App\VitalGym\Entities\ActivationToken;
+use App\VitalGym\Repositories\Contracts\TokenRepository;
 
-class ActivationTokenRepository extends BaseRepository
+class EloquentTokenRepository extends BaseRepository implements TokenRepository
 {
     /**
-     * @return \App\VitalGym\Entities\ActivationToken;
+     * @return string
      */
-    public function getModel()
+    public function entity()
     {
-        return new ActivationToken();
+        return ActivationToken::class;
     }
 
     public function activateUserAccount($token)
@@ -25,6 +26,6 @@ class ActivationTokenRepository extends BaseRepository
 
     public function tokenExists($token)
     {
-        return $this->model->where('token', $token)->firstOrFail();
+        return $this->where('token', $token)->firstOrFail();
     }
 }
