@@ -3,14 +3,14 @@
 namespace App\VitalGym\Services\Auth;
 
 use App\Events\UserRequestedActivationEmail;
-use App\VitalGym\Repositories\UserRepository;
-use App\VitalGym\Repositories\ActivationTokenRepository;
 use App\VitalGym\Contracts\ActivationAccountServiceContract;
+use App\VitalGym\Repositories\Contracts\TokenRepository;
+use App\VitalGym\Repositories\Contracts\UserRepository;
 
 class ActivationAccountService implements ActivationAccountServiceContract
 {
     /**
-     * @var ActivationTokenRepository
+     * @var TokenRepository
      */
     protected $tokenRepository;
     /**
@@ -18,7 +18,7 @@ class ActivationAccountService implements ActivationAccountServiceContract
      */
     protected $userRepository;
 
-    public function __construct(ActivationTokenRepository $tokenRepository, UserRepository $userRepository)
+    public function __construct(TokenRepository $tokenRepository, UserRepository $userRepository)
     {
         $this->tokenRepository = $tokenRepository;
         $this->userRepository = $userRepository;
