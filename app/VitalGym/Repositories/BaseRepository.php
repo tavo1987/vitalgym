@@ -2,9 +2,9 @@
 
 namespace App\VitalGym\Repositories;
 
-use App\VitalGym\Repositories\Contracts\RepositoryInterface;
-use App\VitalGym\Repositories\Exceptions\NoEntityDefined;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\VitalGym\Repositories\Exceptions\NoEntityDefined;
+use App\VitalGym\Repositories\Contracts\RepositoryInterface;
 
 abstract class BaseRepository implements RepositoryInterface
 {
@@ -39,7 +39,7 @@ abstract class BaseRepository implements RepositoryInterface
     {
         $model = $this->entity->find($id);
 
-        if (!$model) {
+        if (! $model) {
             throw (new ModelNotFoundException)->setModel(
                 get_class($this->entity->getModel()), $id
             );
@@ -67,7 +67,7 @@ abstract class BaseRepository implements RepositoryInterface
     {
         $model = $this->entity->where($column, $value)->first();
 
-        if (!$model) {
+        if (! $model) {
             throw (new ModelNotFoundException)->setModel(
                 get_class($this->entity->getModel())
             );
@@ -119,11 +119,10 @@ abstract class BaseRepository implements RepositoryInterface
      */
     public function resolveEntity()
     {
-        if (!method_exists($this, 'entity')) {
+        if (! method_exists($this, 'entity')) {
             throw new NoEntityDefined();
         }
 
         return app()->make($this->entity());
-
     }
 }
