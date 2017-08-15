@@ -2,8 +2,9 @@
 
 namespace App\VitalGym\Repositories\Contracts;
 
-Interface TokenRepository
+interface TokenRepository
 {
     public function activateUserAccount($token);
+
     public function tokenExists($token);
 }
