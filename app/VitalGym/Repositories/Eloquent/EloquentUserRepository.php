@@ -18,6 +18,6 @@ class EloquentUserRepository extends BaseRepository implements UserRepository
 
     public function findByEmail($email)
     {
-        return  $this->where('email', $email)->firstOrFail();
+        return $this->findWhereFirst('email', $email);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\VitalGym\Repositories\Eloquent;
 
 use App\VitalGym\Entities\ActivationToken;
+use App\VitalGym\Repositories\BaseRepository;
 use App\VitalGym\Repositories\Contracts\TokenRepository;
 
 class EloquentTokenRepository extends BaseRepository implements TokenRepository
@@ -26,6 +27,6 @@ class EloquentTokenRepository extends BaseRepository implements TokenRepository
 
     public function tokenExists($token)
     {
-        return $this->where('token', $token)->firstOrFail();
+        return $this->findWhereFirst('token', $token);
     }
 }
