@@ -10,6 +10,7 @@
         "laravel/framework": "5.4.*"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.4",
         "fzaninotto/faker": "~1.4",
         "laravel/browser-kit-testing": "^1.0",
         "laravel/dusk": "^1.1",
