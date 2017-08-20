@@ -37,10 +37,11 @@ trait CreatesApplication
     public function createNewUser($data = [])
     {
         $userData = collect([
-            'name'     => 'Edwin',
             'email'    => 'tavo198718@gmail.com',
             'password' => bcrypt('secret'),
             'active'   => true,
+            'role' => 'admin',
+            'last_login' => '2017-08-20 13:15:00',
         ]);
 
         if (! empty($data)) {
