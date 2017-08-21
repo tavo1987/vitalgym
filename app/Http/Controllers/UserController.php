@@ -3,10 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\VitalGym\Entities\User;
+use App\VitalGym\Services\User\UserService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    /**
+     * @var UserService
+     */
+    protected $userService;
+
+    /**
+     * UserController constructor.
+     * @param UserService $userService
+     */
+    public function __construct(UserService $userService)
+    {
+
+        $this->userService = $userService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +30,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('profile')->paginate(10);
+        $users = $this->userService->paginateUsers();
 
         return view('admin.users.index', compact('users'));
     }
