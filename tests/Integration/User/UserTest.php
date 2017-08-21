@@ -2,8 +2,8 @@
 
 namespace Tests\Integration\User;
 
-use App\VitalGym\Entities\Profile;
 use Tests\TestCase;
+use App\VitalGym\Entities\Profile;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserTest extends TestCase
@@ -27,7 +27,7 @@ class UserTest extends TestCase
             'last_name' => 'Doe',
             'nick_name' => 'doe',
             'avatar' => 'default-avatar.jpg',
-            'user_id' => $otherUser->id
+            'user_id' => $otherUser->id,
         ]);
 
         $response = $this->actingAs($user)

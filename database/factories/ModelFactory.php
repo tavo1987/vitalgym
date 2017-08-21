@@ -1,9 +1,9 @@
 <?php
 
-use App\VitalGym\Entities\Profile;
-use App\VitalGym\Entities\User;
-use App\VitalGym\Entities\ActivationToken;
 use Carbon\Carbon;
+use App\VitalGym\Entities\User;
+use App\VitalGym\Entities\Profile;
+use App\VitalGym\Entities\ActivationToken;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,14 +34,13 @@ $factory->define(Profile::class, function (Faker\Generator $faker) {
         'name'          => $faker->firstName,
         'last_name'       => $faker->lastName,
         'nick_name'      => $faker->name,
-        'avatar'         => $faker->imageUrl(250,250),
+        'avatar'         => $faker->imageUrl(250, 250),
         'address'         => $faker->address,
         'user_id' => function () {
             return factory(User::class)->create()->id;
-        }
+        },
     ];
 });
-
 
 $factory->define(ActivationToken::class, function (Faker\Generator $faker) {
     return [
