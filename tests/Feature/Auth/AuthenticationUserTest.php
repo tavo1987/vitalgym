@@ -18,7 +18,10 @@ class AuthenticationUserTest extends BrowserKitTestCase
             ->press(trans('login.buttonsign'));
 
         $this->SeeIsAuthenticated()
-            ->seeText('.user-panel', $user->name);
+            ->seeText($user->profile->nick_name)
+            ->see($user->profile->avatar)
+            ->see('Miembro desde: ' .$user->created_at->format('F-Y'));
+
     }
 
     public function test_guest_user_cannot_login()

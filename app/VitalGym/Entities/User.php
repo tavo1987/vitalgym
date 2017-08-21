@@ -2,13 +2,14 @@
 
 namespace App\VitalGym\Entities;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -29,6 +30,13 @@ class User extends Authenticatable
     ];
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
+    /**
      * Send the password reset notification.
      *
      * @param  string  $token
@@ -42,5 +50,15 @@ class User extends Authenticatable
     public function token()
     {
         return $this->hasOne(ActivationToken::class);
+    }
+
+    public function getStatusAttribute()
+    {
+        return $this->attributes['active'] ? 'activo': 'inactivo';
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
     }
 }

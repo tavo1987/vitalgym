@@ -1,6 +1,6 @@
 <?php
 
-namespace App\VitalGym\Contracts;
+namespace App\VitalGym\Services\Contracts;
 
 interface ActivationAccountServiceContract
 {
