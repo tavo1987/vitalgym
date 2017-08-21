@@ -20,4 +20,9 @@ class EloquentUserRepository extends BaseRepository implements UserRepository
     {
         return $this->findWhereFirst('email', $email);
     }
+
+    public function paginateUsersWithProfile($perPage)
+    {
+        return $this->entity->with('profile')->paginate($perPage);
+    }
 }
