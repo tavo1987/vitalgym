@@ -5,7 +5,7 @@ namespace App\VitalGym\Services\Auth;
 use App\Events\UserRequestedActivationEmail;
 use App\VitalGym\Repositories\Contracts\UserRepository;
 use App\VitalGym\Repositories\Contracts\TokenRepository;
-use App\VitalGym\Contracts\ActivationAccountServiceContract;
+use App\VitalGym\Services\Contracts\ActivationAccountServiceContract;
 
 class ActivationAccountService implements ActivationAccountServiceContract
 {

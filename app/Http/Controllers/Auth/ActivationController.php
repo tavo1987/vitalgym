@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\VitalGym\Contracts\ActivationAccountServiceContract as ActivationAccountService;
+use App\VitalGym\Services\Auth\ActivationAccountService as ActivationAccountService;
 
 class ActivationController extends Controller
 {
