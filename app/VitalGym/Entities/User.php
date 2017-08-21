@@ -2,8 +2,8 @@
 
 namespace App\VitalGym\Entities;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -54,7 +54,7 @@ class User extends Authenticatable
 
     public function getStatusAttribute()
     {
-        return $this->attributes['active'] ? 'activo': 'inactivo';
+        return $this->attributes['active'] ? 'activo' : 'inactivo';
     }
 
     public function profile()

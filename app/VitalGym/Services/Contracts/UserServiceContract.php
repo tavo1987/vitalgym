@@ -2,8 +2,7 @@
 
 namespace App\VitalGym\Services\Contracts;
 
-
-Interface UserServiceContract
+interface UserServiceContract
 {
     public function paginateusers($pagination);
 }

@@ -26,7 +26,7 @@ class Profile extends Model
 
     public function getFullNameAttribute()
     {
-        return $this->attributes['name'] .' '. $this->attributes['last_name'];
+        return $this->attributes['name'].' '.$this->attributes['last_name'];
     }
 
     public function user()
