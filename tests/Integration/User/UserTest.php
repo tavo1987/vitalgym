@@ -12,8 +12,6 @@ class UserTest extends TestCase
 
     public function test_list_users()
     {
-        $this->disableExceptionHandling();
-
         $user = $this->createNewUser();
 
         $otherUser = $this->createNewUser([
