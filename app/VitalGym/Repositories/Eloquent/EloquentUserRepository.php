@@ -25,4 +25,9 @@ class EloquentUserRepository extends BaseRepository implements UserRepository
     {
         return $this->entity->with('profile')->paginate($perPage);
     }
+
+    public function createProfile($user_id, $properties)
+    {
+        return $this->find($user_id)->profile()->create($properties);
+    }
 }
