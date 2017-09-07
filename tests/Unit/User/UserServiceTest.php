@@ -2,11 +2,11 @@
 
 namespace tests\Unit\User;
 
+use Tests\TestCase;
 use App\VitalGym\Entities\User;
 use App\VitalGym\Services\User\UserService;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserServiceTest extends TestCase
 {
@@ -22,7 +22,7 @@ class UserServiceTest extends TestCase
     {
         $service = $this->makeService();
         factory(User::class, 10)->create();
-        
+
         $newUsers = $service->paginateusers();
 
         $this->assertInstanceOf(LengthAwarePaginator::class, $newUsers);

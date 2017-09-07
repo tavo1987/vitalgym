@@ -2,10 +2,9 @@
 
 namespace App\VitalGym\Services\User;
 
-use app\VitalGym\Repositories\Contracts\UserProfileRepository;
+use Carbon\Carbon;
 use App\VitalGym\Repositories\Contracts\UserRepository;
 use App\VitalGym\Services\Contracts\UserServiceContract;
-use Carbon\Carbon;
 
 class UserService implements UserServiceContract
 {
