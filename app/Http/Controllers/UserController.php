@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\VitalGym\Entities\User;
-use App\VitalGym\Services\User\UserService;
 use Illuminate\Http\Request;
+use App\VitalGym\Services\User\UserService;
 
 class UserController extends Controller
 {
@@ -19,7 +18,6 @@ class UserController extends Controller
      */
     public function __construct(UserService $userService)
     {
-
         $this->userService = $userService;
     }
 
