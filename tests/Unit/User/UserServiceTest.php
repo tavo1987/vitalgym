@@ -17,7 +17,8 @@ class UserServiceTest extends TestCase
         return app(UserService::class);
     }
 
-    public function test_it_can_list_all_users()
+    /** @test **/
+    public function it_can_list_all_users()
     {
         $service = $this->makeService();
         factory(User::class, 10)->create();
@@ -26,5 +27,41 @@ class UserServiceTest extends TestCase
 
         $this->assertInstanceOf(LengthAwarePaginator::class, $newUsers);
         $this->assertEquals(10, $newUsers->count());
+    }
+
+    /** @test **/
+    public function it_can_create_new_user_with_profile()
+    {
+        $this->disableExceptionHandling();
+        $service = $this->makeService();
+        $user = (object) [
+            'name'      => 'Edwin',
+            'last_name' => 'Ramírez',
+            'nick_name' => 'tavo',
+            'avatar'    => 'https://s3-us-west-2.amazonaws.com/vitalgym/avatars/default-avatar.jpg',
+            'address'   => 'Fake address',
+            'email'     => 'tavo198718@gmail.com',
+            'password'  => bcrypt('secret'),
+            'role'      => 'admin',
+            'active'    => 1,
+        ];
+
+        $service->create($user);
+
+        $this->assertDatabaseHas('users', [
+            'email'     => 'tavo198718@gmail.com',
+            'role'      => 'admin',
+            'active'    => 1,
+        ]);
+
+        $this->assertDatabaseHas('profiles', [
+            'name'      => 'Edwin',
+            'last_name' => 'Ramírez',
+            'nick_name' => 'tavo',
+            'avatar'    => 'https://s3-us-west-2.amazonaws.com/vitalgym/avatars/default-avatar.jpg',
+            'address'   => 'Fake address',
+        ]);
+
+        $this->getStatus(200);
     }
 }
