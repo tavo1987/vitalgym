@@ -36,9 +36,10 @@ class ActivationAccountService implements ActivationAccountServiceContract
         }
     }
 
+
     /**
      * @param $email
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return bool|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function resend($email)
     {
@@ -47,6 +48,9 @@ class ActivationAccountService implements ActivationAccountServiceContract
         if ($user->active) {
             return redirect('/');
         }
+
         event(new UserRequestedActivationEmail($user));
+
+        return true;
     }
 }

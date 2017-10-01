@@ -51,7 +51,7 @@ class ActivationAccountServiceTest extends BrowserKitTestCase
 
         factory(ActivationToken::class)->create(['user_id' => $user->id]);
 
-        $service->resend('edwin@gmail.com');
+        $this->assertTrue($service->resend('edwin@gmail.com'));
 
         $listener->shouldHaveReceived('handle')->with(Mockery::on(function ($event) use ($user) {
             return $event->user->id == $user->id;
