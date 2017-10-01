@@ -1,15 +1,17 @@
 <?php
 
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Support\Facades\DB;
-use MailThief\Testing\InteractsWithMail;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ResetPasswordTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions, InteractsWithMail;
+    use DatabaseTransactions;
 
     public function test_password_reset_email()
     {
+        Notification::fake();
+
         $user = $this->createNewUser();
 
         $this->visit('/')
@@ -19,9 +21,7 @@ class ResetPasswordTest extends BrowserKitTestCase
             ->type($user->email, 'email')
             ->press('Restablecer Contraseña');
 
-        $this->seeMessageFor($user->email)
-            ->seeMessageWithSubject('Restablecer Contraseña')
-            ->assertTrue($this->lastMessage()->contains('Usted esta recibiendo este correo porque hemos recibido un solicitud para restablecer su contraseña'));
+        Notification::assertSentTo($user, ResetPasswordNotification::class);
         $this->seeText('¡Te hemos enviado por correo el enlace para restablecer tu contraseña!');
     }
 
@@ -37,25 +37,24 @@ class ResetPasswordTest extends BrowserKitTestCase
         $this->seeText('No podemos encontrar ningún usuario con ese correo electrónico.');
     }
 
-    /*public function test_user_can_reset_password()
+    public function test_user_can_reset_password()
     {
         $token = str_random(60);
         $user = $this->createNewUser();
 
-        DB::table('password_resets')->insert(['email' => $user->email, 'token' => $token]);
+        DB::table('password_resets')->insert(['email' => $user->email, 'token' => bcrypt($token)]);
 
-        $this->visit('/password/reset/'.$token)
+
+        $this->visit("/password/reset/{$token}")
             ->seeText('Restablecer la contraseña')
             ->type('tavo198718@gmail.com', 'email')
             ->type('laravel', 'password')
             ->type('laravel', 'password_confirmation')
             ->press('Restablecer la contraseña');
 
-        $this->seeText('¡Te hemos enviado por correo el enlace para restablecer tu contraseña!')
-            ->seeIsAuthenticated()
-            ->seeCredentials(['password' => 'laravel'])
+        $this->seeCredentials(['password' => 'laravel'])
             ->seeText('Bienvenido');
-    }*/
+    }
 
     public function test_unregistered_user_cannot_reset_password()
     {
