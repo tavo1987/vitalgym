@@ -53,12 +53,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapGuestRoutes()
     {
-        Route::group([
-            'middleware' => 'web',
-            'namespace' => $this->namespace,
-        ], function ($router) {
-            require base_path('routes/guest.php');
-        });
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/guest.php'));
     }
 
     /**
@@ -70,12 +67,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapCustomerRoutes()
     {
-        Route::group([
-            'middleware' => 'web', 'auth',
-            'namespace' => $this->namespace,
-        ], function ($router) {
-            require base_path('routes/customer.php');
-        });
+        Route::middleware(['web', 'auth'])
+            ->namespace($this->namespace)
+            ->group(base_path('routes/customer.php'));
     }
 
     /**
@@ -87,13 +81,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapAdminRoutes()
     {
-        Route::group([
-            'middleware' => 'web', 'auth',
-            'prefix' => 'admin',
-            'namespace' => $this->namespace,
-        ], function ($router) {
-            require base_path('routes/admin.php');
-        });
+        Route::middleware(['web', 'auth'])
+            ->prefix('admin')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/admin.php'));
     }
 
     /**
@@ -105,12 +96,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::group([
-            'middleware' => 'api',
-            'namespace' => $this->namespace,
-            'prefix' => 'api',
-        ], function ($router) {
-            require base_path('routes/api.php');
-        });
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
     }
 }
