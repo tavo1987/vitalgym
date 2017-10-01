@@ -36,7 +36,6 @@ class ActivationAccountService implements ActivationAccountServiceContract
         }
     }
 
-
     /**
      * @param $email
      * @return bool|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector

@@ -1,7 +1,7 @@
 <?php
 
-use App\Notifications\ResetPasswordNotification;
 use Illuminate\Support\Facades\DB;
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ResetPasswordTest extends BrowserKitTestCase
@@ -43,7 +43,6 @@ class ResetPasswordTest extends BrowserKitTestCase
         $user = $this->createNewUser();
 
         DB::table('password_resets')->insert(['email' => $user->email, 'token' => bcrypt($token)]);
-
 
         $this->visit("/password/reset/{$token}")
             ->seeText('Restablecer la contraseña')
