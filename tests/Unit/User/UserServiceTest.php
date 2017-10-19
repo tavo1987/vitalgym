@@ -32,7 +32,6 @@ class UserServiceTest extends TestCase
     /** @test **/
     public function it_can_create_new_user_with_profile()
     {
-        $this->disableExceptionHandling();
         $service = $this->makeService();
         $user = (object) [
             'name'      => 'Edwin',
