@@ -2,12 +2,9 @@
 
 namespace  Tests;
 
-use Exception;
-use App\Exceptions\Handler;
 use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Profile;
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Contracts\Debug\ExceptionHandler;
 
 trait CreatesApplication
 {
