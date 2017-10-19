@@ -34,7 +34,7 @@ $factory->define(Profile::class, function (Faker\Generator $faker) {
         'name'          => $faker->firstName,
         'last_name'       => $faker->lastName,
         'nick_name'      => $faker->name,
-        'avatar'         => $faker->imageUrl(250, 250),
+        'avatar'         => 'https://s3-us-west-2.amazonaws.com/vitalgym/avatars/default-avatar.jpg',
         'address'         => $faker->address,
         'user_id' => function () {
             return factory(User::class)->create()->id;
