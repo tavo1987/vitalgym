@@ -2,31 +2,48 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserRequestedActivationEmail;
 use App\Http\Controllers\Controller;
-use App\VitalGym\Services\Auth\ActivationAccountService as ActivationAccountService;
+use App\VitalGym\Repositories\Contracts\TokenRepository;
+use App\VitalGym\Repositories\Contracts\UserRepository;
 
 class ActivationController extends Controller
 {
-    /**
-     * @var ActivationAccountService
-     */
-    protected $service;
 
-    public function __construct(ActivationAccountService $service)
+    /**
+     * @var TokenRepository
+     */
+    protected $tokenRepository;
+
+    /**
+     * @var UserRepository
+     */
+    protected $userRepository;
+
+    public function __construct(TokenRepository $tokenRepository, UserRepository  $userRepository)
     {
-        $this->service = $service;
+        $this->tokenRepository = $tokenRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function activate($token)
     {
-        $this->service->activate($token);
-
+        $user = $this->tokenRepository->activateUserAccount($token);
+        if ($user) {
+            auth()->login($user);
+        }
         return redirect('/')->with(['message' => 'Gracias por activar tu cuenta', 'alert-type' => 'success']);
     }
 
     public function resend($email)
     {
-        $this->service->resend($email);
+        $user = $this->userRepository->findByEmail($email);
+
+        if ($user->active) {
+            return redirect('/');
+        }
+
+        event(new UserRequestedActivationEmail($user));
 
         return redirect('/login')->withInfo('Email de verificación enviado.');
     }
