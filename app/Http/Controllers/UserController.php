@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\VitalGym\Repositories\Contracts\UserRepository;
 use Illuminate\Http\Request;
-
+use App\VitalGym\Repositories\Contracts\UserRepository;
 
 class UserController extends Controller
 {
