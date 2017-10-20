@@ -29,9 +29,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(UserServiceContract::class, UserService::class);
-        $this->app->bind(ActivationAccountServiceContract::class, ActivationAccountService::class);
-
         if ($this->app->environment('local', 'testing')) {
             $this->app->register(DuskServiceProvider::class);
             $this->app->register(IdeHelperServiceProvider::class);
