@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Events\UserRequestedActivationEmail;
 use App\Http\Controllers\Controller;
-use App\VitalGym\Repositories\Contracts\TokenRepository;
+use App\Events\UserRequestedActivationEmail;
 use App\VitalGym\Repositories\Contracts\UserRepository;
+use App\VitalGym\Repositories\Contracts\TokenRepository;
 
 class ActivationController extends Controller
 {
-
     /**
      * @var TokenRepository
      */
@@ -32,6 +31,7 @@ class ActivationController extends Controller
         if ($user) {
             auth()->login($user);
         }
+
         return redirect('/')->with(['message' => 'Gracias por activar tu cuenta', 'alert-type' => 'success']);
     }
 
