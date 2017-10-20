@@ -74,20 +74,6 @@ class ActivationAccountTokenTest extends BrowserKitTestCase
         });
     }
 
-    public function test_user_dit_not_receive_activation_correct_token()
-    {
-        Mail::fake();
-        $user = $this->createNewUser(['active' => false]);
-        factory(ActivationToken::class)->create(['user_id' => $user->id]);
-        $token_fake = factory(ActivationToken::class)->create();
-
-        $this->get(route('auth.activate.resend', $user->email));
-
-        Mail::assertNotSent(SendActivationToken::class, function ($mail) use ($token_fake) {
-            return $mail->token->token === $token_fake->token;
-        });
-    }
-
     public function test_unregistered_user_cannot_get_email_with_activation_token()
     {
         $this->get(route('auth.activate.resend', 'fake@email.com'));
