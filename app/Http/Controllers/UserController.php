@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\VitalGym\Entities\User;
 use Illuminate\Http\Request;
+use App\VitalGym\Entities\User;
 
 class UserController extends Controller
 {
@@ -19,6 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::with('profile')->paginate();
+
         return view('admin.users.index', compact('users'));
     }
 
