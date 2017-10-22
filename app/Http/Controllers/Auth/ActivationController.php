@@ -4,30 +4,15 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Events\UserRequestedActivationEmail;
-use App\VitalGym\Repositories\Contracts\UserRepository;
-use App\VitalGym\Repositories\Contracts\TokenRepository;
+use App\VitalGym\Entities\ActivationToken;
+use App\VitalGym\Entities\User;
+
 
 class ActivationController extends Controller
 {
-    /**
-     * @var TokenRepository
-     */
-    protected $tokenRepository;
-
-    /**
-     * @var UserRepository
-     */
-    protected $userRepository;
-
-    public function __construct(TokenRepository $tokenRepository, UserRepository  $userRepository)
+    public function activate(ActivationToken $token)
     {
-        $this->tokenRepository = $tokenRepository;
-        $this->userRepository = $userRepository;
-    }
-
-    public function activate($token)
-    {
-        $user = $this->tokenRepository->activateUserAccount($token);
+        $user = $token->activateUserAccount();
         if ($user) {
             auth()->login($user);
         }
@@ -37,7 +22,7 @@ class ActivationController extends Controller
 
     public function resend($email)
     {
-        $user = $this->userRepository->findByEmail($email);
+        $user = User::where('email', $email)->firstOrFail();
 
         if ($user->active) {
             return redirect('/');

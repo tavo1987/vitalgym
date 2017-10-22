@@ -19,4 +19,12 @@ class ActivationToken extends Model
     {
         return 'token';
     }
+
+    public function activateUserAccount()
+    {
+        $this->user()->update(['active' => true]);
+        $this->delete();
+
+        return $this->user;
+    }
 }

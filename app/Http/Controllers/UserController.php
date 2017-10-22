@@ -2,19 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\VitalGym\Entities\User;
 use Illuminate\Http\Request;
-use App\VitalGym\Repositories\Contracts\UserRepository;
 
 class UserController extends Controller
 {
-    /**
-     * @var UserRepository
-     */
-    protected $userRepository;
-
-    public function __construct(UserRepository $userRepository)
+    public function __construct()
     {
-        $this->userRepository = $userRepository;
     }
 
     /**
@@ -24,8 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->userRepository->paginateUsersWithProfile(15);
-
+        $users = User::with('profile')->paginate();
         return view('admin.users.index', compact('users'));
     }
 
