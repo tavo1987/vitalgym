@@ -1,16 +1,17 @@
 <?php
 
-namespace Tests\Integration\User;
+namespace Tests\Features\User;
 
 use Tests\TestCase;
 use App\VitalGym\Entities\Profile;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class UserTest extends TestCase
+class UsersListTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function test_list_users()
+    /** @test **/
+    public function list_users()
     {
         $user = $this->createNewUser();
 
