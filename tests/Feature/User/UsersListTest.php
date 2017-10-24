@@ -52,8 +52,7 @@ class UsersListTest extends TestCase
     /** @test **/
     public function the_users_are_paginated()
     {
-        $this->withoutExceptionHandling();
-        $user = $this->createNewUser(['created_at' => Carbon::now()->subDays(2)]);
+        $user = $this->createNewUser();
 
         factory(User::class, 20)
             ->create()
@@ -65,17 +64,20 @@ class UsersListTest extends TestCase
 
         $response = $this->actingAs($user)->json('GET', route('users.index'));
 
-        $response->assertStatus(200);
-            /*->assertJson([
-                'current_page'=> 1,
-                'total' => 21,
-                'per_page' => 15,
-                "last_page" => 2,
-                "next_page_url" => config('app.url').'/admin/users?page=2',
-                "prev_page_url" => null,
-                "from" => 1,
-                "to" => 2,
-            ]);*/
+        $users = User::with('profile')->get()->take(15)->toArray();
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'current_page'  => 1,
+                'total'         => 21,
+                'per_page'      => 15,
+                'last_page'     => 2,
+                'next_page_url' => config('app.url') . '/admin/users?page=2',
+                'prev_page_url' => null,
+                'from'          => 1,
+                'to'            => 15,
+                'data'          => $users
+            ]);
     }
 
 }
