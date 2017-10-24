@@ -11,11 +11,11 @@ class UserController extends Controller
     {
     }
 
-    public function index(Request $request)
+    public function index()
     {
         $users = User::with('profile')->paginate();
 
-        /*$data = [
+        $data = [
             'total'         => $users->total(),
             'per_page'      => $users->perPage(),
             'current_page'  => $users->currentPage(),
@@ -23,14 +23,11 @@ class UserController extends Controller
             'next_page_url' => $users->nextPageUrl(),
             'prev_page_url' => $users->previousPageUrl(),
             'from'          => $users->firstItem(),
-            'to'            => $users->lastPage(),
+            'to'            => $users->lastItem(),
+            'data'          => $users->items()
         ];
 
-        if ($request->ajax()) {
-            return $data;
-        }*/
-
-        return view('admin.users.index', compact('users'));
+        return $data;
     }
 
     /**
