@@ -1,8 +1,7 @@
+import Vue from 'vue';
 import './bootstrap';
 import './admin-lte.js';
-import 'toastr'
-
-//window.Vue = require('vue');
+import 'toastr';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -10,11 +9,12 @@ import 'toastr'
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-//Vue.component('example', require('./components/Example.vue'));
 
-/*const app = new Vue({
+Vue.component('user-table', require('./components/UserTable.vue'));
+
+new Vue({
     el: '#app'
-});*/
+});
 
 $(window).on('load', function(){
     $('#loader').fadeOut();
