@@ -37,20 +37,11 @@ class UsersListTest extends TestCase
             ->get(route('users.index'));
 
         $response->assertStatus(200)
-            ->assertSeeText('Usuarios')
-            ->assertSeeText($otherUser->profile->name)
-            ->assertSeeText($otherUser->profile->last_name)
-            ->assertSeeText($otherUser->profile->nick_name)
-            ->assertSee($otherUser->profile->avatar)
-            ->assertSeeText($otherUser->email)
-            ->assertSeeText($otherUser->email)
-            ->assertSeeText($otherUser->email)
-            ->assertSeeText($otherUser->role)
-            ->assertSeeText('activo');
+            ->assertSeeText('Usuarios');
     }
 
     /** @test **/
-    public function the_users_are_paginated()
+    public function the_users_are_paginated_and_sorted_by_id_in_descending_order()
     {
         $user = $this->createNewUser();
 
@@ -62,9 +53,9 @@ class UsersListTest extends TestCase
             ]);
         });
 
-        $response = $this->actingAs($user)->json('GET', route('users.index'));
+        $response = $this->actingAs($user)->json('GET', '/api/v1/users');
 
-        $users = User::with('profile')->get()->take(15)->toArray();
+        $users = User::with('profile')->orderBy('id', 'DESC')->get()->take(15)->toArray();
 
         $response->assertStatus(200)
             ->assertJson([
@@ -72,7 +63,7 @@ class UsersListTest extends TestCase
                 'total'         => 21,
                 'per_page'      => 15,
                 'last_page'     => 2,
-                'next_page_url' => config('app.url') . '/admin/users?page=2',
+                'next_page_url' => config('app.url') . '/api/v1/users?page=2',
                 'prev_page_url' => null,
                 'from'          => 1,
                 'to'            => 15,
