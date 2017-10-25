@@ -23,5 +23,6 @@ mix.options({
         proxy: 'http://vitalgym.dev',
         injectChanges: true,
         notify: false,
+        open: false
     })
     .less('resources/assets/less/admin-lte/AdminLTE.less', 'public/css');
