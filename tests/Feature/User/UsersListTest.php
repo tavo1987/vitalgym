@@ -2,9 +2,8 @@
 
 namespace Tests\Features\User;
 
-use App\VitalGym\Entities\User;
-use Carbon\Carbon;
 use Tests\TestCase;
+use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Profile;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
@@ -48,10 +47,10 @@ class UsersListTest extends TestCase
         factory(User::class, 20)
             ->create()
             ->each(function ($user) {
-            factory(Profile::class)->create([
-               'user_id' => $user->id
+                factory(Profile::class)->create([
+               'user_id' => $user->id,
             ]);
-        });
+            });
 
         $response = $this->actingAs($user)->json('GET', '/api/v1/users');
 
@@ -63,12 +62,11 @@ class UsersListTest extends TestCase
                 'total'         => 21,
                 'per_page'      => 15,
                 'last_page'     => 2,
-                'next_page_url' => config('app.url') . '/api/v1/users?page=2',
+                'next_page_url' => config('app.url').'/api/v1/users?page=2',
                 'prev_page_url' => null,
                 'from'          => 1,
                 'to'            => 15,
-                'data'          => $users
+                'data'          => $users,
             ]);
     }
-
 }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\VitalGym\Entities\User;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -20,7 +20,7 @@ class UserController extends Controller
             'prev_page_url' => $users->previousPageUrl(),
             'from'          => $users->firstItem(),
             'to'            => $users->lastItem(),
-            'data'          => $users->items()
+            'data'          => $users->items(),
         ];
 
         return $data;
