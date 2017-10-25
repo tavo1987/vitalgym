@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\VitalGym\Entities\User;
 
 class UserController extends Controller
 {
