@@ -2,10 +2,10 @@
 
 namespace Tests\Features\User;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Profile;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UsersListTest extends TestCase
 {
@@ -43,7 +43,7 @@ class UsersListTest extends TestCase
     public function the_users_are_paginated_and_sorted_by_id_in_descending_order()
     {
         $user = $this->createNewUser([
-            'api_token' => str_random(60)
+            'api_token' => str_random(60),
         ]);
 
         factory(User::class, 20)
@@ -52,10 +52,10 @@ class UsersListTest extends TestCase
                 factory(Profile::class)->create([
                'user_id' => $user->id,
             ]);
-        });
+            });
 
-        $response = $this->json('GET', '/api/v1/users',[
-            'api_token' => $user->api_token
+        $response = $this->json('GET', '/api/v1/users', [
+            'api_token' => $user->api_token,
         ]);
 
         $users = User::with('profile')->orderBy('id', 'DESC')->get()->take(15)->toArray();
@@ -81,22 +81,20 @@ class UsersListTest extends TestCase
 
         $response->assertStatus(401)
             ->assertJson([
-                "message" => "Unauthenticated."
+                'message' => 'Unauthenticated.',
             ]);
-
     }
 
     /** @test **/
     public function the_users_with_invalid_api_token_can_not_get_users_list_data()
     {
         $response = $this->json('GET', '/api/v1/users', [
-            'api_token' => 'abc'
+            'api_token' => 'abc',
         ]);
 
         $response->assertStatus(401)
             ->assertJson([
-                "message" => "Unauthenticated."
+                'message' => 'Unauthenticated.',
             ]);
-
     }
 }
