@@ -5,6 +5,7 @@
                   :fields="fields"
                   pagination-path=""
                   @vuetable:pagination-data="onPaginationData"
+                  :http-options="{ headers: {Authorization: 'Bearer M8PSqDIeVpg2XwNJnvZN3RJNO8vz8vnxweiuJ2TBo90aYReyQuEf0FHdop7y'}}"
         >
             <template slot="actions" slot-scope="props">
                 <div class="btn-group">
