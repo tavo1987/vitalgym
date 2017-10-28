@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('role');
             $table->boolean('active')->default(false);
             $table->dateTime('last_login');
+            $table->string('api_token')->unique();
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

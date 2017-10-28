@@ -25,6 +25,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
         'active'         => $faker->randomElement([true, false, true]),
         'role'           => $faker->randomElement(['admin', 'customer', 'customer']),
         'last_login'     => Carbon::now(),
+        'api_token'      => str_random(60),
         'remember_token' => str_random(10),
     ];
 });
