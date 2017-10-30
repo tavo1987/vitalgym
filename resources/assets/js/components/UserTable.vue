@@ -3,7 +3,7 @@
         <vuetable ref="vuetable"
                   api-url="/api/v1/users"
                   :fields="fields"
-                  :muti-sort="true"
+                  :query-params="queryParams"
                   pagination-path=""
                   @vuetable:pagination-data="onPaginationData"
                   :http-options="{ headers: {Authorization: 'Bearer ' + apiToken }}"
@@ -40,7 +40,14 @@
         },
         data() {
             return {
-                moreParams: {},
+                queryParams:{
+                    sort: 'orderBy',
+                    page: 'page',
+                    perPage: 'per_page'
+                },
+                moreParams: {
+                    orderDirection: 'desc',
+                },
                 fields: [
                     {name: 'id', title: 'id', sortField: 'id'},
                     {name: 'name', title: 'Nombre', sortField: 'name'},
@@ -67,6 +74,12 @@
             this.$eventHub.$on('filter-reset', e => this.onFilterReset())
         },
         methods: {
+            getSortParam(sortOrder) {
+                return sortOrder.map( sort => {
+                    this.moreParams.orderDirection = sort.direction
+                    return sort.field
+                }).join(',');
+            },
             onPaginationData (paginationData) {
                 this.$refs.pagination.setPaginationData(paginationData)
             },
