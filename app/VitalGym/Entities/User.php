@@ -17,7 +17,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role',  'active', 'last_login',
+        'name',
+        'email',
+        'name',
+        'last_name',
+        'nick_name',
+        'avatar',
+        'address',
+        'password',
+        'role',
+        'active',
+        'last_login',
     ];
 
     /**
@@ -57,8 +67,9 @@ class User extends Authenticatable
         return $this->attributes['active'] ? 'activo' : 'inactivo';
     }
 
-    public function profile()
+    public function getFullNameAttribute()
     {
-        return $this->hasOne(Profile::class);
+        return $this->attributes['name'] . $this->attributes['last_name'];
     }
+
 }
