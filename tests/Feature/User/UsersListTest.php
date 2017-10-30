@@ -24,14 +24,6 @@ class UsersListTest extends TestCase
             'last_login' => '2017-08-20 04:15:00',
         ]);
 
-        factory(Profile::class)->create([
-            'name' => 'John',
-            'last_name' => 'Doe',
-            'nick_name' => 'doe',
-            'avatar' => 'default-avatar.jpg',
-            'user_id' => $otherUser->id,
-        ]);
-
         $response = $this->actingAs($user)
             ->get(route('users.index'));
 
@@ -46,19 +38,14 @@ class UsersListTest extends TestCase
             'api_token' => str_random(60),
         ]);
 
-        factory(User::class, 20)
-            ->create()
-            ->each(function ($user) {
-                factory(Profile::class)->create([
-               'user_id' => $user->id,
-            ]);
-            });
+        factory(User::class, 20)->create();
+
 
         $response = $this->json('GET', '/api/v1/users', [
             'api_token' => $user->api_token,
         ]);
 
-        $users = User::with('profile')->orderBy('id', 'DESC')->get()->take(15)->toArray();
+        $users = User::orderBy('id', 'DESC')->get()->take(15)->toArray();
 
         $response->assertStatus(200)
             ->assertJson([
