@@ -2,7 +2,6 @@
 
 use Carbon\Carbon;
 use App\VitalGym\Entities\User;
-use App\VitalGym\Entities\Profile;
 use App\VitalGym\Entities\ActivationToken;
 
 /*
@@ -18,28 +17,21 @@ use App\VitalGym\Entities\ActivationToken;
 
 $factory->define(User::class, function (Faker\Generator $faker) {
     static $password;
-
     return [
+        'name'           => $faker->firstName,
+        'last_name'      => $faker->lastName,
+        'nick_name'      => $faker->name,
+        'avatar'         => 'https://s3-us-west-2.amazonaws.com/vitalgym/avatars/default-avatar.jpg',
         'email'          => $faker->unique()->safeEmail,
+        'phone'          => $faker->phoneNumber,
+        'cell_phone'     => $faker->phoneNumber,
+        'address'         => $faker->address,
         'password'       => $password ?: $password = bcrypt('secret'),
         'active'         => $faker->randomElement([true, false, true]),
         'role'           => $faker->randomElement(['admin', 'customer', 'customer']),
         'last_login'     => Carbon::now(),
         'api_token'      => str_random(60),
         'remember_token' => str_random(10),
-    ];
-});
-
-$factory->define(Profile::class, function (Faker\Generator $faker) {
-    return [
-        'name'          => $faker->firstName,
-        'last_name'       => $faker->lastName,
-        'nick_name'      => $faker->name,
-        'avatar'         => 'https://s3-us-west-2.amazonaws.com/vitalgym/avatars/default-avatar.jpg',
-        'address'         => $faker->address,
-        'user_id' => function () {
-            return factory(User::class)->create()->id;
-        },
     ];
 });
 

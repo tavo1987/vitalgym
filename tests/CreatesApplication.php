@@ -3,7 +3,6 @@
 namespace  Tests;
 
 use App\VitalGym\Entities\User;
-use App\VitalGym\Entities\Profile;
 use Illuminate\Contracts\Console\Kernel;
 
 trait CreatesApplication
@@ -31,32 +30,21 @@ trait CreatesApplication
         return $app;
     }
 
-    public function createNewUser($data = [])
+    public function createNewUser( $attributes = [] )
     {
-        $userData = collect([
+        $userData = [
             'email'      => 'tavo198718@gmail.com',
             'password'   => bcrypt('secret'),
             'active'     => true,
             'role'       => 'admin',
             'last_login' => '2017-08-20 13:15:00',
-        ]);
+        ];
 
-        if (! empty($data)) {
-            foreach ($data as $key => $value) {
-                $userData->put($key, $value);
-            }
+        if ($attributes) {
+            return factory(User::class)->create($attributes);
         }
 
-        $user = factory(User::class)->create($userData->toArray());
-        factory(Profile::class)->create([
-            'name'      => 'Edwin',
-            'last_name'  => 'Ramírez',
-            'nick_name' => 'tavo',
-            'avatar'    => 'https://s3-us-west-2.amazonaws.com/vitalgym/avatars/default-avatar.jpg',
-            'address'   => 'My address',
-            'user_id'   => $user->id,
-        ]);
+        return factory(User::class)->create($userData);
 
-        return $user;
     }
 }

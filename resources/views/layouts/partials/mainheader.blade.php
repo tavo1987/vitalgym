@@ -50,16 +50,16 @@
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="{{ Auth::user()->profile->avatar }}" class="user-image" alt="User Image"/>
+                            <img src="{{ Auth::user()->avatar }}" class="user-image" alt="User Image"/>
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">{{ Auth::user()->profile->fullName }}</span>
+                            <span class="hidden-xs">{{ Auth::user()->fullName }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header bg-blue">
-                                <img src="{{ Auth::user()->profile->avatar }}" class="img-circle" alt="User Image" />
+                                <img src="{{ Auth::user()->avatar }}" class="img-circle" alt="User Image" />
                                 <p>
-                                    <span>{{ Auth::user()->profile->fullName }} - {{ Auth::user()->profile->nick_name }}</span>
+                                    <span>{{ Auth::user()->full_name }} - {{ Auth::user()->nick_name }}</span>
                                     {{ Auth::user()->name }}
                                     <small>Miembro desde: {{ Auth::user()->created_at->format('F-Y') }}</small>
                                 </p>

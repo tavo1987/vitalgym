@@ -18,8 +18,8 @@ class AuthenticationUserTest extends BrowserKitTestCase
             ->press(trans('login.buttonsign'));
 
         $this->SeeIsAuthenticated()
-            ->seeText($user->profile->nick_name)
-            ->see($user->profile->avatar)
+            ->seeText($user->nick_name)
+            ->see($user->avatar)
             ->see('Miembro desde: '.$user->created_at->format('F-Y'));
     }
 
