@@ -43,10 +43,10 @@
                 moreParams: {},
                 fields: [
                     {name: 'id', title: 'id', sortField: 'id'},
-                    {name: 'profile.name', title: 'Nombre'},
-                    {name: 'profile.last_name', title: 'Apellido'},
-                    {name: 'profile.nick_name', title: 'Nick Name'},
-                    {name: 'profile.avatar', title: 'Avatar', callback: 'renderAvatar'},
+                    {name: 'name', title: 'Nombre', sortField: 'name'},
+                    {name: 'last_name', title: 'Apellido', sortField: 'last_name'},
+                    {name: 'nick_name', title: 'Nick Name', sortField: 'nick_name'},
+                    {name: 'avatar', title: 'Avatar', callback: 'renderAvatar'},
                     {name: 'email', title: 'Email', sortField: 'email'},
                     {name: 'role', title: 'Tipo', callback: 'roleLabel'},
                     {name: 'active', title: 'Estado', callback: 'statusLabel'},
@@ -91,7 +91,7 @@
                 return `<img width="50" class="img-circle img-bordered-sm" src="${value}"/>`
             },
             onAction (action, data, index) {
-                alert(`slot action: ' ${action}, ${data.profile.name}, ${index}`)
+                alert(`slot action: ' ${action}, ${data.name}, ${index}`)
             },
             onFilterSet(payload) {
                 this.moreParams = {'filter': payload},
