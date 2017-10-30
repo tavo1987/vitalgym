@@ -10,7 +10,7 @@ class UserController extends Controller
     public function index()
     {
         $order = request('sort') ? collect(explode('|', request('sort'))) : collect(['id', 'DESC']);
-        $users = User::with('profile')->orderBy($order->first(), $order->last())->paginate();
+        $users = User::orderBy($order->first(), $order->last())->paginate();
 
         $data = [
             'total'         => $users->total(),
