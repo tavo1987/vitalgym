@@ -3,9 +3,11 @@
         <vuetable ref="vuetable"
                   api-url="/api/v1/users"
                   :fields="fields"
+                  :muti-sort="true"
                   pagination-path=""
                   @vuetable:pagination-data="onPaginationData"
-                  :http-options="{ headers: {Authorization: 'Bearer M8PSqDIeVpg2XwNJnvZN3RJNO8vz8vnxweiuJ2TBo90aYReyQuEf0FHdop7y'}}"
+                  :http-options="{ headers: {Authorization: 'Bearer ' + apiToken }}"
+                  :append-params="moreParams"
         >
             <template slot="actions" slot-scope="props">
                 <div class="btn-group">
@@ -22,26 +24,30 @@
                 </div>
             </template>
         </vuetable>
-        <vuetable-pagination ref="pagination"
-                             @vuetable-pagination:change-page="onChangePage"
-        ></vuetable-pagination>
+        <vuetable-pagination ref="pagination" @vuetable-pagination:change-page="onChangePage">
+        </vuetable-pagination>
     </div>
 </template>
 
 <script>
+    import Vue from 'vue'
     import Vuetable from 'vuetable-2/src/components/Vuetable'
     import VuetablePagination from 'vuetable-2/src/components/VuetablePagination'
 
     export default {
+        props:{
+            apiToken: { type: String, required: true}
+        },
         data() {
             return {
+                moreParams: {},
                 fields: [
-                    {name: 'id', title: 'id'},
+                    {name: 'id', title: 'id', sortField: 'id'},
                     {name: 'profile.name', title: 'Nombre'},
                     {name: 'profile.last_name', title: 'Apellido'},
                     {name: 'profile.nick_name', title: 'Nick Name'},
                     {name: 'profile.avatar', title: 'Avatar', callback: 'renderAvatar'},
-                    {name: 'email', title: 'Email'},
+                    {name: 'email', title: 'Email', sortField: 'email'},
                     {name: 'role', title: 'Tipo', callback: 'roleLabel'},
                     {name: 'active', title: 'Estado', callback: 'statusLabel'},
                     {name: 'last_login', title: 'Última sesión'},
@@ -55,6 +61,10 @@
         components: {
             VuetablePagination,
             Vuetable,
+        },
+        mounted() {
+            this.$eventHub.$on('filter-set', eventData => this.onFilterSet(eventData))
+            this.$eventHub.$on('filter-reset', e => this.onFilterReset())
         },
         methods: {
             onPaginationData (paginationData) {
@@ -82,6 +92,16 @@
             },
             onAction (action, data, index) {
                 alert(`slot action: ' ${action}, ${data.profile.name}, ${index}`)
+            },
+            onFilterSet(payload) {
+                this.moreParams = {'filter': payload},
+                Vue.nextTick( () => this.$refs.vuetable.refresh())
+                console.log('from user table component:' + payload);
+            },
+            onFilterReset() {
+                this.moreParams = {}
+                Vue.nextTick( () => this.$refs.vuetable.refresh())
+                console.log('reset:');
             }
         }
     }
