@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import EventBus from './event-bus';
 import './bootstrap';
 import './admin-lte.js';
 import 'toastr';
@@ -10,7 +11,8 @@ import 'toastr';
  */
 
 
-Vue.component('user-table', require('./components/UserTable.vue'));
+Vue.component('user-table', require('./components/UserTable'));
+Vue.component('filter-bar', require('./components/FilterBar'))
 
 new Vue({
     el: '#app'
