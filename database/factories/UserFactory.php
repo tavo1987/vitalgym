@@ -17,6 +17,7 @@ use App\VitalGym\Entities\ActivationToken;
 
 $factory->define(User::class, function (Faker\Generator $faker) {
     static $password;
+
     return [
         'name'           => $faker->firstName,
         'last_name'      => $faker->lastName,

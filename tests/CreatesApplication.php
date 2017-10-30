@@ -30,7 +30,7 @@ trait CreatesApplication
         return $app;
     }
 
-    public function createNewUser( $attributes = [] )
+    public function createNewUser($attributes = [])
     {
         $userData = [
             'email'      => 'tavo198718@gmail.com',
@@ -45,6 +45,5 @@ trait CreatesApplication
         }
 
         return factory(User::class)->create($userData);
-
     }
 }

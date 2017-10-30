@@ -4,7 +4,6 @@ namespace Tests\Features\User;
 
 use Tests\TestCase;
 use App\VitalGym\Entities\User;
-use App\VitalGym\Entities\Profile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UsersListTest extends TestCase
@@ -39,7 +38,6 @@ class UsersListTest extends TestCase
         ]);
 
         factory(User::class, 20)->create();
-
 
         $response = $this->json('GET', '/api/v1/users', [
             'api_token' => $user->api_token,
