@@ -13,6 +13,10 @@ class UserController extends Controller
         $orderByDirection = request('orderDirection') ?? 'DESC';
         $users = User::orderBy($orderByField, $orderByDirection)->paginate();
 
+        if (request()->filled('filter')) {
+            $users = User::where('name', 'like', '%'.request()->filter.'%')->orderBy($orderByField, $orderByDirection)->paginate();
+        }
+
         $data = [
             'total'         => $users->total(),
             'per_page'      => $users->perPage(),
