@@ -16,8 +16,8 @@ trait Filterable
      */
     public function scopeFilter($query)
     {
-        if (!class_exists($this->filters)) {
-            throw new Exception($this->filters . " does not exist.");
+        if (! class_exists($this->filters)) {
+            throw new Exception($this->filters.' does not exist.');
         }
 
         return app()->make($this->filters)->apply($query);
