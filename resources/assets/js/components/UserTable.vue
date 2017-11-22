@@ -1,5 +1,6 @@
 <template>
     <div>
+        <filter-bar></filter-bar>
         <vuetable ref="vuetable"
                   api-url="/api/v1/users"
                   :fields="fields"
@@ -33,6 +34,7 @@
     import Vue from 'vue'
     import Vuetable from 'vuetable-2/src/components/Vuetable'
     import VuetablePagination from 'vuetable-2/src/components/VuetablePagination'
+    import userFields  from './../field-definitions/userFields'
 
     export default {
         props:{
@@ -48,22 +50,8 @@
                 moreParams: {
                     orderDirection: 'desc',
                 },
-                fields: [
-                    {name: 'id', title: 'id', sortField: 'id'},
-                    {name: 'name', title: 'Nombre', sortField: 'name'},
-                    {name: 'last_name', title: 'Apellido', sortField: 'last_name'},
-                    {name: 'nick_name', title: 'Nick Name', sortField: 'nick_name'},
-                    {name: 'avatar', title: 'Avatar', callback: 'renderAvatar'},
-                    {name: 'email', title: 'Email', sortField: 'email'},
-                    {name: 'role', title: 'Tipo', callback: 'roleLabel'},
-                    {name: 'active', title: 'Estado', callback: 'statusLabel'},
-                    {name: 'last_login', title: 'Última sesión'},
-                    {name: '__slot:actions', title: 'Acciones'},
-                ]
+                fields: userFields
             }
-        },
-        computed: {
-
         },
         components: {
             VuetablePagination,
