@@ -84,7 +84,8 @@ class UsersListTest extends TestCase
     }
 
     /** @test **/
-    public function the_users_can_be_filtered(){
+    public function the_users_can_be_filtered()
+    {
         $user = $this->createNewUser([
             'name' => 'Edwin',
             'api_token' => str_random(60),
@@ -117,4 +118,3 @@ class UsersListTest extends TestCase
             ]);
     }
 }
-
