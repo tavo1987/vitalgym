@@ -11,7 +11,7 @@ class UserController extends Controller
     {
         $orderByField = request('orderBy') ?? 'id';
         $orderByDirection = request('orderDirection') ?? 'DESC';
-        $users = User::orderBy($orderByField, $orderByDirection)->paginate();
+        $users = User::filter(request())->orderBy($orderByField, $orderByDirection)->paginate();
 
         $data = [
             'total'         => $users->total(),

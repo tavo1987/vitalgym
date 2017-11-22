@@ -2,6 +2,8 @@
 
 namespace App\VitalGym\Entities;
 
+use App\Filters\Traits\Filterable;
+use App\Filters\UserFilter;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Notifications\ResetPasswordNotification;
@@ -9,7 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, SoftDeletes;
+    use Notifiable, SoftDeletes, Filterable;
 
     /**
      * The attributes that are mass assignable.
@@ -29,6 +31,8 @@ class User extends Authenticatable
         'active',
         'last_login',
     ];
+
+    protected $filters = UserFilter::class;
 
     /**
      * The attributes that should be hidden for arrays.
