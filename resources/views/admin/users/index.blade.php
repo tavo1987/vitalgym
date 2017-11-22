@@ -13,7 +13,6 @@
                         <h3 class="box-title">Lista</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body ">
-                        <filter-bar></filter-bar>
                         <user-table api-token="{{ auth()->user()->api_token }}"></user-table>
                     </div><!-- /.end box-body -->
                 </div>
