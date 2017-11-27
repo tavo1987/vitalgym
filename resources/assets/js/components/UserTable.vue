@@ -1,5 +1,14 @@
 <template>
-    <vg-vuetable api-url="/api/v1/users" :fields="fields" :api-token="apiToken" :methods="{testing}">
+    <vg-vuetable api-url="/api/v1/users" :fields="fields" :api-token="$attrs.apitoken">
+        <span slot="role" slot-scope="props" class="badge bg-purple">{{ props.rowData.role }}</span>
+
+        <template slot="status" slot-scope="props">
+            <span v-if="props.rowData.active" class="badge bg-green">Activo</span>
+            <span v-else class="badge bg-orange">Inactivo</span>
+        </template>
+
+        <img width="50" class="img-circle img-bordered-sm" slot="avatar" slot-scope="props" :src="props.rowData.avatar"/>
+
         <div class="btn-group" slot="actions" slot-scope="props">
             <button type="button" class="btn btn-info">Acciones</button>
             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -24,27 +33,8 @@
                 fields: userFields
             }
         },
-        props: {
-            apiToken: {
-                type: String,
-                required: true,
-            }
-        },
-        mounted() {
-          //console.log(this.apiToken);
-        },
+        inheritAttrs: false,
         methods: {
-            roleLabel (value) {
-                return `<span class="badge bg-purple">${value}</span>`
-            },
-            statusLabel (value) {
-                return value
-                    ? '<span class="badge bg-green">Activo</span>'
-                    : '<span class="badge bg-orange">Inactivo</span>'
-            },
-            renderAvatar(value) {
-                return `<img width="50" class="img-circle img-bordered-sm" src="${value}"/>`
-            },
             onAction (action, data, index) {
                 alert(`slot action: ' ${action}, ${data.name}, ${index}`)
             },
