@@ -11,6 +11,7 @@ import 'toastr';
  */
 
 
+Vue.component('vg-vuetable', require('./components/Vuetable'));
 Vue.component('user-table', require('./components/UserTable'));
 Vue.component('filter-bar', require('./components/FilterBar'))
 
