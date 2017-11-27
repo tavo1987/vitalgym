@@ -27,7 +27,6 @@
             }
         },
         props:{
-            methods: { type: Object},
             apiToken: { type: String, required: true},
             apiUrl: { type: String, required: true},
             fields: { type: Array, required: true},
