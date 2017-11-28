@@ -51,7 +51,7 @@ class ResetPasswordTest extends BrowserKitTestCase
             ->type('laravel', 'password_confirmation')
             ->press('Restablecer la contraseña');
 
-        $this->seeCredentials(['password' => 'laravel'])
+        $this->seeIsAuthenticated()
             ->seeText('Bienvenido');
     }
 
