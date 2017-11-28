@@ -1,7 +1,7 @@
 <script>
     import Vue from 'vue'
     import Vuetable from 'vuetable-2/src/components/Vuetable'
-    import VuetablePagination from 'vuetable-2/src/components/VuetablePagination'
+    import VuetablePaginationBootstrap from './VuetablePaginationBootstrap'
 
     export default {
         render(h) {
@@ -24,17 +24,20 @@
                 moreParams: {
                     orderDirection: 'desc',
                 },
+                cssConfig: {
+                    tableClass: "table table-striped table-bordered table-hover",
+                    loadingClass: "loading",
+                    ascendingIcon: "glyphicon glyphicon-chevron-up",
+                    descendingIcon: "glyphicon glyphicon-chevron-down",
+                    handleIcon: "glyphicon glyphicon-menu-hamburger",
+                }
             }
         },
         props:{
             apiToken: { type: String, required: true},
             apiUrl: { type: String, required: true},
             fields: { type: Array, required: true},
-            apiToken: { type: String,
-                default() {
-                    return []
-                }
-            },
+            apiToken: { type: String, default() {  return [] }},
             appendParams: {
                 type: Object,
                 default() {
@@ -43,7 +46,7 @@
             },
         },
         components: {
-            VuetablePagination,
+            VuetablePaginationBootstrap,
             Vuetable,
         },
         mounted() {
@@ -82,7 +85,8 @@
                             queryParams: this.queryParams,
                             paginationPath: "",
                             appendParams: this.moreParams,
-                            httpOptions: { headers: {Authorization: 'Bearer ' + this.apiToken }}
+                            httpOptions: { headers: {Authorization: 'Bearer ' + this.apiToken }},
+                            css: this.cssConfig,
                         },
                         on:{
                             'vuetable:pagination-data': this.onPaginationData,
@@ -93,16 +97,13 @@
             },
             renderPagination(h) {
                 return h(
-                    'div',
-                    { class: {'vuetable-pagination': true, 'ui': true, 'basic': true, 'segment': true, 'grid': true} },
-                    [
-                        h('vuetable-pagination', {
-                            ref: 'pagination',
-                            on: {
-                                'vuetable-pagination:change-page': this.onChangePage
-                            }
-                        })
-                    ]
+                    'vuetable-pagination-bootstrap',
+                    {
+                        ref: 'pagination',
+                        on: {
+                            'vuetable-pagination:change-page': this.onChangePage
+                        }
+                    }
                 )
             },
         }
