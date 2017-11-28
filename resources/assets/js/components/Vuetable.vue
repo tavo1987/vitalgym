@@ -7,6 +7,9 @@
         render(h) {
             return h(
                 'div',
+                {
+                    class: ''
+                },
                 [
                     h('filter-bar'),
                     this.renderVuetable(h),
@@ -25,7 +28,7 @@
                     orderDirection: 'desc',
                 },
                 cssConfig: {
-                    tableClass: "table table-striped table-bordered table-hover",
+                    tableClass: "table table-striped table-bordered table-hover table--align-middle",
                     loadingClass: "loading",
                     ascendingIcon: "glyphicon glyphicon-chevron-up",
                     descendingIcon: "glyphicon glyphicon-chevron-down",
@@ -76,23 +79,30 @@
             },
             renderVuetable(h) {
                 return h(
-                    'vuetable',
+                    'div',
                     {
-                        ref: 'vuetable',
-                        props: {
-                            apiUrl: this.apiUrl,
-                            fields: this.fields,
-                            queryParams: this.queryParams,
-                            paginationPath: "",
-                            appendParams: this.moreParams,
-                            httpOptions: { headers: {Authorization: 'Bearer ' + this.apiToken }},
-                            css: this.cssConfig,
-                        },
-                        on:{
-                            'vuetable:pagination-data': this.onPaginationData,
-                        },
-                        scopedSlots: this.$scopedSlots
+                        class: 'table-container',
                     },
+                    [
+                        h('vuetable',
+                            {
+                                ref: 'vuetable',
+                                props: {
+                                    apiUrl: this.apiUrl,
+                                    fields: this.fields,
+                                    queryParams: this.queryParams,
+                                    paginationPath: "",
+                                    appendParams: this.moreParams,
+                                    httpOptions: { headers: {Authorization: 'Bearer ' + this.apiToken }},
+                                    css: this.cssConfig,
+                                },
+                                on:{
+                                    'vuetable:pagination-data': this.onPaginationData,
+                                },
+                                scopedSlots: this.$scopedSlots
+                            },
+                        )
+                    ]
                 )
             },
             renderPagination(h) {

@@ -10,13 +10,13 @@
         <img width="50" class="img-circle img-bordered-sm" slot="avatar" slot-scope="props" :src="props.rowData.avatar"/>
 
         <div class="" slot="actions" slot-scope="props">
-            <a class="btn btn-md btn-flat btn-warning"  @click.prevent="onAction('edit-item', props.rowData)" href="#">
+            <a class="btn btn-flat btn-warning"  @click.prevent="onAction('edit-item', props.rowData)" href="#">
                 <i class="fa fa-pencil"></i> Editar
             </a>
-            <a class="btn btn-md btn-flat btn-danger"  @click.prevent="onAction('delete-item', props.rowData)"href="#">
+            <a class="btn btn-flat btn-danger"  @click.prevent="onAction('delete-item', props.rowData)"href="#">
                 <i class="fa fa-trash"></i> Eliminar
             </a>
-            <a class="btn btn-md btn-flat btn-info"  @click.prevent="onAction('view-item', props.rowData)" href="#">
+            <a class="btn btn-flat btn-info"  @click.prevent="onAction('view-item', props.rowData)" href="#">
                 <i class="fa fa-eye"></i> Ver
             </a>
         </div>

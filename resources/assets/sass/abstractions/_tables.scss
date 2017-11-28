@@ -1,0 +1,30 @@
+.table-container {
+    max-width: 1200px;
+    overflow: auto;
+    @media screen and (min-width: 1200px){
+        max-width: initial;
+    }
+}
+
+.table {
+    min-width: 500px;
+
+    td{
+        text-align: center;
+    }
+
+    tr {
+        border-bottom: 2px solid rgba(black, .1);
+    }
+
+    .btn {
+        display: block;
+        margin-bottom: .5rem;
+    }
+
+    &.table--align-middle {
+        td {
+            vertical-align: middle;
+        }
+    }
+}
