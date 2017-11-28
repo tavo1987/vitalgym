@@ -9,17 +9,16 @@
 
         <img width="50" class="img-circle img-bordered-sm" slot="avatar" slot-scope="props" :src="props.rowData.avatar"/>
 
-        <div class="btn-group" slot="actions" slot-scope="props">
-            <button type="button" class="btn btn-info">Acciones</button>
-            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <span class="caret"></span>
-                <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a  @click="onAction('edit-item', props.rowData, props.rowIndex)" href="#">Editar</a></li>
-                <li><a  @click="onAction('delete-item', props.rowData, props.rowIndex)"href="#">Eliminar</a></li>
-                <li><a  @click="onAction('view-item', props.rowData, props.rowIndex)" href="#">Ver</a></li>
-            </ul>
+        <div class="" slot="actions" slot-scope="props">
+            <a class="btn btn-md btn-flat btn-warning"  @click.prevent="onAction('edit-item', props.rowData)" href="#">
+                <i class="fa fa-pencil"></i> Editar
+            </a>
+            <a class="btn btn-md btn-flat btn-danger"  @click.prevent="onAction('delete-item', props.rowData)"href="#">
+                <i class="fa fa-trash"></i> Eliminar
+            </a>
+            <a class="btn btn-md btn-flat btn-info"  @click.prevent="onAction('view-item', props.rowData)" href="#">
+                <i class="fa fa-eye"></i> Ver
+            </a>
         </div>
     </vg-vuetable>
 </template>
@@ -35,8 +34,8 @@
         },
         inheritAttrs: false,
         methods: {
-            onAction (action, data, index) {
-                alert(`slot action: ' ${action}, ${data.name}, ${index}`)
+            onAction (action, data) {
+                alert(`slot action: ' ${action}, ${data.name}, id: ${data.id}`)
             },
         }
     }
