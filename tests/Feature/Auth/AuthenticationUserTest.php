@@ -5,7 +5,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthenticationUserTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions, InteractsWithMail;
+    use DatabaseTransactions;
 
     public function test_user_can_login()
     {
