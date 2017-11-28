@@ -1,6 +1,5 @@
 <?php
 
-use MailThief\Testing\InteractsWithMail;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthenticationUserTest extends BrowserKitTestCase
