@@ -21,7 +21,8 @@
     "laravel-mix": "^1.4.2",
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
-    "mjml": "^3.0.2"
+    "mjml": "^3.0.2",
+    "tailwindcss": "^0.2.2"
   },
   "dependencies": {
     "axios": "^0.16.2",
