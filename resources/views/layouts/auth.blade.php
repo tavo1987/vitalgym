@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     @include('layouts.partials.htmlheader')
-    <body class="hold-transition">
+    <body class="hold-transition tw-px-4">
         <div id="app" class="tw-min-h-screen tw-flex tw-flex-col tw-items-center tw-justify-center">
             <div class="login-logo tw-mb-4">
                 <a class="tw-font-bold" href="{{ url('/') }}">
@@ -10,8 +10,6 @@
             </div><!-- /.login-logo -->
             @yield('content')
         </div>
-        @include('layouts.partials.scripts_auth')
-
-        @include('auth.terms')
+        <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
