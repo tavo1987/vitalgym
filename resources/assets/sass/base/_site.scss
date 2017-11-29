@@ -1,4 +1,11 @@
-
+html{
+    font-size: 100%;
+}
 body{
     margin-top: 0;
+    @apply .tw-bg-grey-lighter;
+}
+
+p{
+    @apply .tw-text-grey-darker;
 }
