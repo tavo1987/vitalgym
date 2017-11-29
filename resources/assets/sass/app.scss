@@ -3,6 +3,10 @@
         APP SCSS
     ============================================================================
  */
+@tailwind preflight;
+
+//Variables
+@import "variables";
 
 //PLUGINS
 @import "plugins/pace";
@@ -12,11 +16,14 @@
 @import "base/bootstrap";
 @import "base/site";
 
-//Variables
-@import "variables";
-
 //ABSTRATIONS
 @import "abstractions/loader";
 @import "abstractions/tables";
 
+//Components
+@import "components/buttons";
+@import "components/forms";
+@import "components/login";
+
+@tailwind utilities;
 

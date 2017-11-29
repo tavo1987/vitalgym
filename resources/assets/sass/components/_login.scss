@@ -1,0 +1,9 @@
+.vg-login {
+    @apply .tw-max-w-sm;
+    @screen md {
+        @apply .tw-min-w-sm;
+    }
+    &__content {
+        @apply .tw-bg-white .tw-pt-10 .tw-pb-8 .tw-px-8 .tw-shadow-md .tw-rounded-lg .tw-overflow-hidden;
+    }
+}

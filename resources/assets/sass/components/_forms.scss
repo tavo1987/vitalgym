@@ -1,0 +1,11 @@
+.form {
+    &-control {
+        @apply .tw-border-grey-light .tw-h-auto .tw-p-2lg;
+        box-shadow: none;
+        &-feedback {
+            top: 50%;
+            @apply .tw-text-grey-darker;
+            transform: translateY(-50%);
+        }
+    }
+}
