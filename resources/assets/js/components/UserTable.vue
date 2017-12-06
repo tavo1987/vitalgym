@@ -7,7 +7,7 @@
             <span v-else class="badge bg-orange">Inactivo</span>
         </template>
 
-        <img width="50" class="img-circle img-bordered-sm" slot="avatar" slot-scope="props" :src="props.rowData.avatar"/>
+        <img width="50" class="img-circle img-bordered-sm" slot="avatar" slot-scope="props" :src="'/storage/avatars/' + props.rowData.avatar"/>
 
         <div class="" slot="actions" slot-scope="props">
             <a class="btn btn-flat btn-warning"  @click.prevent="onAction('edit-item', props.rowData)" href="#">

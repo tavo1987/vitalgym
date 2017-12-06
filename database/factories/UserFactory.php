@@ -22,7 +22,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
         'name'           => $faker->firstName,
         'last_name'      => $faker->lastName,
         'nick_name'      => $faker->name,
-        'avatar'         => 'https://s3-us-west-2.amazonaws.com/vitalgym/avatars/default-avatar.jpg',
+        'avatar'         => 'default-avatar.jpg',
         'email'          => $faker->unique()->safeEmail,
         'phone'          => $faker->phoneNumber,
         'cell_phone'     => $faker->phoneNumber,
