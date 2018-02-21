@@ -3,17 +3,11 @@
 namespace  Tests;
 
 use App\VitalGym\Entities\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\Console\Kernel;
 
 trait CreatesApplication
 {
-    /**
-     * The base URL of the application.
-     *
-     * @var string
-     */
-    protected $baseUrl;
-
     /**
      * Creates the application.
      *
@@ -25,7 +19,7 @@ trait CreatesApplication
 
         $app->make(Kernel::class)->bootstrap();
 
-        $this->baseUrl = $app->make('config')->get('app.url');
+        Hash::driver('bcrypt')->setRounds(4);
 
         return $app;
     }
