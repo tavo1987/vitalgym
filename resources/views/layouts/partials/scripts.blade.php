@@ -1,5 +1,5 @@
 {{-- Main js --}}
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ mix('js/app.js') }}"></script>
 <script src="{{asset('plugins/toastr/toastr.js')}}"></script>
 
 {{-- Slimscroll is required when using the fixed layout. --}}
