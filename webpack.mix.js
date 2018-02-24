@@ -11,7 +11,7 @@ mix
         postCss: [tailwindcss('./tailwind.js')],
     })
     .browserSync({
-        proxy: 'http://vitalgym.dev',
+        proxy: 'http://vitalgym.test',
         injectChanges: true,
         notify: false,
         open: false
