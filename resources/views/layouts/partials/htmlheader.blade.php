@@ -6,6 +6,7 @@
 
     {{-- Font Awesome Icons --}}
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
     {{-- Theme styles --}}
     <script src="{{ asset('js/pace.min.js') }}"></script>
