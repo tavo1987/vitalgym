@@ -2,16 +2,17 @@
 
 namespace Tests\Feature;
 
-use App\VitalGym\Entities\MembershipType;
 use Tests\TestCase;
+use App\VitalGym\Entities\MembershipType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ListingMemberShipTypesTest extends TestCase
+class ListingMembershipTypesTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function listing_membership_types(){
+    public function listing_membership_types()
+    {
         $user = $this->createNewUser();
 
         factory(MembershipType::class)->create(['name' => 'mensual', 'price' => 2550]);
