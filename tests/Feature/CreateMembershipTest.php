@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\VitalGym\Entities\MembershipType;
 use Carbon\Carbon;
 use Tests\TestCase;
+use App\VitalGym\Entities\MembershipType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CreateMembershipTest extends TestCase
