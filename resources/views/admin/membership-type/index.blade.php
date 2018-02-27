@@ -15,7 +15,7 @@
                     <div class="box-body ">
                         @foreach($membershipTypes as $membershipType)
                             {{ $membershipType->name }}
-                            {{ number_format($membershipType->price / 100, 2)}}
+                            {{ $membershipType->price_in_dollars }}
                         @endforeach
                     </div><!-- /.end box-body -->
                 </div>
