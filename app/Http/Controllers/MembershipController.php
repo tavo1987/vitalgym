@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\VitalGym\Entities\Customer;
-use App\VitalGym\Entities\Membership;
 
 class MembershipController extends Controller
 {
@@ -17,6 +16,7 @@ class MembershipController extends Controller
             'total_days' => request('total_days'),
             'membership_type_id' => request('membership_type_id'),
         ]);
+
         return response()->json([], 201);
     }
 }
