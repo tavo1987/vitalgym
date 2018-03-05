@@ -2,17 +2,16 @@
 
 namespace Tests\Unit;
 
-use App\VitalGym\Entities\Customer;
-use App\VitalGym\Entities\Membership;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\VitalGym\Entities\Customer;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CustomerTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    function a_customer_has_memberships()
+    public function a_customer_has_memberships()
     {
         $customer = factory(Customer::class)->make();
 
