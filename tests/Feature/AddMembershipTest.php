@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\VitalGym\Entities\Payment;
 use Carbon\Carbon;
 use Tests\TestCase;
+use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Membership;
 use App\VitalGym\Entities\MembershipType;
@@ -43,7 +43,7 @@ class AddMembershipTest extends TestCase
         $this->assertEquals(30, $membership->total_days);
         $this->assertEquals($dateStart, $membership->date_start);
         $this->assertEquals($dateEnd, $membership->date_end);
-        $this->assertEquals($membership->id , $payment->membership_id);
+        $this->assertEquals($membership->id, $payment->membership_id);
         $this->assertEquals(1, $payment->membership_quantity);
         $this->assertEquals($customer->id, $payment->customer_id);
         $this->assertEquals(3000, $payment->total_price);
