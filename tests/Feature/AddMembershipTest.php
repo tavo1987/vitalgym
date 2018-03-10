@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\VitalGym\Entities\Payment;
 use Carbon\Carbon;
 use Tests\TestCase;
 use App\VitalGym\Entities\Customer;
@@ -19,9 +20,8 @@ class AddMembershipTest extends TestCase
         $this->withoutExceptionHandling();
 
         $user = $this->createNewUser();
-        $dateStart = Carbon::parse('01-01-2018');
-        $dateEnd = Carbon::parse('31-01-2018');
-        $totalDays = $dateStart->diffInDays($dateEnd);
+        $dateStart = Carbon::parse('2018-12-01');
+        $dateEnd = Carbon::parse('2018-12-31');
 
         $membershipType = factory(MembershipType::class)->create(['name' =>'mensual', 'price' => 3000]);
         $customer = factory(Customer::class)->create();
@@ -29,10 +29,9 @@ class AddMembershipTest extends TestCase
         $response = $this->actingAs($user)->post(route('admin.membership.create'), [
             'date_start' => $dateStart,
             'date_end' => $dateEnd,
-            'total_days' => $totalDays,
+            'total_days' => 30,
             'membership_type_id' => $membershipType->id,
             'customer_id' => $customer->id,
-            'total_payment' => 3000,
             'quantity' => 1,
         ]);
 
@@ -45,9 +44,9 @@ class AddMembershipTest extends TestCase
         $this->assertEquals($dateStart, $membership->date_start);
         $this->assertEquals($dateEnd, $membership->date_end);
         $this->assertEquals($membership->id , $payment->membership_id);
-        $this->assertEquals(1, $payment->quantity);
+        $this->assertEquals(1, $payment->membership_quantity);
         $this->assertEquals($customer->id, $payment->customer_id);
-        $this->assertEquals(3000, $payment->total);
+        $this->assertEquals(3000, $payment->total_price);
         $this->assertEquals($user->id, $payment->user_id);
     }
 }
