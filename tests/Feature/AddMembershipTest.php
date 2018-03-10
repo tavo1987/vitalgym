@@ -44,7 +44,7 @@ class AddMembershipTest extends TestCase
         $this->assertEquals(30, $membership->total_days);
         $this->assertEquals($dateStart, $membership->date_start);
         $this->assertEquals($dateEnd, $membership->date_end);
-        $this->assertEquals($membership->id , $payment->membership_id);
+        $this->assertEquals($membership->id, $payment->membership_id);
         $this->assertEquals(1, $payment->quantity);
         $this->assertEquals($customer->id, $payment->customer_id);
         $this->assertEquals(3000, $payment->total);
