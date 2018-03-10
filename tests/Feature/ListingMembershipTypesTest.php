@@ -19,7 +19,7 @@ class ListingMembershipTypesTest extends TestCase
         factory(MembershipType::class)->create(['name' => 'semestral', 'price' => 20000]);
         factory(MembershipType::class)->create(['name' => 'anual', 'price' => 28050]);
 
-        $response = $this->actingAs($user)->get(route('membership-types'));
+        $response = $this->actingAs($user)->get(route('admin.membership-types'));
 
         $response->assertStatus(200);
         $response->assertSee('mensual');

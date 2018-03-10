@@ -26,7 +26,7 @@ class CreateMembershipTest extends TestCase
         $membershipType = factory(MembershipType::class)->create(['name' =>'mensual', 'price' => 3000]);
         $customer = factory(Customer::class)->create();
 
-        $response = $this->actingAs($user)->post(route('membership.create'), [
+        $response = $this->actingAs($user)->post(route('admin.membership.create'), [
             'date_start' => $dateStart,
             'date_end' => $dateEnd,
             'total_days' => $totalDays,
