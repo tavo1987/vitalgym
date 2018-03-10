@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Membership;
 use App\VitalGym\Entities\MembershipType;
-use App\VitalGym\Entities\Payment;
 
 class MembershipController extends Controller
 {
     public function store()
     {
-
         $membership = Membership::create([
             'date_start' => request('date_start'),
             'date_end' => request('date_end'),
