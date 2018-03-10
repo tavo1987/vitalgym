@@ -9,7 +9,7 @@ use App\VitalGym\Entities\Membership;
 use App\VitalGym\Entities\MembershipType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class CreateMembershipTest extends TestCase
+class AddMembershipTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -36,13 +36,18 @@ class CreateMembershipTest extends TestCase
             'quantity' => 1,
         ]);
 
+        $membership = Membership::where('customer_id', $customer->id)->get()->last();
+        $payment = Payment::where('customer_id', $customer->id)->where('membership_id', $membership->id)->first();
+
         $response->assertStatus(201);
-        $membership = $customer->memberships()->get()->last();
         $this->assertNotNull($membership);
-        //$this->assertEquals(30, $membership->total_days);
-        //$this->assertEquals($membership->id, $customer->fresh()->payments()->membership_id);
-        //$this->assertEquals(1, $customer->fresh()->payments()->count());
-        //$this->assertEquals(3000, $customer->payments()->last()->total);
-        //$this->assertEquals($user->id, $membership->payment()->user_id);
+        $this->assertEquals(30, $membership->total_days);
+        $this->assertEquals($dateStart, $membership->date_start);
+        $this->assertEquals($dateEnd, $membership->date_end);
+        $this->assertEquals($membership->id , $payment->membership_id);
+        $this->assertEquals(1, $payment->quantity);
+        $this->assertEquals($customer->id, $payment->customer_id);
+        $this->assertEquals(3000, $payment->total);
+        $this->assertEquals($user->id, $payment->user_id);
     }
 }
