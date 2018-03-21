@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Mail\MembershipConfirmationEmail;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
@@ -18,13 +20,15 @@ class AddMembershipTest extends TestCase
     public function create_membership_for_a_new_customer()
     {
         $this->withoutExceptionHandling();
+        Mail::fake();
 
         $user = $this->createNewUser();
+        $userCustomer = $this->createNewUser(['role' => 'customer', 'email' => 'john@example.com']);
+
         $dateStart = Carbon::parse('2018-12-01');
         $dateEnd = Carbon::parse('2018-12-31');
-
         $membershipType = factory(MembershipType::class)->create(['name' =>'mensual', 'price' => 3000]);
-        $customer = factory(Customer::class)->create();
+        $customer = factory(Customer::class)->create(['user_id' => $userCustomer->id]);
 
         $response = $this->actingAs($user)->post(route('admin.membership.create'), [
             'date_start' => $dateStart,
@@ -48,5 +52,10 @@ class AddMembershipTest extends TestCase
         $this->assertEquals($customer->id, $payment->customer_id);
         $this->assertEquals(3000, $payment->total_price);
         $this->assertEquals($user->id, $payment->user_id);
+
+        Mail::assertSent(MembershipConfirmationEmail::class, function ($mail) use ($membership) {
+            return $mail->hasTo('john@example.com')
+                && $mail->membership->id === $membership->id;
+        });
     }
 }
