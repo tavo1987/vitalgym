@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Mail\MembershipConfirmationEmail;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
+use Illuminate\Support\Facades\Mail;
 use App\VitalGym\Entities\Membership;
+use App\Mail\MembershipConfirmationEmail;
 use App\VitalGym\Entities\MembershipType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
