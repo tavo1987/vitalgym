@@ -10,4 +10,9 @@ class Customer extends Model
     {
         return $this->hasMany(Membership::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
