@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\MembershipConfirmationEmail;
-use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Payment;
-use App\VitalGym\Entities\Membership;
-use App\VitalGym\Entities\MembershipType;
+use App\VitalGym\Entities\Customer;
 use Illuminate\Support\Facades\Mail;
+use App\VitalGym\Entities\Membership;
+use App\Mail\MembershipConfirmationEmail;
+use App\VitalGym\Entities\MembershipType;
 
 class MembershipController extends Controller
 {
@@ -35,6 +35,7 @@ class MembershipController extends Controller
         $customer = Customer::with('user')->findOrFail(request('customer_id'));
 
         Mail::to($customer->user->email)->send(new MembershipConfirmationEmail($membership));
+
         return response()->json([], 201);
     }
 }

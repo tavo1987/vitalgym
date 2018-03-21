@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\VitalGym\Entities\User;
 use Tests\TestCase;
+use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Customer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -22,7 +22,7 @@ class CustomerTest extends TestCase
     }
 
     /** @test */
-    function a_customer_has_a_user()
+    public function a_customer_has_a_user()
     {
         $customer = factory(Customer::class)->create();
 
