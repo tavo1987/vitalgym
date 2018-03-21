@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\VitalGym\Entities\User;
 use Tests\TestCase;
 use App\VitalGym\Entities\Customer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -17,6 +18,16 @@ class CustomerTest extends TestCase
 
         $this->assertInstanceOf(
             'Illuminate\Database\Eloquent\Collection', $customer->memberships
+        );
+    }
+
+    /** @test */
+    function a_customer_has_a_user()
+    {
+        $customer = factory(Customer::class)->create();
+
+        $this->assertInstanceOf(
+            User::class, $customer->user
         );
     }
 }
