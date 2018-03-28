@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
@@ -11,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\MembershipConfirmationEmail;
 use App\VitalGym\Entities\MembershipType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class AddMembershipTest extends TestCase
 {
