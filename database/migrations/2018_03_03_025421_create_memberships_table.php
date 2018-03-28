@@ -20,7 +20,7 @@ class CreateMembershipsTable extends Migration
             $table->integer('total_days');
             $table->unsignedInteger('customer_id');
             $table->unsignedInteger('membership_type_id');
-            $table->foreign('customer_id')->references('id')->on('memberships')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('membership_type_id')->references('id')->on('membership_types')->onDelete('cascade');
             $table->timestamps();
         });
