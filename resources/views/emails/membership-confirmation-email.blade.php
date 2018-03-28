@@ -1,5 +1,1 @@
-<?php
-    dd($membership->customer()->user->name)
-?>
-
-{{ $membership->customer->id}}
+{{ $membership->customer->user->name }}
