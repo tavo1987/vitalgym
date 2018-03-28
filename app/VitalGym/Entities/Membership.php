@@ -14,5 +14,4 @@ class Membership extends Model
     {
         return $this->belongsTo(Customer::class);
     }
-
 }

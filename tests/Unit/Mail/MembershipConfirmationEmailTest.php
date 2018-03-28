@@ -2,21 +2,21 @@
 
 namespace tests\Unit\Mail;
 
-use App\Mail\MembershipConfirmationEmail;
+use Tests\TestCase;
 use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Membership;
-use Tests\TestCase;
+use App\Mail\MembershipConfirmationEmail;
 
 class MembershipConfirmationEmailTest extends TestCase
 {
     /** @test */
-    function email_contain_the_customer_name()
+    public function email_contain_the_customer_name()
     {
         $customer = factory(Customer::class)->make([
             'name' => 'John',
         ]);
         $membership = factory(Membership::class)->make([
-            'customer_id' => $customer->id
+            'customer_id' => $customer->id,
         ]);
 
         $email = new MembershipConfirmationEmail($membership);
