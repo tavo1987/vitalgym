@@ -9,4 +9,10 @@ class Membership extends Model
     protected $guarded = [];
 
     protected $dates = ['date_start', 'date_end'];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
 }
