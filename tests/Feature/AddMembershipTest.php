@@ -3,18 +3,18 @@
 namespace Tests\Feature;
 
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
 use Illuminate\Support\Facades\Mail;
-use App\VitalGym\Entities\Membership;
 use App\Mail\MembershipConfirmationEmail;
 use App\VitalGym\Entities\MembershipType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AddMembershipTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithoutMiddleware;
 
     /** @test */
     public function create_membership_for_a_new_customer()
@@ -39,11 +39,10 @@ class AddMembershipTest extends TestCase
             'quantity' => 1,
         ]);
 
-        $membership = Membership::where('customer_id', $customer->id)->get()->last();
-        $payment = Payment::where('customer_id', $customer->id)->where('membership_id', $membership->id)->first();
-
         $response->assertStatus(201);
+        $membership = $customer->memberships->last();
         $this->assertNotNull($membership);
+        $payment = Payment::where('customer_id', $customer->id)->where('membership_id', $membership->id)->first();
         $this->assertEquals(30, $membership->total_days);
         $this->assertEquals($dateStart, $membership->date_start);
         $this->assertEquals($dateEnd, $membership->date_end);
