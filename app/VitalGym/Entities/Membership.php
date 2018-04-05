@@ -14,4 +14,9 @@ class Membership extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    public function membershipType()
+    {
+        return $this->belongsTo(MembershipType::class);
+    }
 }
