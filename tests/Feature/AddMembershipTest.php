@@ -36,20 +36,20 @@ class AddMembershipTest extends TestCase
             'total_days' => 30,
             'membership_type_id' => $membershipType->id,
             'customer_id' => $customer->id,
-            'quantity' => 1,
+            'quantity' => 2,
         ]);
 
         $response->assertStatus(201);
-        $membership = $customer->memberships->last();
+        $membership = $customer->memberships->fresh()->last();
         $this->assertNotNull($membership);
         $payment = Payment::where('customer_id', $customer->id)->where('membership_id', $membership->id)->first();
         $this->assertEquals(30, $membership->total_days);
         $this->assertEquals($dateStart, $membership->date_start);
         $this->assertEquals($dateEnd, $membership->date_end);
         $this->assertEquals($membership->id, $payment->membership_id);
-        $this->assertEquals(1, $payment->membership_quantity);
+        $this->assertEquals(2, $payment->membership_quantity);
         $this->assertEquals($customer->id, $payment->customer_id);
-        $this->assertEquals(3000, $payment->total_price);
+        $this->assertEquals(6000, $payment->total_price);
         $this->assertEquals($user->id, $payment->user_id);
 
         Mail::assertSent(MembershipConfirmationEmail::class, function ($mail) use ($membership) {

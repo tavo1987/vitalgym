@@ -21,13 +21,10 @@ class MembershipController extends Controller
             'customer_id' => request('customer_id'),
         ]);
 
-        $membershipType = MembershipType::findOrFail(request('membership_type_id'));
-        $totalPrice = request('quantity') * $membershipType->price;
-
         Payment::create([
             'membership_id' => $membership->id,
             'customer_id' => request('customer_id'),
-            'total_price' =>$totalPrice,
+            'total_price' => $membership->membershipType->price * request('quantity'),
             'membership_quantity' => request('quantity'),
             'user_id' => auth()->user()->id,
         ]);
