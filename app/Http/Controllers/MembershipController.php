@@ -7,7 +7,6 @@ use App\VitalGym\Entities\Customer;
 use Illuminate\Support\Facades\Mail;
 use App\VitalGym\Entities\Membership;
 use App\Mail\MembershipConfirmationEmail;
-use App\VitalGym\Entities\MembershipType;
 
 class MembershipController extends Controller
 {
