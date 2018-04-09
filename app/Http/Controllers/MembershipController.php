@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\VitalGym\Entities\Payment;
-use App\VitalGym\Entities\Customer;
 use Illuminate\Support\Facades\Mail;
 use App\VitalGym\Entities\Membership;
 use App\Mail\MembershipConfirmationEmail;
@@ -29,6 +28,7 @@ class MembershipController extends Controller
         ]);
 
         Mail::to($membership->customer->email)->send(new MembershipConfirmationEmail($membership));
+
         return response()->json([], 201);
     }
 }
