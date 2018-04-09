@@ -4,8 +4,8 @@ namespace tests\Unit\Mail;
 
 use Tests\TestCase;
 use App\VitalGym\Entities\User;
-use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Order;
+use App\VitalGym\Entities\Customer;
 use App\Mail\MembershipOrderConfirmationEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

@@ -2,8 +2,8 @@
 
 use Carbon\Carbon;
 use Faker\Generator as Faker;
-use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Order;
+use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Membership;
 
 $factory->define(Order::class, function (Faker $faker) {
