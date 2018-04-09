@@ -37,11 +37,11 @@ class CustomerTest extends TestCase
         $user = $this->createNewUser([
             'name' => 'John',
             'last_name' => 'Doe',
-            'email' => 'john@example.com'
+            'email' => 'john@example.com',
         ]);
 
         $customer = factory(Customer::class)->create([
-           'user_id' => $user->id
+           'user_id' => $user->id,
         ]);
 
         $customer = $customer->fresh()->first();
