@@ -2,10 +2,10 @@
 
 namespace Tests\Unit;
 
-use App\VitalGym\Entities\Membership;
 use Tests\TestCase;
+use App\VitalGym\Entities\Membership;
 
-class MembershipTest extends TestCase
+class MembershipTypeTest extends TestCase
 {
     /** @test */
     public function can_get_price_in_dollars_with_two_decimals()

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\VitalGym\Entities\Order;
 use App\VitalGym\Entities\Payment;
 use Illuminate\Support\Facades\Mail;
-use App\VitalGym\Entities\Order;
 use App\Mail\MembershipOrderConfirmationEmail;
 
 class MembershipController extends Controller
