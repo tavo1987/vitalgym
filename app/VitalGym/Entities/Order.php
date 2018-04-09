@@ -15,8 +15,8 @@ class Order extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function membershipType()
+    public function membership()
     {
-        return $this->belongsTo(MembershipType::class);
+        return $this->belongsTo(Membership::class);
     }
 }

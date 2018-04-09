@@ -5,7 +5,7 @@ namespace tests\Unit;
 use Tests\TestCase;
 use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Order;
-use App\VitalGym\Entities\MembershipType;
+use App\VitalGym\Entities\Membership;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class OrderTest extends TestCase
@@ -25,10 +25,10 @@ class OrderTest extends TestCase
     /** @test */
     public function a_order_has_a_membership()
     {
-        $membership = factory(Order::class)->create();
+        $order = factory(Order::class)->create();
 
         $this->assertInstanceOf(
-            MembershipType::class, $membership->membershipType
+            Membership::class, $order->membership
         );
     }
 }

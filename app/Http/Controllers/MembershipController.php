@@ -15,14 +15,14 @@ class MembershipController extends Controller
             'date_start' => request('date_start'),
             'date_end' => request('date_end'),
             'total_days' => request('total_days'),
-            'membership_type_id' => request('membership_type_id'),
+            'membership_id' => request('membership_id'),
             'customer_id' => request('customer_id'),
         ]);
 
         Payment::create([
             'order_id' => $order->id,
             'customer_id' => request('customer_id'),
-            'total_price' => $order->membershipType->price * request('quantity'),
+            'total_price' => $order->membership->price * request('quantity'),
             'membership_quantity' => request('quantity'),
             'user_id' => auth()->user()->id,
         ]);

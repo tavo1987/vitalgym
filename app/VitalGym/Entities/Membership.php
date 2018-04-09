@@ -4,7 +4,7 @@ namespace App\VitalGym\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MembershipType extends Model
+class Membership extends Model
 {
     public function getPriceInDollarsAttribute()
     {

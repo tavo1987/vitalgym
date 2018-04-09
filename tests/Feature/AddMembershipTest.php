@@ -8,7 +8,7 @@ use Tests\TestCase;
 use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
 use Illuminate\Support\Facades\Mail;
-use App\VitalGym\Entities\MembershipType;
+use App\VitalGym\Entities\Membership;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
@@ -27,14 +27,14 @@ class AddMembershipTest extends TestCase
 
         $dateStart = Carbon::parse('2018-12-01');
         $dateEnd = Carbon::parse('2018-12-31');
-        $membershipType = factory(MembershipType::class)->create(['name' =>'mensual', 'price' => 3000]);
+        $membership = factory(Membership::class)->create(['name' =>'mensual', 'price' => 3000]);
         $customer = factory(Customer::class)->create(['user_id' => $userCustomer->id]);
 
         $response = $this->actingAs($user)->post(route('admin.membership.create'), [
             'date_start' => $dateStart,
             'date_end' => $dateEnd,
             'total_days' => 30,
-            'membership_type_id' => $membershipType->id,
+            'membership_id' => $membership->id,
             'customer_id' => $customer->id,
             'quantity' => 2,
         ]);

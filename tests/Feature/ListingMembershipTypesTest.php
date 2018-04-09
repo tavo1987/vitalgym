@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\VitalGym\Entities\MembershipType;
+use App\VitalGym\Entities\Membership;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ListingMembershipTypesTest extends TestCase
@@ -15,9 +15,9 @@ class ListingMembershipTypesTest extends TestCase
     {
         $user = $this->createNewUser();
 
-        factory(MembershipType::class)->create(['name' => 'mensual', 'price' => 2550]);
-        factory(MembershipType::class)->create(['name' => 'semestral', 'price' => 20000]);
-        factory(MembershipType::class)->create(['name' => 'anual', 'price' => 28050]);
+        factory(Membership::class)->create(['name' => 'mensual', 'price' => 2550]);
+        factory(Membership::class)->create(['name' => 'semestral', 'price' => 20000]);
+        factory(Membership::class)->create(['name' => 'anual', 'price' => 28050]);
 
         $response = $this->actingAs($user)->get(route('admin.membership-types'));
 
