@@ -4,28 +4,28 @@ namespace tests\Unit;
 
 use Tests\TestCase;
 use App\VitalGym\Entities\Customer;
-use App\VitalGym\Entities\Membership;
+use App\VitalGym\Entities\Order;
 use App\VitalGym\Entities\MembershipType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class MembershipTest extends TestCase
+class OrderTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function a_membership_has_a_customer()
+    public function a_order_has_a_customer()
     {
-        $membership = factory(Membership::class)->create();
+        $order = factory(Order::class)->create();
 
         $this->assertInstanceOf(
-            Customer::class, $membership->customer
+            Customer::class, $order->customer
         );
     }
 
     /** @test */
-    public function a_membership_belongs_to_membershipType()
+    public function a_order_has_a_membership()
     {
-        $membership = factory(Membership::class)->create();
+        $membership = factory(Order::class)->create();
 
         $this->assertInstanceOf(
             MembershipType::class, $membership->membershipType

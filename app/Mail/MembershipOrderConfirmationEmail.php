@@ -6,19 +6,19 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class MembershipConfirmationEmail extends Mailable
+class MembershipOrderConfirmationEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $membership;
+    public $order;
 
     /**
-     * MembershipConfirmationEmail constructor.
-     * @param $membership
+     * MembershipOrderConfirmationEmail constructor.
+     * @param $order
      */
-    public function __construct($membership)
+    public function __construct($order)
     {
-        $this->membership = $membership;
+        $this->order = $order;
     }
 
     /**

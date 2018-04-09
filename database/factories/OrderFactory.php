@@ -3,10 +3,10 @@
 use Carbon\Carbon;
 use Faker\Generator as Faker;
 use App\VitalGym\Entities\Customer;
-use App\VitalGym\Entities\Membership;
+use App\VitalGym\Entities\Order;
 use App\VitalGym\Entities\MembershipType;
 
-$factory->define(Membership::class, function (Faker $faker) {
+$factory->define(Order::class, function (Faker $faker) {
     return [
         'date_start' => Carbon::now(),
         'date_end' => Carbon::now()->addDays(30),

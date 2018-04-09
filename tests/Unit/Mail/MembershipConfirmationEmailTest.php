@@ -5,8 +5,8 @@ namespace tests\Unit\Mail;
 use Tests\TestCase;
 use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Customer;
-use App\VitalGym\Entities\Membership;
-use App\Mail\MembershipConfirmationEmail;
+use App\VitalGym\Entities\Order;
+use App\Mail\MembershipOrderConfirmationEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class MembershipConfirmationEmailTest extends TestCase
@@ -24,11 +24,11 @@ class MembershipConfirmationEmailTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $membership = factory(Membership::class)->create([
+        $order = factory(Order::class)->create([
             'customer_id' => $customer->id,
         ]);
 
-        $email = new MembershipConfirmationEmail($membership);
+        $email = new MembershipOrderConfirmationEmail($order);
         $rendered = $email->render();
 
         $this->assertContains('John', $rendered);

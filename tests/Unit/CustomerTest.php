@@ -12,12 +12,12 @@ class CustomerTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function a_customer_has_memberships()
+    public function a_customer_has_orders()
     {
         $customer = factory(Customer::class)->make();
 
         $this->assertInstanceOf(
-            'Illuminate\Database\Eloquent\Collection', $customer->memberships
+            'Illuminate\Database\Eloquent\Collection', $customer->orders
         );
     }
 

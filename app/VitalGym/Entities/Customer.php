@@ -8,9 +8,9 @@ class Customer extends Model
 {
     protected $with = ['user'];
 
-    public function memberships()
+    public function orders()
     {
-        return $this->hasMany(Membership::class);
+        return $this->hasMany(Order::class);
     }
 
     public function user()
