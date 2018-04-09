@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Mail\MembershipOrderConfirmationEmail;
 use Carbon\Carbon;
 use Tests\TestCase;
 use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
 use Illuminate\Support\Facades\Mail;
 use App\VitalGym\Entities\MembershipType;
+use App\Mail\MembershipOrderConfirmationEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
@@ -40,7 +40,7 @@ class AddMembershipTest extends TestCase
         ]);
 
         $response->assertStatus(201);
-        $order= $customer->orders->fresh()->last();
+        $order = $customer->orders->fresh()->last();
         $this->assertNotNull($order);
         $payment = Payment::where('customer_id', $customer->id)->where('order_id', $order->id)->first();
         $this->assertEquals(30, $order->total_days);
