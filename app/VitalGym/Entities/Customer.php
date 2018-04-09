@@ -17,4 +17,14 @@ class Customer extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->user->first_name} {$this->user->last_name}";
+    }
+
+    public function getEmailAttribute()
+    {
+        return $this->user->email;
+    }
 }
