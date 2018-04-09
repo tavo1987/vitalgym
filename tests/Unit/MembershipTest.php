@@ -2,11 +2,11 @@
 
 namespace tests\Unit;
 
-use App\VitalGym\Entities\MembershipType;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Membership;
+use App\VitalGym\Entities\MembershipType;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class MembershipTest extends TestCase
 {
@@ -23,8 +23,8 @@ class MembershipTest extends TestCase
     }
 
     /** @test */
-    public function a_membership_belongs_to_membershipType(){
-
+    public function a_membership_belongs_to_membershipType()
+    {
         $membership = factory(Membership::class)->create();
 
         $this->assertInstanceOf(
