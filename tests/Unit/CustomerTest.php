@@ -30,4 +30,22 @@ class CustomerTest extends TestCase
             User::class, $customer->user
         );
     }
+
+    /** @test */
+    public function a_customer_load_user_relationship_by_default()
+    {
+        $user = $this->createNewUser([
+            'name' => 'John',
+            'last_name' => 'Doe',
+            'email' => 'john@example.com'
+        ]);
+
+        $customer = factory(Customer::class)->create([
+           'user_id' => $user->id
+        ]);
+
+        $customer = $customer->fresh()->first();
+
+        $this->assertContains($customer->toArray(), $user->toArray());
+    }
 }

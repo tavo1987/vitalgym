@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
+    protected $with = ['user'];
+
     public function memberships()
     {
         return $this->hasMany(Membership::class);
