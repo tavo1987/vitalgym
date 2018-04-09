@@ -28,10 +28,7 @@ class MembershipController extends Controller
             'user_id' => auth()->user()->id,
         ]);
 
-        $customer = Customer::with('user')->findOrFail(request('customer_id'));
-
-        Mail::to($customer->user->email)->send(new MembershipConfirmationEmail($membership));
-
+        Mail::to($membership->customer->email)->send(new MembershipConfirmationEmail($membership));
         return response()->json([], 201);
     }
 }
