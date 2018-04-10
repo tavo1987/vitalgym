@@ -3,8 +3,8 @@
 namespace tests\Unit;
 
 use Tests\TestCase;
-use App\VitalGym\Entities\Membership;
 use App\VitalGym\Entities\Customer;
+use App\VitalGym\Entities\Membership;
 use App\VitalGym\Entities\MembershipType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
