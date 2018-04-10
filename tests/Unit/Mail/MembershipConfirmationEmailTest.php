@@ -4,7 +4,7 @@ namespace tests\Unit\Mail;
 
 use Tests\TestCase;
 use App\VitalGym\Entities\User;
-use App\VitalGym\Entities\Order;
+use App\VitalGym\Entities\Membership;
 use App\VitalGym\Entities\Customer;
 use App\Mail\MembershipOrderConfirmationEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -24,7 +24,7 @@ class MembershipConfirmationEmailTest extends TestCase
             'user_id' => $user->id,
         ]);
 
-        $order = factory(Order::class)->create([
+        $order = factory(Membership::class)->create([
             'customer_id' => $customer->id,
         ]);
 

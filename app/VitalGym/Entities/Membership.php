@@ -6,8 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Membership extends Model
 {
-    public function getPriceInDollarsAttribute()
+    protected $guarded = [];
+
+    protected $dates = ['date_start', 'date_end'];
+
+    public function customer()
     {
-        return number_format($this->price / 100, 2);
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function membershipType()
+    {
+        return $this->belongsTo(MembershipType::class);
     }
 }

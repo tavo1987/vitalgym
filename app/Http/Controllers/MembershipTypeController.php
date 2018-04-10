@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\VitalGym\Entities\Membership;
+use App\VitalGym\Entities\MembershipType;
 
 class MembershipTypeController extends Controller
 {
     public function index()
     {
-        $membershipTypes = Membership::all();
+        $membershipTypes = MembershipType::all();
 
         return view('admin.membership-type.index', compact('membershipTypes'));
     }

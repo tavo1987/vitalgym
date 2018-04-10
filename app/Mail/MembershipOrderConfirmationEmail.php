@@ -10,15 +10,15 @@ class MembershipOrderConfirmationEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $order;
+    public $membership;
 
     /**
      * MembershipOrderConfirmationEmail constructor.
-     * @param $order
+     * @param $membership
      */
-    public function __construct($order)
+    public function __construct($membership)
     {
-        $this->order = $order;
+        $this->membership = $membership;
     }
 
     /**

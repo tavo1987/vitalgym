@@ -3930,7 +3930,7 @@ var wysihtml5 = {
         function saveRanges(ranges, backward) {
             var rangeInfos = [], range, doc;
 
-            // Order the ranges by position within the DOM, latest first, cloning the array to leave the original untouched
+            // Membership the ranges by position within the DOM, latest first, cloning the array to leave the original untouched
             ranges = ranges.slice(0);
             ranges.sort(compareRanges);
 

@@ -1,1 +1,1 @@
-{{ $order->customer->user->name }}
+{{ $membership->customer->user->name }}
