@@ -17,7 +17,7 @@ class AddMembershipTest extends TestCase
     use RefreshDatabase, WithoutMiddleware;
 
     /** @test */
-    public function create_order_for_a_new_customer()
+    public function create_membership_for_a_new_customer()
     {
         $this->withoutExceptionHandling();
         Mail::fake();
