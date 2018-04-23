@@ -19,4 +19,9 @@ class Membership extends Model
     {
         return $this->belongsTo(MembershipType::class);
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }
