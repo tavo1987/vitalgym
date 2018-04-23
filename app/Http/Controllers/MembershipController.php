@@ -19,8 +19,7 @@ class MembershipController extends Controller
             'customer_id' => request('customer_id'),
         ]);
 
-        Payment::create([
-            'membership_id' => $membership->id,
+        $membership->payments()->create([
             'customer_id' => request('customer_id'),
             'total_price' => $membership->membershipType->price * request('quantity'),
             'membership_quantity' => request('quantity'),
