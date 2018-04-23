@@ -2,6 +2,8 @@
 
 namespace tests\Unit;
 
+use App\VitalGym\Entities\Payment;
+use Illuminate\Database\Eloquent\Collection;
 use Tests\TestCase;
 use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Membership;
@@ -30,5 +32,20 @@ class MembershipTest extends TestCase
         $this->assertInstanceOf(
             MembershipType::class, $membership->membershipType
         );
+    }
+
+    /** @test */
+    function a_membership_has_payments()
+    {
+        $membership = factory(Membership::class)->create();
+        $payment = factory(Payment::class)->create([
+            'membership_id' => $membership->id
+        ]);
+
+        $this->assertInstanceOf(
+            Collection::class, $membership->payments
+        );
+
+        $this->assertTrue($membership->payments->contains($payment));
     }
 }
