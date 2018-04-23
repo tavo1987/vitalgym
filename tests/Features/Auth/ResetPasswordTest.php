@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\DB;
 use MailThief\Testing\InteractsWithMail;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ResetPasswordTest extends TestCase
 {
@@ -43,7 +43,6 @@ class ResetPasswordTest extends TestCase
         $user = $this->createNewUser();
         $token = str_random(60);
         DB::table('password_resets')->insert(['email' => $user->email, 'token' => $token]);
-
 
         $this->visit('/password/reset/'.$token)
             ->seeText('Restablecer la contraseña')
