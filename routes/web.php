@@ -11,7 +11,6 @@
 |
 */
 
-
 /**
  * Removed routes belonging to admin lte package.
  */
