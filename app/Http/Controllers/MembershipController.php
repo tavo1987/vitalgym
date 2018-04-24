@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\VitalGym\Entities\Payment;
 use Illuminate\Support\Facades\Mail;
 use App\VitalGym\Entities\Membership;
 use App\Mail\MembershipOrderConfirmationEmail;
