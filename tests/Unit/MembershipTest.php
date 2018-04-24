@@ -2,12 +2,12 @@
 
 namespace tests\Unit;
 
-use App\VitalGym\Entities\Payment;
-use Illuminate\Database\Eloquent\Collection;
 use Tests\TestCase;
+use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Membership;
 use App\VitalGym\Entities\MembershipType;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class MembershipTest extends TestCase
@@ -35,11 +35,11 @@ class MembershipTest extends TestCase
     }
 
     /** @test */
-    function a_membership_has_payments()
+    public function a_membership_has_payments()
     {
         $membership = factory(Membership::class)->create();
         $payment = factory(Payment::class)->create([
-            'membership_id' => $membership->id
+            'membership_id' => $membership->id,
         ]);
 
         $this->assertInstanceOf(
