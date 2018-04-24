@@ -57,4 +57,23 @@ class AddMembershipTest extends TestCase
                 && $mail->membership->id === $membership->id;
         });
     }
+
+    /** @test */
+    public function date_start_is_required_to_create_a_membership()
+    {
+    	$this->withExceptionHandling();
+	    $membershipType = factory(MembershipType::class)->make();
+	    $customer = factory(Customer::class)->make();
+
+	    $response = $this->json('POST', route('admin.membership.create'), [
+		    'date_end' => Carbon::parse('2018-12-01'),
+		    'total_days' => 30,
+		    'membership_type_id' => $membershipType->id,
+		    'customer_id' => $customer->id,
+		    'quantity' => 2,
+	    ]);
+
+	    $response->assertStatus(422);
+	    $response->assertJsonValidationErrors('date_start');
+	}
 }
