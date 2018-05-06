@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\MembershipFormRequest;
+use App\Http\Requests\CreateMembershipFormRequest;
 use Illuminate\Support\Facades\Mail;
 use App\VitalGym\Entities\Membership;
 use App\Mail\MembershipOrderConfirmationEmail;
 
 class MembershipController extends Controller
 {
-    public function store(MembershipFormRequest $request)
+    public function store(CreateMembershipFormRequest $request)
     {
         $membership = Membership::create([
             'date_start' => $request->get('date_start'),
@@ -21,8 +21,8 @@ class MembershipController extends Controller
 
         $membership->payments()->create([
             'customer_id' => $request->get('customer_id'),
-            'total_price' => $membership->membershipType->price * $request->get('quantity'),
-            'membership_quantity' => $request->get('quantity'),
+            'total_price' => $membership->membershipType->price * $request->get('membership_quantity'),
+            'membership_quantity' => $request->get('membership_quantity'),
             'user_id' => auth()->user()->id,
         ]);
 
