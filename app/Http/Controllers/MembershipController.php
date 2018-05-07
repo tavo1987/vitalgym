@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateMembershipFormRequest;
 use Illuminate\Support\Facades\Mail;
 use App\VitalGym\Entities\Membership;
 use App\Mail\MembershipOrderConfirmationEmail;
+use App\Http\Requests\CreateMembershipFormRequest;
 
 class MembershipController extends Controller
 {
