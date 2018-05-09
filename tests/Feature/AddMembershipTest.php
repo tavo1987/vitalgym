@@ -41,13 +41,15 @@ class AddMembershipTest extends TestCase
     /** @test */
     public function create_membership_for_a_new_customer()
     {
+    	$this->withoutExceptionHandling();
         Mail::fake();
 
         $customerUser = $this->createNewUser(['role' => 'customer', 'email' => 'john@example.com']);
+
         $dateStart = Carbon::now()->toDateString();
         $dateEnd = Carbon::now()->addMonth(1)->toDateString();
 
-        $membershipType = factory(MembershipType::class)->create(['name' =>'mensual', 'price' => 3000]);
+        $membershipType = factory(MembershipType::class)->create(['name' =>'Mensual', 'price' => 3000]);
         $customer = factory(Customer::class)->create(['user_id' => $customerUser->id]);
 
         $this->orderMembership([
@@ -60,6 +62,16 @@ class AddMembershipTest extends TestCase
         ]);
 
         $this->response->assertStatus(201);
+
+        $this->response->assertJson([
+	        'date_start'  => $dateStart,
+	        'date_end'    => $dateEnd,
+	        'total_days'  => 30,
+	        'name'        => 'Mensual',
+	        'unit_price'  => 3000,
+	        'created_by' => $this->adminUser->full_name,
+        ]);
+
         $membership = $customer->memberships->fresh()->last();
         $this->assertNotNull($membership);
         $payment = Payment::where('membership_id', $membership->id)->first();
