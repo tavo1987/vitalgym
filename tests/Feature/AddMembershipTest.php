@@ -41,7 +41,7 @@ class AddMembershipTest extends TestCase
     /** @test */
     public function create_membership_for_a_new_customer()
     {
-    	$this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
         Mail::fake();
 
         $customerUser = $this->createNewUser(['role' => 'customer', 'email' => 'john@example.com']);
@@ -64,12 +64,12 @@ class AddMembershipTest extends TestCase
         $this->response->assertStatus(201);
 
         $this->response->assertJson([
-	        'date_start'  => $dateStart,
-	        'date_end'    => $dateEnd,
-	        'total_days'  => 30,
-	        'name'        => 'Mensual',
-	        'unit_price'  => 3000,
-	        'created_by' => $this->adminUser->full_name,
+            'date_start'  => $dateStart,
+            'date_end'    => $dateEnd,
+            'total_days'  => 30,
+            'name'        => 'Mensual',
+            'unit_price'  => 3000,
+            'created_by' => $this->adminUser->full_name,
         ]);
 
         $membership = $customer->memberships->fresh()->last();
