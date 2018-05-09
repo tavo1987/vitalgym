@@ -29,12 +29,12 @@ class MembershipController extends Controller
         Mail::to($membership->customer->email)->send(new MembershipOrderConfirmationEmail($membership));
 
         return response()->json([
-        	'date_start' => $membership->date_start->toDateString(),
-        	'date_end' => $membership->date_end->toDateString(),
-        	'total_days' => $membership->total_days,
-	        'name'        => $membership->membershipType->name,
-	        'unit_price'  => $membership->membershipType->price,
-	        'created_by' => auth()->user()->full_name,
+            'date_start' => $membership->date_start->toDateString(),
+            'date_end' => $membership->date_end->toDateString(),
+            'total_days' => $membership->total_days,
+            'name'        => $membership->membershipType->name,
+            'unit_price'  => $membership->membershipType->price,
+            'created_by' => auth()->user()->full_name,
         ], 201);
     }
 }
