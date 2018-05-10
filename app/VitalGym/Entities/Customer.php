@@ -27,4 +27,14 @@ class Customer extends Model
     {
         return $this->user->email;
     }
+
+	public function getNameAttribute()
+	{
+		return $this->user->name;
+    }
+
+    public function getLastNameAttribute()
+	{
+		return $this->user->last_name;
+    }
 }
