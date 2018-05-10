@@ -19,7 +19,7 @@ class MembershipController extends Controller
             'customer_id' => $request->get('customer_id'),
         ]);
 
-        $membership->payments()->create([
+        $membership->payment()->create([
             'customer_id' => $request->get('customer_id'),
             'total_price' => $membership->membershipType->price * $request->get('membership_quantity'),
             'membership_quantity' => $request->get('membership_quantity'),
@@ -35,6 +35,13 @@ class MembershipController extends Controller
 	        'name'        => $membership->membershipType->name,
 	        'unit_price'  => $membership->membershipType->price,
 	        'created_by' => auth()->user()->full_name,
+	        'total_price' => $membership->payment->total_price,
+	        'membership_quantity' => $membership->payment->membership_quantity,
+	        'customer' => [
+	        	'name' => $membership->customer->name,
+	        	'last_name' => $membership->customer->last_name,
+	        	'email' => $membership->customer->email,
+	        ]
         ], 201);
     }
 }
