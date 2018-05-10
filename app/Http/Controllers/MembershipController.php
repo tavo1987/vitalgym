@@ -29,19 +29,19 @@ class MembershipController extends Controller
         Mail::to($membership->customer->email)->send(new MembershipOrderConfirmationEmail($membership));
 
         return response()->json([
-        	'date_start' => $membership->date_start->toDateString(),
-        	'date_end' => $membership->date_end->toDateString(),
-        	'total_days' => $membership->total_days,
-	        'name'        => $membership->membershipType->name,
-	        'unit_price'  => $membership->membershipType->price,
-	        'created_by' => auth()->user()->full_name,
-	        'total_price' => $membership->payment->total_price,
-	        'membership_quantity' => $membership->payment->membership_quantity,
-	        'customer' => [
-	        	'name' => $membership->customer->name,
-	        	'last_name' => $membership->customer->last_name,
-	        	'email' => $membership->customer->email,
-	        ]
+            'date_start' => $membership->date_start->toDateString(),
+            'date_end' => $membership->date_end->toDateString(),
+            'total_days' => $membership->total_days,
+            'name'        => $membership->membershipType->name,
+            'unit_price'  => $membership->membershipType->price,
+            'created_by' => auth()->user()->full_name,
+            'total_price' => $membership->payment->total_price,
+            'membership_quantity' => $membership->payment->membership_quantity,
+            'customer' => [
+                'name' => $membership->customer->name,
+                'last_name' => $membership->customer->last_name,
+                'email' => $membership->customer->email,
+            ],
         ], 201);
     }
 }
