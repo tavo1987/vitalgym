@@ -7,7 +7,6 @@ use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Membership;
 use App\VitalGym\Entities\MembershipType;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class MembershipTest extends TestCase
@@ -35,7 +34,7 @@ class MembershipTest extends TestCase
     }
 
     /** @test */
-    public function a_membership_has_payments()
+    public function a_membership_has_a_payment()
     {
         $membership = factory(Membership::class)->create();
         $payment = factory(Payment::class)->create([
@@ -43,9 +42,9 @@ class MembershipTest extends TestCase
         ]);
 
         $this->assertInstanceOf(
-            Collection::class, $membership->payments
+            Payment::class, $membership->payment
         );
 
-        $this->assertTrue($membership->payments->contains($payment));
+        $this->assertEquals($payment->id, $membership->payment->id);
     }
 }
