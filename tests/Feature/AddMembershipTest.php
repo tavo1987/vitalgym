@@ -44,7 +44,12 @@ class AddMembershipTest extends TestCase
     	$this->withoutExceptionHandling();
         Mail::fake();
 
-        $customerUser = $this->createNewUser(['role' => 'customer', 'email' => 'john@example.com']);
+        $customerUser = $this->createNewUser([
+        	'name' =>'John',
+	        'last_name' => 'Doe',
+	        'role' => 'customer',
+	        'email' => 'john@example.com',
+	    ]);
 
         $dateStart = Carbon::now()->toDateString();
         $dateEnd = Carbon::now()->addMonth(1)->toDateString();
@@ -70,6 +75,13 @@ class AddMembershipTest extends TestCase
 	        'name'        => 'Mensual',
 	        'unit_price'  => 3000,
 	        'created_by' => $this->adminUser->full_name,
+	        'total_price' => 6000,
+	        'membership_quantity' => 2,
+	        'customer' => [
+	        	'name' => 'John',
+		        'last_name' => 'Doe',
+				'email' => 'john@example.com',
+	        ],
         ]);
 
         $membership = $customer->memberships->fresh()->last();
