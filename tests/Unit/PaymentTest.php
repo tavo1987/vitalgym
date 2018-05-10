@@ -2,10 +2,10 @@
 
 namespace tests\Unit;
 
-use App\VitalGym\Entities\Payment;
-use App\VitalGym\Entities\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use App\VitalGym\Entities\User;
+use App\VitalGym\Entities\Payment;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PaymentTest extends TestCase
 {
@@ -17,7 +17,7 @@ class PaymentTest extends TestCase
         $payment = factory(Payment::class)->create();
 
         $this->assertInstanceOf(
-        	User::class, $payment->user
+            User::class, $payment->user
         );
     }
 }
