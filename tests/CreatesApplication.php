@@ -27,6 +27,8 @@ trait CreatesApplication
     public function createNewUser($attributes = [])
     {
         $userData = [
+        	'name' => 'John',
+	        'last_name' => 'Doe',
             'email'      => 'tavo198718@gmail.com',
             'password'   => bcrypt('secret'),
             'active'     => true,
