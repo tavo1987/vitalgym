@@ -2,11 +2,11 @@
 
 use Illuminate\Support\Facades\DB;
 use App\Notifications\ResetPasswordNotification;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ResetPasswordTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     public function test_password_reset_email()
     {

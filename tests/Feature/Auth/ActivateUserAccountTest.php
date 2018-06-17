@@ -1,11 +1,11 @@
 <?php
 
 use App\VitalGym\Entities\ActivationToken;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ActionAccountTest extends BrowserKitTestCase
 {
-    use  DatabaseTransactions;
+    use  RefreshDatabase;
 
     public function test_inactive_user_cannot_login()
     {

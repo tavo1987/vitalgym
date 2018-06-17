@@ -5,11 +5,11 @@ use Illuminate\Support\Facades\Mail;
 use App\Listeners\SendActivationEmail;
 use App\VitalGym\Entities\ActivationToken;
 use App\Events\UserRequestedActivationEmail;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ActivationAccountTokenTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     public function test_user_can_resend_email_verification_with_token()
     {

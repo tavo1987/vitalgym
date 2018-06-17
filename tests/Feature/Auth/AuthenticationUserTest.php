@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AuthenticationUserTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     public function test_user_can_login()
     {
