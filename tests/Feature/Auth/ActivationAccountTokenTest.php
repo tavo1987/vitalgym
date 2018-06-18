@@ -12,7 +12,7 @@ class ActivationAccountTokenTest extends BrowserKitTestCase
     use RefreshDatabase;
 
     /** @test */
-    function user_can_resend_email_verification_with_token()
+    public function user_can_resend_email_verification_with_token()
     {
         $this->expectsEvents(UserRequestedActivationEmail::class);
 
@@ -34,7 +34,7 @@ class ActivationAccountTokenTest extends BrowserKitTestCase
     }
 
     /** @test */
-    function user_cannot_resend_email_verification_with_token()
+    public function user_cannot_resend_email_verification_with_token()
     {
         $listener = Mockery::spy(SendActivationEmail::class);
         app()->instance(SendActivationEmail::class, $listener);
@@ -61,7 +61,7 @@ class ActivationAccountTokenTest extends BrowserKitTestCase
     }
 
     /** @test */
-    function user_can_receive_email_with_activation_token()
+    public function user_can_receive_email_with_activation_token()
     {
         Mail::fake();
         $user = $this->createNewUser(['active' => false]);
@@ -78,7 +78,7 @@ class ActivationAccountTokenTest extends BrowserKitTestCase
     }
 
     /** @test */
-    function unregistered_user_cannot_get_email_with_activation_token()
+    public function unregistered_user_cannot_get_email_with_activation_token()
     {
         $this->get(route('auth.activate.resend', 'fake@email.com'));
 
