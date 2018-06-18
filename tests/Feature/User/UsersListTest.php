@@ -10,8 +10,8 @@ class UsersListTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test **/
-    public function list_users()
+    /** @test */
+    function list_users()
     {
         $user = $this->createNewUser();
 
@@ -30,8 +30,8 @@ class UsersListTest extends TestCase
             ->assertSeeText('Usuarios');
     }
 
-    /** @test **/
-    public function the_users_are_paginated_and_sorted_by_id_in_descending_order()
+    /** @test */
+    function the_users_are_paginated_and_sorted_by_id_in_descending_order()
     {
         $user = $this->createNewUser([
             'api_token' => str_random(60),
@@ -59,8 +59,8 @@ class UsersListTest extends TestCase
             ]);
     }
 
-    /** @test **/
-    public function the_users_without_api_token_can_not_get_user_list_data()
+    /** @test */
+    function the_users_without_api_token_can_not_get_user_list_data()
     {
         $response = $this->json('GET', '/api/v1/users');
 
@@ -70,8 +70,8 @@ class UsersListTest extends TestCase
             ]);
     }
 
-    /** @test **/
-    public function the_users_with_invalid_api_token_can_not_get_users_list_data()
+    /** @test */
+    function the_users_with_invalid_api_token_can_not_get_users_list_data()
     {
         $response = $this->json('GET', '/api/v1/users', [
             'api_token' => 'abc',
@@ -83,8 +83,8 @@ class UsersListTest extends TestCase
             ]);
     }
 
-    /** @test **/
-    public function the_users_can_be_filtered()
+    /** @test */
+    function the_users_can_be_filtered()
     {
         $user = $this->createNewUser([
             'name' => 'Edwin',

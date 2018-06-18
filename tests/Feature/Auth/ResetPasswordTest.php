@@ -8,7 +8,8 @@ class ResetPasswordTest extends BrowserKitTestCase
 {
     use RefreshDatabase;
 
-    public function test_password_reset_email()
+    /** @test */
+    function password_reset_email()
     {
         Notification::fake();
 
@@ -25,7 +26,8 @@ class ResetPasswordTest extends BrowserKitTestCase
         $this->seeText('¡Te hemos enviado por correo el enlace para restablecer tu contraseña!');
     }
 
-    public function test_password_reset_email_not_received()
+    /** @test */
+    function password_reset_email_not_received()
     {
         $this->visit('/')
             ->seePageIs('/login')
@@ -37,7 +39,8 @@ class ResetPasswordTest extends BrowserKitTestCase
         $this->seeText('No podemos encontrar ningún usuario con ese correo electrónico.');
     }
 
-    public function test_user_can_reset_password()
+    /** @test */
+    function user_can_reset_password()
     {
         $token = str_random(60);
         $user = $this->createNewUser();
@@ -55,7 +58,8 @@ class ResetPasswordTest extends BrowserKitTestCase
             ->seeText('Bienvenido');
     }
 
-    public function test_unregistered_user_cannot_reset_password()
+    /** @test */
+    function unregistered_user_cannot_reset_password()
     {
         $token = str_random(60);
 
@@ -71,7 +75,8 @@ class ResetPasswordTest extends BrowserKitTestCase
             ->seeText('No podemos encontrar ningún usuario con ese correo electrónico.');
     }
 
-    public function test_invalid_token_to_password_reset()
+    /** @test */
+    function invalid_token_to_password_reset()
     {
         $user = $this->createNewUser();
         $token = str_random(60);
@@ -91,7 +96,8 @@ class ResetPasswordTest extends BrowserKitTestCase
             ->seeText('El token de recuperación de contraseña es inválido.');
     }
 
-    public function test_required_fields_to_password_reset()
+    /** @test */
+    function required_fields_to_password_reset()
     {
         $token = str_random(60);
 
