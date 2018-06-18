@@ -16,7 +16,7 @@ class MembershipTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function a_membership_has_a_customer()
+    public function a_membership_has_a_customer()
     {
         $membership = factory(Membership::class)->create();
 
@@ -26,7 +26,7 @@ class MembershipTest extends TestCase
     }
 
     /** @test */
-    function a_membership_has_a_membershipType()
+    public function a_membership_has_a_membershipType()
     {
         $membership = factory(Membership::class)->create();
 
@@ -36,7 +36,7 @@ class MembershipTest extends TestCase
     }
 
     /** @test */
-    function a_membership_has_a_payment()
+    public function a_membership_has_a_payment()
     {
         $membership = factory(Membership::class)->create();
         $payment = factory(Payment::class)->create([
@@ -51,7 +51,7 @@ class MembershipTest extends TestCase
     }
 
     /** @test */
-    function converting_to_an_array()
+    public function converting_to_an_array()
     {
         $adminUser = $this->createNewUser();
         $user = factory(User::class)->create(['name' => 'Jane', 'last_name' => 'Doe', 'email' => 'jane@example.com']);

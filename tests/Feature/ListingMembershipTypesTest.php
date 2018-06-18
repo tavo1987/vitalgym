@@ -11,7 +11,7 @@ class ListingMembershipTypesTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function listing_membership_types()
+    public function listing_membership_types()
     {
         $user = $this->createNewUser();
 
