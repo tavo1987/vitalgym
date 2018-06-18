@@ -2,10 +2,10 @@
 
 namespace  Tests;
 
-use Webmozart\Assert\Assert;
 use Illuminate\Foundation\Testing\TestResponse;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use PHPUnit\Framework\Assert;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -20,7 +20,8 @@ abstract class TestCase extends BaseTestCase
         });
 
         EloquentCollection::macro('assertEquals', function ($items) {
-            Assert::count($items->count(), $this);
+            Assert::assertCount($items->count(), $this);
+
             $this->zip($items)->each(function ($itemPair) {
                 Assert::assertTrue($itemPair[0]->is($itemPair[1]));
             });
