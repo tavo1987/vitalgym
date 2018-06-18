@@ -14,7 +14,7 @@ class MembershipConfirmationEmailTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function email_contain_the_customer_name()
+    public function email_contain_the_customer_name()
     {
         $user = factory(User::class)->create([
            'name' => 'John',

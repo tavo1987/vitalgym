@@ -39,7 +39,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function create_membership_for_a_new_customer()
+    public function create_membership_for_a_new_customer()
     {
         $this->withoutExceptionHandling();
         Mail::fake();
@@ -103,7 +103,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function date_start_is_required_to_create_a_membership()
+    public function date_start_is_required_to_create_a_membership()
     {
         $this->withExceptionHandling();
         $membershipType = factory(MembershipType::class)->create();
@@ -121,7 +121,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function date_start_must_be_a_valid_date_to_create_a_membership()
+    public function date_start_must_be_a_valid_date_to_create_a_membership()
     {
         $this->withExceptionHandling();
         $membershipType = factory(MembershipType::class)->create();
@@ -140,7 +140,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function date_start_must_be_greater_or_equal_than_the_current_date_to_create_a_membership()
+    public function date_start_must_be_greater_or_equal_than_the_current_date_to_create_a_membership()
     {
         $this->withExceptionHandling();
         $membershipType = factory(MembershipType::class)->create();
@@ -159,7 +159,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function date_start_must_have_the_following_format_yyyy_mm_dd_to_create_a_membership()
+    public function date_start_must_have_the_following_format_yyyy_mm_dd_to_create_a_membership()
     {
         $this->withExceptionHandling();
         $membershipType = factory(MembershipType::class)->create();
@@ -178,7 +178,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function date_end_is_required_to_create_a_membership()
+    public function date_end_is_required_to_create_a_membership()
     {
         $this->withExceptionHandling();
         $membershipType = factory(MembershipType::class)->create();
@@ -196,7 +196,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function date_end_must_be_a_valid_date_to_create_a_membership()
+    public function date_end_must_be_a_valid_date_to_create_a_membership()
     {
         $this->withExceptionHandling();
         $membershipType = factory(MembershipType::class)->create();
@@ -215,7 +215,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function date_end_must_have_the_following_format_yyyy_mm_dd_to_create_a_membership()
+    public function date_end_must_have_the_following_format_yyyy_mm_dd_to_create_a_membership()
     {
         $this->withExceptionHandling();
         $membershipType = factory(MembershipType::class)->create();
@@ -234,7 +234,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function the_end_date_must_be_greater_or_equal_than_start_date_to_create_a_membership()
+    public function the_end_date_must_be_greater_or_equal_than_start_date_to_create_a_membership()
     {
         $this->withExceptionHandling();
         $membershipType = factory(MembershipType::class)->create();
@@ -254,7 +254,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function the_total_days_must_be_integer()
+    public function the_total_days_must_be_integer()
     {
         $this->withExceptionHandling();
         $membershipType = factory(MembershipType::class)->create();
@@ -274,7 +274,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function the_total_days_must_be_required_to_create_a_membership()
+    public function the_total_days_must_be_required_to_create_a_membership()
     {
         $this->withExceptionHandling();
         $membershipType = factory(MembershipType::class)->create();
@@ -293,7 +293,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function total_days_must_be_at_least_1_to_create_a_membership()
+    public function total_days_must_be_at_least_1_to_create_a_membership()
     {
         $this->withExceptionHandling();
         $membershipType = factory(MembershipType::class)->create();
@@ -313,7 +313,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function membership_type_is_required_to_create_a_membership()
+    public function membership_type_is_required_to_create_a_membership()
     {
         $this->withExceptionHandling();
         $customer = factory(Customer::class)->create();
@@ -331,7 +331,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function membership_type_must_exist_to_create_a_membership()
+    public function membership_type_must_exist_to_create_a_membership()
     {
         $this->withExceptionHandling();
         $customer = factory(Customer::class)->create();
@@ -350,7 +350,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function the_customer_is_required_to_create_a_membership()
+    public function the_customer_is_required_to_create_a_membership()
     {
         $this->withExceptionHandling();
         $membershipType = factory(MembershipType::class)->create();
@@ -368,7 +368,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function customer_must_exist_to_create_a_membership()
+    public function customer_must_exist_to_create_a_membership()
     {
         $this->withExceptionHandling();
         $membershipType = factory(MembershipType::class)->create();
@@ -387,7 +387,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function membership_quantity_is_required_to_create_membership()
+    public function membership_quantity_is_required_to_create_membership()
     {
         $this->withExceptionHandling();
         $membershipType = factory(MembershipType::class)->create();
@@ -406,7 +406,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function membership_quantity_must_be_a_integer_to_create_membership()
+    public function membership_quantity_must_be_a_integer_to_create_membership()
     {
         $this->withExceptionHandling();
         $membershipType = factory(MembershipType::class)->create();
@@ -426,7 +426,7 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
-    function membership_quantity_must_be_at_least_1_to_create_membership()
+    public function membership_quantity_must_be_at_least_1_to_create_membership()
     {
         $this->withExceptionHandling();
         $membershipType = factory(MembershipType::class)->create();

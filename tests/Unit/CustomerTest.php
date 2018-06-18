@@ -12,7 +12,7 @@ class CustomerTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function a_customer_has_memberships()
+    public function a_customer_has_memberships()
     {
         $customer = factory(Customer::class)->make();
 
@@ -22,7 +22,7 @@ class CustomerTest extends TestCase
     }
 
     /** @test */
-    function a_customer_has_a_user()
+    public function a_customer_has_a_user()
     {
         $customer = factory(Customer::class)->create();
 
@@ -32,7 +32,7 @@ class CustomerTest extends TestCase
     }
 
     /** @test */
-    function a_customer_load_user_relationship_by_default()
+    public function a_customer_load_user_relationship_by_default()
     {
         $user = $this->createNewUser();
         $customer = factory(Customer::class)->create(['user_id' => $user->id]);

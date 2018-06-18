@@ -11,11 +11,11 @@ class ListingMembershipTypesTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function listing_membership_types()
+    public function listing_membership_types()
     {
         $user = $this->createNewUser();
 
-        $membershipsTypes =  factory(MembershipType::class)->times(3)->create();
+        $membershipsTypes = factory(MembershipType::class)->times(3)->create();
 
         $response = $this->actingAs($user)->get(route('admin.membership-types'));
 

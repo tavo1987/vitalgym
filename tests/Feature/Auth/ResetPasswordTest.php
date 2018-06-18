@@ -9,7 +9,7 @@ class ResetPasswordTest extends BrowserKitTestCase
     use RefreshDatabase;
 
     /** @test */
-    function password_reset_email()
+    public function password_reset_email()
     {
         Notification::fake();
 
@@ -27,7 +27,7 @@ class ResetPasswordTest extends BrowserKitTestCase
     }
 
     /** @test */
-    function password_reset_email_not_received()
+    public function password_reset_email_not_received()
     {
         $this->visit('/')
             ->seePageIs('/login')
@@ -40,7 +40,7 @@ class ResetPasswordTest extends BrowserKitTestCase
     }
 
     /** @test */
-    function user_can_reset_password()
+    public function user_can_reset_password()
     {
         $token = str_random(60);
         $user = $this->createNewUser();
@@ -59,7 +59,7 @@ class ResetPasswordTest extends BrowserKitTestCase
     }
 
     /** @test */
-    function unregistered_user_cannot_reset_password()
+    public function unregistered_user_cannot_reset_password()
     {
         $token = str_random(60);
 
@@ -76,7 +76,7 @@ class ResetPasswordTest extends BrowserKitTestCase
     }
 
     /** @test */
-    function invalid_token_to_password_reset()
+    public function invalid_token_to_password_reset()
     {
         $user = $this->createNewUser();
         $token = str_random(60);
@@ -97,7 +97,7 @@ class ResetPasswordTest extends BrowserKitTestCase
     }
 
     /** @test */
-    function required_fields_to_password_reset()
+    public function required_fields_to_password_reset()
     {
         $token = str_random(60);
 

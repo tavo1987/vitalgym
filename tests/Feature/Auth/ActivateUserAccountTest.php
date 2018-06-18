@@ -8,7 +8,7 @@ class ActionAccountTest extends BrowserKitTestCase
     use  RefreshDatabase;
 
     /** @test */
-    function inactive_user_cannot_login()
+    public function inactive_user_cannot_login()
     {
         $user = $this->createNewUser([
             'active' => false,
@@ -24,7 +24,7 @@ class ActionAccountTest extends BrowserKitTestCase
     }
 
     /** @test  */
-    function inactive_user_cannot_login_even_if_reset_his_password()
+    public function inactive_user_cannot_login_even_if_reset_his_password()
     {
         $user = $this->createNewUser([
             'active' => false,
@@ -43,7 +43,7 @@ class ActionAccountTest extends BrowserKitTestCase
     }
 
     /** @test */
-    function user_can_activate_account()
+    public function user_can_activate_account()
     {
         $user = $this->createNewUser(['active' => false]);
 
@@ -70,7 +70,7 @@ class ActionAccountTest extends BrowserKitTestCase
     }
 
     /** @test  */
-    function user_cannot_activate_account()
+    public function user_cannot_activate_account()
     {
         $user = $this->createNewUser(['active' => false]);
         $token = str_random(128);
