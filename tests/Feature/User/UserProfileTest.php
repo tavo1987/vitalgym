@@ -10,7 +10,7 @@ class UserProfileTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function an_active_user_can_visit_the_home_page_and_view_his_basic_profile_data()
+    public function an_active_user_can_visit_the_home_page_and_view_his_basic_profile_data()
     {
         $this->withoutExceptionHandling();
         $user = $this->createNewUser();

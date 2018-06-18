@@ -12,7 +12,7 @@ class PaymentTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function a_payment_belongs_to_a_user()
+    public function a_payment_belongs_to_a_user()
     {
         $payment = factory(Payment::class)->create();
 

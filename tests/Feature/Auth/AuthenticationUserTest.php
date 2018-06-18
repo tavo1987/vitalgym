@@ -7,7 +7,7 @@ class AuthenticationUserTest extends BrowserKitTestCase
     use RefreshDatabase;
 
     /** @test */
-    function user_can_login()
+    public function user_can_login()
     {
         $user = $this->createNewUser();
 
@@ -24,7 +24,7 @@ class AuthenticationUserTest extends BrowserKitTestCase
     }
 
     /** @test */
-    function guest_user_cannot_login()
+    public function guest_user_cannot_login()
     {
         $this->visit('/')
             ->seePageIs('/login')
@@ -37,7 +37,7 @@ class AuthenticationUserTest extends BrowserKitTestCase
     }
 
     /** @test */
-    function user_can_logout()
+    public function user_can_logout()
     {
         $user = $this->createNewUser();
 
