@@ -1,6 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
     "/css/AdminLTE.css": "/css/AdminLTE.css",
+    "/css/app.css": "/css/app.css",
     "/plugins/toastr/toastr.js": "/plugins/toastr/toastr.js"
 }
