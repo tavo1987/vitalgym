@@ -2,8 +2,9 @@
 
 use App\VitalGym\Entities\ActivationToken;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
-class ActionAccountTest extends BrowserKitTestCase
+class ActionAccountTest extends TestCase
 {
     use  RefreshDatabase;
 
@@ -14,13 +15,13 @@ class ActionAccountTest extends BrowserKitTestCase
             'active' => false,
         ]);
 
-        $this->visit('/login')
-            ->type($user->email, 'email')
-            ->type('secret', 'password')
-            ->press('Entrar');
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'secret',
+        ]);
 
-        $this->dontSeeIsAuthenticated()
-            ->seePageIs('/login');
+        $response->assertRedirect('/login');
+        $this->assertGuest();
     }
 
     /** @test  */
@@ -33,13 +34,14 @@ class ActionAccountTest extends BrowserKitTestCase
         $token = str_random(60);
         DB::table('password_resets')->insert(['email' => $user->email, 'token' => $token]);
 
-        $this->visit('/password/reset/'.$token)
-            ->type($user->email, 'email')
-            ->type('laravel', 'password')
-            ->type('laravel', 'password_confirmation')
-            ->press('Restablecer la contraseña');
+        $response = $this->post('/password/reset/', [
+            'email' => $user->email,
+            'password' => 'secret',
+            'password_confirmation' => 'secret',
+        ]);
 
-        $this->dontSeeIsAuthenticated();
+        $response->assertStatus(302);
+        $this->assertGuest();
     }
 
     /** @test */
@@ -51,22 +53,21 @@ class ActionAccountTest extends BrowserKitTestCase
             'user_id' => $user->id,
         ]);
 
-        $this->visitRoute('auth.activate.account', $token->token);
+        $response = $this->get(route('auth.activate.account', ['token' => $token]));
 
-        $this->dontSeeInDatabase('activation_tokens', [
+        $response->assertRedirect('/');
+        $this->assertAuthenticated();
+
+        $this->assertDatabaseMissing('activation_tokens', [
             'id'      => $token->id,
             'token'   => $token->token,
             'user_id' => $user->id,
         ]);
 
-        $this->seeInDatabase('users', [
+        $this->assertDatabaseHas('users', [
             'id'     => $user->id,
             'active' => true,
         ]);
-
-        $this->seeIsAuthenticated();
-        $this->seePageIs('/')
-            ->seeText('Gracias por activar tu cuenta');
     }
 
     /** @test  */
@@ -75,16 +76,13 @@ class ActionAccountTest extends BrowserKitTestCase
         $user = $this->createNewUser(['active' => false]);
         $token = str_random(128);
 
-        $this->get(route('auth.activate.account', $token));
+        $response = $this->get(route('auth.activate.account', $token));
 
-        $this->assertResponseStatus(404);
-
-        $this->seeInDatabase('users', [
+        $response->assertStatus(404);
+        $this->assertGuest();
+        $this->assertDatabaseHas('users', [
             'id'     => $user->id,
             'active' => false,
         ]);
-
-        $this->dontSeeIsAuthenticated();
-        $this->seeText('Página no encontrada');
     }
 }
