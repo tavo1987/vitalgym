@@ -1,15 +1,11 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of the routes that are handled
-| by your application. Just tell Laravel the URIs it should respond
-| to using a Closure or controller method. Build something great!
-|
-*/
+Route::get('/', 'HomeController@index');
+
+/**
+ *  Memberships
+ */
+Route::get('/memberships', 'MembershipController@show')->name('memberships.index');
 
 /**
  * Removed routes belonging to admin lte package.
@@ -26,11 +22,8 @@ Route::post('register', function () {
     abort(404);
 });
 
-Route::get('/', 'HomeController@index');
-
 /*
  * Activate account
  */
-
 Route::get('/activation/account/{token}', 'Auth\ActivationController@activate')->name('auth.activate.account');
 Route::get('/activate/resend/{email}', 'Auth\ActivationController@resend')->name('auth.activate.resend');
