@@ -2,12 +2,12 @@
 
 Route::get('/', 'HomeController@index');
 
-/**
+/*
  *  Memberships
  */
 Route::get('/memberships', 'MembershipController@show')->name('memberships.index');
 
-/**
+/*
  * Removed routes belonging to admin lte package.
  */
 Route::get('/home', function () {
