@@ -22,18 +22,33 @@
         <ul class="sidebar-menu">
             <li class="header">MENU PRINCIPAL</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="{{ route('users.index') }}"><i class='fa fa-users'></i> <span>Usuarios</span></a></li>
-            <li><a href="#"><i class='fa fa-user'></i> <span>Clientes</span></a></li>
+            <li><a href="#"><i class='fa fa-street-view'></i> <span>Clientes</span></a></li>
             <li class="treeview">
-                <a href="#"><i class='fa fa-archive'></i> <span>Rutinas</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    <span>Membresías</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
                 <ul class="treeview-menu">
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i>Todas</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i>Nueva</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class='fa fa-archive'></i>
+                    <span>Rutinas</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-circle-o"></i>Todas</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i>Nueva</a></li>
                 </ul>
             </li>
             <li><a href="#"><i class='fa fa-money'></i> <span>Pagos</span></a></li>
             <li><a href="#"><i class='fa fa fa-file-text-o'></i> <span>Fichas</span></a></li>
             <li><a href="#"><i class='fa fa-calendar'></i> <span>Asistencia</span></a></li>
+            <li class="active"><a href="{{ route('users.index') }}"><i class='fa fa-users'></i> <span>Usuarios</span></a></li>
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
