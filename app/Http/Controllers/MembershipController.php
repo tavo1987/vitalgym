@@ -28,6 +28,6 @@ class MembershipController extends Controller
 
         Mail::to($membership->customer->email)->send(new MembershipOrderConfirmationEmail($membership));
 
-        return response()->json($membership, 201);
+        return redirect()->route('memberships.index')->with(['message' => 'Membresía guardada con éxito', 'alert-type' => 'success']);
     }
 }

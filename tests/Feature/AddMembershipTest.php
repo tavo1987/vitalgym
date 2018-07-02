@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\VitalGym\Entities\Membership;
 use Carbon\Carbon;
 use Tests\TestCase;
-use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
 use Illuminate\Support\Facades\Mail;
 use App\VitalGym\Entities\MembershipType;
@@ -16,7 +16,6 @@ class AddMembershipTest extends TestCase
 {
     use RefreshDatabase, WithoutMiddleware;
 
-    private $response;
     private $adminUser;
 
     public function setUp()
@@ -27,19 +26,11 @@ class AddMembershipTest extends TestCase
 
     private function orderMembership($params = [])
     {
-        $savedRequest = $this->app['request'];
-        $this->response = $this->actingAs($this->adminUser)->json('POST', route('admin.membership.store'), $params);
-        $this->app['request'] = $savedRequest;
-    }
-
-    private function assertValidationError($field)
-    {
-        $this->response->assertStatus(422);
-        $this->response->assertJsonValidationErrors($field);
+        return $this->actingAs($this->adminUser)->post(route('admin.membership.store'), $params);
     }
 
     /** @test */
-    function create_membership_for_a_new_customer()
+    function add_membership_for_a_new_customer()
     {
         $this->withoutExceptionHandling();
         Mail::fake();
@@ -57,7 +48,7 @@ class AddMembershipTest extends TestCase
         $membershipType = factory(MembershipType::class)->create(['name' =>'Mensual', 'price' => 3000]);
         $customer = factory(Customer::class)->create(['user_id' => $customerUser->id]);
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => $dateStart,
             'date_end' => $dateEnd,
             'total_days' => 30,
@@ -66,35 +57,20 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 2,
         ]);
 
-        $this->response->assertStatus(201);
-
-        $this->response->assertJson([
-            'date_start'  => $dateStart,
-            'date_end'    => $dateEnd,
-            'total_days'  => 30,
-            'name'        => 'Mensual',
-            'unit_price'  => 3000,
-            'created_by' => $this->adminUser->full_name,
-            'total_price' => 6000,
-            'membership_quantity' => 2,
-            'customer' => [
-                'name' => 'John',
-                'last_name' => 'Doe',
-                'email' => 'john@example.com',
-            ],
-        ]);
-
         $membership = $customer->memberships->fresh()->last();
         $this->assertNotNull($membership);
-        $payment = Payment::where('membership_id', $membership->id)->first();
+        $response->assertRedirect(route('memberships.index'));
+
+        $response->assertSessionHas('message');
+        $response->assertSessionHas('alert-type', 'success');
         $this->assertEquals(30, $membership->total_days);
         $this->assertEquals($dateStart, $membership->date_start->toDateString());
         $this->assertEquals($dateEnd, $membership->date_end->toDateString());
-        $this->assertEquals($membership->id, $payment->membership_id);
-        $this->assertEquals(2, $payment->membership_quantity);
-        $this->assertEquals($customer->id, $payment->customer_id);
-        $this->assertEquals(6000, $payment->total_price);
-        $this->assertEquals($this->adminUser->id, $payment->user_id);
+        $this->assertEquals($membership->id, $membership->payment->membership_id);
+        $this->assertEquals(2, $membership->payment->membership_quantity);
+        $this->assertEquals($customer->id, $membership->payment->customer_id);
+        $this->assertEquals(6000, $membership->payment->total_price);
+        $this->assertEquals($this->adminUser->id, $membership->payment->user_id);
 
         Mail::assertSent(MembershipOrderConfirmationEmail::class, function ($mail) use ($membership) {
             return $mail->hasTo('john@example.com')
@@ -109,7 +85,7 @@ class AddMembershipTest extends TestCase
         $membershipType = factory(MembershipType::class)->create();
         $customer = factory(Customer::class)->create();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_end' => Carbon::now()->toDateString(),
             'total_days' => 30,
             'membership_type_id' => $membershipType->id,
@@ -117,7 +93,9 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 2,
         ]);
 
-        $this->assertValidationError('date_start');
+        $response->status(302);
+        $response->assertSessionHasErrors('date_start');
+        $this->assertEquals(0, Membership::count());
     }
 
     /** @test */
@@ -127,7 +105,7 @@ class AddMembershipTest extends TestCase
         $membershipType = factory(MembershipType::class)->create();
         $customer = factory(Customer::class)->create();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => 'invalid-start-date',
             'date_end' => Carbon::now()->toDateString(),
             'total_days' => 30,
@@ -136,7 +114,9 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 2,
         ]);
 
-        $this->response->assertJsonValidationErrors('date_start');
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('date_start');
+        $this->assertEquals(0, Membership::count());
     }
 
     /** @test */
@@ -146,7 +126,7 @@ class AddMembershipTest extends TestCase
         $membershipType = factory(MembershipType::class)->create();
         $customer = factory(Customer::class)->create();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => '1998-06-05',
             'date_end' => Carbon::now()->toDateString(),
             'total_days' => 30,
@@ -155,7 +135,9 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 2,
         ]);
 
-        $this->assertValidationError('date_start');
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('date_start');
+        $this->assertEquals(0, Membership::count());
     }
 
     /** @test */
@@ -165,7 +147,7 @@ class AddMembershipTest extends TestCase
         $membershipType = factory(MembershipType::class)->create();
         $customer = factory(Customer::class)->create();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => Carbon::now()->format('d-m-Y'),
             'date_end' => Carbon::now()->toDateString(),
             'total_days' => 30,
@@ -174,7 +156,10 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 2,
         ]);
 
-        $this->assertValidationError('date_start');
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('date_start');
+        $this->assertEquals(0, Membership::count());
+
     }
 
     /** @test */
@@ -184,7 +169,7 @@ class AddMembershipTest extends TestCase
         $membershipType = factory(MembershipType::class)->create();
         $customer = factory(Customer::class)->create();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => Carbon::now()->toDateString(),
             'total_days' => 30,
             'membership_type_id' => $membershipType->id,
@@ -192,7 +177,9 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 2,
         ]);
 
-        $this->assertValidationError('date_end');
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('date_end');
+        $this->assertEquals(0, Membership::count());
     }
 
     /** @test */
@@ -202,7 +189,7 @@ class AddMembershipTest extends TestCase
         $membershipType = factory(MembershipType::class)->create();
         $customer = factory(Customer::class)->create();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => Carbon::now()->toDateString(),
             'date_end' => 'invalid-end-date',
             'total_days' => 30,
@@ -211,7 +198,9 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 2,
         ]);
 
-        $this->response->assertJsonValidationErrors('date_end');
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('date_end');
+        $this->assertEquals(0, Membership::count());
     }
 
     /** @test */
@@ -221,7 +210,7 @@ class AddMembershipTest extends TestCase
         $membershipType = factory(MembershipType::class)->create();
         $customer = factory(Customer::class)->create();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => Carbon::now()->toDateString(),
             'date_end' => Carbon::now()->format('d-m-Y'),
             'total_days' => 30,
@@ -230,7 +219,9 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 2,
         ]);
 
-        $this->assertValidationError('date_end');
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('date_end');
+        $this->assertEquals(0, Membership::count());
     }
 
     /** @test */
@@ -241,7 +232,7 @@ class AddMembershipTest extends TestCase
         $customer = factory(Customer::class)->create();
         $date = Carbon::now();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => $date->toDateString(),
             'date_end' => $date->subDays(10)->toDateString(),
             'total_days' => 30,
@@ -250,7 +241,9 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 2,
         ]);
 
-        $this->assertValidationError('date_end');
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('date_end');
+        $this->assertEquals(0, Membership::count());
     }
 
     /** @test */
@@ -261,7 +254,7 @@ class AddMembershipTest extends TestCase
         $customer = factory(Customer::class)->create();
         $date = Carbon::now();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => $date->toDateString(),
             'date_end' => $date->addDays(30)->toDateString(),
             'total_days' => 'invalid-number-days',
@@ -270,7 +263,9 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 2,
         ]);
 
-        $this->assertValidationError('total_days');
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('total_days');
+        $this->assertEquals(0, Membership::count());
     }
 
     /** @test */
@@ -281,7 +276,7 @@ class AddMembershipTest extends TestCase
         $customer = factory(Customer::class)->create();
         $date = Carbon::now();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => $date->toDateString(),
             'date_end' => $date->addDays(30)->toDateString(),
             'membership_type_id' => $membershipType->id,
@@ -289,7 +284,9 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 2,
         ]);
 
-        $this->assertValidationError('total_days');
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('total_days');
+        $this->assertEquals(0, Membership::count());
     }
 
     /** @test */
@@ -300,7 +297,7 @@ class AddMembershipTest extends TestCase
         $customer = factory(Customer::class)->create();
         $date = Carbon::now();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => $date->toDateString(),
             'date_end' => $date->addDays(30)->toDateString(),
             'total_days' => 0,
@@ -309,7 +306,9 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 2,
         ]);
 
-        $this->assertValidationError('total_days');
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('total_days');
+        $this->assertEquals(0, Membership::count());
     }
 
     /** @test */
@@ -319,15 +318,16 @@ class AddMembershipTest extends TestCase
         $customer = factory(Customer::class)->create();
         $date = Carbon::now();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => $date->toDateString(),
             'date_end' => $date->addDays(30)->toDateString(),
             'total_days' => 30,
             'customer_id' => $customer->id,
             'membership_quantity' => 2,
         ]);
-
-        $this->assertValidationError('membership_type_id');
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('membership_type_id');
+        $this->assertEquals(0, Membership::count());
     }
 
     /** @test */
@@ -337,7 +337,7 @@ class AddMembershipTest extends TestCase
         $customer = factory(Customer::class)->create();
         $date = Carbon::now();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => $date->toDateString(),
             'date_end' => $date->addDays(30)->toDateString(),
             'total_days' => 30,
@@ -346,7 +346,9 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 2,
         ]);
 
-        $this->assertValidationError('membership_type_id');
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('membership_type_id');
+        $this->assertEquals(0, Membership::count());
     }
 
     /** @test */
@@ -356,7 +358,7 @@ class AddMembershipTest extends TestCase
         $membershipType = factory(MembershipType::class)->create();
         $date = Carbon::now();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => $date->toDateString(),
             'date_end' => $date->addDays(30)->toDateString(),
             'total_days' => 30,
@@ -364,7 +366,9 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 2,
         ]);
 
-        $this->assertValidationError('customer_id');
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('customer_id');
+        $this->assertEquals(0, Membership::count());
     }
 
     /** @test */
@@ -374,7 +378,7 @@ class AddMembershipTest extends TestCase
         $membershipType = factory(MembershipType::class)->create();
         $date = Carbon::now();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => $date->toDateString(),
             'date_end' => $date->addDays(30)->toDateString(),
             'total_days' => 30,
@@ -383,7 +387,9 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 2,
         ]);
 
-        $this->assertValidationError('customer_id');
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('customer_id');
+        $this->assertEquals(0, Membership::count());
     }
 
     /** @test */
@@ -394,7 +400,7 @@ class AddMembershipTest extends TestCase
         $customer = factory(Customer::class)->create();
         $date = Carbon::now();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => $date->toDateString(),
             'date_end' => $date->addDays(30)->toDateString(),
             'total_days' => 30,
@@ -402,7 +408,9 @@ class AddMembershipTest extends TestCase
             'customer_id' => $customer->id,
         ]);
 
-        $this->assertValidationError('membership_quantity');
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('membership_quantity');
+        $this->assertEquals(0, Membership::count());
     }
 
     /** @test */
@@ -413,7 +421,7 @@ class AddMembershipTest extends TestCase
         $customer = factory(Customer::class)->create();
         $date = Carbon::now();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => $date->toDateString(),
             'date_end' => $date->addDays(30)->toDateString(),
             'total_days' => 30,
@@ -422,7 +430,9 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 'invalid-membership-quantity',
         ]);
 
-        $this->assertValidationError('membership_quantity');
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('membership_quantity');
+        $this->assertEquals(0, Membership::count());
     }
 
     /** @test */
@@ -433,7 +443,7 @@ class AddMembershipTest extends TestCase
         $customer = factory(Customer::class)->create();
         $date = Carbon::now();
 
-        $this->orderMembership([
+        $response = $this->orderMembership([
             'date_start' => $date->toDateString(),
             'date_end' => $date->addDays(30)->toDateString(),
             'total_days' => 30,
@@ -442,6 +452,8 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 0,
         ]);
 
-        $this->assertValidationError('membership_quantity');
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('membership_quantity');
+        $this->assertEquals(0, Membership::count());
     }
 }
