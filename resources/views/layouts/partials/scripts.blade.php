@@ -6,7 +6,6 @@
 <script src="{{ asset('plugins/slimScroll/jquery.slimscroll.min.js') }}"></script>
 
 <script>
-
     toastr.options = {
         "closeButton": false,
         "progressBar": false,
@@ -18,12 +17,10 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
-
     $(window).on('load', function(){
-
         @if(Session::has('message'))
             var type = "{{ Session::get('alert-type', 'info') }}";
-            switch(type){
+            switch( type ) {
                 case 'info':
                     toastr.info("{{ Session::get('message') }}");
                     break;
@@ -36,8 +33,8 @@
                 case 'error':
                     toastr.error("{{ Session::get('message') }}");
                     break;
-        }
+            }
         @endif
     })
-
 </script>
+@stack('footer-scripts')

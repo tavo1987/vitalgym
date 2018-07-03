@@ -12,5 +12,7 @@
     <script src="{{ asset('js/pace.min.js') }}"></script>
     <link href="{{ asset('/css/AdminLTE.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/css/skins/skin-black.css') }}" rel="stylesheet" type="text/css" />
+    @stack('styles')
+    @stack('header-scripts')
     <link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}">
 </head>
