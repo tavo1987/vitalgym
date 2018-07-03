@@ -9,6 +9,11 @@ use App\Http\Requests\CreateMembershipFormRequest;
 
 class MembershipController extends Controller
 {
+    public function create()
+    {
+        return view('admin.memberships.create');
+    }
+
     public function store(CreateMembershipFormRequest $request)
     {
         $membership = Membership::create([

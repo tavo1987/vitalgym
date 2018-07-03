@@ -28,6 +28,16 @@ class AddMembershipTest extends TestCase
     {
         return $this->actingAs($this->adminUser)->post(route('admin.membership.store'), $params);
     }
+    
+    /** @test */
+    function admins_can_view_the_add_membership_form()
+    {
+        $this->withoutExceptionHandling();
+        $response = $this->actingAs($this->adminUser)->get(route('admin.membership.create'));
+
+        $response->assertSuccessful();
+        $response->assertViewIs('admin.memberships.create');
+    }
 
     /** @test */
     function add_membership_for_a_new_customer()
