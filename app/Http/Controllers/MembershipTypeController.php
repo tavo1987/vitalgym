@@ -10,6 +10,6 @@ class MembershipTypeController extends Controller
     {
         $membershipTypes = MembershipType::all();
 
-        return view('admin.membership-type.index', compact('membershipTypes'));
+        return view('admin.membership-types.index', compact('membershipTypes'));
     }
 }
