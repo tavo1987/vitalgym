@@ -10,3 +10,4 @@ Homestead.yaml
 .env
 *.css.map
 _ide_helper.php
+*.map
