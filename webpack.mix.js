@@ -9,10 +9,14 @@ mix
     .options({
         processCssUrls:false,
         postCss: [tailwindcss('./tailwind.js')],
-    })
-    .browserSync({
-        proxy: 'http://vitalgym.test',
-        injectChanges: true,
-        notify: false,
-        open: false
     });
+
+if(!mix.inProduction()) {
+    mix.browserSync({
+        proxy: 'vitalgym.test',
+        open: false,
+        notify: false,
+    }).webpackConfig({
+        devtool: 'source-map'
+    }).sourceMaps();
+}
