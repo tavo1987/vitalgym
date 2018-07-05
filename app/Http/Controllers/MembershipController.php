@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\VitalGym\Entities\Customer;
+use App\VitalGym\Entities\MembershipType;
 use Illuminate\Support\Facades\Mail;
 use App\VitalGym\Entities\Membership;
 use App\Mail\MembershipOrderConfirmationEmail;
@@ -11,7 +13,10 @@ class MembershipController extends Controller
 {
     public function create()
     {
-        return view('admin.memberships.create');
+        $customers = Customer::all();
+        $membershipTypes = MembershipType::all();
+
+        return view('admin.memberships.create', compact('customers', 'membershipTypes'));
     }
 
     public function store(CreateMembershipFormRequest $request)

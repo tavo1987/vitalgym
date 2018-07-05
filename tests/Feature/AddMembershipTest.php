@@ -33,9 +33,14 @@ class AddMembershipTest extends TestCase
     function admins_can_view_the_add_membership_form()
     {
         $this->withoutExceptionHandling();
+        $customers = factory(Customer::class)->times(5)->create();
+        $membershipTypes = factory(MembershipType::class)->times(3)->create();
+
         $response = $this->actingAs($this->adminUser)->get(route('admin.membership.create'));
 
         $response->assertSuccessful();
+        $customers->assertEquals($response->data('customers'));
+        $membershipTypes->assertEquals($response->data('membershipTypes'));
         $response->assertViewIs('admin.memberships.create');
     }
 
