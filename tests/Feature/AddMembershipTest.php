@@ -10,11 +10,10 @@ use Illuminate\Support\Facades\Mail;
 use App\VitalGym\Entities\MembershipType;
 use App\Mail\MembershipOrderConfirmationEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class AddMembershipTest extends TestCase
 {
-    use RefreshDatabase, WithoutMiddleware;
+    use RefreshDatabase;
 
     private $adminUser;
 
