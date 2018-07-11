@@ -17,7 +17,7 @@ class CreateMembershipsTable extends Migration
             $table->increments('id');
             $table->dateTime('date_start');
             $table->dateTime('date_end');
-            $table->integer('total_days');
+            $table->integer('total_days')->nullable();
             $table->unsignedInteger('customer_id');
             $table->unsignedInteger('membership_type_id');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');

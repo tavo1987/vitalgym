@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\VitalGym\Entities\MembershipType;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateMembershipFormRequest extends FormRequest
@@ -24,12 +25,14 @@ class CreateMembershipFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'date_start'         => 'required|date|date_format:Y-m-d|after_or_equal:today',
-            'date_end'           => 'required|date|date_format:Y-m-d|after_or_equal:date_start',
-            'total_days'         => 'required|integer|min:1',
-            'membership_type_id' => 'required|exists:membership_types,id',
-            'customer_id'        => 'required|exists:customers,id',
-            'membership_quantity'  => 'required|integer|min:1',
+            'date_start'          => 'required|date|date_format:Y-m-d|after_or_equal:today',
+            'date_end'            => 'required|date|date_format:Y-m-d|after_or_equal:date_start',
+            'membership_type_id'  => 'required|exists:membership_types,id',
+            'total_days'          => optional(MembershipType::find(request('membership_type_id')))->is_premium
+                                     ? 'required|integer|min:1'
+                                     : '',
+            'customer_id'         => 'required|exists:customers,id',
+            'membership_quantity' => 'required|integer|min:1',
         ];
     }
 }

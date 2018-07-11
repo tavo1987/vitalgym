@@ -17,6 +17,7 @@ class CreateMembershipTypesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('price');
+            $table->boolean('is_premium');
             $table->timestamps();
         });
     }
