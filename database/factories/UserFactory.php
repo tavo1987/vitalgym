@@ -36,6 +36,14 @@ $factory->define(User::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->state(User::class, 'admin', [
+    'role' => 'admin',
+]);
+
+$factory->state(User::class, 'active', [
+    'active' => true,
+]);
+
 $factory->define(ActivationToken::class, function (Faker\Generator $faker) {
     return [
         'token'   => str_random(128),
