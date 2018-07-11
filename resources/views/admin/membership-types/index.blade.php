@@ -16,34 +16,18 @@
                             Nueva
                         </a>
                     </div><!-- /.box-header -->
-                    <div class="box-body">
-                        <table class="table text-center table-striped">
-                            <tr>
-                                <th width="10px">ID</th>
-                                <th>Nombre</th>
-                                <th>Precio</th>
-                                <th>Creada</th>
-                                <th width="225px">Acciones</th>
-                            </tr>
-                            @foreach($membershipTypes as $membershipType)
-                                <tr>
-                                    <td>{{ $membershipType->id }}</td>
-                                    <td><span class="tw-capitalize label tw-bg-grey">{{ $membershipType->name }}</span></td>
-                                    <td>${{ $membershipType->price_in_dollars }}</td>
-                                    <td>{{ $membershipType->created_at->format('d-m-Y') }}</td>
-                                    <td>
-                                        <div class="tw-flex tw-items-center tw-justify-around">
-                                            <a class="tw-text-white tw-px-3 tw-py-1 tw-rounded tw-text-xs tw-bg-blue" href="#">
-                                                <i class="fa fa-pencil tw-pr-1"></i>Editar
-                                            </a>
-                                            <a class="tw-text-grey-dark tw-px-3 tw-py-1 tw-rounded tw-text-xs tw-border" href="#">
-                                                <i class="fa fa-trash tw-pr-1"></i>Eliminar
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </table>
+                    <div class="box-body tw-px-6">
+                        @foreach($membershipTypes as $membershipType)
+                            <div class="tw-shadow tw-p-6 tw-rounded-lg tw-flex tw-items-center tw-justify-between tw-mb-4">
+                                <h2 class="tw-text-black tw-uppercase tw-text-2xl">{{ $membershipType->name }}</h2>
+                                <div>
+                                    <span class="tw-text-xl"> ${{ $membershipType->price_in_dollars }}</span>
+                                </div>
+                                <div>
+                                    <a class="tw-bg-indigo tw-py-2 tw-px-4 tw-text-white tw-rounded" href="#">Comprar</a>
+                                </div>
+                            </div>
+                        @endforeach
                     </div><!-- /.end box-body -->
                 </div>
             </div>
