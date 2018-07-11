@@ -14,7 +14,7 @@
         <div class="col-md-8">
             <div class="box tw-px-4 tw-py-4">
                 <div class="box-header">
-                    <h2 class="box-title">Formulario</h2>
+                    <h2 class="box-title">{{ $membershipType->name  }}</h2>
                 </div>
                 <div class="box-body">
                     <form action="{{ route('admin.membership.store') }}" method="post" autocomplete="off">
@@ -30,36 +30,16 @@
                                 @endforeach
                             </select>
                             @if ($errors->has('customer_id'))
-                                <span class="help-block">
-                            <span>{{ $errors->first('customer_id') }}</span>
-                        </span>
+                                <span class="help-block">{{ $errors->first('customer_id') }}</span>
                             @endif
                         </div>
 
-                        <div class="form-group {{ $errors->has('membership_type_id') ? ' has-error': '' }}">
-                            <label>Tipo de membresía</label>
-                            <select name="membership_type_id" class="form-control select2" tabindex="-1">
-                                <option>Selecciona un membresía</option>
-                                @foreach($membershipTypes as $membershipType)
-                                    <option value="{{ $membershipType->id }}" {{ old('membership_type_id') == $membershipType->id ? 'selected' : '' }}>
-                                        {{ $membershipType->name }} - ${{ $membershipType->price_in_dollars }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('membership_type_id'))
-                                <span class="help-block">
-                            <span>{{ $errors->first('membership_type_id') }}</span>
-                        </span>
-                            @endif
-                        </div>
 
                         <div class="form-group {{ $errors->has('membership_quantity') ? ' has-error': '' }}">
                             <label>Cantidad</label>
                             <input class="form-control tw-rounded-none" type="number" name="membership_quantity" value="{{ old('membership_quantity') }}">
                             @if ($errors->has('membership_quantity'))
-                                <span class="help-block">
-                            <span>{{ $errors->first('membership_quantity') }}</span>
-                        </span>
+                                <span class="help-block">{{ $errors->first('membership_quantity') }}</span>
                             @endif
                         </div>
 
@@ -67,9 +47,7 @@
                             <label>Días Totales</label>
                             <input class="form-control tw-rounded-none" type="number" name="total_days" value="{{ old('total_days') }}">
                             @if ($errors->has('total_days'))
-                                <span class="help-block">
-                            <span>{{ $errors->first('total_days') }}</span>
-                        </span>
+                                <span class="help-block">{{ $errors->first('total_days') }}</span>
                             @endif
                         </div>
 
@@ -77,9 +55,7 @@
                             <label>Fecha de Inicio</label>
                             <input name="date_start" type="text" class="form-control datepicker tw-rounded-none" value="{{ old('date_start') }}">
                             @if ($errors->has('date_start'))
-                                <span class="help-block">
-                            <span>{{ $errors->first('date_start') }}</span>
-                        </span>
+                                <span class="help-block">{{ $errors->first('date_start') }}</span>
                             @endif
                         </div>
 
@@ -87,9 +63,7 @@
                             <label>Fecha de Caducidad</label>
                             <input name="date_end" type="text" class="form-control datepicker tw-rounded-none" value="{{ old('date_end') }}">
                             @if ($errors->has('date_end'))
-                                <span class="help-block">
-                            <span>{{ $errors->first('date_end') }}</span>
-                        </span>
+                                <span class="help-block">{{ $errors->first('date_end') }}</span>
                             @endif
                         </div>
 

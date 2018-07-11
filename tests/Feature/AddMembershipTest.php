@@ -34,13 +34,13 @@ class AddMembershipTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $customers = factory(Customer::class)->times(5)->create();
-        $membershipTypes = factory(MembershipType::class)->times(3)->create();
+        $membershipType = factory(MembershipType::class)->create();
 
-        $response = $this->actingAs($this->adminUser)->get(route('admin.membership.create'));
+        $response = $this->actingAs($this->adminUser)->get(route('admin.memberships.create', $membershipType));
 
         $response->assertSuccessful();
+        $this->assertTrue($response->data('membershipType')->is($membershipType));
         $customers->assertEquals($response->data('customers'));
-        $membershipTypes->assertEquals($response->data('membershipTypes'));
         $response->assertViewIs('admin.memberships.create');
     }
 

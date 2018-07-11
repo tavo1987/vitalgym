@@ -40,7 +40,6 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('admin.membership-types') }}"><i class="fa fa-circle-o"></i>Todas</a></li>
-                    <li><a href="{{ route('admin.membership.create') }}"><i class="fa fa-circle-o"></i>Nueva</a></li>
                 </ul>
             </li>
             <li class="treeview">
