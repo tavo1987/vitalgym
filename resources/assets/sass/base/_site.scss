@@ -1,6 +1,7 @@
 html{
     font-size: 100%;
 }
+
 body{
     margin-top: 0;
     @apply .tw-bg-grey-lighter;
@@ -8,4 +9,20 @@ body{
 
 p{
     @apply .tw-text-grey-darker;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    @apply .tw-font-display;
+    margin: 0;
+}
+
+a {
+    transition: all .3s;
+    &:hover {
+        text-decoration: none;
+    }
+    &:focus {
+        text-decoration: none;
+    }
 }
