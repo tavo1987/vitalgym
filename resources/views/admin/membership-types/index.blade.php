@@ -5,7 +5,7 @@
 @endsection
 
 @section('main-content')
-    <div class="box tw-p-8 tw-rounded tw-shadow-lg tw-border-blue-darker">
+    <div class="box">
         <div class="box-header tw-mb-3 lg:tw-flex lg:tw-items-center">
             <h3 class="tw-pr-4 tw-mb-2">Crear Nueva:</h3>
             <a class="tw-inline-block tw-bg-grey tw-py-2 tw-px-4 tw-text-white tw-rounded tw-font-bold tw-uppercase hover:tw-text-white hover:tw-bg-indigo"
