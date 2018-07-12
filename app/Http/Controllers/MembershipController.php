@@ -11,6 +11,13 @@ use App\Http\Requests\CreateMembershipFormRequest;
 
 class MembershipController extends Controller
 {
+    public function index()
+    {
+        $memberships = Membership::all();
+
+        return view('admin.memberships.index', compact('memberships'));
+    }
+
     public function create($membershipTypeId)
     {
         $membershipType = MembershipType::findOrFail($membershipTypeId);
