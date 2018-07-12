@@ -18,10 +18,8 @@ class CreatePaymentsTable extends Migration
             $table->integer('total_price');
             $table->integer('membership_quantity');
             $table->unsignedInteger('customer_id');
-            $table->unsignedInteger('membership_id');
             $table->unsignedInteger('user_id');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->foreign('membership_id')->references('id')->on('memberships')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

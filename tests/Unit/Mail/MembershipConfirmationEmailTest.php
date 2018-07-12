@@ -30,8 +30,6 @@ class MembershipConfirmationEmailTest extends TestCase
             'customer_id' => $customer->id,
         ]);
 
-        factory(Payment::class)->create(['membership_id' => $membership->id]);
-
         $email = new MembershipOrderConfirmationEmail($membership);
         $rendered = $email->render();
 
@@ -48,8 +46,6 @@ class MembershipConfirmationEmailTest extends TestCase
         $membership = factory(Membership::class)->create([
             'membership_type_id' => $membershipType->id,
         ]);
-
-        factory(Payment::class)->create(['membership_id' => $membership->id]);
 
         $email = new MembershipOrderConfirmationEmail($membership);
         $rendered = $email->render();
@@ -68,8 +64,6 @@ class MembershipConfirmationEmailTest extends TestCase
             'membership_type_id' => $membershipType->id,
         ]);
 
-        factory(Payment::class)->create(['membership_id' => $membership->id]);
-
         $email = new MembershipOrderConfirmationEmail($membership);
         $rendered = $email->render();
 
@@ -82,8 +76,6 @@ class MembershipConfirmationEmailTest extends TestCase
         $membership = factory(Membership::class)->create([
             'date_start' => now()->toDateString(),
         ]);
-
-        factory(Payment::class)->create(['membership_id' => $membership->id]);
 
         $email = new MembershipOrderConfirmationEmail($membership);
         $rendered = $email->render();
@@ -98,8 +90,6 @@ class MembershipConfirmationEmailTest extends TestCase
             'date_end' => now()->addDays(30)->toDateString(),
         ]);
 
-        factory(Payment::class)->create(['membership_id' => $membership->id]);
-
         $email = new MembershipOrderConfirmationEmail($membership);
         $rendered = $email->render();
 
@@ -109,13 +99,12 @@ class MembershipConfirmationEmailTest extends TestCase
     /** @test */
     function email_must_be_contain_the_total_price_and_membership_quantity()
     {
-        $membership = factory(Membership::class)->create();
-
-        factory(Payment::class)->create([
-           'membership_id' => $membership->id,
-           'total_price' => 4000,
-           'membership_quantity' => 2,
+        $payment = factory(Payment::class)->create([
+            'total_price' => 4000,
+            'membership_quantity' => 2,
         ]);
+        $membership = factory(Membership::class)->create(['payment_id' => $payment->id]);
+
 
         $email = new MembershipOrderConfirmationEmail($membership);
         $rendered = $email->render();

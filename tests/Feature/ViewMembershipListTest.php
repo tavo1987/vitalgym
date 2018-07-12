@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\VitalGym\Entities\Membership;
 use App\VitalGym\Entities\User;
-use Faker\Provider\Payment;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 

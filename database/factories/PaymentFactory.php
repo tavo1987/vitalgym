@@ -8,9 +8,6 @@ use App\VitalGym\Entities\Membership;
 
 $factory->define(Payment::class, function (Faker $faker) {
     return [
-        'membership_id' => function () {
-            return factory(Membership::class)->create()->id;
-        },
         'total_price' => $faker->numberBetween(30, 300),
         'membership_quantity' => $faker->numberBetween(1, 5),
         'customer_id' => function () {

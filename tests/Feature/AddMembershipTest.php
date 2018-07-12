@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\VitalGym\Entities\Membership;
-use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\User;
 use Tests\TestCase;
 use App\VitalGym\Entities\Customer;
@@ -71,19 +70,18 @@ class AddMembershipTest extends TestCase
             'customer_id' => $customer->id,
             'membership_quantity' => 2,
         ]);
+        $membership =Membership::first()->fresh();
+        $payment = $membership->payment;
 
-        $membership = $customer->memberships->fresh()->last();
         $response->assertRedirect(route('memberships.index'));
         $this->assertEquals(1, $membership->count());
+        $this->assertEquals(1, $payment->count());
         $this->assertEquals($dateStart, $membership->date_start->toDateString());
         $this->assertEquals($dateEnd, $membership->date_end->toDateString());
-        $this->assertEquals(1, Payment::count());
-        $this->assertEquals($membership->id, $membership->payment->membership_id);
-        $this->assertEquals(2, $membership->payment->membership_quantity);
-        $this->assertEquals($customer->id, $membership->payment->customer_id);
-        $this->assertEquals(6000, $membership->payment->total_price);
-        $this->assertEquals($this->adminUser->id, $membership->payment->user_id);
-        $this->assertEquals($membershipType->id, $membership->membership_type_id);
+        $this->assertEquals(2, $payment->membership_quantity);
+        $this->assertEquals($customer->id, $payment->customer_id);
+        $this->assertEquals(6000, $payment->total_price);
+        $this->assertEquals($this->adminUser->id, $payment->user_id);
         $response->assertSessionHas('message');
         $response->assertSessionHas('alert-type', 'success');
 
@@ -114,17 +112,18 @@ class AddMembershipTest extends TestCase
             'membership_quantity' => 2,
         ]);
 
-        $membership = $customer->memberships->fresh()->last();
+        $membership =Membership::first()->fresh();
+        $payment = $membership->payment;
+
         $response->assertRedirect(route('memberships.index'));
         $this->assertEquals(1, $membership->count());
+        $this->assertEquals(1, $payment->count());
         $this->assertEquals($dateStart, $membership->date_start->toDateString());
         $this->assertEquals($dateEnd, $membership->date_end->toDateString());
-        $this->assertEquals(1, Payment::count());
-        $this->assertEquals($membership->id, $membership->payment->membership_id);
-        $this->assertEquals(2, $membership->payment->membership_quantity);
-        $this->assertEquals($customer->id, $membership->payment->customer_id);
-        $this->assertEquals(8000, $membership->payment->total_price);
-        $this->assertEquals($this->adminUser->id, $membership->payment->user_id);
+        $this->assertEquals(2, $payment->membership_quantity);
+        $this->assertEquals($customer->id, $payment->customer_id);
+        $this->assertEquals(8000, $payment->total_price);
+        $this->assertEquals($this->adminUser->id, $payment->user_id);
         $this->assertEquals(30, $membership->total_days);
         $response->assertSessionHas('message');
         $response->assertSessionHas('alert-type', 'success');

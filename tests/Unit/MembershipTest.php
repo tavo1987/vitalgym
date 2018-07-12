@@ -36,12 +36,10 @@ class MembershipTest extends TestCase
     }
 
     /** @test */
-    function a_membership_has_a_payment()
+    function a_membership_belongs_to_payment()
     {
-        $membership = factory(Membership::class)->create();
-        $payment = factory(Payment::class)->create([
-            'membership_id' => $membership->id,
-        ]);
+        $payment = factory(Payment::class)->create();
+        $membership = factory(Membership::class)->create(['payment_id' => $payment->id]);
 
         $this->assertInstanceOf(
             Payment::class, $membership->payment
@@ -59,20 +57,21 @@ class MembershipTest extends TestCase
         $customer = factory(Customer::class)->create(['user_id' => $user->id]);
         $dateStart = Carbon::now()->toDateString();
         $dateEnd = Carbon::now()->addMonth(1)->toDateString();
+
+        $payment = factory(Payment::class)->create([
+            'total_price' => 6000,
+            'membership_quantity' => 2,
+            'customer_id' => $customer->id,
+            'user_id' => $adminUser->id,
+        ]);
+
         $membership = factory(Membership::class)->create([
             'date_start' => $dateStart,
             'date_end' => $dateEnd,
             'total_days' => 30,
             'customer_id' => $customer->id,
             'membership_type_id' => $membershipType->id,
-        ]);
-
-        factory(Payment::class)->create([
-            'total_price' => 6000,
-            'membership_quantity' => 2,
-            'customer_id' => $customer->id,
-            'membership_id' => $membership->id,
-            'user_id' => $adminUser->id,
+            'payment_id' => $payment->id,
         ]);
 
         $result = $membership->toArray();

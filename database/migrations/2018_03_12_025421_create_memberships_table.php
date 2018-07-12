@@ -20,8 +20,10 @@ class CreateMembershipsTable extends Migration
             $table->integer('total_days')->nullable();
             $table->unsignedInteger('customer_id');
             $table->unsignedInteger('membership_type_id');
+            $table->unsignedInteger('payment_id');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('membership_type_id')->references('id')->on('membership_types')->onDelete('cascade');
+            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
             $table->timestamps();
         });
     }
