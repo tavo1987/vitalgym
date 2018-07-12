@@ -1,8 +1,8 @@
 <?php
 
-use App\VitalGym\Entities\Payment;
 use Carbon\Carbon;
 use Faker\Generator as Faker;
+use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Membership;
 use App\VitalGym\Entities\MembershipType;
