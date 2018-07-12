@@ -45,6 +45,14 @@ class AddMembershipTest extends TestCase
     }
 
     /** @test */
+    function admin_see_a_404_when_attempting_to_view_the_create_membership_form_for_a_membership_type_that_does_not_exist()
+    {
+        $response = $this->actingAs($this->adminUser)->get(route('admin.memberships.create', 10));
+
+        $response->assertStatus(404);
+    }
+
+    /** @test */
     function admin_can_add_a_normal_membership_for_a_new_customer()
     {
         $this->withoutExceptionHandling();

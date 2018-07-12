@@ -13,7 +13,7 @@ class MembershipController extends Controller
 {
     public function create($membershipTypeId)
     {
-        $membershipType = MembershipType::find($membershipTypeId);
+        $membershipType = MembershipType::findOrFail($membershipTypeId);
         $customers = Customer::all();
 
         return view('admin.memberships.create', compact('customers', 'membershipType'));
