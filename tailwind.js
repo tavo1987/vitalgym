@@ -193,9 +193,12 @@ module.exports = {
   */
 
   fonts: {
+    'display': [
+          'Open Sans',
+          'sans-serif',
+    ],
     'sans': [
-      '-apple-system',
-      'BlinkMacSystemFont',
+      'Lato',
       'Segoe UI',
       'Roboto',
       'Oxygen',
