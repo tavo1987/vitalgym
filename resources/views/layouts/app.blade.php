@@ -10,7 +10,7 @@
         @include('layouts.partials.sidebar')
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <div class="tw-container tw-mx-auto tw-px-4">
+            <div class="tw-container tw-mx-auto tw-px-4 tw-pt-6">
                 @include('layouts.partials.contentheader')
                 <!-- Main content -->
                 <section class="content tw-px-0 tw-pt-0">
