@@ -4,7 +4,6 @@ use Faker\Generator as Faker;
 use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
-use App\VitalGym\Entities\Membership;
 
 $factory->define(Payment::class, function (Faker $faker) {
     return [

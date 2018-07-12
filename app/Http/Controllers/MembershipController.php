@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\VitalGym\Entities\Customer;
-use App\VitalGym\Entities\Membership;
 use App\VitalGym\Entities\Payment;
+use App\VitalGym\Entities\Customer;
 use Illuminate\Support\Facades\Mail;
+use App\VitalGym\Entities\Membership;
 use App\VitalGym\Entities\MembershipType;
 use App\Mail\MembershipOrderConfirmationEmail;
 use App\Http\Requests\CreateMembershipFormRequest;
