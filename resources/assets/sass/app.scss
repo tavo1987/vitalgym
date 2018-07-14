@@ -7,22 +7,16 @@
 
 @tailwind components;
 
-//Variables
-@import "variables";
-
-//PLUGINS
+//Plugins
 @import "plugins/pace";
 @import "plugins/toastr";
 
 //Base
-@import "base/bootstrap";
 @import "base/site";
 
-//ABSTRATIONS
-@import "abstractions/loader";
-@import "abstractions/tables";
-
 //Components
+@import "components/loader";
+@import "components/tables";
 @import "components/buttons";
 @import "components/forms";
 @import "components/login";

@@ -21,8 +21,10 @@ a {
     transition: all .3s;
     &:hover {
         text-decoration: none;
+        color: config('colors.blue');
     }
     &:focus {
+        color: config('colors.blue');
         text-decoration: none;
     }
 }
