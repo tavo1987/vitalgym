@@ -10,9 +10,15 @@ Route::get('/memberships', 'MembershipController@index')->name('memberships.inde
 /*
  * Removed routes belonging to admin lte package.
  */
-Route::get('/home', function () { abort(404);});
-Route::get('register', function () {abort(404);});
-Route::post('register', function () {abort(404);});
+Route::get('/home', function () {
+    abort(404);
+});
+Route::get('register', function () {
+    abort(404);
+});
+Route::post('register', function () {
+    abort(404);
+});
 
 /*
  * Activate account
