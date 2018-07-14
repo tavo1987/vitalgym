@@ -10,9 +10,9 @@
 @endpush
 
 @section('main-content')
-    <div class="box tw-px-4 tw-py-4">
-        <div class="box-header tw-mb-3 lg:tw-flex lg:tw-items-center">
-            <h2 class="box-title tw-uppercase">Lenar el formulario para agregar una membresía </h2>
+    <div class="box">
+        <div class="box-header tw-mb-3 tw-py-0 tw-mb-2">
+            <h3 class="tw-text-base">Lenar el formulario para agregar una membresía </h3>
         </div>
         <div class="box-body">
             <form action="{{ route('admin.membership.store') }}" method="post" autocomplete="off">
@@ -36,7 +36,7 @@
 
                 <div class="form-group {{ $errors->has('membership_quantity') ? ' has-error': '' }}">
                     <label>Cantidad</label>
-                    <input class="form-control" type="number" name="membership_quantity" value="{{ old('membership_quantity') }}">
+                    <input class="form-control" type="number" name="membership_quantity" value="{{ old('membership_quantity') ?? 1 }}">
                     @if ($errors->has('membership_quantity'))
                         <span class="help-block">{{ $errors->first('membership_quantity') }}</span>
                     @endif
@@ -51,24 +51,26 @@
                     </div>
                 @endif
 
-                <div class="form-group date {{ $errors->has('date_start') ? ' has-error': '' }}">
-                    <label>Fecha de Inicio</label>
-                    <input name="date_start" type="text" class="form-control datepicker" value="{{ old('date_start') }}">
-                    @if ($errors->has('date_start'))
-                        <span class="help-block">{{ $errors->first('date_start') }}</span>
-                    @endif
+                <div class="lg:tw-flex tw-mb-4">
+                    <div class="form-group date lg:tw-w-1/2 lg:tw-pr-2 {{ $errors->has('date_start') ? ' has-error': '' }}">
+                        <label>Fecha de Inicio</label>
+                        <input name="date_start" type="text" class="form-control datepicker" value="{{ old('date_start') }}">
+                        @if ($errors->has('date_start'))
+                            <span class="help-block">{{ $errors->first('date_start') }}</span>
+                        @endif
+                    </div>
+
+                    <div class="form-group date lg:tw-w-1/2 lg:tw-pl-2 date {{ $errors->has('date_end') ? ' has-error': '' }}">
+                        <label>Fecha de Caducidad</label>
+                        <input name="date_end" type="text" class="form-control datepicker" value="{{ old('date_end') }}">
+                        @if ($errors->has('date_end'))
+                            <span class="help-block">{{ $errors->first('date_end') }}</span>
+                        @endif
+                    </div>
                 </div>
 
-                <div class="form-group date {{ $errors->has('date_end') ? ' has-error': '' }}">
-                    <label>Fecha de Caducidad</label>
-                    <input name="date_end" type="text" class="form-control datepicker" value="{{ old('date_end') }}">
-                    @if ($errors->has('date_end'))
-                        <span class="help-block">{{ $errors->first('date_end') }}</span>
-                    @endif
-                </div>
-
-                <button type="submit" class="btn tw-bg-indigo tw-text-white tw-text-base hover:tw-text-white">
-                    <i class="fa fa-save"></i>
+                <button type="submit" class="vg-button tw-bg-indigo tw-inline-flex tw-items-center">
+                    <i class="fa fa-save tw-mr-1 tw-text-base"></i>
                     Guardar
                 </button>
             </form>
