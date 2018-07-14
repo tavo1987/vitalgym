@@ -5,22 +5,14 @@ Route::get('/', 'HomeController@index');
 /*
  *  Memberships
  */
-Route::get('/memberships', 'MembershipController@show')->name('memberships.index');
+Route::get('/memberships', 'MembershipController@index')->name('memberships.index');
 
 /*
  * Removed routes belonging to admin lte package.
  */
-Route::get('/home', function () {
-    abort(404);
-});
-
-Route::get('register', function () {
-    abort(404);
-});
-
-Route::post('register', function () {
-    abort(404);
-});
+Route::get('/home', function () { abort(404);});
+Route::get('register', function () {abort(404);});
+Route::post('register', function () {abort(404);});
 
 /*
  * Activate account

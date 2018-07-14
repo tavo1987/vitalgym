@@ -19,7 +19,7 @@ class ViewMembershipListTest extends TestCase
 
         $memberships = factory(Membership::class)->times(10)->create();
 
-        $response = $this->be($adminUser)->get(route('admin.memberships.index'));
+        $response = $this->be($adminUser)->get(route('memberships.index'));
 
         $response->assertSuccessful();
         $memberships->assertEquals($response->data('memberships'));
