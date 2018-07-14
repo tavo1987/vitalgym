@@ -23,13 +23,18 @@
             <li class="header">MENU PRINCIPAL</li>
             <!-- Optionally, you can add icons to the links -->
             <li>
+                <a href="/">
+                    <i class='fa fa-home'></i> <span>Inicio</span>
+                </a>
+            </li>
+            <li>
                 <a href="#">
                     <i class='fa fa-street-view'></i> <span>Clientes</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('admin.membership-types') }}"><i class="fa fa-circle-o"></i>Todos</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Nuevo</a></li>
+                    <li><a href="{{ route('admin.membership-types') }}"><i class="fa fa-circle-o"></i>Todos los clientes</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i>Añadir Nuevo</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -39,7 +44,8 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('admin.membership-types') }}"><i class="fa fa-circle-o"></i>Todas</a></li>
+                    <li><a href="{{ route('memberships.index') }}"><i class="fa fa-circle-o"></i>Todas las membresías</a></li>
+                    <li><a href="{{ route('admin.membership-types') }}"><i class="fa fa-circle-o"></i>Añadir nueva</a></li>
                 </ul>
             </li>
             <li class="treeview">

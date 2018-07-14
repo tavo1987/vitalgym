@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('contentheader_title')
-    Tipos de Membresías
+    Membresías
 @endsection
 
 @section('main-content')
@@ -14,8 +14,8 @@
                 Nueva
             </a>
         </div><!-- /.box-header -->
-        <div class="box-body tw-px-0 tw-text-center tw-overflow-auto">
-            <table class="table table-striped table-hover tw-min-w-lg">
+        <div class="box-header tw-mb-3 lg:tw-flex lg:tw-items-center tw-py-0">
+            <table class="table table-striped table-hover tw-min-w-lg tw-text-center">
                 <thead>
                     <th class="text-center">Nombre</th>
                     <th class="text-center">Apellido</th>
