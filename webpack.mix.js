@@ -20,3 +20,5 @@ if(!mix.inProduction()) {
         devtool: 'source-map'
     }).sourceMaps();
 }
+
+mix.disableNotifications();
