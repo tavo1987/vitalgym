@@ -14,7 +14,7 @@
                 Nueva
             </a>
         </div><!-- /.box-header -->
-        <div class="box-header tw-mb-3 lg:tw-flex lg:tw-items-center tw-py-0">
+        <div class="box-body tw-px-0 tw-text-center">
             <table class="table table-striped table-hover tw-min-w-lg tw-text-center">
                 <thead>
                     <th class="text-center">Nombre</th>
