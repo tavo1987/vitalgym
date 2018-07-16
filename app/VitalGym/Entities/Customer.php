@@ -20,7 +20,7 @@ class Customer extends Model
 
     public function getFullNameAttribute()
     {
-        return "{$this->user->first_name} {$this->user->last_name}";
+        return "{$this->user->name} {$this->user->last_name}";
     }
 
     public function getEmailAttribute()
@@ -33,8 +33,28 @@ class Customer extends Model
         return $this->user->name;
     }
 
+    public function getAvatarAttribute()
+    {
+        return $this->user->avatar;
+    }
+
     public function getLastNameAttribute()
     {
         return $this->user->last_name;
+    }
+
+    public function getPhoneAttribute()
+    {
+        return $this->user->phone;
+    }
+
+    public function getAddressAttribute()
+    {
+        return $this->user->address;
+    }
+
+    public function getCellPhoneAttribute()
+    {
+        return $this->user->cell_phone;
     }
 }

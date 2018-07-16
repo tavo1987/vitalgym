@@ -45,7 +45,7 @@
                                 @endif
                             </td>
                             <td class="tw-flex tw-justify-center tw-items-center">
-                                <a class="tw-px-2 tw-text-2xl tw-text-indigo" href=""><i class="fa fa-eye"></i></a>
+                                <a href="{{ route('admin.memberships.show', $membership) }}" class="tw-px-2 tw-text-2xl tw-text-indigo" href=""><i class="fa fa-eye"></i></a>
                                 <a class="tw-px-2 tw-text-2xl tw-text-indigo" href=""><i class="fa fa-edit"></i></a>
                                 <a class="tw-px-2 tw-text-2xl tw-text-grey hover:tw-text-red-light" href=""><i class="fa fa-trash"></i></a>
                             </td>

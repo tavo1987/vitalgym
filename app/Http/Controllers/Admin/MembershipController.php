@@ -28,6 +28,16 @@ class MembershipController extends Controller
         return view('admin.memberships.create', compact('customers', 'plan'));
     }
 
+    public function show($membershipId)
+    {
+        $membership = Membership::with('customer', 'plan', 'payment')->findOrFail($membershipId);
+        $customer = $membership->customer;
+        $plan = $membership->plan;
+        $payment = $membership->payment;
+
+        return view('admin.memberships.show', compact('membership', 'customer', 'plan', 'payment'));
+    }
+
     public function store(CreateMembershipFormRequest $request, $planId)
     {
         $plan = Plan::findOrFail($planId);
