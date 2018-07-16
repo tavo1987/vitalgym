@@ -30,7 +30,7 @@ class MembershipController extends Controller
 
     public function store(CreateMembershipFormRequest $request, $planId)
     {
-        $plan = Plan::find($planId);
+        $plan = Plan::findOrFail($planId);
         $payment = Payment::create([
             'customer_id' => $request->get('customer_id'),
             'total_price' => $plan->price * $request->get('membership_quantity'),

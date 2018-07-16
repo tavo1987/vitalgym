@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\VitalGym\Entities\Membership;
+use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\User;
 use Tests\TestCase;
 use App\VitalGym\Entities\Customer;
@@ -130,6 +131,27 @@ class AddMembershipTest extends TestCase
             return $mail->hasTo('john@example.com')
                    && $mail->membership->id === $membership->id;
         });
+    }
+
+    /** @test */
+    function see_a_404_error_when_attempting_to_create_a_membership_with_a_plan_that_does_not_exists()
+    {
+        $customerUser = factory(User::class)->states('active')->create(['role' => 'customer', 'email' => 'john@example.com']);
+        $dateStart = now()->toDateString();
+        $dateEnd = now()->addMonth(1)->toDateString();
+        $customer = factory(Customer::class)->create(['user_id' => $customerUser->id]);
+
+        $response = $this->orderMembership([
+            'date_start' => $dateStart,
+            'date_end' => $dateEnd,
+            'total_days' => 30,
+            'customer_id' => $customer->id,
+            'membership_quantity' => 2,
+        ], 'invalid-plan');
+
+        $response->assertStatus(404);
+        $this->assertEquals(0, Membership::count());
+        $this->assertEquals(0, Payment::count());
     }
 
     /** @test */
