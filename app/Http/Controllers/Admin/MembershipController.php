@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\VitalGym\Entities\Plan;
 use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use App\VitalGym\Entities\Membership;
-use App\VitalGym\Entities\Plan;
 use App\Mail\MembershipOrderConfirmationEmail;
 use App\Http\Requests\CreateMembershipFormRequest;
 
@@ -16,6 +16,7 @@ class MembershipController extends Controller
     public function index()
     {
         $memberships = Membership::all();
+
         return view('admin.memberships.index', compact('memberships'));
     }
 
