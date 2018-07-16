@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\UpdateMembershipFormRequest;
 use App\VitalGym\Entities\Plan;
 use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
@@ -28,6 +29,17 @@ class MembershipController extends Controller
         return view('admin.memberships.create', compact('customers', 'plan'));
     }
 
+    public function edit($membershipId)
+    {
+        $customers = Customer::all();
+        $membership = Membership::with('customer', 'plan', 'payment')->findOrFail($membershipId);
+        $customer = $membership->customer;
+        $plan = $membership->plan;
+        $payment = $membership->payment;
+
+        return view('admin.memberships.edit', compact('membership', 'customers', 'customer', 'plan', 'payment'));
+    }
+
     public function show($membershipId)
     {
         $membership = Membership::with('customer', 'plan', 'payment')->findOrFail($membershipId);
@@ -49,8 +61,8 @@ class MembershipController extends Controller
         ]);
 
         $membership = $payment->membership()->create([
-            'date_start' => $request->get('date_start'),
-            'date_end' => $request->get('date_end'),
+            'date_start' => now()->parse($request->get('date_start')),
+            'date_end' => now()->parse($request->get('date_end')),
             'total_days' => $request->get('total_days'),
             'plan_id' => $plan->id,
             'customer_id' => $payment->customer_id,
@@ -59,5 +71,27 @@ class MembershipController extends Controller
         Mail::to($membership->customer->email)->send(new MembershipOrderConfirmationEmail($membership));
 
         return redirect()->route('admin.memberships.index')->with(['message' => 'Membresía guardada con éxito', 'alert-type' => 'success']);
+    }
+
+    public function update(UpdateMembershipFormRequest $request, $membershipId)
+    {
+        $membership = Membership::findOrFail($membershipId);
+
+        $membership->update([
+            'date_start' => now()->parse($request->get('date_start')),
+            'date_end' => now()->parse($request->get('date_end')),
+            'total_days' => $request->get('total_days'),
+            'customer_id' => $request->get('customer_id'),
+        ]);
+        $membership->payment()->update([
+            'customer_id' => $membership->customer_id,
+            'total_price' => $membership->plan->price * $request->get('membership_quantity'),
+            'membership_quantity' => $request->get('membership_quantity'),
+            'user_id' => auth()->user()->id,
+        ]);
+
+        Mail::to($membership->customer->email)->send(new MembershipOrderConfirmationEmail($membership));
+
+        return redirect()->route('admin.memberships.index')->with(['message' => 'Membresía actulizada con éxito', 'alert-type' => 'success']);
     }
 }
