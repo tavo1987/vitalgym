@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\VitalGym\Entities\Membership;
+use App\VitalGym\Entities\Plan;
 use App\VitalGym\Entities\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -12,7 +13,7 @@ class ViewMembershipListTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function an_admin_can_view_the_membership_list()
+    function an_admin_can_view_the_membership_administration()
     {
         $this->withoutExceptionHandling();
         $adminUser = factory(User::class)->states('admin', 'active')->create();

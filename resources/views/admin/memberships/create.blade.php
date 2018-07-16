@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('contentheader_title')
-    Membresía {{ $plan->name  }}
+    Membresía <span class="tw-font">{{ $plan->name  }}</span>
 @endsection
 
 @push('styles')
@@ -12,7 +12,7 @@
 @section('main-content')
     <div class="box">
         <div class="box-header tw-mb-3 tw-py-0 tw-mb-2">
-            <h3 class="tw-text-base">Lenar el formulario para agregar una membresía </h3>
+            <h2 class="tw-text-base">Lenar el formulario para agregar una membresía</h2>
         </div>
         <div class="box-body">
             <form action="{{ route('admin.memberships.store', $plan) }}" method="post" autocomplete="off">

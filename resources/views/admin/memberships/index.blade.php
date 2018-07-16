@@ -9,7 +9,7 @@
         <div class="box-header tw-mb-3 lg:tw-flex lg:tw-items-center">
             <h3 class="tw-pr-4 tw-mb-2">Crear Nueva:</h3>
             <a class="vg-button tw-py-2 tw-bg-grey hover:tw-bg-indigo"
-               href="">
+               href="{{ route('plans.index') }}">
                 <i class=" glyphicon glyphicon-file"></i>
                 Nueva
             </a>
