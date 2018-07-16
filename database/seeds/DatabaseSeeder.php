@@ -1,9 +1,9 @@
 <?php
 
+use App\VitalGym\Entities\Plan;
 use App\VitalGym\Entities\User;
 use Illuminate\Database\Seeder;
 use App\VitalGym\Entities\Customer;
-use App\VitalGym\Entities\Plan;
 
 class DatabaseSeeder extends Seeder
 {
