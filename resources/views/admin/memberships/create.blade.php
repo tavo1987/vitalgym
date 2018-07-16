@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('contentheader_title')
-    Membresía {{ $membershipType->name  }}
+    Membresía {{ $plan->name  }}
 @endsection
 
 @push('styles')
@@ -15,9 +15,8 @@
             <h3 class="tw-text-base">Lenar el formulario para agregar una membresía </h3>
         </div>
         <div class="box-body">
-            <form action="{{ route('admin.membership.store') }}" method="post" autocomplete="off">
+            <form action="{{ route('admin.memberships.store', $plan) }}" method="post" autocomplete="off">
                 @csrf
-                <input type="hidden" name="membership_type_id" value="{{ $membershipType->id }}">
                 <div class="form-group {{  $errors->has('customer_id') ? 'has-error': '' }}">
                     <label>Cliente</label>
                     <select name="customer_id" class="form-control select2" tabindex="-1">
@@ -41,7 +40,7 @@
                         <span class="help-block">{{ $errors->first('membership_quantity') }}</span>
                     @endif
                 </div>
-                @if( $membershipType->is_premium)
+                @if( $plan->is_premium)
                     <div class="form-group {{ $errors->has('total_days') ? ' has-error': '' }}">
                         <label>Días Totales</label>
                         <input class="form-control" type="number" name="total_days" value="{{ old('total_days') }}">

@@ -9,7 +9,7 @@
         <div class="box-header tw-mb-3 lg:tw-flex lg:tw-items-center">
             <h3 class="tw-pr-4 tw-mb-2">Crear Nueva:</h3>
             <a class="vg-button tw-py-2 tw-bg-grey hover:tw-bg-indigo"
-               href="{{ route('admin.membership-types') }}">
+               href="">
                 <i class=" glyphicon glyphicon-file"></i>
                 Nueva
             </a>
@@ -31,7 +31,7 @@
                             <td>{{ $membership->customer->name }}</td>
                             <td>{{ $membership->customer->last_name }}</td>
                             <td>{{ $membership->customer->email }}</td>
-                            <td class="tw-capitalize">{{ $membership->membershipType->name }}</td>
+                            <td class="tw-capitalize">{{ $membership->plan->name }}</td>
                             <td>{{ $membership->date_start->format('d-m-y') }}</td>
                             <td>
                                 @if( $membership->date_end < now())

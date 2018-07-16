@@ -8,7 +8,7 @@ use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Membership;
-use App\VitalGym\Entities\MembershipType;
+use App\VitalGym\Entities\Plan;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class MembershipTest extends TestCase
@@ -31,7 +31,7 @@ class MembershipTest extends TestCase
         $membership = factory(Membership::class)->create();
 
         $this->assertInstanceOf(
-            MembershipType::class, $membership->membershipType
+            Plan::class, $membership->plan
         );
     }
 
@@ -53,7 +53,7 @@ class MembershipTest extends TestCase
     {
         $adminUser = $this->createNewUser();
         $user = factory(User::class)->create(['name' => 'Jane', 'last_name' => 'Doe', 'email' => 'jane@example.com']);
-        $membershipType = factory(MembershipType::class)->create(['name' => 'Mensual', 'price' => '3000']);
+        $plan = factory(Plan::class)->create(['name' => 'Mensual', 'price' => '3000']);
         $customer = factory(Customer::class)->create(['user_id' => $user->id]);
         $dateStart = Carbon::now()->toDateString();
         $dateEnd = Carbon::now()->addMonth(1)->toDateString();
@@ -70,7 +70,7 @@ class MembershipTest extends TestCase
             'date_end' => $dateEnd,
             'total_days' => 30,
             'customer_id' => $customer->id,
-            'membership_type_id' => $membershipType->id,
+            'plan_id' => $plan->id,
             'payment_id' => $payment->id,
         ]);
 

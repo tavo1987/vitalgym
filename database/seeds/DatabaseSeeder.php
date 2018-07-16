@@ -3,7 +3,7 @@
 use App\VitalGym\Entities\User;
 use Illuminate\Database\Seeder;
 use App\VitalGym\Entities\Customer;
-use App\VitalGym\Entities\MembershipType;
+use App\VitalGym\Entities\Plan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,9 +25,9 @@ class DatabaseSeeder extends Seeder
         factory(Customer::class)->times(50)->create();
 
         //Membership types
-        factory(MembershipType::class)->create(['name' => 'mensual', 'price' => 3000]);
-        factory(MembershipType::class)->create(['name' => 'trimestral', 'price' => 8000]);
-        factory(MembershipType::class)->create(['name' => 'Semestral', 'price' => 16000]);
-        factory(MembershipType::class)->create(['name' => 'mensual', 'price' => 32000]);
+        factory(Plan::class)->create(['name' => 'mensual', 'price' => 3000]);
+        factory(Plan::class)->create(['name' => 'trimestral', 'price' => 8000]);
+        factory(Plan::class)->create(['name' => 'Semestral', 'price' => 16000]);
+        factory(Plan::class)->create(['name' => 'mensual', 'price' => 32000]);
     }
 }

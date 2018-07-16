@@ -15,9 +15,9 @@ class Membership extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function membershipType()
+    public function plan()
     {
-        return $this->belongsTo(MembershipType::class);
+        return $this->belongsTo(Plan::class);
     }
 
     public function payment()
@@ -31,8 +31,8 @@ class Membership extends Model
             'date_start' => $this->date_start->toDateString(),
             'date_end' => $this->date_end->toDateString(),
             'total_days' => $this->total_days,
-            'name'        => $this->membershipType->name,
-            'unit_price'  => $this->membershipType->price,
+            'name'        => $this->plan->name,
+            'unit_price'  => $this->plan->price,
             'created_by' => $this->payment->user->full_name,
             'total_price' => $this->payment->total_price,
             'membership_quantity' => $this->payment->membership_quantity,

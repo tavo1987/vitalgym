@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
 use Illuminate\Support\Facades\Mail;
 use App\VitalGym\Entities\Membership;
-use App\VitalGym\Entities\MembershipType;
+use App\VitalGym\Entities\Plan;
 use App\Mail\MembershipOrderConfirmationEmail;
 use App\Http\Requests\CreateMembershipFormRequest;
 
@@ -15,24 +16,23 @@ class MembershipController extends Controller
     public function index()
     {
         $memberships = Membership::all();
-
         return view('admin.memberships.index', compact('memberships'));
     }
 
-    public function create($membershipTypeId)
+    public function create($planId)
     {
-        $membershipType = MembershipType::findOrFail($membershipTypeId);
+        $plan = Plan::findOrFail($planId);
         $customers = Customer::all();
 
-        return view('admin.memberships.create', compact('customers', 'membershipType'));
+        return view('admin.memberships.create', compact('customers', 'plan'));
     }
 
-    public function store(CreateMembershipFormRequest $request)
+    public function store(CreateMembershipFormRequest $request, $planId)
     {
-        $membershipType = MembershipType::find($request->get('membership_type_id'));
+        $plan = Plan::find($planId);
         $payment = Payment::create([
             'customer_id' => $request->get('customer_id'),
-            'total_price' => $membershipType->price * $request->get('membership_quantity'),
+            'total_price' => $plan->price * $request->get('membership_quantity'),
             'membership_quantity' => $request->get('membership_quantity'),
             'user_id' => auth()->user()->id,
         ]);
@@ -41,12 +41,12 @@ class MembershipController extends Controller
             'date_start' => $request->get('date_start'),
             'date_end' => $request->get('date_end'),
             'total_days' => $request->get('total_days'),
-            'membership_type_id' => $membershipType->id,
+            'plan_id' => $plan->id,
             'customer_id' => $payment->customer_id,
         ]);
 
         Mail::to($membership->customer->email)->send(new MembershipOrderConfirmationEmail($membership));
 
-        return redirect()->route('memberships.index')->with(['message' => 'Membresía guardada con éxito', 'alert-type' => 'success']);
+        return redirect()->route('admin.memberships.index')->with(['message' => 'Membresía guardada con éxito', 'alert-type' => 'success']);
     }
 }

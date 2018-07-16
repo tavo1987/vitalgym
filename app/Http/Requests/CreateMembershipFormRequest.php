@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\VitalGym\Entities\MembershipType;
+use App\VitalGym\Entities\Plan;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateMembershipFormRequest extends FormRequest
@@ -27,8 +27,7 @@ class CreateMembershipFormRequest extends FormRequest
         return [
             'date_start'          => 'required|date|date_format:Y-m-d|after_or_equal:today',
             'date_end'            => 'required|date|date_format:Y-m-d|after_or_equal:date_start',
-            'membership_type_id'  => 'required|exists:membership_types,id',
-            'total_days'          => optional(MembershipType::find(request('membership_type_id')))->is_premium
+            'total_days'          => optional(Plan::find($this->route('planId')))->is_premium
                                      ? 'required|integer|min:1'
                                      : '',
             'customer_id'         => 'required|exists:customers,id',

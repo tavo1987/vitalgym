@@ -2,7 +2,7 @@
 
 namespace tests\Unit\Mail;
 
-use App\VitalGym\Entities\MembershipType;
+use App\VitalGym\Entities\Plan;
 use App\VitalGym\Entities\Payment;
 use Tests\TestCase;
 use App\VitalGym\Entities\User;
@@ -39,29 +39,29 @@ class MembershipConfirmationEmailTest extends TestCase
     /** @test */
     function email_contain_the_membership_type_name()
     {
-        $membershipType = factory(MembershipType::class)->create([
+        $plan = factory(Plan::class)->create([
            'name' => 'mensual',
         ]);
 
         $membership = factory(Membership::class)->create([
-            'membership_type_id' => $membershipType->id,
+            'plan_id' => $plan->id,
         ]);
 
         $email = new MembershipOrderConfirmationEmail($membership);
         $rendered = $email->render();
 
-        $this->assertContains($membershipType->name, $rendered);
+        $this->assertContains($plan->name, $rendered);
     }
 
     /** @test */
     function email_contain_the_membership_type_unit_price()
     {
-        $membershipType = factory(MembershipType::class)->create([
+        $plan = factory(Plan::class)->create([
             'price' => 2000,
         ]);
 
         $membership = factory(Membership::class)->create([
-            'membership_type_id' => $membershipType->id,
+            'plan_id' => $plan->id,
         ]);
 
         $email = new MembershipOrderConfirmationEmail($membership);

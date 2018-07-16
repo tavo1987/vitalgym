@@ -5,15 +5,15 @@ use Faker\Generator as Faker;
 use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Membership;
-use App\VitalGym\Entities\MembershipType;
+use App\VitalGym\Entities\Plan;
 
 $factory->define(Membership::class, function (Faker $faker) {
     return [
         'date_start' => Carbon::now(),
         'date_end' => Carbon::now()->addDays(30),
         'total_days' => 30,
-        'membership_type_id' => function () {
-            return factory(MembershipType::class)->create()->id;
+        'plan_id' => function () {
+            return factory(Plan::class)->create()->id;
         },
         'customer_id' => function () {
             return factory(Customer::class)->create()->id;

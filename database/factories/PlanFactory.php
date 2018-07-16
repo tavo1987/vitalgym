@@ -1,9 +1,9 @@
 <?php
 
 use Faker\Generator as Faker;
-use App\VitalGym\Entities\MembershipType;
+use App\VitalGym\Entities\Plan;
 
-$factory->define(MembershipType::class, function (Faker $faker) {
+$factory->define(Plan::class, function (Faker $faker) {
     return [
         'name' => $faker->randomElement(['mensual', 'anual', 'semestral']),
         'price' => $faker->numberBetween(2000, 30000),
@@ -11,4 +11,4 @@ $factory->define(MembershipType::class, function (Faker $faker) {
     ];
 });
 
-$factory->state(MembershipType::class, 'premium', ['is_premium' =>true]);
+$factory->state(Plan::class, 'premium', ['is_premium' =>true]);

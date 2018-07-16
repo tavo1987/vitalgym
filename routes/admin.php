@@ -2,6 +2,7 @@
 
 Route::resource('users', 'UserController');
 
-Route::get('/membership-types', 'MembershipTypeController@index')->name('admin.membership-types');
-Route::post('/memberships', 'MembershipController@store')->name('admin.membership.store');
-Route::get('/memberships/{membershipTypeId}/create', 'MembershipController@create')->name('admin.memberships.create');
+Route::get('/plans', 'PlanController@index')->name('admin.plans.index');
+Route::get('/memberships', 'MembershipController@index')->name('admin.memberships.index');
+Route::post('/memberships/{planId}/', 'MembershipController@store')->name('admin.memberships.store');
+Route::get('/memberships/{planId}/create', 'MembershipController@create')->name('admin.memberships.create');
