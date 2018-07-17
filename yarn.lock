@@ -7894,6 +7894,10 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
+sweetalert2@^7.25.6:
+  version "7.25.6"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-7.25.6.tgz#462a5ab72c2eb3f4cd4ffb648b02fc91c4ad4c65"
+
 tailwindcss@^0.6.3:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-0.6.3.tgz#973d33342f3d1d1f9c9d20aa42b9fa9ca57f2ed0"
