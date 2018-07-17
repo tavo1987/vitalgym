@@ -19,8 +19,8 @@ class EditMembershipTest extends TestCase
         $customer = factory(Customer::class)->create();
 
         return array_merge([
-            'date_start'          => '16-07-2018',
-            'date_end'            => '16-08-2018',
+            'date_start'          => now()->toDateString(),
+            'date_end'            => now()->addMonth(1)->toDateString(),
             'total_days'            => 30,
             'customer_id'         => $customer->id,
             'membership_quantity' => 1,
@@ -67,6 +67,7 @@ class EditMembershipTest extends TestCase
     /** @test */
     function admin_can_edit_normal_membership()
     {
+        $this->withoutExceptionHandling();
         $adminUser = factory(User::class)->states('admin', 'active')->create();
         $otherCustomer = factory(Customer::class)->create();
         $customer = factory(Customer::class)->create();
@@ -84,18 +85,21 @@ class EditMembershipTest extends TestCase
             'customer_id' => $customer->id,
             'payment_id' => $payment->id,
         ]);
+        $date_start = now();
+        $date_end = now()->addMonth(1);
 
-        $response = $this->be($adminUser)->patch(route('admin.memberships.update', $membership), [
-            'date_start'          => '16-07-2018',
-            'date_end'            => '16-08-2018',
+        $response = $this->be($adminUser)->patch(route('admin.memberships.update', $membership), $this->validParams([
+            'date_start'          => $date_start,
+            'date_end'            => $date_end,
+            'total_days'          => '',
             'customer_id'         => $otherCustomer->id,
             'membership_quantity' => 2,
-        ]);
+        ]));
 
         $response->assertRedirect(route('admin.memberships.index'));
-        tap($membership->fresh(), function ( $membership ) use ($otherCustomer, $adminUser) {
-            $this->assertEquals(now()->parse('16-07-2018'), $membership->date_start);
-            $this->assertEquals(now()->parse('16-08-2018'), $membership->date_end);
+        tap($membership->fresh(), function ( $membership ) use ($otherCustomer, $adminUser, $date_start, $date_end) {
+            $this->assertEquals($date_start->toDateString(), $membership->date_start->toDateString());
+            $this->assertEquals($date_end->toDateString(), $membership->date_end->toDateString());
             $this->assertEquals($otherCustomer->id, $membership->customer_id);
             $this->assertEquals(4000, $membership->payment->total_price);
             $this->assertEquals($otherCustomer->id, $membership->payment->customer_id);
@@ -125,19 +129,21 @@ class EditMembershipTest extends TestCase
             'customer_id' => $customer->id,
             'payment_id' => $payment->id,
         ]);
+        $date_start = now();
+        $date_end = now()->addMonth(1);
 
         $response = $this->be($adminUser)->patch(route('admin.memberships.update', $membership), [
-            'date_start'          => '16-07-2018',
-            'date_end'            => '16-08-2018',
+            'date_start'          => $date_start,
+            'date_end'            => $date_end,
             'total_days'            => 30,
             'customer_id'         => $otherCustomer->id,
             'membership_quantity' => 2,
         ]);
 
         $response->assertRedirect(route('admin.memberships.index'));
-        tap($membership->fresh(), function ( $membership ) use ($otherCustomer, $adminUser) {
-            $this->assertEquals(now()->parse('16-07-2018'), $membership->date_start);
-            $this->assertEquals(now()->parse('16-08-2018'), $membership->date_end);
+        tap($membership->fresh(), function ( $membership ) use ($otherCustomer, $adminUser, $date_start, $date_end) {
+            $this->assertEquals($date_start->toDateString(), $membership->date_start->toDateString());
+            $this->assertEquals($date_end->toDateString(), $membership->date_end->toDateString());
             $this->assertEquals(30, $membership->total_days);
             $this->assertEquals($otherCustomer->id, $membership->customer_id);
             $this->assertEquals(4000, $membership->payment->total_price);
