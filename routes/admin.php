@@ -12,3 +12,4 @@ Route::get('/memberships/{id}/details', 'MembershipController@show')->name('admi
 Route::get('/memberships/{id}/edit', 'MembershipController@edit')->name('admin.memberships.edit');
 Route::post('/memberships/{planId}/', 'MembershipController@store')->name('admin.memberships.store');
 Route::patch('/memberships/{membershipId}/', 'MembershipController@update')->name('admin.memberships.update');
+Route::delete('/memberships/{membershipId}/', 'MembershipController@destroy')->name('admin.memberships.destroy');

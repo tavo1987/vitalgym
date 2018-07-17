@@ -94,4 +94,13 @@ class MembershipController extends Controller
 
         return redirect()->route('admin.memberships.index')->with(['message' => 'Membresía actulizada con éxito', 'alert-type' => 'success']);
     }
+
+    public function destroy($membershipId)
+    {
+        $membership = Membership::findorFail($membershipId);
+        $membership->delete();
+        $membership->payment()->delete();
+
+        return redirect()->route('admin.memberships.index')->with(['message' => 'Membresía Borrada con éxito', 'alert-type' => 'success']);
+    }
 }

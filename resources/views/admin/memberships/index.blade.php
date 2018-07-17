@@ -47,7 +47,13 @@
                             <td class="tw-flex tw-justify-center tw-items-center">
                                 <a href="{{ route('admin.memberships.show', $membership) }}" class="tw-px-2 tw-text-2xl tw-text-indigo"><i class="fa fa-eye"></i></a>
                                 <a href="{{ route('admin.memberships.edit', $membership) }}" class="tw-px-2 tw-text-2xl tw-text-indigo"><i class="fa fa-edit"></i></a>
-                                <a class="tw-px-2 tw-text-2xl tw-text-grey hover:tw-text-red-light" href=""><i class="fa fa-trash"></i></a>
+                                <form action="{{ route('admin.memberships.destroy', $membership) }}"  method="post" class="form-delete">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="tw-px-2 tw-text-2xl tw-text-grey hover:tw-text-red-light js-button-delete focus:tw-outline-none">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -56,4 +62,3 @@
         </div><!-- /.end box-body -->
     </div><!-- /.end box -->
 @endsection
-
