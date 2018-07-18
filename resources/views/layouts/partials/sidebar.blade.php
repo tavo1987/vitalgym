@@ -73,7 +73,7 @@
             <li><a href="#"><i class='fa fa-money'></i> <span>Pagos</span></a></li>
             <li><a href="#"><i class='fa fa fa-file-text-o'></i> <span>Fichas</span></a></li>
             <li><a href="#"><i class='fa fa-calendar'></i> <span>Asistencia</span></a></li>
-            <li class="active"><a href="{{ route('users.index') }}"><i class='fa fa-users'></i> <span>Usuarios</span></a></li>
+            <li class="active"><a href="{{ route('admin.users.index') }}"><i class='fa fa-users'></i> <span>Usuarios</span></a></li>
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

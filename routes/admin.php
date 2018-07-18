@@ -1,6 +1,6 @@
 <?php
 
-Route::resource('users', 'UserController');
+Route::get('users', 'UserController@index')->name('admin.users.index');
 
 //Plans
 Route::get('/plans', 'PlanController@index')->name('admin.plans.index');
