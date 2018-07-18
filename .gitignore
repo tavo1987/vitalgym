@@ -1,7 +1,9 @@
 /node_modules
 /public/storage
 /public/css/app.css
+/public/css/AdminLTE.css
 /public/js/app.js
+/public/mix-manifest.json
 /storage/*.key
 /vendor
 /.idea
