@@ -85,7 +85,7 @@ class AddMembershipTest extends TestCase
         $response->assertSessionHas('message');
         $response->assertSessionHas('alert-type', 'success');
 
-        Mail::assertSent(MembershipOrderConfirmationEmail::class, function ($mail) use ($membership) {
+        Mail::assertQueued(MembershipOrderConfirmationEmail::class, function ($mail) use ($membership) {
             return $mail->hasTo('john@example.com')
                 && $mail->membership->id === $membership->id;
         });
@@ -127,7 +127,7 @@ class AddMembershipTest extends TestCase
         $response->assertSessionHas('message');
         $response->assertSessionHas('alert-type', 'success');
 
-        Mail::assertSent(MembershipOrderConfirmationEmail::class, function ($mail) use ($membership) {
+        Mail::assertQueued(MembershipOrderConfirmationEmail::class, function ($mail) use ($membership) {
             return $mail->hasTo('john@example.com')
                    && $mail->membership->id === $membership->id;
         });
