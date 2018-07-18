@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\VitalGym\Entities\User;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
