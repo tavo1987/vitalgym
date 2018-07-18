@@ -11,26 +11,6 @@ class UsersListTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function list_users()
-    {
-        $user = $this->createNewUser();
-
-        $otherUser = $this->createNewUser([
-            'email'     => 'john@gmail.com',
-            'password' => bcrypt('secret'),
-            'active'   => true,
-            'role' => 'admin',
-            'last_login' => '2017-08-20 04:15:00',
-        ]);
-
-        $response = $this->actingAs($user)
-            ->get(route('users.index'));
-
-        $response->assertStatus(200)
-            ->assertSeeText('Usuarios');
-    }
-
-    /** @test */
     function the_users_are_paginated_and_sorted_by_id_in_descending_order()
     {
         $user = $this->createNewUser([

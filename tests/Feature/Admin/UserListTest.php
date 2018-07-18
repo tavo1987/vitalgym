@@ -15,21 +15,11 @@ class UserListTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        //Arrange
-        //Administrador
         $userAdmin = factory(User::class)->states('admin', 'active')->create();
-        //Crear usuarios
         $users = factory(User::class)->times(10)->create();
 
-
-        //Act
-        //Visitar la url listar usuarios
         $response = $this->be($userAdmin)->get(route('admin.users.index'));
 
-        //Assertions
-        //Successful
-        $response->assertSuccessful();
-        //Afirmar que paso a la vista los usuarios
-        $users->assertEquals($response->data('users'));
+        $response->assertViewHas('users');
     }
 }
