@@ -1,7 +1,6 @@
 let mix = require('laravel-mix');
 let tailwindcss = require('tailwindcss');
 
-mix.copy('node_modules/toastr/build/toastr.min.js', 'public/plugins/toastr/toastr.js');
 mix
     .js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
@@ -19,6 +18,10 @@ if(!mix.inProduction()) {
     }).webpackConfig({
         devtool: 'source-map'
     }).sourceMaps();
+}
+
+if (mix.inProduction()) {
+    mix.version();
 }
 
 mix.disableNotifications();
