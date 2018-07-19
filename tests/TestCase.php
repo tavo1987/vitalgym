@@ -20,7 +20,7 @@ abstract class TestCase extends BaseTestCase
         });
 
         EloquentCollection::macro('assertEquals', function ($items) {
-            Assert::assertCount($items->count(), $this);
+            Assert::assertEquals(count($this), count($items));
 
             $this->zip($items)->each(function ($itemPair) {
                 Assert::assertTrue($itemPair[0]->is($itemPair[1]));
