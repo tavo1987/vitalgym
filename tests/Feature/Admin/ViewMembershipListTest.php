@@ -3,9 +3,7 @@
 namespace Tests\Feature;
 
 use App\VitalGym\Entities\Membership;
-use App\VitalGym\Entities\Plan;
 use App\VitalGym\Entities\User;
-use illuminate\Pagination\LengthAwarePaginator;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
