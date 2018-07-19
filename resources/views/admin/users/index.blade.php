@@ -17,6 +17,7 @@
         <div class="box-body tw-px-0 tw-text-center">
             <table class="table table-striped table-hover tw-min-w-lg tw-text-center">
                 <thead>
+                    <th class="text-center">id</th>
                     <th class="text-center">Nombre</th>
                     <th class="text-center">Apellido</th>
                     <th class="text-center">Email</th>
@@ -26,29 +27,33 @@
                     <th class="text-center">Accciones</th>
                 </thead>
                 <tbody>
-                @foreach($users as $user)
-                    <tr>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->last_name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->role }}</td>
-                        <td>{{ $user->active  ? 'activo' : 'inactivo'}}</td>
-                        <td>{{ $user->created_at->format('d-m-y') }}</td>
-                        <td class="tw-flex tw-justify-center tw-items-center">
-                            <a href="#" class="tw-px-2 tw-text-2xl tw-text-indigo"><i class="fa fa-eye"></i></a>
-                            <a href="#" class="tw-px-2 tw-text-2xl tw-text-indigo"><i class="fa fa-edit"></i></a>
-                            <form action="#"  method="post" class="form-delete">
-                                @csrf
-                                @method('delete')
-                                <button class="tw-px-2 tw-text-2xl tw-text-grey hover:tw-text-red-light js-button-delete focus:tw-outline-none">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
+                    @foreach($users as $user)
+                        <tr>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->last_name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->role }}</td>
+                            <td>{{ $user->status }}</td>
+                            <td>{{ $user->created_at->format('d-m-y') }}</td>
+                            <td class="tw-flex tw-justify-center tw-items-center">
+                                <a href="#" class="tw-px-2 tw-text-2xl tw-text-indigo"><i class="fa fa-eye"></i></a>
+                                <a href="#" class="tw-px-2 tw-text-2xl tw-text-indigo"><i class="fa fa-edit"></i></a>
+                                <form action=""  method="post" class="form-delete">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="tw-px-2 tw-text-2xl tw-text-grey hover:tw-text-red-light js-button-delete focus:tw-outline-none">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
+            <div>
+                {{ $users->links() }}
+            </div>
         </div><!-- /.end box-body -->
     </div><!-- /.end box -->
 @endsection

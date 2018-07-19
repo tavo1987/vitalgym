@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::whereNotIn('id', [auth()->user()->id])->paginate();
+        $users = User::whereNotIn('id', [auth()->user()->id])->orderByDesc('id')->paginate();
 
         return view('admin.users.index', compact('users'));
     }
