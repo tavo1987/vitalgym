@@ -59,6 +59,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="text-center">
+                {{ $memberships->links() }}
+            </div>
         </div><!-- /.end box-body -->
     </div><!-- /.end box -->
 @endsection
