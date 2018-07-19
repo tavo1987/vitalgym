@@ -16,7 +16,7 @@ class MembershipController extends Controller
 {
     public function index()
     {
-        $memberships = Membership::all();
+        $memberships = Membership::with('customer')->paginate();
 
         return view('admin.memberships.index', compact('memberships'));
     }
