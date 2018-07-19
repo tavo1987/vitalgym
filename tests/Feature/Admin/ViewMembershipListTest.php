@@ -18,14 +18,13 @@ class ViewMembershipListTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $adminUser = factory(User::class)->states('admin', 'active')->create();
-        $memberships = factory(Membership::class)->times(10)->create();
+        factory(Membership::class)->times(5)->create();
 
         $response = $this->be($adminUser)->get(route('admin.memberships.index'));
 
         $response->assertSuccessful();
+        $expectedMemberships = Membership::with('customer', 'plan')->paginate();
         $response->assertViewIs('admin.memberships.index');
-        $response->assertViewHas('memberships');
-        $response->data('memberships')->assertEquals($memberships);
-        $this->assertInstanceOf(LengthAwarePaginator::class, $response->data('memberships'));
+        $response->assertViewHas('memberships', $expectedMemberships);
     }
 }

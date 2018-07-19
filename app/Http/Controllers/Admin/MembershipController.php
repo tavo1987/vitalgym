@@ -16,7 +16,7 @@ class MembershipController extends Controller
 {
     public function index()
     {
-        $memberships = Membership::with('customer')->orderByDesc('created_at')->paginate();
+        $memberships = Membership::with('customer', 'plan')->orderByDesc('created_at')->paginate();
 
         return view('admin.memberships.index', compact('memberships'));
     }
