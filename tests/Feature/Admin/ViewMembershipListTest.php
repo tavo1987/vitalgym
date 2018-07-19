@@ -23,10 +23,9 @@ class ViewMembershipListTest extends TestCase
         $response = $this->be($adminUser)->get(route('admin.memberships.index'));
 
         $response->assertSuccessful();
-        $response->assertViewHas('memberships');
         $response->assertViewIs('admin.memberships.index');
+        $response->assertViewHas('memberships');
         $response->data('memberships')->assertEquals($memberships);
-
         $this->assertInstanceOf(LengthAwarePaginator::class, $response->data('memberships'));
     }
 }
