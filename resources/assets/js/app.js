@@ -22,6 +22,15 @@ $(window).on('load', function(){
     $('#loader').fadeOut();
 });
 
+//Filter Bar
+let selectFilter = document.getElementById('js-select-filter');
+if (selectFilter) {
+    let inputFilter = document.getElementById('js-input-filter');
+    selectFilter.addEventListener('change', () => {
+        inputFilter.name = selectFilter.value;
+    });
+}
+
 // Sweet alert configuration
 let button = $(".js-button-delete");
 button.on('click',function(event){

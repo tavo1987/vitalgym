@@ -2,13 +2,19 @@
 
 namespace App\VitalGym\Entities;
 
+use App\Filters\MembershipFilter;
+use App\Filters\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model;
 
 class Membership extends Model
 {
+    use Filterable;
+
     protected $guarded = [];
 
     protected $dates = ['date_start', 'date_end'];
+
+    protected $filters = MembershipFilter::class;
 
     public function customer()
     {

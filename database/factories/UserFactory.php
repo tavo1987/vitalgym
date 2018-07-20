@@ -40,6 +40,10 @@ $factory->state(User::class, 'admin', [
     'role' => 'admin',
 ]);
 
+$factory->state(User::class, 'customer', [
+    'role' => 'customer',
+]);
+
 $factory->state(User::class, 'active', [
     'active' => true,
 ]);
