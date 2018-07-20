@@ -16,8 +16,8 @@
         </div>
         <div class="box-body p">
             <div class="tw-shadow tw-rounded-lg tw-overflow-hidden">
-                <h2 class="tw-bg-grey-light tw-px-4 tw-text-black tw-py-3 tw-text-lg">Cliente</h2>
-                <div class="tw-px-6 tw-py-6 tw-flex tw-items-center ">
+                <h2 class="tw-bg-grey-light tw-px-4 tw-text-black tw-py-3 tw-text-lg tw-text-center md:tw-text-left">Cliente</h2>
+                <div class="tw-px-6 tw-py-6 lg:tw-flex lg:tw-items-center tw-text-center md:tw-text-left">
                     <div class="tw-rounded-full tw-overflow-hidden tw-w-32 tw-inline-block tw-mr-8 tw-border-4 tw-border-grey-light">
                         <img src="{{ asset("storage/avatars/{$customer->avatar}") }}" alt="Logo">
                     </div>
