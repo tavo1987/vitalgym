@@ -53,7 +53,7 @@
                 <div class="lg:tw-flex tw-mb-4">
                     <div class="form-group date lg:tw-w-1/2 lg:tw-pr-2 {{ $errors->has('date_start') ? ' has-error': '' }}">
                         <label>Fecha de Inicio</label>
-                        <input name="date_start" type="text" class="form-control datepicker" value="{{ old('date_start', $membership->date_start->format('Y-m-d')) }}">
+                        <input id="start-datepicker" name="date_start" type="text" class="form-control datepicker" value="{{ old('date_start', $membership->date_start->format('Y-m-d')) }}">
                         @if ($errors->has('date_start'))
                             <span class="help-block">{{ $errors->first('date_start') }}</span>
                         @endif
@@ -61,7 +61,7 @@
 
                     <div class="form-group date lg:tw-w-1/2 lg:tw-pl-2 date {{ $errors->has('date_end') ? ' has-error': '' }}">
                         <label>Fecha de Caducidad</label>
-                        <input name="date_end" type="text" class="form-control datepicker" value="{{ old('date_end', $membership->date_end->format('Y-m-d')) }}">
+                        <input id="end-datepicker" name="date_end" type="text" class="form-control datepicker" value="{{ old('date_end', $membership->date_end->format('Y-m-d')) }}">
                         @if ($errors->has('date_end'))
                             <span class="help-block">{{ $errors->first('date_end') }}</span>
                         @endif
@@ -82,8 +82,19 @@
     <script src="{{ asset('plugins/datepicker/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('plugins/datepicker/locales/bootstrap-datepicker.es.js') }}"></script>
     <script>
-        $(document).ready(function () {
-            $('.datepicker').datepicker({
+        $(document).ready( function (e) {
+            //Date TimePickers
+            let membershipStartDate = "{{ $membership->date_start->toDateString() }}";
+            $('#start-datepicker').datepicker({
+                language: 'es',
+                format: 'yyyy-mm-dd',
+                orientation: 'bottom',
+                startDate: membershipStartDate,
+                todayHighlight: true,
+                autoclose: true,
+            });
+
+            $('#end-datepicker').datepicker({
                 language: 'es',
                 format: 'yyyy-mm-dd',
                 orientation: 'bottom',
@@ -91,6 +102,8 @@
                 todayHighlight: true,
                 autoclose: true,
             });
+
+            //Select2 Configuration for customers
             $('.select2').select2();
         })
     </script>

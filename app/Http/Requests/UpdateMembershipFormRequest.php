@@ -25,13 +25,28 @@ class UpdateMembershipFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'date_start' => 'required|date|after_or_equal:today',
+            'date_start' => $this->getStartDateRules(),
             'date_end' => 'required|date|after_or_equal:date_start',
-            'total_days' => optional(Membership::findOrFail($this->route('membershipId')))->plan->is_premium
-                            ? 'required|integer|min:1'
-                            : '',
+            'total_days' => $this->getTotalDaysRules(),
             'customer_id' => 'required|exists:customers,id',
             'membership_quantity' => 'required|integer|min:1',
         ];
+    }
+
+    private function getMembershipByRouteParam()
+    {
+        return optional(Membership::with('plan')->findOrFail($this->route('membershipId')));
+    }
+
+    private function getTotalDaysRules(): string
+    {
+        return (boolean)$this->getMembershipByRouteParam()->plan->is_premium
+            ? 'required|integer|min:1'
+            : '';
+    }
+
+    private function getStartDateRules(): string
+    {
+        return 'required|date|after_or_equal:' . $this->getMembershipByRouteParam()->date_start->toDateString();
     }
 }

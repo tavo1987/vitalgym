@@ -19,7 +19,7 @@ class EditMembershipTest extends TestCase
         $customer = factory(Customer::class)->create();
 
         return array_merge([
-            'date_start'          => now()->toDateString(),
+            'date_start'          => now(),
             'date_end'            => now()->addMonth(1)->toDateString(),
             'total_days'            => 30,
             'customer_id'         => $customer->id,
@@ -193,13 +193,56 @@ class EditMembershipTest extends TestCase
     }
 
     /** @test */
-    function date_start_must_be_a_greater_or_equal_to_current_date_to_update_any_membership()
+    function date_start_can_be_less_than_the_current_date_to_update_any_membership()
     {
+        $dateStart = now()->subDays(5);
         $adminUser = factory(User::class)->states('admin', 'active')->create();
-        $membership = factory(Membership::class)->create();
+        $membership = factory(Membership::class)->create([
+            'date_start' => $dateStart,
+        ]);
+
+        $dateStart = $dateStart->addDays(1);
 
         $response = $this->be($adminUser)->patch(route('admin.memberships.update', $membership), $this->validParams([
-            'date_start' => now()->subDays(1),
+            'date_start' => $dateStart,
+        ]));
+
+        $response->assertRedirect(route('admin.memberships.index'));
+        tap($membership->fresh(), function ( $membership ) use ( $dateStart ) {
+            $this->assertEquals($dateStart->toDateString(), $membership->date_start->toDateString());
+        });
+        $response->assertSessionHas('alert-type', 'success');
+    }
+
+    /** @test */
+    function date_start_can_be_equals_to_the_date_previously_saved_to_update_any_membership()
+    {
+        $dateStart = now()->subDays(5);
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+        $membership = factory(Membership::class)->create([
+            'date_start' => $dateStart,
+        ]);
+
+        $response = $this->be($adminUser)->patch(route('admin.memberships.update', $membership), $this->validParams([
+            'date_start' => $dateStart,
+        ]));
+
+        $response->assertRedirect(route('admin.memberships.index'));
+        tap($membership->fresh(), function ( $membership ) use ( $dateStart ) {
+            $this->assertEquals($dateStart->toDateString(), $membership->date_start->toDateString());
+        });
+        $response->assertSessionHas('alert-type', 'success');
+    }
+
+    /** @test */
+    function date_start_must_be_a_greater_than_or_equal_to_the_date_previously_saved_to_update_any_membership()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+        $membership = factory(Membership::class)->create(['date_start' => now()->subDays(1)]);
+
+
+        $response = $this->be($adminUser)->patch(route('admin.memberships.update', $membership), $this->validParams([
+            'date_start' => $membership->date_start->subDays(1),
         ]));
 
         $response->status(302);
