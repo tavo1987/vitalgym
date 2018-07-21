@@ -40,13 +40,13 @@ class UpdateMembershipFormRequest extends FormRequest
 
     private function getTotalDaysRules(): string
     {
-        return (boolean)$this->getMembershipByRouteParam()->plan->is_premium
+        return (bool) $this->getMembershipByRouteParam()->plan->is_premium
             ? 'required|integer|min:1'
             : '';
     }
 
     private function getStartDateRules(): string
     {
-        return 'required|date|after_or_equal:' . $this->getMembershipByRouteParam()->date_start->toDateString();
+        return 'required|date|after_or_equal:'.$this->getMembershipByRouteParam()->date_start->toDateString();
     }
 }
