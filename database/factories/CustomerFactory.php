@@ -1,9 +1,9 @@
 <?php
 
-use App\VitalGym\Entities\Level;
-use App\VitalGym\Entities\Routine;
 use Faker\Generator as Faker;
 use App\VitalGym\Entities\User;
+use App\VitalGym\Entities\Level;
+use App\VitalGym\Entities\Routine;
 use App\VitalGym\Entities\Customer;
 
 $factory->define(Customer::class, function (Faker $faker) {

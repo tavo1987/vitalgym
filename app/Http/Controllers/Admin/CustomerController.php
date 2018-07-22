@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\VitalGym\Entities\Customer;
-use App\VitalGym\Entities\Level;
-use App\Http\Controllers\Controller;
-use App\VitalGym\Entities\User;
 use Illuminate\Http\Request;
+use App\VitalGym\Entities\User;
+use App\VitalGym\Entities\Level;
+use App\VitalGym\Entities\Customer;
+use App\Http\Controllers\Controller;
 
 class CustomerController extends Controller
 {
@@ -28,7 +28,7 @@ class CustomerController extends Controller
             'cell_phone' => $request->cell_phone,
             'address' => $request->address,
             'role' => 'customer',
-            'active' => (boolean) $request->active,
+            'active' => (bool) $request->active,
         ]);
 
         Customer::create([
@@ -38,7 +38,7 @@ class CustomerController extends Controller
             'medical_observations' => $request->medical_observations,
             'routine_id' => $request->routine_id,
             'level_id' => $request->level_id,
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         return redirect()->route('admin.customers.index')
