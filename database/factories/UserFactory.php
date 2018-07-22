@@ -1,6 +1,5 @@
 <?php
 
-use Carbon\Carbon;
 use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\ActivationToken;
 
