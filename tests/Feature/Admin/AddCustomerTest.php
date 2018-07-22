@@ -2,11 +2,14 @@
 
 namespace Tests\Feature\Admin;
 
+use App\Mail\CustomerWelcomeEmail;
+use App\VitalGym\Entities\ActivationToken;
 use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Level;
 use App\VitalGym\Entities\Routine;
 use App\VitalGym\Entities\User;
 use Illuminate\Http\Testing\File;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -18,11 +21,13 @@ class AddCustomerTest extends TestCase
     private $file;
     private $routine;
     private $level;
+    private $user;
 
     public function setUp()
     {
         parent::setUp();
 
+        Mail::fake();
         Storage::fake('public');
         $this->file = File::image('john.jpg', 160, 160);
     }
@@ -31,6 +36,7 @@ class AddCustomerTest extends TestCase
     {
         $this->level = factory(Level::class)->create();
         $this->routine = factory(Routine::class)->create(['level_id' => $this->level->id]);
+
         return array_merge([
             'name' => 'John',
             'last_name' => 'Doe',
@@ -68,37 +74,39 @@ class AddCustomerTest extends TestCase
     function an_admin_can_create_a_new_customer()
     {
         $this->withoutExceptionHandling();
-
         $adminUser = factory(User::class)->states('admin', 'active')->create();
-        $user = factory(User::class)->states('customer')->create();
 
         $response = $this->be($adminUser)->post(route('admin.customers.store'), $this->validParams());
 
         $response->assertRedirect(route('admin.customers.index'));
-        tap(Customer::first(), function ($customer) use ( $user ) {
-            $this->assertEquals('John', $customer->name);
-            $this->assertEquals('Doe', $customer->last_name);
-            $this->assertNotNull($customer->avatar);
-            Storage::disk('public')->assertExists($customer->avatar);
-            $this->assertFileEquals($this->file->getPathname(), Storage::disk('public')->path($customer->avatar));
-            $this->assertEquals('john@example.com', $customer->email);
-            $this->assertEquals('0926687856', $customer->ci);
-            $this->assertEquals('2695755', $customer->user->phone);
-            $this->assertEquals('0123456789', $customer->user->cell_phone);
-            $this->assertEquals('Fake address', $customer->user->address);
-            $this->assertEquals('customer', $customer->user->role);
-            $this->assertFalse((boolean) $customer->user->active);
-            $this->assertEquals('1987-12-09', $customer->birthdate->toDateString());
-            $this->assertEquals('masculino', $customer->gender);
-            $this->assertEquals('Problemas del corazón', $customer->medical_observations);
-            $this->assertEquals($this->routine->id, $customer->routine->id);
-            $this->assertEquals($this->level->id, $customer->level->id);
-            $this->assertTrue( (boolean) $customer->has('user'));
-        });
-
+        $customer = Customer::first();
+        $this->assertEquals('John', $customer->name);
+        $this->assertEquals('Doe', $customer->last_name);
+        $this->assertNotNull($customer->avatar);
+        Storage::disk('public')->assertExists($customer->avatar);
+        $this->assertFileEquals($this->file->getPathname(), Storage::disk('public')->path($customer->avatar));
+        $this->assertEquals('john@example.com', $customer->email);
+        $this->assertEquals('0926687856', $customer->ci);
+        $this->assertEquals('2695755', $customer->user->phone);
+        $this->assertEquals('0123456789', $customer->user->cell_phone);
+        $this->assertEquals('Fake address', $customer->user->address);
+        $this->assertEquals('customer', $customer->user->role);
+        $this->assertFalse((boolean) $customer->user->active);
+        $this->assertEquals('1987-12-09', $customer->birthdate->toDateString());
+        $this->assertEquals('masculino', $customer->gender);
+        $this->assertEquals('Problemas del corazón', $customer->medical_observations);
+        $this->assertEquals($this->routine->id, $customer->routine->id);
+        $this->assertEquals($this->level->id, $customer->level->id);
+        $this->assertTrue( (boolean) $customer->has('user') );
         $this->assertEquals(1, Customer::count());
         $response->assertSessionHas('alert-type', 'success');
         $response->assertSessionHas('message');
-    }
 
+        $this->assertInstanceOf(ActivationToken::class,  $customer->user->token);
+
+        Mail::assertQueued(CustomerWelcomeEmail::class, function ( $mail ) use ( $customer ) {
+           return $mail->hasTo('john@example.com')
+                  && $mail->customer->id = $customer->id;
+        });
+    }
 }

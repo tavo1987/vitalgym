@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Mail\CustomerWelcomeEmail;
 use Illuminate\Http\Request;
 use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Level;
 use App\VitalGym\Entities\Customer;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class CustomerController extends Controller
 {
@@ -31,7 +33,11 @@ class CustomerController extends Controller
             'active' => (bool) $request->active,
         ]);
 
-        Customer::create([
+        $user->token()->create([
+           'token' => str_random(60)
+        ]);
+
+        $customer = Customer::create([
             'ci' => $request->ci,
             'birthdate' => $request->birthdate,
             'gender' => $request->gender,
@@ -40,6 +46,8 @@ class CustomerController extends Controller
             'level_id' => $request->level_id,
             'user_id' => $user->id,
         ]);
+
+        Mail::to($customer->email)->send(new CustomerWelcomeEmail($customer));
 
         return redirect()->route('admin.customers.index')
                          ->with(['alert-type' => 'success', 'message' => 'cliente creado con éxito']);
