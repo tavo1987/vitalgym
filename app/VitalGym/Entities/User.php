@@ -68,4 +68,11 @@ class User extends Authenticatable
     {
         return $this->attributes['name'].' '.$this->attributes['last_name'];
     }
+
+    public static function createWithActivationToken($data)
+    {
+        $user = self::create($data);
+        $user->token()->create(['token' => str_random(60)]);
+        return $user;
+    }
 }
