@@ -55,15 +55,15 @@
                             <td>{{ $membership->customer->last_name }}</td>
                             <td>{{ $membership->customer->email }}</td>
                             <td class="tw-capitalize">{{ $membership->plan->name }}</td>
-                            <td>{{ $membership->date_start->format('d-m-y') }}</td>
+                            <td>{{ $membership->date_start->format('Y-m-d') }}</td>
                             <td>
                                 @if( $membership->date_end < now())
                                     <span class="tw-bg-red tw-text-white tw-text-xs tw-px-3 tw-py-1 tw-rounded tw-inline-block">
-                                        {{ $membership->date_end->format('d-m-y') }}
+                                        {{ $membership->date_end->format('Y-m-d') }}
                                     </span>
                                 @else
                                     <span class="tw-bg-green tw-text-white tw-text-xs tw-px-3 tw-py-1 tw-rounded tw-inline-block">
-                                        {{ $membership->date_end->format('d-m-y') }}
+                                        {{ $membership->date_end->format('Y-m-d') }}
                                     </span>
                                 @endif
                             </td>
