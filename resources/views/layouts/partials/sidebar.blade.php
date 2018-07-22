@@ -70,6 +70,17 @@
                     <li><a href="#"><i class="fa fa-circle-o"></i>Nueva</a></li>
                 </ul>
             </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-level-up" aria-hidden="true"></i>
+                    <span>Niveles</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('levels.index') }}"><i class="fa fa-circle-o"></i>Administrar niveles</a></li>
+                    <li><a href="{{ route('levels.create') }}"><i class="fa fa-circle-o"></i>Nuevo</a></li>
+                </ul>
+            </li>
             <li><a href="#"><i class='fa fa-money'></i> <span>Pagos</span></a></li>
             <li><a href="#"><i class='fa fa fa-file-text-o'></i> <span>Fichas</span></a></li>
             <li><a href="#"><i class='fa fa-calendar'></i> <span>Asistencia</span></a></li>

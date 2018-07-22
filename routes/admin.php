@@ -2,6 +2,9 @@
 
 Route::get('users', 'UserController@index')->name('admin.users.index');
 
+//Levels
+Route::resource('levels','LevelController');
+
 //Plans
 Route::get('/plans', 'PlanController@index')->name('admin.plans.index');
 
