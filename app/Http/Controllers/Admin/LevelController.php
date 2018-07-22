@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\VitalGym\Entities\Level;
+use App\Http\Controllers\Controller;
 
 class LevelController extends Controller
 {
@@ -16,7 +16,8 @@ class LevelController extends Controller
     public function index()
     {
         $levels = Level::all();
-        return view('admin.levels.index',compact('levels'));
+
+        return view('admin.levels.index', compact('levels'));
     }
 
     /**
@@ -53,8 +54,8 @@ class LevelController extends Controller
     public function show($id)
     {
         $level = Level::findOrFail($id);
-        return view('admin.levels.show',compact('level'));
 
+        return view('admin.levels.show', compact('level'));
     }
 
     /**
@@ -66,7 +67,8 @@ class LevelController extends Controller
     public function edit($id)
     {
         $level = Level::findOrFail($id);
-        return view('admin.levels.edit',compact('level'));
+
+        return view('admin.levels.edit', compact('level'));
     }
 
     /**
