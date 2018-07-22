@@ -46,7 +46,6 @@ class AddCustomerTest extends TestCase
             'phone' => '2695755',
             'cell_phone' => '0123456789',
             'address' => 'Fake address',
-            'active' => false,
             'birthdate' => '1987-12-09',
             'gender' => 'masculino',
             'medical_observations' => 'Problemas del corazón',
