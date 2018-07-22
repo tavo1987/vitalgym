@@ -13,3 +13,6 @@ Route::get('/memberships/{id}/edit', 'MembershipController@edit')->name('admin.m
 Route::post('/memberships/{planId}/', 'MembershipController@store')->name('admin.memberships.store');
 Route::patch('/memberships/{membershipId}/', 'MembershipController@update')->name('admin.memberships.update');
 Route::delete('/memberships/{membershipId}/', 'MembershipController@destroy')->name('admin.memberships.destroy');
+
+//Customers
+Route::get('/customers', 'CustomerController@create')->name('admin.customers.create');
