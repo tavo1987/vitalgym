@@ -2,9 +2,9 @@
 
 namespace App\Mail;
 
-use App\VitalGym\Entities\Customer;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use App\VitalGym\Entities\Customer;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 

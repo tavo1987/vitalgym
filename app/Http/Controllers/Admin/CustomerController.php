@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Mail\CustomerWelcomeEmail;
 use Illuminate\Http\Request;
 use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Level;
+use App\Mail\CustomerWelcomeEmail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 
@@ -20,7 +20,7 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
-       $user = User::createWithActivationToken([
+        $user = User::createWithActivationToken([
             'name' => $request->name,
             'last_name' => $request->last_name,
             'avatar' => $request->hasFile('avatar') ? $request->file('avatar')->store('avatars', 'public') : 'avatars/default-avatar',
@@ -30,7 +30,6 @@ class CustomerController extends Controller
             'address' => $request->address,
             'role' => 'customer',
         ]);
-
 
         $customer = $user->customer()->create([
             'ci' => $request->ci,
