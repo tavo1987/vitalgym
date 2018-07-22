@@ -18,19 +18,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'name',
-        'last_name',
-        'nick_name',
-        'avatar',
-        'address',
-        'password',
-        'role',
-        'active',
-        'last_login',
-    ];
+    protected $guarded = [];
 
     protected $filters = UserFilter::class;
 

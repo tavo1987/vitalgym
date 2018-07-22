@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
+    protected $guarded = [];
+
+    protected $dates = ['birthdate'];
+
     protected $with = ['user'];
 
     public function Memberships()
@@ -16,6 +20,16 @@ class Customer extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function routine()
+    {
+        return $this->belongsTo(Routine::class);
+    }
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
     }
 
     public function getFullNameAttribute()

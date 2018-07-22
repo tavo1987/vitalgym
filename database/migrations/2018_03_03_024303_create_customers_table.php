@@ -15,7 +15,15 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('ci');
+            $table->date('birthdate');
+            $table->string('gender');
+            $table->mediumText('medical_observations');
+            $table->unsignedInteger('routine_id');
+            $table->unsignedInteger('level_id');
             $table->unsignedInteger('user_id');
+            $table->foreign('routine_id')->references('id')->on('routines')->onDelete('cascade');
+            $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

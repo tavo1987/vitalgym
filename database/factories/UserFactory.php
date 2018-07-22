@@ -21,7 +21,6 @@ $factory->define(User::class, function (Faker\Generator $faker) {
     return [
         'name'           => $faker->firstName,
         'last_name'      => $faker->lastName,
-        'nick_name'      => $faker->name,
         'avatar'         => 'default-avatar.jpg',
         'email'          => $faker->unique()->safeEmail,
         'phone'          => $faker->phoneNumber,
@@ -30,8 +29,6 @@ $factory->define(User::class, function (Faker\Generator $faker) {
         'password'       => $password ?: $password = bcrypt('secret'),
         'active'         => $faker->randomElement([true, false, true]),
         'role'           => $faker->randomElement(['admin', 'customer', 'customer']),
-        'last_login'     => Carbon::now(),
-        'api_token'      => str_random(60),
         'remember_token' => str_random(10),
     ];
 });
