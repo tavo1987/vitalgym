@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Mail\CustomerWelcomeEmail;
 use Illuminate\Http\Request;
 use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Level;
+use App\Mail\CustomerWelcomeEmail;
 use App\VitalGym\Entities\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -34,7 +34,7 @@ class CustomerController extends Controller
         ]);
 
         $user->token()->create([
-           'token' => str_random(60)
+           'token' => str_random(60),
         ]);
 
         $customer = Customer::create([
