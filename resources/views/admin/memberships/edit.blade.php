@@ -98,7 +98,7 @@
                 language: 'es',
                 format: 'yyyy-mm-dd',
                 orientation: 'bottom',
-                startDate: new Date(),
+                startDate: membershipStartDate,
                 todayHighlight: true,
                 autoclose: true,
             });
