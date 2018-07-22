@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\VitalGym\Entities\Level;
-
+use App\Http\Controllers\Controller;
 
 class CustomerController extends Controller
 {

@@ -1,7 +1,7 @@
 <?php
 
-use App\VitalGym\Entities\Level;
 use Faker\Generator as Faker;
+use App\VitalGym\Entities\Level;
 
 $factory->define(Level::class, function (Faker $faker) {
     return [
