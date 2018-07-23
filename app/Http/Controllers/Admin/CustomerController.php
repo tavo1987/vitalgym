@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\CreateCustomerFormRequest;
 use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Level;
 use App\Mail\CustomerWelcomeEmail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\CreateCustomerFormRequest;
 
 class CustomerController extends Controller
 {
