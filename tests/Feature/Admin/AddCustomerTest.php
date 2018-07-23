@@ -251,11 +251,11 @@ class AddCustomerTest extends TestCase
         $adminUser = factory(User::class)->states('admin', 'active')->create();
 
         $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
-            'avatar' =>  File::create('not-a-image.pdf')
+            'avatar' => File::create('no-image.pdf'),
         ]));
 
         $response->assertRedirect(route('admin.customers.create'));
-        //$response->assertSessionHasErrors('avatar');
+        $response->assertSessionHasErrors('avatar');
         $this->assertEquals(0, Customer::count());
         Mail::assertNotQueued(CustomerWelcomeEmail::class);
     }
