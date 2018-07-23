@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\CreateCustomerFormRequest;
 use App\Mail\CustomerWelcomeEmail;
-use Illuminate\Http\Request;
 use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Level;
 use App\Http\Controllers\Controller;
@@ -18,7 +18,7 @@ class CustomerController extends Controller
         return view('admin.customers.create', compact('levels'));
     }
 
-    public function store(Request $request)
+    public function store(CreateCustomerFormRequest $request)
     {
        $user = User::createWithActivationToken([
             'name' => $request->name,
