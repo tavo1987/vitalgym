@@ -2272,16 +2272,16 @@
         },
         {
             "name": "tavo1987/laravel-ec-validator",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tavo1987/ec-laravel-validator.git",
-                "reference": "8423075438d8d14b65c06423c290aa489980a7d2"
+                "reference": "c1eccda9412c6dee9fe8c69b07be93a1c51fa28a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tavo1987/ec-laravel-validator/zipball/8423075438d8d14b65c06423c290aa489980a7d2",
-                "reference": "8423075438d8d14b65c06423c290aa489980a7d2",
+                "url": "https://api.github.com/repos/tavo1987/ec-laravel-validator/zipball/c1eccda9412c6dee9fe8c69b07be93a1c51fa28a",
+                "reference": "c1eccda9412c6dee9fe8c69b07be93a1c51fa28a",
                 "shasum": ""
             },
             "require": {
@@ -2323,7 +2323,7 @@
                 "ecuador",
                 "laravel"
             ],
-            "time": "2018-07-23T03:09:27+00:00"
+            "time": "2018-07-23T19:22:25+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
