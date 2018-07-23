@@ -73,6 +73,7 @@ class User extends Authenticatable
     {
         $user = self::create($data);
         $user->token()->create(['token' => str_random(60)]);
+
         return $user;
     }
 }
