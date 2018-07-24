@@ -39,7 +39,6 @@ class DatabaseSeeder extends Seeder
         //Customers
         factory(\App\VitalGym\Entities\Customer::class, 10)->create(['level_id' => $levels->random()->id, 'routine_id' => $routines->random()->id]);
 
-
         //Membership types
         factory(\App\VitalGym\Entities\Plan::class)->create(['name' => 'diario', 'price' => 200]);
         factory(\App\VitalGym\Entities\Plan::class)->create(['name' => 'mensual', 'price' => 3000]);
