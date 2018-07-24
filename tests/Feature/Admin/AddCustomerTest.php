@@ -259,4 +259,199 @@ class AddCustomerTest extends TestCase
         $this->assertEquals(0, Customer::count());
         Mail::assertNotQueued(CustomerWelcomeEmail::class);
     }
+
+    /** @test */
+    function avatar_must_have_a_maximum_of_1024_kilobytes()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'avatar' => File::image('avatar.jpg')->size(1025),
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('avatar');
+        $this->assertEquals(0, Customer::count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+
+    /** @test */
+    function phone_is_required()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'phone' => '',
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('phone');
+        $this->assertEquals(0, Customer::count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+
+    /** @test */
+    function phone_must_have_a_maximum_of_10_characters()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'phone' => str_random(11),
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('phone');
+        $this->assertEquals(0, Customer::count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+
+    /** @test */
+    function cell_phone_is_required()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'cell_phone' => '',
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('cell_phone');
+        $this->assertEquals(0, Customer::count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+
+    /** @test */
+    function cell_phone_must_have_a_maximum_of_10_characters()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'cell_phone' => str_random(11),
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('cell_phone');
+        $this->assertEquals(0, Customer::count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+
+    /** @test */
+    function address_is_required()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'address' => '',
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('address');
+        $this->assertEquals(0, Customer::count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+
+    /** @test */
+    function address_must_have_a_maximum_of_255_characters()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'address' => str_random(256),
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('address');
+        $this->assertEquals(0, Customer::count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+
+    /** @test */
+    function birthdate_is_required()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'birthdate' => '',
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('birthdate');
+        $this->assertEquals(0, Customer::count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+
+    /** @test */
+    function birthdate_mst_be_a_valid_date()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'birthdate' => 'invalid-birthdate',
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('birthdate');
+        $this->assertEquals(0, Customer::count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+
+    /** @test */
+    function gender_is_required()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'gender' => '',
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('gender');
+        $this->assertEquals(0, Customer::count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+
+    /** @test */
+    function gender_must_have_a_maximum_of_60_characters()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'gender' => str_random(61),
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('gender');
+        $this->assertEquals(0, Customer::count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+    
+    /** @test */
+    function routine_id_must_be_exist()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'routine_id' => 2,
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('routine_id');
+        $this->assertEquals(0, Customer::count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+
+    /** @test */
+    function level_id_must_be_exist()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'level_id' => 9999,
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('level_id');
+        $this->assertEquals(0, Customer::count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
 }
