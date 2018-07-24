@@ -19,7 +19,7 @@ $factory->define(Customer::class, function (Faker $faker) {
             return factory(Routine::class)->create()->id;
         },
         'user_id' => function () {
-            return factory(User::class)->create()->id;
+            return factory(User::class)->states('customer')->create()->id;
         },
     ];
 });
