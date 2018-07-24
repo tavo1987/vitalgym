@@ -38,6 +38,10 @@ class LevelController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|unique:levels|min:3|max:12',
+        ]);
+
         $level = Level::create([
             'name' => $request->get('name'),
         ]);
@@ -80,6 +84,10 @@ class LevelController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'name' => 'required',
+        ]);
+
         $level = Level::findOrFail($id);
 
         $level->update([
