@@ -13,6 +13,13 @@ use App\Http\Requests\UpdateCustomerFormRequest;
 
 class CustomerController extends Controller
 {
+    public function index()
+    {
+        $customers = Customer::with('user')->paginate();
+
+        return view('admin.customers.index', compact('customers'));
+    }
+
     public function create()
     {
         $levels = Level::all();
