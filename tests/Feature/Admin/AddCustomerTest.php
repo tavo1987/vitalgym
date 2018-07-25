@@ -9,6 +9,7 @@ use App\VitalGym\Entities\Level;
 use App\VitalGym\Entities\Routine;
 use App\VitalGym\Entities\User;
 use Illuminate\Http\Testing\File;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -40,6 +41,8 @@ class AddCustomerTest extends TestCase
             'name' => 'John',
             'last_name' => 'Doe',
             'email' => 'john@example.com',
+            'password' => 'secret',
+            'confirmation_password' => 'secret',
             'ci' => '0926687856',
             'avatar' => $this->file,
             'phone' => '2695755',
@@ -84,6 +87,7 @@ class AddCustomerTest extends TestCase
         Storage::disk('public')->assertExists($customer->avatar);
         $this->assertFileEquals($this->file->getPathname(), Storage::disk('public')->path($customer->avatar));
         $this->assertEquals('john@example.com', $customer->email);
+        $this->assertTrue(Hash::check('secret', $customer->user->password));
         $this->assertEquals('0926687856', $customer->ci);
         $this->assertEquals('2695755', $customer->user->phone);
         $this->assertEquals('0123456789', $customer->user->cell_phone);
@@ -199,6 +203,71 @@ class AddCustomerTest extends TestCase
     }
 
     /** @test */
+    function email_must_be_unique()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $oldUser = factory(User::class)->states('customer')->create(['email' => 'john@example.com']);
+        $oldCustomer = factory(Customer::class)->create(['user_id' => $oldUser->id]);
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'email' => $oldUser->email,
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('email');
+        $this->assertEquals(0, Customer::whereNotIn('id', [$oldCustomer->id])->count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+
+    /** @test */
+    function password_is_required()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'password' => ''
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('password');
+        $this->assertEquals(0, Customer::count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+
+    /** @test */
+    function password_must_have_a_minimum_of_6_characters()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'password' => '12345',
+            'confirmation_password' => '12345',
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('password');
+        $this->assertEquals(0, Customer::count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+
+    /** @test */
+    function password_must_be_equals_to_password_confirmation_field()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'password' => 'secret',
+            'confirmation_password' => 'other-password',
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('password');
+        $this->assertEquals(0, Customer::count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+
+    /** @test */
     function ci_is_optional()
     {
         $this->withoutExceptionHandling();
@@ -226,6 +295,22 @@ class AddCustomerTest extends TestCase
         $response->assertRedirect(route('admin.customers.create'));
         $response->assertSessionHasErrors('ci');
         $this->assertEquals(0, Customer::count());
+        Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+
+    /** @test */
+    function ci_must_be_unique()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+        $otherCustomer = factory(Customer::class)->create(['ci' => '0926687856']);
+
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'ci' => '0926687856'
+        ]));
+
+        $response->assertRedirect(route('admin.customers.create'));
+        $response->assertSessionHasErrors('ci');
+        $this->assertEquals(0, Customer::whereNotIn('id', [$otherCustomer->id])->count());
         Mail::assertNotQueued(CustomerWelcomeEmail::class);
     }
 
