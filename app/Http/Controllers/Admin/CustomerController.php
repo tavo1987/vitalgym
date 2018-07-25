@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\UpdateCustomerFormRequest;
 use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Level;
 use App\Mail\CustomerWelcomeEmail;
@@ -35,7 +35,7 @@ class CustomerController extends Controller
         $user = User::createWithActivationToken([
             'name' => $request->name,
             'last_name' => $request->last_name,
-            'avatar' => $request->hasFile('avatar') ? $request->file('avatar')->store('avatars', 'public') : 'avatars/default-avatar',
+            'avatar' => $request->hasFile('avatar') ? $request->file('avatar')->store('avatars', 'public') : 'avatars/default-avatar.jpg',
             'email' => $request->email,
             'phone' => $request->phone,
             'cell_phone' => $request->cell_phone,
@@ -58,29 +58,12 @@ class CustomerController extends Controller
                          ->with(['alert-type' => 'success', 'message' => 'cliente creado con éxito']);
     }
 
-    public function update(Request $request, $customerId)
+    public function update(UpdateCustomerFormRequest $request, $customerId)
     {
         $customer = Customer::with('user')->findOrFail($customerId);
 
-        $user = $customer->user->update([
-            'name' => $request->name,
-            'last_name' => $request->last_name,
-            'avatar' => $request->hasFile('avatar') ? $request->file('avatar')->store('avatars', 'public') : 'avatars/default-avatar',
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'cell_phone' => $request->cell_phone,
-            'address' => $request->address,
-            'password' => bcrypt($request->password),
-        ]);
-
-        $customer->update([
-            'ci' => $request->ci,
-            'birthdate' => $request->birthdate,
-            'gender' => $request->gender,
-            'medical_observations' => $request->medical_observations,
-            'routine_id' => $request->routine_id,
-            'level_id' => $request->level_id,
-        ]);
+        $customer->update($request->customerRequestParams());
+        $customer->user->update($request->userRequestParams());
 
         return redirect()->route('admin.customers.index')
                          ->with(['alert-type' => 'success', 'message' => 'cliente actualizado con éxito']);
