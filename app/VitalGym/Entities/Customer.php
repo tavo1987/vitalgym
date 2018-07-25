@@ -2,10 +2,16 @@
 
 namespace App\VitalGym\Entities;
 
+use App\Filters\CustomerFilter;
+use App\Filters\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
+    use Filterable;
+
+    protected $filters = CustomerFilter::class;
+
     protected $guarded = [];
 
     protected $dates = ['birthdate'];
