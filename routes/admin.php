@@ -20,4 +20,6 @@ Route::delete('/memberships/{membershipId}/', 'MembershipController@destroy')->n
 //Customers
 Route::get('/customers', 'CustomerController@index')->name('admin.customers.index');
 Route::get('/customers/create', 'CustomerController@create')->name('admin.customers.create');
+Route::get('/customers/{id}/edit', 'CustomerController@edit')->name('admin.customers.edit');
 Route::post('/customers', 'CustomerController@store')->name('admin.customers.store');
+Route::patch('/customers/{id}', 'CustomerController@update')->name('admin.customers.update');
