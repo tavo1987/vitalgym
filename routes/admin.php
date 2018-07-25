@@ -21,5 +21,6 @@ Route::delete('/memberships/{membershipId}/', 'MembershipController@destroy')->n
 Route::get('/customers', 'CustomerController@index')->name('admin.customers.index');
 Route::get('/customers/create', 'CustomerController@create')->name('admin.customers.create');
 Route::get('/customers/{id}/edit', 'CustomerController@edit')->name('admin.customers.edit');
+Route::get('/customers/{customerId}/details', 'CustomerController@show')->name('admin.customers.show');
 Route::post('/customers', 'CustomerController@store')->name('admin.customers.store');
 Route::patch('/customers/{customerId}', 'CustomerController@update')->name('admin.customers.update');

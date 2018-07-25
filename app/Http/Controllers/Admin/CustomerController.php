@@ -30,6 +30,13 @@ class CustomerController extends Controller
         return view('admin.customers.edit', compact('customer', 'levels', 'level', 'routine'));
     }
 
+    public function show($customerId)
+    {
+        $customer = Customer::findOrFail($customerId);
+
+        return view('admin.customers.show', compact('customer'));
+    }
+
     public function store(CreateCustomerFormRequest $request)
     {
         $user = User::createWithActivationToken($request->userRequestParams());
