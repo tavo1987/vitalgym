@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\VitalGym\Entities\Customer;
+use Illuminate\Http\Request;
 use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Level;
 use App\Mail\CustomerWelcomeEmail;
+use App\VitalGym\Entities\Customer;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\CreateCustomerFormRequest;
 
@@ -26,6 +26,7 @@ class CustomerController extends Controller
         $routine = $customer->routine;
         $level = $customer->level;
         $levels = Level::all();
+
         return view('admin.customers.edit', compact('customer', 'levels', 'level', 'routine'));
     }
 
