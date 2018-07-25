@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\UpdateCustomerFormRequest;
 use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Level;
 use App\Mail\CustomerWelcomeEmail;
@@ -10,6 +9,7 @@ use App\VitalGym\Entities\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\CreateCustomerFormRequest;
+use App\Http\Requests\UpdateCustomerFormRequest;
 
 class CustomerController extends Controller
 {
