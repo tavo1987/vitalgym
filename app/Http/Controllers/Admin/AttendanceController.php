@@ -21,4 +21,17 @@ class AttendanceController extends Controller
 
         return view('admin.attendances.create', compact('customers'));
     }
+
+    public function store()
+    {
+        $validatedData = request()->validate([
+           'date' => 'required|date',
+           'customer_id' => 'required|exists:customers,id',
+        ]);
+
+        Attendance::create($validatedData);
+
+        return redirect()->route('admin.attendances.index')
+                         ->with(['alert-type' => 'success', 'message' => 'Asistencia Registrada con éxito']);
+    }
 }

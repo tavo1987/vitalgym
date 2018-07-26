@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin;
 
+use App\VitalGym\Entities\Attendance;
 use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\User;
 use Tests\TestCase;
@@ -10,6 +11,17 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class AddAttendanceTest extends TestCase
 {
     use RefreshDatabase;
+
+    private $customer;
+
+    private function  validParams($overrides = [])
+    {
+        $this->customer = factory(Customer::class)->create();
+        return array_merge([
+            'date' => '2017-11-23',
+            'customer_id' => $this->customer->id
+        ], $overrides);
+    }
 
    /** @test */
    function an_admin_can_view_the_form_to_create_a_new_attendance()
@@ -25,4 +37,77 @@ class AddAttendanceTest extends TestCase
        $response->assertViewIs('admin.attendances.create');
        $response->assertViewHas('customers', $expectedCustomers);
    }
+
+   /** @test */
+   function ad_admin_can_create_an_attendance()
+   {
+       $this->withoutExceptionHandling();
+       $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+       $response = $this->be($adminUser)->post(route('admin.attendances.store'), $this->validParams());
+
+       $response->assertRedirect(route('admin.attendances.index'));
+       tap(Attendance::first(), function ($attendance) {
+           $this->assertEquals('2017-11-23', $attendance->date->toDateString());
+           $this->assertEquals($this->customer->id, $attendance->customer_id);
+       });
+       $response->assertSessionHas('alert-type', 'success');
+       $response->assertSessionHas('message');
+   }
+
+   /** @test */
+   function date_is_required()
+   {
+       $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+       $response = $this->be($adminUser)->from(route('admin.attendances.create'))->post(route('admin.attendances.store'), $this->validParams([
+           'date' => '',
+       ]));
+
+        $response->assertRedirect(route('admin.attendances.create'));
+        $response->assertSessionHasErrors('date');
+        $this->assertEquals(0, Attendance::count());
+   }
+
+    /** @test */
+    function date_must_be_a_valid_date()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.attendances.create'))->post(route('admin.attendances.store'), $this->validParams([
+            'date' => 'invalid-date',
+        ]));
+
+        $response->assertRedirect(route('admin.attendances.create'));
+        $response->assertSessionHasErrors('date');
+        $this->assertEquals(0, Attendance::count());
+    }
+
+    /** @test */
+    function customer_id_is_required()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.attendances.create'))->post(route('admin.attendances.store'), $this->validParams([
+            'customer_id' => '',
+        ]));
+
+        $response->assertRedirect(route('admin.attendances.create'));
+        $response->assertSessionHasErrors('customer_id');
+        $this->assertEquals(0, Attendance::count());
+    }
+
+    /** @test */
+    function customer_id_must_be_exist()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.attendances.create'))->post(route('admin.attendances.store'), $this->validParams([
+            'customer_id' => '9999',
+        ]));
+
+        $response->assertRedirect(route('admin.attendances.create'));
+        $response->assertSessionHasErrors('customer_id');
+        $this->assertEquals(0, Attendance::count());
+    }
 }
