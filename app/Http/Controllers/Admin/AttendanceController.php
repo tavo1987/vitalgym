@@ -34,4 +34,12 @@ class AttendanceController extends Controller
         return redirect()->route('admin.attendances.index')
                          ->with(['alert-type' => 'success', 'message' => 'Asistencia Registrada con éxito']);
     }
+
+    public function destroy($attendanceId)
+    {
+        $attendance = Attendance::findOrFail($attendanceId);
+        $attendance->delete();
+
+        return redirect()->route('admin.attendances.index')->with(['alert-type' => 'success', 'message' => 'Asistencia eliminada con éxito']);
+    }
 }
