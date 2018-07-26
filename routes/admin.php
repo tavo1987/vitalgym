@@ -8,7 +8,9 @@ Route::resource('levels', 'LevelController');
 //Plans
 Route::get('/plans', 'PlanController@index')->name('admin.plans.index');
 Route::get('/plans/create', 'PlanController@create')->name('admin.plans.create');
+Route::get('/plans/{planId}/edit', 'PlanController@edit')->name('admin.plans.edit');
 Route::post('/plans', 'PlanController@store')->name('admin.plans.store');
+Route::patch('/plans/{planId}', 'PlanController@update')->name('admin.plans.update');
 
 //Memberships
 Route::get('/memberships', 'MembershipController@index')->name('admin.memberships.index');

@@ -19,6 +19,13 @@ class PlanController extends Controller
         return view('admin.plans.create');
     }
 
+    public function edit($planId)
+    {
+        $plan = Plan::findOrFail($planId);
+
+        return view('admin.plans.edit', compact('plan'));
+    }
+
     public function store()
     {
         $validatedData = request()->validate([
@@ -28,6 +35,23 @@ class PlanController extends Controller
         ]);
 
         Plan::create($validatedData);
-        return redirect()->route('admin.plans.index')->with(['alert-type' => 'success', 'message' => 'Plan creado con éxito']);
+        return redirect()->route('admin.plans.index')
+                         ->with(['alert-type' => 'success', 'message' => 'Plan creado con éxito']);
+    }
+
+    public function update($planId)
+    {
+        $validatedData = request()->validate([
+           'name' => 'required|max:60',
+           'price' => 'required|integer',
+           'is_premium' => 'required|boolean',
+        ]);
+
+        $plan = Plan::findOrfail($planId);
+
+        $plan->update($validatedData);
+
+        return redirect()->route('admin.plans.index')
+                         ->with(['alert-type' => 'success', 'message' => 'Plan actualizado con éxito']);
     }
 }
