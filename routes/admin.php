@@ -7,6 +7,8 @@ Route::resource('levels', 'LevelController');
 
 //Plans
 Route::get('/plans', 'PlanController@index')->name('admin.plans.index');
+Route::get('/plans/create', 'PlanController@create')->name('admin.plans.create');
+Route::post('/plans', 'PlanController@store')->name('admin.plans.store');
 
 //Memberships
 Route::get('/memberships', 'MembershipController@index')->name('admin.memberships.index');
