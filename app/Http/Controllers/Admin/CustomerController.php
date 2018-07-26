@@ -64,4 +64,12 @@ class CustomerController extends Controller
         return redirect()->route('admin.customers.index')
                          ->with(['alert-type' => 'success', 'message' => 'cliente actualizado con éxito']);
     }
+
+    public function destroy($customerId)
+    {
+        $customer = Customer::findOrFail($customerId);
+        $customer->delete();
+
+        return redirect()->route('admin.customers.index')->with(['alert-type' => 'success', 'message' => 'Cliente eliminado con éxito']);
+    }
 }

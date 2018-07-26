@@ -24,3 +24,4 @@ Route::get('/customers/{id}/edit', 'CustomerController@edit')->name('admin.custo
 Route::get('/customers/{customerId}/details', 'CustomerController@show')->name('admin.customers.show');
 Route::post('/customers', 'CustomerController@store')->name('admin.customers.store');
 Route::patch('/customers/{customerId}', 'CustomerController@update')->name('admin.customers.update');
+Route::delete('/customers/{customerId}', 'CustomerController@destroy')->name('admin.customers.destroy');
