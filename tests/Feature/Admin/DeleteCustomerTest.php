@@ -27,7 +27,7 @@ class DeleteCustomerTest extends TestCase
     }
 
     /** @test */
-    function see_404_error_if_try_delete_customer_does_not_exist()
+    function see_404_error_if_try_to_delete_customer_does_not_exist()
     {
         $adminUser = factory(User::class)->states('admin', 'active')->create();
 
