@@ -28,3 +28,4 @@ Route::delete('/customers/{customerId}', 'CustomerController@destroy')->name('ad
 
 //Attendances
 Route::get('/attendances/', 'AttendanceController@index')->name('admin.attendances.index');
+Route::get('/attendances/create', 'AttendanceController@create')->name('admin.attendances.create');
