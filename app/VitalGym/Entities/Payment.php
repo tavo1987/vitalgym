@@ -18,6 +18,11 @@ class Payment extends Model
         return $this->hasOne(Membership::class);
     }
 
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
     public function getTotalPriceInDollarsAttribute()
     {
         return number_format($this->total_price / 100, 2);

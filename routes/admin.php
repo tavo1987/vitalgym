@@ -13,6 +13,9 @@ Route::post('/plans', 'PlanController@store')->name('admin.plans.store');
 Route::patch('/plans/{planId}', 'PlanController@update')->name('admin.plans.update');
 Route::delete('/plans/{planId}', 'PlanController@destroy')->name('admin.plans.destroy');
 
+//Payments
+Route::get('/payments', 'PaymentController@index')->name('admin.payments.index');
+
 //Memberships
 Route::get('/memberships', 'MembershipController@index')->name('admin.memberships.index');
 Route::get('/memberships/{planId}/create', 'MembershipController@create')->name('admin.memberships.create');
