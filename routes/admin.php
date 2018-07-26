@@ -27,4 +27,4 @@ Route::patch('/customers/{customerId}', 'CustomerController@update')->name('admi
 Route::delete('/customers/{customerId}', 'CustomerController@destroy')->name('admin.customers.destroy');
 
 //Attendances
-Route::get('/attendances/','AttendanceController@index')->name('admin.attendances.index');
+Route::get('/attendances/', 'AttendanceController@index')->name('admin.attendances.index');
