@@ -28,6 +28,7 @@ class PlanController extends Controller
         ]);
 
         Plan::create($validatedData);
+
         return redirect()->route('admin.plans.index')->with(['alert-type' => 'success', 'message' => 'Plan creado con éxito']);
     }
 }
