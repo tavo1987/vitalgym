@@ -11,6 +11,7 @@ Route::get('/plans/create', 'PlanController@create')->name('admin.plans.create')
 Route::get('/plans/{planId}/edit', 'PlanController@edit')->name('admin.plans.edit');
 Route::post('/plans', 'PlanController@store')->name('admin.plans.store');
 Route::patch('/plans/{planId}', 'PlanController@update')->name('admin.plans.update');
+Route::delete('/plans/{planId}', 'PlanController@destroy')->name('admin.plans.destroy');
 
 //Memberships
 Route::get('/memberships', 'MembershipController@index')->name('admin.memberships.index');

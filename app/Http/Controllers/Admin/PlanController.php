@@ -55,4 +55,13 @@ class PlanController extends Controller
         return redirect()->route('admin.plans.index')
                          ->with(['alert-type' => 'success', 'message' => 'Plan actualizado con éxito']);
     }
+
+    public function destroy($planId)
+    {
+        $plan = Plan::findOrFail($planId);
+        $plan->delete();
+
+        return redirect()->route('admin.plans.index')
+                         ->with(['alert-type' => 'success', 'message' => 'Plan Eliminado con éxito']);
+    }
 }
