@@ -22,12 +22,12 @@
         <ul class="sidebar-menu">
             <li class="header">MENU PRINCIPAL</li>
             <!-- Optionally, you can add icons to the links -->
-            <li>
-                <a href="/">
+            <li class="{{ request()->is('/') ? 'active' : '' }}">
+                <a  href="/">
                     <i class='fa fa-home'></i> <span>Inicio</span>
                 </a>
             </li>
-            <li>
+            <li class="{{ request()->is('admin/customers') || request()->is('admin/customers/*') ? 'active' : '' }}">
                 <a href="#">
                     <i class='fa fa-street-view'></i> <span>Clientes</span>
                     <i class="fa fa-angle-left pull-right"></i>
@@ -37,7 +37,7 @@
                     <li><a href="{{ route('admin.customers.create') }}"><i class="fa fa-circle-o"></i>Añadir Nuevo</a></li>
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="treeview {{ request()->is('admin/memberships') || request()->is('admin/memberships/*') ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-user-plus" aria-hidden="true"></i>
                     <span>Membresías</span>
@@ -48,7 +48,7 @@
                     <li><a href="{{ route('plans.index') }}"><i class="fa fa-circle-o"></i>Añadir nueva</a></li>
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="treeview {{ request()->is('admin/plans') || request()->is('admin/plans/*') ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-file-text" aria-hidden="true"></i>
                     <span>Planes</span>
@@ -70,7 +70,7 @@
                     <li><a href="#"><i class="fa fa-circle-o"></i>Nueva</a></li>
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="treeview {{ request()->is('admin/levels') || request()->is('admin/levels/*') ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-level-up" aria-hidden="true"></i>
                     <span>Niveles</span>
@@ -81,10 +81,18 @@
                     <li><a href="{{ route('levels.create') }}"><i class="fa fa-circle-o"></i>Nuevo</a></li>
                 </ul>
             </li>
-            <li><a href="#"><i class='fa fa-money'></i> <span>Pagos</span></a></li>
-            <li><a href="#"><i class='fa fa fa-file-text-o'></i> <span>Fichas</span></a></li>
-            <li><a href="#"><i class='fa fa-calendar'></i> <span>Asistencia</span></a></li>
-            <li class="active"><a href="{{ route('admin.users.index') }}"><i class='fa fa-users'></i> <span>Usuarios</span></a></li>
+            <li class="{{ request()->is('admin/payments') ? 'active' : '' }}">
+                <a href="#"><i class='fa fa-money'></i> <span>Pagos</span></a>
+            </li>
+            <li class="{{ request()->is('admin/attendances') || request()->is('admin/attendances/*') ? 'active' : '' }}">
+                <a href="#"><i class='fa fa-calendar'></i> <span>Asistencia</span></a>
+            </li>
+            <li class="{{ request()->is('admin/reports') ? 'active' : '' }}">
+                <a href="{{ route('admin.reports.index') }}"><i class='fa fa-file-pdf-o'></i> <span>Reportes</span></a>
+            </li>
+            <li class="{{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
+                <a href="{{ route('admin.users.index') }}"><i class='fa fa-users'></i> <span>Usuarios</span></a>
+            </li>
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
