@@ -21,7 +21,7 @@ class ViewCustomerListTest extends TestCase
         $response = $this->be($adminUser)->get(route('admin.customers.index'));
 
         $response->assertSuccessful();
-        $expectedCustomers = Customer::with('user')->orderByDesc('id')->paginate();
+        $expectedCustomers = Customer::with('user', 'level')->orderByDesc('id')->paginate();
         $response->assertViewIs('admin.customers.index');
         $response->assertViewHas('customers', $expectedCustomers);
     }
@@ -40,7 +40,7 @@ class ViewCustomerListTest extends TestCase
         ]));
 
         $response->assertSuccessful();
-        $filteredCustomers = Customer::with('user')->where('ci', 'like', '%0926687856')->orderByDesc('id')->paginate();
+        $filteredCustomers = Customer::with('user', 'level')->where('ci', 'like', '%0926687856')->orderByDesc('id')->paginate();
 
         $response->assertViewIs('admin.customers.index');
         $response->assertViewHas('customers', $filteredCustomers);
