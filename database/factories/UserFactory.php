@@ -20,7 +20,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
     return [
         'name'           => $faker->firstName,
         'last_name'      => $faker->lastName,
-        'avatar'         => 'default-avatar.jpg',
+        'avatar'         => 'avatars/default-avatar.jpg',
         'email'          => $faker->unique()->safeEmail,
         'phone'          => $faker->phoneNumber,
         'cell_phone'     => $faker->phoneNumber,
