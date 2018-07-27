@@ -2,8 +2,8 @@
 
 namespace App\Filters;
 
-use App\VitalGym\Entities\Routine;
 use App\VitalGym\Entities\Level;
+use App\VitalGym\Entities\Routine;
 
 class LevelFilter extends Filter
 {
