@@ -8,7 +8,7 @@
         @if (! Auth::guest())
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{ asset('storage/avatars/'.Auth::user()->avatar) }}" class="img-circle" alt="User Image" />
+                    <img src="{{ Storage::url(Auth::user()->avatar) }}" class="img-circle" alt="User Image" />
                 </div>
                 <div class="pull-left info">
                     <p>{{ Auth::user()->full_name }}</p>
@@ -33,8 +33,8 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('admin.plans.index') }}"><i class="fa fa-circle-o"></i>Todos los clientes</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Añadir Nuevo</a></li>
+                    <li><a href="{{ route('admin.customers.index') }}"><i class="fa fa-circle-o"></i>Todos los clientes</a></li>
+                    <li><a href="{{ route('admin.customers.create') }}"><i class="fa fa-circle-o"></i>Añadir Nuevo</a></li>
                 </ul>
             </li>
             <li class="treeview">
