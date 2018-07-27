@@ -3,6 +3,7 @@
 namespace Tests\Feature\Admin;
 
 use App\VitalGym\Entities\User;
+use Maatwebsite\Excel\Facades\Excel;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -20,4 +21,23 @@ class ReportTest extends TestCase
         $response->assertSuccessful();
         $response->assertViewIs('admin.reports.index');
     }
+
+    /**
+     * @test
+     */
+    /*public function user_can_download_memberships_export()
+    {
+        $this->withoutExceptionHandling();
+        Excel::fake();
+
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->get(route('admin.memberships-export.excel'));
+
+        $response->assertSuccessful();
+
+        Excel::assertDownloaded('memberships.xlsx', function(MembershipsPerMonthExport $export) {
+            return $export->collection()->contains('#2018-01');
+        });
+    }*/
 }

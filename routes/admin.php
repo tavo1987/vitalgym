@@ -25,6 +25,9 @@ Route::post('/memberships/{planId}/', 'MembershipController@store')->name('admin
 Route::patch('/memberships/{membershipId}/', 'MembershipController@update')->name('admin.memberships.update');
 Route::delete('/memberships/{membershipId}/', 'MembershipController@destroy')->name('admin.memberships.destroy');
 
+//Membership Exports
+Route::get('/memberships/exports/excel', 'MembershipExportController@excel')->name('admin.memberships-export.excel');
+
 //Customers
 Route::get('/customers', 'CustomerController@index')->name('admin.customers.index');
 Route::get('/customers/create', 'CustomerController@create')->name('admin.customers.create');
