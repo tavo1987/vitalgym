@@ -8,7 +8,7 @@ class CustomerFilter extends Filter
 {
     public function ci($value)
     {
-        return $this->builder->where('ci', 'like', "%{$value}");
+        return $this->builder->where('ci', 'like', "{$value}%");
     }
 
     public function email($value)
