@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\CreateRoutineRequest;
-use Illuminate\Support\Facades\Input;
-use App\VitalGym\Entities\Routine;
-use App\VitalGym\Entities\Level;
 use Illuminate\Http\Request;
+use App\VitalGym\Entities\Level;
+use App\VitalGym\Entities\Routine;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-
+use App\Http\Requests\CreateRoutineRequest;
 
 class RoutineController extends Controller
 {
@@ -33,7 +31,8 @@ class RoutineController extends Controller
     public function create()
     {
         $levels = Level::all();
-        return view('admin.routines.create',compact('levels'));
+
+        return view('admin.routines.create', compact('levels'));
     }
 
     /**
@@ -64,7 +63,8 @@ class RoutineController extends Controller
     public function show($id)
     {
         $routine = Routine::with('level')->findOrFail($id);
-        return view('admin.routines.show',compact('routine'));
+
+        return view('admin.routines.show', compact('routine'));
     }
 
     /**
