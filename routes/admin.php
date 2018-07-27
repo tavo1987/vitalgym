@@ -5,6 +5,10 @@ Route::get('users', 'UserController@index')->name('admin.users.index');
 //Levels
 Route::resource('levels', 'LevelController');
 
+//Routines
+Route::resource('routines','RoutineController');
+Route::post('download','RoutineController@downloadFile')->name('file.download');
+
 //Plans
 Route::get('/plans', 'PlanController@index')->name('admin.plans.index');
 Route::get('/plans/create', 'PlanController@create')->name('admin.plans.create');
