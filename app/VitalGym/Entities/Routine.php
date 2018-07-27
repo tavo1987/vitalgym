@@ -11,7 +11,7 @@ class Routine extends Model
     use Filterable;
 
     protected $fillable = [
-        'level_id','name','file','description'
+        'level_id', 'name', 'file', 'description',
     ];
 
     protected $filters = LevelFilter::class;

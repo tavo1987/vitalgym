@@ -6,8 +6,8 @@ Route::get('users', 'UserController@index')->name('admin.users.index');
 Route::resource('levels', 'LevelController');
 
 //Routines
-Route::resource('routines','RoutineController');
-Route::post('download','RoutineController@downloadFile')->name('file.download');
+Route::resource('routines', 'RoutineController');
+Route::post('download', 'RoutineController@downloadFile')->name('file.download');
 
 //Plans
 Route::get('/plans', 'PlanController@index')->name('admin.plans.index');
