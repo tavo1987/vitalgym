@@ -39,3 +39,6 @@ Route::get('/attendances/', 'AttendanceController@index')->name('admin.attendanc
 Route::get('/attendances/create', 'AttendanceController@create')->name('admin.attendances.create');
 Route::post('/attendances', 'AttendanceController@store')->name('admin.attendances.store');
 Route::delete('/attendances/{attendanceId}', 'AttendanceController@destroy')->name('admin.attendances.destroy');
+
+//Reports
+Route::get('/reports', 'ReportController@index')->name('admin.reports.index');
