@@ -9,7 +9,7 @@ class MembershipFilter extends Filter
 {
     public function name($name)
     {
-        $userIds = User::whereRole('customer')->where('name', 'like', "%{$name}%")->pluck('id');
+        $userIds = User::with('level')->where('name', 'like', "%{$name}%")->pluck('id');
         $customerIds = Customer::whereIn('user_id', $userIds)->pluck('id');
 
         return $this->builder->whereIn('customer_id', $customerIds);
