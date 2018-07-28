@@ -35,8 +35,9 @@ class CustomerController extends Controller
         $routine = $customer->routine;
         $level = $customer->level;
         $levels = Level::all();
+        $routines = Routine::all();
 
-        return view('admin.customers.edit', compact('customer', 'levels', 'level', 'routine'));
+        return view('admin.customers.edit', compact('customer','level', 'routine', 'levels', 'routines'));
     }
 
     public function show($customerId)
