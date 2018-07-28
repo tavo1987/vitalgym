@@ -16,33 +16,37 @@
         </div><!-- /.box-header -->
         <div class="box-body tw-px-0 tw-text-center">
             <div class="lg:tw-flex tw-flex-wrap">
-                @foreach($plans as $plan)
-                @endforeach
-                    <table class="table table-striped table-hover tw-min-w-lg tw-text-center">
-                        <thead>
-                            <th class="text-center">Nombre</th>
-                            <th class="text-center">Precio</th>
-                            <th class="text-center">Premium</th>
-                            <th class="text-center">Creado</th>
-                            <th class="text-center">Acciones</th>
-                        </thead>
-                        <tbody>
+                <table class="table table-striped table-hover tw-min-w-lg tw-text-center">
+                    <thead>
+                        <th class="text-center">Nombre</th>
+                        <th class="text-center">Precio</th>
+                        <th class="text-center">Premium</th>
+                        <th class="text-center">Creado</th>
+                        <th class="text-center">Acciones</th>
+                    </thead>
+                    <tbody>
                         @foreach($plans as $plan)
                             <tr>
                                 <td class="tw-capitalize">{{ $plan->name }}</td>
                                 <td>${{ $plan->price_in_dollars }}</td>
                                 <td>{{ $plan->is_premium ? 'si' : 'no' }}</td>
-                                <td>{{ $plan->created_at->format('d-m-y') }}</td>
+                                <td>{{ $plan->created_at->format('d-m-Y') }}</td>
                                 <td class="tw-flex tw-justify-center tw-items-center">
-                                    <a class="tw-px-2 tw-text-2xl tw-text-indigo" href=""><i class="fa fa-eye"></i></a>
-                                    <a class="tw-px-2 tw-text-2xl tw-text-indigo" href=""><i class="fa fa-edit"></i></a>
-                                    <a class="tw-px-2 tw-text-2xl tw-text-grey hover:tw-text-red-light" href=""><i class="fa fa-trash"></i></a>
+                                    <a href="{{ route('admin.plans.edit', $plan) }}" class="tw-px-2 tw-text-2xl tw-text-indigo"><i class="fa fa-edit"></i></a>
+                                    <form action="{{ route('admin.plans.destroy', $plan) }}"  method="post" class="form-delete">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="tw-px-2 tw-text-2xl tw-text-grey hover:tw-text-red-light js-button-delete focus:tw-outline-none">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
             </div><!-- /.end tw-flex -->
+            {{ $plans->links() }}
         </div><!-- /.end box-body -->
     </div><!-- /.end box -->
 @endsection
