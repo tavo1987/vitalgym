@@ -8,7 +8,7 @@ use App\VitalGym\Entities\Customer;
 
 $factory->define(Customer::class, function (Faker $faker) {
     return [
-        'ci' => '1723468565',
+        'ci' => null,
         'birthdate' => $faker->date(),
         'gender' => $faker->randomElement(['male', 'feminine']),
         'medical_observations' => $faker->sentence,
