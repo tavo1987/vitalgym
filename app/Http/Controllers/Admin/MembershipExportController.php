@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Maatwebsite\Excel\Excel;
 use App\Http\Controllers\Controller;
 use App\Exports\MembershipsExcelExport;
+use Maatwebsite\Excel\Exporter;
 
 class MembershipExportController extends Controller
 {
@@ -13,7 +14,7 @@ class MembershipExportController extends Controller
      */
     private $excel;
 
-    public function __construct(Excel  $excel)
+    public function __construct(Exporter  $excel)
     {
         $this->excel = $excel;
     }

@@ -19,25 +19,19 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Membresías último mes</td>
+                        <td>Detalles de todas las membresías y pagos</td>
                         <td class="tw-flex tw-justify-center tw-items-center">
-                            <form action=""  method="post" class="form-delete">
-                                @csrf
-                                <button class="tw-px-2 tw-text-2xl tw-text-indigo">
-                                    <i class="fa fa-download"></i>
-                                </button>
-                            </form>
+                            <a href="{{ route('admin.memberships-export.excel') }}" class="tw-px-2 tw-text-2xl tw-text-indigo">
+                                <i class="fa fa-download"></i>
+                            </a>
                         </td>
                     </tr>
                     <tr>
-                        <td>Clientes último mes</td>
+                        <td>Detalles todos los clientes registrados</td>
                         <td class="tw-flex tw-justify-center tw-items-center">
-                            <form action=""  method="post" class="form-delete">
-                                @csrf
-                                <button class="tw-px-2 tw-text-2xl tw-text-indigo">
-                                    <i class="fa fa-download"></i>
-                                </button>
-                            </form>
+                            <a href="{{ route('admin.customers-export.excel') }}" class="tw-px-2 tw-text-2xl tw-text-indigo">
+                                <i class="fa fa-download"></i>
+                            </a>
                         </td>
                     </tr>
                 </tbody><!-- /.end tbody -->
