@@ -56,6 +56,7 @@ class EditCustomerTest extends TestCase
         $this->withoutExceptionHandling();
         $adminUser = factory(User::class)->states('admin', 'active')->create();
         $levels = factory(Level::class)->times(3)->create();
+        factory(Routine::class)->times(5)->create(['level_id' => $levels->first()->id]);
         $routine = factory(Routine::class)->create(['level_id' => $levels->first()->id]);
         $customer = factory(Customer::class)->create(['level_id' => $levels->first()->id, 'routine_id' => $routine->id]);
 
@@ -67,6 +68,8 @@ class EditCustomerTest extends TestCase
         $this->assertTrue($response->data('routine')->is($routine));
         $this->assertTrue($response->data('level')->is($levels->first()));
         $levels->assertEquals($response->data('levels'));
+        $routines = Routine::all();
+        $routines->assertEquals($response->data('routines'));
     }
 
     /** @test */
@@ -357,6 +360,23 @@ class EditCustomerTest extends TestCase
     }
 
     /** @test */
+    function ignore_a_given_customer_ID_during_the_unique_ci_check()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+        $customer = factory(Customer::class)->create([ 'ci' => '1723468565']);
+
+        $response = $this->be($adminUser)->from(route('admin.customers.edit', $customer))->patch(route('admin.customers.update', $customer), $this->validParams([
+            'ci' => '1723468565',
+        ]));
+
+        $response->assertRedirect(route('admin.customers.index'));
+        $customer = Customer::first();
+        $this->assertEquals('1723468565',$customer->ci);
+        $response->assertSessionHas('alert-type', 'success');
+        $response->assertSessionHas('message');
+    }
+
+    /** @test */
     function ci_must_be_a_valid_ci()
     {
         $adminUser = factory(User::class)->states('admin', 'active')->create();
@@ -374,7 +394,8 @@ class EditCustomerTest extends TestCase
     function avatar_is_optional()
     {
         $adminUser = factory(User::class)->states('admin', 'active')->create();
-        $customer = factory(Customer::class)->create();
+        $user = factory(User::class)->states('customer')->create(['avatar' => 'avatars/my-avatar.jpg']);
+        $customer = factory(Customer::class)->create(['user_id' => $user->id]);
 
         $response = $this->be($adminUser)->from(route('admin.customers.edit', $customer))->patch(route('admin.customers.update', $customer), $this->validParams([
             'avatar' => null,
@@ -382,7 +403,7 @@ class EditCustomerTest extends TestCase
 
         $response->assertRedirect(route('admin.customers.index'));
         $customer = Customer::first();
-        $this->assertEquals('avatars/default-avatar.jpg', $customer->avatar);
+        $this->assertEquals('avatars/my-avatar.jpg', $customer->avatar);
         $response->assertSessionHas('alert-type', 'success');
         $response->assertSessionHas('message');
     }

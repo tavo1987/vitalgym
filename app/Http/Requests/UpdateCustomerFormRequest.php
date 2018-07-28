@@ -34,7 +34,11 @@ class UpdateCustomerFormRequest extends FormRequest
                 Rule::unique('users')->ignore($this->getUserByRouteParam()->id),
             ],
             'password' => 'nullable|min:6|max:64|same:password_confirmation',
-            'ci' => 'nullable|ecuador:ci|unique:customers,ci',
+            'ci' => [
+                'nullable',
+                'ecuador:ci',
+                Rule::unique('customers')->ignore($this->getCustomerByRouteParam()->id),
+            ],
             'avatar' => 'nullable|image|max:1024',
             'phone' => 'required|max:10',
             'cell_phone' => 'required|max:10',
@@ -51,7 +55,7 @@ class UpdateCustomerFormRequest extends FormRequest
         $userRequestData = collect([
             'name' => $this->get('name'),
             'last_name' => $this->get('last_name'),
-            'avatar' => $this->hasFile('avatar') ? $this->file('avatar')->store('avatars', 'public') : 'avatars/default-avatar.jpg',
+            'avatar' => $this->hasFile('avatar') ? $this->file('avatar')->store('avatars', 'public') : $this->getUserByRouteParam()->avatar,
             'email' => $this->get('email'),
             'phone' => $this->get('phone'),
             'cell_phone' => $this->get('cell_phone'),
@@ -80,5 +84,10 @@ class UpdateCustomerFormRequest extends FormRequest
     public function getUserByRouteParam()
     {
         return optional(Customer::with('user')->findOrFail($this->route('customerId')))->user;
+    }
+
+    public function getCustomerByRouteParam()
+    {
+        return optional(Customer::with('user')->findOrFail($this->route('customerId')));
     }
 }
