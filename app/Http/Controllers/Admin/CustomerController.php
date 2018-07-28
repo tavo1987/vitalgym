@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Level;
-use App\VitalGym\Entities\Routine;
 use App\Mail\CustomerWelcomeEmail;
+use App\VitalGym\Entities\Routine;
 use App\VitalGym\Entities\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
