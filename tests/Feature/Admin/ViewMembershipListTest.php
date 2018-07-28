@@ -22,9 +22,9 @@ class ViewMembershipListTest extends TestCase
         $response = $this->be($adminUser)->get(route('admin.memberships.index'));
 
         $response->assertSuccessful();
-        //$expectedMemberships = Membership::with('customer', 'plan')->paginate();
+        $expectedMemberships = Membership::with('customer', 'plan')->paginate();
         $response->assertViewIs('admin.memberships.index');
-        $response->assertViewHas('memberships');
+        $response->assertViewHas('memberships', $expectedMemberships);
     }
     
     /** @test */
