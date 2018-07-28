@@ -82,7 +82,7 @@
                 </ul>
             </li>
             <li class="{{ request()->is('admin/payments') ? 'active' : '' }}">
-                <a href="#"><i class='fa fa-money'></i> <span>Pagos</span></a>
+                <a href="{{ route('admin.payments.index') }}"><i class='fa fa-money'></i> <span>Pagos</span></a>
             </li>
             <li class="{{ request()->is('admin/attendances') || request()->is('admin/attendances/*') ? 'active' : '' }}">
                 <a href="#"><i class='fa fa-calendar'></i> <span>Asistencia</span></a>
