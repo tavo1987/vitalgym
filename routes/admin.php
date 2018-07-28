@@ -47,5 +47,8 @@ Route::get('/attendances/create', 'AttendanceController@create')->name('admin.at
 Route::post('/attendances', 'AttendanceController@store')->name('admin.attendances.store');
 Route::delete('/attendances/{attendanceId}', 'AttendanceController@destroy')->name('admin.attendances.destroy');
 
+//Membership Exports
+Route::get('/customers/exports/excel', 'CustomerExportController@excel')->name('admin.customers-export.excel');
+
 //Reports
 Route::get('/reports', 'ReportController@index')->name('admin.reports.index');
