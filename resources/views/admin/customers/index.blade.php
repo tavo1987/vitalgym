@@ -37,6 +37,7 @@
                 </form><!-- /.end form -->
             </div><!-- /.end xl:tw-w-3/5 -->
         </div><!-- /.box-header -->
+        <div class="box-body tw-px-0 tw-text-center">
             <table class="table table-striped table-hover tw-min-w-lg tw-text-left">
                 <thead>
                     <th class="text-left">Id</th>

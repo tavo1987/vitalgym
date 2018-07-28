@@ -157,7 +157,7 @@
                     <input class="form-control" type="password" name="confirmation_password">
                 </div>
 
-                <button type="submit" class="vg-button tw-bg-indigo tw-inline-flex tw-items-center tw-border-indigo">
+                <button type="submit" class="vg-button tw-bg-indigo tw-inline-flex tw-items-center tw-border-indigo tw-mr-1">
                     <i class="fa fa-save tw-mr-1 tw-text-base"></i>
                     Actualizar
                 </button>
