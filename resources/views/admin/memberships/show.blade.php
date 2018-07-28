@@ -4,11 +4,6 @@
     Detalles Membresía - N# {{ $membership->id }}
 @endsection
 
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('plugins/select2/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/datepicker/bootstrap-datepicker3.min.css') }}">
-@endpush
-
 @section('main-content')
     <div class="box">
         <div class="box-header tw-mb-3 tw-py-0 tw-mb-2">
@@ -19,7 +14,7 @@
                 <h2 class="tw-bg-grey-light tw-px-4 tw-text-black tw-py-3 tw-text-lg tw-text-center md:tw-text-left">Cliente</h2>
                 <div class="tw-px-6 tw-py-6 lg:tw-flex lg:tw-items-center tw-text-center md:tw-text-left">
                     <div class="tw-rounded-full tw-overflow-hidden tw-w-32 tw-inline-block tw-mr-8 tw-border-4 tw-border-grey-light">
-                        <img src="{{ asset("storage/avatars/{$customer->avatar}") }}" alt="Logo">
+                        <img src="{{ Storage::url($customer->avatar)  }}" alt="Logo">
                     </div>
                     <div>
                         <h3 class="tw-mb-px">{{ $customer->full_name }}</h3>
@@ -72,26 +67,19 @@
                     </tr>
                 </table>
             </div><!-- ./End tw-shadow-->
+            
+            <div class="tw-mt-6">
+                <a href="{{ route('admin.memberships.edit', $membership) }}"
+                   class="vg-button tw-text-white tw-bg-indigo tw-inline-flex tw-items-center tw-border-indigo tw-mr-1">
+                    <i class="fa fa-pencil tw-mr-1 tw-text-base"></i>
+                    Editar
+                </a>
+                <a href="{{ route('admin.memberships.index') }}"
+                   class="vg-button tw-text-black tw-bg-transparent hover:tw-text-black tw-inline-flex tw-items-center tw-border">
+                    <i class="fa fa-undo tw-text-base tw-mr-1"></i>
+                    Volver
+                </a>
+            </div><!-- ./End tw-m-b-->
         </div><!-- ./End box body-->
     </div><!-- ./End box default-->
 @endsection
-
-@push('footer-scripts')
-    <script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
-    <script src="{{ asset('plugins/datepicker/bootstrap-datepicker.min.js') }}"></script>
-    <script src="{{ asset('plugins/datepicker/locales/bootstrap-datepicker.es.js') }}"></script>
-    <script>
-        $(document).ready(function () {
-            $('.datepicker').datepicker({
-                language: 'es',
-                format: 'yyyy-mm-dd',
-                orientation: 'bottom',
-                startDate: new Date(),
-                todayHighlight: true,
-                autoclose: true,
-            });
-            $('.select2').select2();
-        })
-    </script>
-@endpush
-

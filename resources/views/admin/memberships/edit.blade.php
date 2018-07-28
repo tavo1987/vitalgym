@@ -21,9 +21,8 @@
                 <div class="form-group {{  $errors->has('customer_id') ? 'has-error': '' }}">
                     <label>Cliente</label>
                     <select name="customer_id" class="form-control select2" tabindex="-1">
-                        <option>Selecciona un cliente</option>
                         @foreach($customers as $c)
-                            <option  value="{{ $c->id }}" {{ old('customer_id', $customer->id) == $c->id ? 'selected' : ''}}>
+                            <option  value="{{ $c->id }}" {{ old('customer_id', $customer->id) == $c->id ? 'selected' : ''}} data-avatar="{{ Storage::url($c->avatar) }}">
                                 {{ $c->name }} {{ $c->last_name }} - {{ $c->email }}
                             </option>
                         @endforeach
@@ -68,10 +67,17 @@
                     </div>
                 </div>
 
-                <button type="submit" class="vg-button tw-bg-indigo tw-inline-flex tw-items-center">
-                    <i class="fa fa-save tw-mr-1 tw-text-base"></i>
-                    Guardar
-                </button>
+                <div class="tw-mt-6">
+                    <button type="submit" class="vg-button tw-bg-indigo tw-inline-flex tw-items-center">
+                        <i class="fa fa-save tw-mr-1 tw-text-base"></i>
+                        Actualizar
+                    </button>
+                    <a href="{{ route('admin.memberships.index') }}"
+                       class="vg-button tw-text-black tw-bg-transparent hover:tw-text-black tw-inline-flex tw-items-center tw-border">
+                        <i class="fa fa-undo tw-text-base tw-mr-1"></i>
+                        Volver
+                    </a>
+                </div><!-- ./End tw-m-b-->
             </form>
         </div>
     </div><!-- ./End box default-->
@@ -104,7 +110,19 @@
             });
 
             //Select2 Configuration for customers
-            $('.select2').select2();
+            function formatState (state) {
+                if (!state.id) { return state.text; }
+                var $state = $(
+                    '<span><img class="tw-rounded-full tw-w-8 tw-h-8 tw-mr-2" src="'+state.element.dataset.avatar+'"/> ' + state.text + '</span>'
+                );
+                return $state;
+            }
+
+            $('.select2').select2({
+                placeholder: 'Seleccionar  un cliente',
+                allowClear: true,
+                templateResult: formatState,
+            });
         })
     </script>
 @endpush
