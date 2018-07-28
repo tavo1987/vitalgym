@@ -13,3 +13,4 @@ Homestead.yaml
 *.css.map
 _ide_helper.php
 *.map
+.phpstorm.meta.php
