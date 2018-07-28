@@ -55,7 +55,7 @@
                                 {{ $membership->id }}
                             </td>
                             <td class="tw-text-left">
-                                <img class="tw-h-10 tw-rounded-full tw-mr-2" src="{{ Storage::url( $membership->customer->avatar ) }}" alt="{{ $membership->customer->full_name }}">
+                                <img class="tw-w-10 tw-h-10 tw-rounded-full tw-mr-2" src="{{ Storage::url( $membership->customer->avatar ) }}" alt="{{ $membership->customer->full_name }}">
                                 {{ $membership->customer->full_name }}
                             </td>
                             <td class="tw-text-left">{{ $membership->customer->email }}</td>

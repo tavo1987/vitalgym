@@ -29,7 +29,7 @@
                     <tr>
                         <td>{{ $payment->id }}</td>
                         <td class="tw-text-left">
-                            <img class="tw-h-10 tw-rounded-full tw-mr-2" src="{{ Storage::url( $payment->customer->avatar ) }}" alt="{{ $payment->customer->full_name }}">
+                            <img class="tw-w-10 tw-h-10 tw-rounded-full tw-mr-2" src="{{ Storage::url( $payment->customer->avatar ) }}" alt="{{ $payment->customer->full_name }}">
                             {{ $payment->customer->full_name }}
                         </td>
                         <td>{{ $payment->membership->plan->name }}</td>
