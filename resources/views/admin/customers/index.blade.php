@@ -55,7 +55,7 @@
                                 <img class="tw-h-10 tw-w-10 tw-rounded-full" src="{{ Storage::url($customer->avatar) }}" alt="{{ $customer->name }}">
                                 <span class="tw-pl-3">{{ $customer->full_name }}</span>
                             </td>
-                            <td>{{ $customer->ci }}</td>
+                            <td>{{ $customer->ci ?? 'Vacio'  }}</td>
                             <td>{{ $customer->email }}</td>
                             <td>{{ $customer->level->name }}</td>
                             <td>{{ $customer->gender }}</td>

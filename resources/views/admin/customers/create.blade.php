@@ -156,10 +156,15 @@
                     <input class="form-control" type="password" name="confirmation_password">
                 </div>
 
-                <button type="submit" class="vg-button tw-bg-indigo tw-inline-flex tw-items-center">
+                <button type="submit" class="vg-button tw-bg-indigo tw-inline-flex tw-items-center tw-border-indigo">
                     <i class="fa fa-save tw-mr-1 tw-text-base"></i>
                     Guardar
                 </button>
+                <a href="{{ route('admin.customers.index') }}"
+                   class="vg-button tw-text-black tw-bg-transparent hover:tw-text-black tw-inline-flex tw-items-center tw-border">
+                    <i class="fa fa-undo tw-mr-1 tw-text-base"></i>
+                    Volver
+                </a>
             </form><!-- ./Endform -->
         </div><!-- ./End box body -->
     </div><!-- ./End box default -->
