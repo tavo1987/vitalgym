@@ -28,7 +28,10 @@
                 @foreach($payments as $payment)
                     <tr>
                         <td>{{ $payment->id }}</td>
-                        <td class="tw-text-left">{{ $payment->customer->full_name }}  - {{ $payment->customer->email }}</td>
+                        <td class="tw-text-left">
+                            <img class="tw-h-10 tw-rounded-full tw-mr-2" src="{{ Storage::url( $payment->customer->avatar ) }}" alt="{{ $payment->customer->full_name }}">
+                            {{ $payment->customer->full_name }}
+                        </td>
                         <td>{{ $payment->membership->plan->name }}</td>
                         <td class="tw-text-center">{{ $payment->membership_quantity }}</td>
                         <td class="tw-text-center">${{ $payment->membership->plan->price_in_dollars }}</td>

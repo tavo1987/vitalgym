@@ -20,10 +20,9 @@
                 <div class="form-group {{  $errors->has('customer_id') ? 'has-error': '' }}">
                     <label>Cliente</label>
                     <select name="customer_id" class="form-control select2" tabindex="-1">
-                        <option>Selecciona un cliente</option>
                         @foreach($customers as $customer)
-                            <option  value="{{ $customer->id }}" {{ old('customer_id') == $customer->id ? 'selected' : '' }}>
-                                {{ $customer->name }} {{ $customer->last_name }} - {{ $customer->email }}
+                            <option  value="{{ $customer->id }}" {{ old('customer_id') == $customer->id ? 'selected' : '' }} data-avatar="{{ Storage::url($customer->avatar) }}">
+                                {{ $customer->full_name }} {{ $customer->email }}
                             </option>
                         @endforeach
                     </select>
@@ -91,7 +90,20 @@
                 todayHighlight: true,
                 autoclose: true,
             });
-            $('.select2').select2();
+
+            function formatState (state) {
+                if (!state.id) { return state.text; }
+                var $state = $(
+                    '<span><img class="tw-rounded-full tw-h-8 tw-mr-2" src="'+state.element.dataset.avatar+'"/> ' + state.text + '</span>'
+                );
+                return $state;
+            }
+
+            $('.select2').select2({
+                placeholder: 'Seleccionar  un cliente',
+                allowClear: true,
+                templateResult: formatState,
+            });
         })
     </script>
 @endpush

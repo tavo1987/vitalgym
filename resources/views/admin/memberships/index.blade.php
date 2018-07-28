@@ -40,9 +40,9 @@
         <div class="box-body tw-px-0 tw-text-center">
             <table class="table table-striped table-hover tw-min-w-lg tw-text-center">
                 <thead>
-                    <th class="text-center">Nombre</th>
-                    <th class="text-center">Apellido</th>
-                    <th class="text-center">Email</th>
+                    <th class="text-center">Id</th>
+                    <th class="text-left">Cliente</th>
+                    <th class="text-left">Email</th>
                     <th class="text-center">Tipo</th>
                     <th class="text-center">Inicio</th>
                     <th class="text-center">Expira</th>
@@ -51,9 +51,14 @@
                 <tbody>
                     @foreach($memberships as $membership)
                         <tr>
-                            <td>{{ $membership->customer->name }}</td>
-                            <td>{{ $membership->customer->last_name }}</td>
-                            <td>{{ $membership->customer->email }}</td>
+                            <td>
+                                {{ $membership->id }}
+                            </td>
+                            <td class="tw-text-left">
+                                <img class="tw-h-10 tw-rounded-full tw-mr-2" src="{{ Storage::url( $membership->customer->avatar ) }}" alt="{{ $membership->customer->full_name }}">
+                                {{ $membership->customer->full_name }}
+                            </td>
+                            <td class="tw-text-left">{{ $membership->customer->email }}</td>
                             <td class="tw-capitalize">{{ $membership->plan->name }}</td>
                             <td>{{ $membership->date_start->format('Y-m-d') }}</td>
                             <td>

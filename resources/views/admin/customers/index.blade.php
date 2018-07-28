@@ -52,7 +52,7 @@
                         <tr>
                             <td>{{ $customer->id }}</td>
                             <td>
-                                <img class="tw-h-8 tw-rounded-full" src="{{ Storage::url($customer->avatar) }}" alt="{{ $customer->name }}">
+                                <img class="tw-h-10 tw-rounded-full" src="{{ Storage::url($customer->avatar) }}" alt="{{ $customer->name }}">
                                 <span class="tw-pl-3">{{ $customer->full_name }}</span>
                             </td>
                             <td>{{ $customer->ci }}</td>
