@@ -28,7 +28,7 @@ class CreateRoutineRequest extends FormRequest
             'name'  =>  'required|min:3|max:20',
             'file'  =>   'required|max:2048|mimes:jpeg,png,jpg,doc,docx,pdf',
             'description'   =>  'required|max:255',
-            'level_id'  =>  'required|numeric'
+            'level_id'  =>  'required|numeric',
         ];
     }
 }
