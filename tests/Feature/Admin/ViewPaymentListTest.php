@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin;
 
+use App\VitalGym\Entities\Membership;
 use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\User;
 use Tests\TestCase;
@@ -16,13 +17,15 @@ class ViewPaymentListTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $adminUser = factory(User::class)->states('admin', 'active')->create();
-        factory(Payment::class)->times(5)->create();
+        //Creating memberships to generate payments automatically
+        factory(Membership::class)->times(5)->create();
 
         $response = $this->be($adminUser)->get(route('admin.payments.index'));
 
         $response->assertSuccessful();
         $response->assertViewIs('admin.payments.index');
-        $expectedPayments = Payment::with('customer', 'user', 'membership')->orderByDesc('created_at')->paginate();
+        $expectedPayments = Payment::with('customer', 'user', 'membership.plan')->orderByDesc('created_at')->paginate();
+
         $response->assertViewHas('payments', $expectedPayments);
     }
 }

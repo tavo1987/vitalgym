@@ -9,7 +9,7 @@ class PaymentController extends Controller
 {
     public function index()
     {
-        $payments = Payment::with('customer', 'user', 'membership')->orderByDesc('created_at')->paginate();
+        $payments = Payment::with('customer', 'user', 'membership.plan')->orderByDesc('created_at')->paginate();
 
         return view('admin.payments.index', compact('payments'));
     }
