@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use Maatwebsite\Excel\Excel;
+use Maatwebsite\Excel\Exporter;
 use App\Http\Controllers\Controller;
 use App\Exports\MembershipsExcelExport;
-use Maatwebsite\Excel\Exporter;
 
 class MembershipExportController extends Controller
 {

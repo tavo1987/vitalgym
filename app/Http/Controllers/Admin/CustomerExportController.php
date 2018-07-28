@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\CustomersExcelExport;
-use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Exporter;
+use App\Http\Controllers\Controller;
+use App\Exports\CustomersExcelExport;
 
 class CustomerExportController extends Controller
 {
