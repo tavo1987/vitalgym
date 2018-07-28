@@ -35,8 +35,8 @@ class CreateCustomerFormRequest extends FormRequest
             'address' => 'required|max:255',
             'birthdate' => 'required|date',
             'gender' => 'required|max:60',
-            'routine_id' => 'exists:routines,id',
-            'level_id' => 'exists:levels,id',
+            'routine_id' => 'required|exists:routines,id',
+            'level_id' => 'required|exists:levels,id',
         ];
     }
 

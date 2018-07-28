@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Level;
+use App\VitalGym\Entities\Routine;
 use App\Mail\CustomerWelcomeEmail;
 use App\VitalGym\Entities\Customer;
 use App\Http\Controllers\Controller;
@@ -23,8 +24,9 @@ class CustomerController extends Controller
     public function create()
     {
         $levels = Level::all();
+        $routines = Routine::all();
 
-        return view('admin.customers.create', compact('levels'));
+        return view('admin.customers.create', compact('levels', 'routines'));
     }
 
     public function edit($customerId)

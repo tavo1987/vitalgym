@@ -63,12 +63,14 @@ class AddCustomerTest extends TestCase
 
         $adminUser = factory(User::class)->states('admin', 'active')->create();
         $levels = factory(Level::class)->times(3)->create();
+        $routines = factory(Routine::class)->times(3)->create(['level_id' => $levels->random()->id]);
 
         $response = $this->be($adminUser)->get(route('admin.customers.create'));
 
         $response->assertSuccessful();
         $response->assertViewIs('admin.customers.create');
         $levels->assertEquals($response->data('levels'));
+        $routines->assertEquals($response->data('routines'));
     }
     
     /** @test */
