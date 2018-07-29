@@ -1,4 +1,5 @@
 <?php
+
 // Users
 Route::get('users', 'UserController@index')->name('admin.users.index');
 
