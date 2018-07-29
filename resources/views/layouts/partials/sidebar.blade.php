@@ -90,8 +90,16 @@
             <li class="{{ request()->is('admin/reports') ? 'active' : '' }}">
                 <a href="{{ route('admin.reports.index') }}"><i class='fa fa-file-pdf-o'></i> <span>Reportes</span></a>
             </li>
-            <li class="{{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
-                <a href="{{ route('admin.users.index') }}"><i class='fa fa-users'></i> <span>Usuarios</span></a>
+            <li class="treeview {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
+                <a href="#">
+                    <i class="fa fa-users" aria-hidden="true"></i>
+                    <span>Usuarios</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('admin.users.index') }}"><i class="fa fa-circle-o"></i>Administrar usuario</a></li>
+                    <li><a href="{{ route('admin.users.create') }}"><i class="fa fa-circle-o"></i>Añadir nuevo usuario</a></li>
+                </ul>
             </li>
         </ul><!-- /.sidebar-menu -->
     </section>
