@@ -18,6 +18,6 @@ class UserProfileController extends Controller
     {
         auth()->user()->update($request->userParams());
 
-        return redirect()->route('admin.profile.edit')->with(['message' => 'Perfil Actualizado con éxito' ,'alert-type' => 'success']);
+        return redirect()->route('admin.profile.edit')->with(['message' => 'Perfil Actualizado con éxito', 'alert-type' => 'success']);
     }
 }
