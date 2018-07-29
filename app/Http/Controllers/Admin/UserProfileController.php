@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\VitalGym\Entities\User;
+use App\Http\Controllers\Controller;
 
 class UserProfileController extends Controller
 {
@@ -34,6 +34,6 @@ class UserProfileController extends Controller
 
         auth()->user()->update($userRequestData->toArray());
 
-        return redirect()->route('admin.profile.edit')->with(['message' => 'Perfil Actualizado con éxito' ,'alert-type' => 'success']);
+        return redirect()->route('admin.profile.edit')->with(['message' => 'Perfil Actualizado con éxito', 'alert-type' => 'success']);
     }
 }
