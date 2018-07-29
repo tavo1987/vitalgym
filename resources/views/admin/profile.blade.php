@@ -83,7 +83,7 @@
                 </div>
                 <div class="form-group {{ $errors->has('password') ? ' has-error': '' }}">
                     <label>Repetir Contraseña:</label>
-                    <input class="form-control" type="password" name="confirmation_password">
+                    <input class="form-control" type="password" name="password_confirmation">
                 </div>
 
                 <button type="submit" class="vg-button tw-bg-indigo tw-inline-flex tw-items-center tw-border-indigo tw-mr-1">
