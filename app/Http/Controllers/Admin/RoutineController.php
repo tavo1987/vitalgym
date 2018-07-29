@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use File;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateRoutineFormRequest;
 use App\VitalGym\Entities\Level;
 use App\VitalGym\Entities\Routine;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CreateRoutineFormRequest;
 
@@ -47,12 +47,19 @@ class RoutineController extends Controller
 
     public function edit($routineId)
     {
-        //
+        $levels = Level::all();
+        $routine = Routine::with('level')->findOrFail($routineId);
+
+        return view('admin.routines.edit', compact('routine', 'levels'));
+
     }
 
-    public function update(Request $request, $routineId)
+    public function update(UpdateRoutineFormRequest $request, $routineId)
     {
-        //
+        $routine = Routine::findOrFail($routineId);
+        $routine->update($request->routineParams());
+
+        return redirect()->route('admin.routines.index')->with(['message' => 'Rutina actualizada con éxito', 'alert-type' => 'success']);
     }
 
     public function destroy($routineId)

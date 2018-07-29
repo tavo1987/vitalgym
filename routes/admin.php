@@ -14,8 +14,9 @@ Route::resource('levels', 'LevelController');
 Route::get('/routines', 'RoutineController@index')->name('admin.routines.index');
 Route::get('/routines/create', 'RoutineController@create')->name('admin.routines.create');
 Route::get('/routines/{routineId}/details', 'RoutineController@show')->name('admin.routines.show');
-Route::get('/routines/{routineId}/edit', 'RoutineController@show')->name('admin.routines.edit');
+Route::get('/routines/{routineId}/edit', 'RoutineController@edit')->name('admin.routines.edit');
 Route::post('/routines', 'RoutineController@store')->name('admin.routines.store');
+Route::patch('/routines/{routineId}', 'RoutineController@update')->name('admin.routines.update');
 Route::delete('/routines/{routineId}', 'RoutineController@destroy')->name('admin.routines.destroy');
 Route::get('/download/{routineId}', 'RoutineController@downloadFile')->name('admin.routines.download');
 
