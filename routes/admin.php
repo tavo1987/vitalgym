@@ -1,6 +1,9 @@
 <?php
-
+// Users
 Route::get('users', 'UserController@index')->name('admin.users.index');
+
+//Admin Profile
+Route::get('profile', 'UserProfileController@edit')->name('admin.admin-profile.edit');
 
 //Levels
 Route::resource('levels', 'LevelController');

@@ -18,31 +18,7 @@
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                <!-- Notifications Menu -->
-                <li class="dropdown notifications-menu">
-                    <!-- Menu toggle button -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-bell-o"></i>
-                        <span class="label label-warning">10</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="header">{{ trans('adminlte_lang::message.notifications') }}</li>
-                        <li>
-                            <!-- Inner Menu: contains the notifications -->
-                            <ul class="menu">
-                                <li><!-- start notification -->
-                                    <a href="#">
-                                        <i class="fa fa-users text-aqua"></i> {{ trans('adminlte_lang::message.newmembers') }}
-                                    </a>
-                                </li><!-- end notification -->
-                            </ul>
-                        </li>
-                        <li class="footer"><a href="#">{{ trans('adminlte_lang::message.viewall') }}</a></li>
-                    </ul>
-                </li>
-
                 @if (Auth::guest())
-                    <li><a href="{{ url('/register') }}">{{ trans('adminlte_lang::message.register') }}</a></li>
                     <li><a href="{{ url('/login') }}">{{ trans('adminlte_lang::message.login') }}</a></li>
                 @else
                     <!-- User Account Menu -->
@@ -56,36 +32,36 @@
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
-                            <li class="user-header bg-blue">
+                            <li class="user-header tw-bg-grey-lighter">
                                 <img src="{{ Storage::url(Auth::user()->avatar) }}" class="img-circle" alt="User Image" />
                                 <p>
-                                    <span>{{ Auth::user()->full_name }} - {{ Auth::user()->nick_name }}</span>
-                                    {{ Auth::user()->name }}
-                                    <small>Miembro desde: {{ Auth::user()->created_at->format('F-Y') }}</small>
+                                    <span>{{ Auth::user()->full_name }}</span>
+                                    <small>Miembro desde: {{ Auth::user()->created_at->diffForHumans() }}</small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
                             <li class="user-body">
-
                                 <div class="col-xs-12 text-center">
                                     <a href="#">Vital Gym</a>
                                 </div>
-
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.profile') }}</a>
+                                    <a href="{{ route('admin.admin-profile.edit') }}" class="vg-button tw-bg-indigo tw-py-2 tw-border-indigo">
+                                        {{ trans('adminlte_lang::message.profile') }}
+                                    </a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{ url('/logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <a href="{{ url('/logout') }}"
+                                       class="vg-button tw-text-grey-dark hover:tw-text-black tw-py-2 tw-border"
+                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ trans('adminlte_lang::message.signout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
-
                                 </div>
                             </li>
                         </ul>
