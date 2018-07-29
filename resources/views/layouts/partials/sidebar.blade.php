@@ -59,15 +59,15 @@
                     <li><a href="{{ route('admin.plans.create') }}"><i class="fa fa-circle-o"></i>Añadir nuevo</a></li>
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="treeview {{ request()->is('admin/routines') || request()->is('admin/routines/*') ? 'active' : '' }}">
                 <a href="#">
                     <i class='fa fa-archive'></i>
                     <span>Rutinas</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Todas</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Nueva</a></li>
+                    <li><a href="{{ route('admin.routines.index') }}"><i class="fa fa-circle-o"></i>Administrar rutinas</a></li>
+                    <li><a href="{{ route('admin.routines.create') }}"><i class="fa fa-circle-o"></i>Añadir Nueva</a></li>
                 </ul>
             </li>
             <li class="treeview {{ request()->is('admin/levels') || request()->is('admin/levels/*') ? 'active' : '' }}">

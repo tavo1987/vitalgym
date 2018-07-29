@@ -11,8 +11,13 @@ Route::patch('profile', 'UserProfileController@update')->name('admin.profile.upd
 Route::resource('levels', 'LevelController');
 
 //Routines
-Route::resource('routines', 'RoutineController');
-Route::post('download', 'RoutineController@downloadFile')->name('file.download');
+Route::get('/routines', 'RoutineController@index')->name('admin.routines.index');
+Route::get('/routines/create', 'RoutineController@create')->name('admin.routines.create');
+Route::get('/routines/{routineId}/details', 'RoutineController@show')->name('admin.routines.show');
+Route::get('/routines/{routineId}/edit', 'RoutineController@show')->name('admin.routines.edit');
+Route::post('/routines', 'RoutineController@store')->name('admin.routines.store');
+Route::delete('/routines/{routineId}', 'RoutineController@destroy')->name('admin.routines.destroy');
+Route::get('/download/{routineId}', 'RoutineController@downloadFile')->name('admin.routines.download');
 
 //Plans
 Route::get('/plans', 'PlanController@index')->name('admin.plans.index');

@@ -2,32 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
+use File;
 use Illuminate\Http\Request;
 use App\VitalGym\Entities\Level;
 use App\VitalGym\Entities\Routine;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\CreateRoutineRequest;
+use App\Http\Requests\CreateRoutineFormRequest;
 
 class RoutineController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $routines = Routine::with('level')->filter(request())->orderByDesc('created_at')->paginate();
+        $routines = Routine::with('level')->orderByDesc('created_at')->paginate();
 
         return view('admin.routines.index', compact('routines'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $levels = Level::all();
@@ -35,74 +26,55 @@ class RoutineController extends Controller
         return view('admin.routines.create', compact('levels'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(CreateRoutineRequest $request)
+    public function store(CreateRoutineFormRequest $request)
     {
-        $routine = new Routine;
-        $routine->level_id = $request->get('level_id');
-        $routine->name = $request->get('name');
-        $routine->description = $request->get('description');
-        $routine->file = $request->hasFile('file') ? $request->file('file')->store('files', 'public') : 'files/routines-files';
+        Routine::create([
+            'level_id' => $request->get('level_id'),
+            'name' => $request->get('name'),
+            'description' => $request->get('description'),
+            'file' => $request->file('file')->store('files'),
+        ]);
 
-        $routine->save();
-
-        return redirect()->route('routines.index')->with(['message' => 'Rutina guardada con éxito', 'alert-type' => 'success']);
+        return redirect()->route('admin.routines.index')->with(['message' => 'Rutina guardada con éxito', 'alert-type' => 'success']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show($routineId)
     {
-        $routine = Routine::with('level')->findOrFail($id);
+        $routine = Routine::with('level')->findOrFail($routineId);
 
         return view('admin.routines.show', compact('routine'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit($routineId)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, $routineId)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy($routineId)
     {
-        //
+        $routine = Routine::findOrFail($routineId);
+        Storage::delete($routine->file);
+        $routine->delete();
+
+        return redirect()->route('admin.routines.index')->with(['message' => 'Rutina Eliminada con éxito', 'alert-type' => 'success']);
     }
 
-    public function downloadFile(Routine $routine)
+    public function downloadFile($routineId)
     {
-        return Storage::download($routine->file);
+        $routine = Routine::findOrFail($routineId);
+
+        if ($routine->file) {
+            $extension = File::extension($routine->file);
+            $fileName = str_slug($routine->name).'.'.$extension;
+
+            return Storage::download($routine->file, $fileName);
+        }
+
+        return redirect()->back()->with(['message' => 'El archivo no se econtró', 'alert-type' => 'error']);
     }
 }

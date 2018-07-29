@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRoutineRequest extends FormRequest
+class CreateRoutineFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +23,11 @@ class CreateRoutineRequest extends FormRequest
      */
     public function rules()
     {
-        //|mimes:jpeg,png,jpg,doc,docx,pdf
         return [
             'name'  =>  'required|min:3|max:20',
-            'file'  =>   'required|max:2048|mimes:jpeg,png,jpg,doc,docx,pdf',
+            'file'  =>   'required|max:2048|mimes:jpeg,png,jpg,doc,docx,pdf,xlsx',
             'description'   =>  'required|max:255',
-            'level_id'  =>  'required|numeric',
+            'level_id'  =>  'required|exists:levels,id',
         ];
     }
 }
