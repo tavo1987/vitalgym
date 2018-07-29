@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use App\VitalGym\Entities\Routine;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRoutineFormRequest extends FormRequest
 {
@@ -43,6 +43,7 @@ class UpdateRoutineFormRequest extends FormRequest
 
         if ($this->has('file')) {
             Storage::delete($this->getRoutineFileByRouteParam());
+
             return $requestedData->merge(['file' => $this->file('file')->store('files')])->toArray();
         }
 
