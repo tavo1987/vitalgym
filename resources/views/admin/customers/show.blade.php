@@ -66,7 +66,7 @@
                     <tr>
                         <td class="tw-font-semibold tw-inline-block tw-ml-6 tw-uppercase tw-text-xs">Rutina:</td>
                         <td class="tw-uppercase tw-text-xs">
-                            <a class="tw-text-indigo" href="#">
+                            <a class="tw-text-indigo" href="{{ route('admin.routines.download', $customer->routine) }}">
                                 <i class="fa fa-download"></i>
                                 {{ $customer->routine->name }}
                             </a>
