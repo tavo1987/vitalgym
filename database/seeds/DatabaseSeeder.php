@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('secret'),
         ]);
 
+        //Admin Users
+        factory(\App\VitalGym\Entities\User::class)->states('admin', 'active')->times(20)->create();
+
         //Levels
         $levels = collect([
             factory(\App\VitalGym\Entities\Level::class)->create(['name' => 'General']),
