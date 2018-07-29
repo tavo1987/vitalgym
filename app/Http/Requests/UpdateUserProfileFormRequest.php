@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUserProfileFormRequest extends FormRequest
 {
@@ -53,7 +53,7 @@ class UpdateUserProfileFormRequest extends FormRequest
         ]);
 
         if (request()->get('password') !== null) {
-             return $userRequestData->merge(['password' => bcrypt(request()->get('password'))])->toArray();
+            return $userRequestData->merge(['password' => bcrypt(request()->get('password'))])->toArray();
         }
 
         return $userRequestData->toArray();
