@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateRoutineFormRequest;
 use App\VitalGym\Entities\Level;
 use App\VitalGym\Entities\Routine;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CreateRoutineFormRequest;
+use App\Http\Requests\UpdateRoutineFormRequest;
 
 class RoutineController extends Controller
 {
@@ -51,7 +51,6 @@ class RoutineController extends Controller
         $routine = Routine::with('level')->findOrFail($routineId);
 
         return view('admin.routines.edit', compact('routine', 'levels'));
-
     }
 
     public function update(UpdateRoutineFormRequest $request, $routineId)
