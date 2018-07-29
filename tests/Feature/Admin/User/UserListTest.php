@@ -16,13 +16,14 @@ class UserListTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $userAdmin = factory(User::class)->states('admin', 'active')->create();
-        factory(User::class)->times(10)->create();
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+        factory(User::class)->states('admin')->times(10)->create();
+        factory(User::class)->states('customer')->times(5)->create();
 
-        $response = $this->be($userAdmin)->get(route('admin.users.index'));
+        $response = $this->be($adminUser)->get(route('admin.users.index'));
 
         $response->assertSuccessful();
-        $response->assertViewHas('users');
+        $this->assertEquals(10, $response->data('users')->count());
         $response->assertViewIs('admin.users.index');
         $this->assertInstanceOf(LengthAwarePaginator::class, $response->data('users'));
     }
