@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\CreateUserFormRequest;
+use function view;
+use function redirect;
 use App\VitalGym\Entities\User;
 use App\Http\Controllers\Controller;
-use function redirect;
-use function view;
+use App\Http\Requests\CreateUserFormRequest;
 
 class UserController extends Controller
 {
