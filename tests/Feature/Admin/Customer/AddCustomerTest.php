@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Admin;
+namespace Tests\Feature\Admin\Customer;
 
 use App\Mail\CustomerWelcomeEmail;
 use App\VitalGym\Entities\ActivationToken;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Admin;
+namespace Tests\Feature\Admin\Report;
 
 use App\Exports\CustomersExcelExport;
 use App\Exports\MembershipsExcelExport;

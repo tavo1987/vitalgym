@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Admin;
+namespace Tests\Feature\Admin\Membership;
 
 use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Membership;
