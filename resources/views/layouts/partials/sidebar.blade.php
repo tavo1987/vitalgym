@@ -56,7 +56,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('admin.plans.index') }}"><i class="fa fa-circle-o"></i>Administrar planes</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Añadir nuevo</a></li>
+                    <li><a href="{{ route('admin.plans.create') }}"><i class="fa fa-circle-o"></i>Añadir nuevo</a></li>
                 </ul>
             </li>
             <li class="treeview">

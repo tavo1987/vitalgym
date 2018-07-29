@@ -43,8 +43,8 @@
                 <div class="form-group {{ $errors->has('is_premium') ? ' has-error': '' }}">
                     <label>Premium:</label>
                     <select name="is_premium" class="form-control">
-                        <option value="1">Si</option>
-                        <option value="0">No</option>
+                        <option value="1" {{ old('is_premium', $plan->is_premium) == "1" ? 'selected' : '' }}>Si</option>
+                        <option value="0" {{ old('is_premium', $plan->is_premium) == "0" ? 'selected' : '' }}>No</option>
                     </select>
                     @if ($errors->has('is_premium'))
                         <span class="help-block">{{ $errors->first('is_premium') }}</span>
@@ -57,7 +57,7 @@
                         <i class="fa fa-save tw-mr-1 tw-text-base"></i>
                         Actualizar
                     </button>
-                    <a href="{{ route('admin.memberships.index') }}"
+                    <a href="{{ route('admin.plans.index') }}"
                        class="vg-button tw-text-black tw-bg-transparent hover:tw-text-black tw-inline-flex tw-items-center tw-border">
                         <i class="fa fa-undo tw-text-base tw-mr-1"></i>
                         Volver
