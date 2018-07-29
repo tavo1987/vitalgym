@@ -13,12 +13,14 @@ class AddAttendanceTest extends TestCase
     use RefreshDatabase;
 
     private $customer;
+    private $date;
 
     private function  validParams($overrides = [])
     {
         $this->customer = factory(Customer::class)->create();
+        $this->date = now();
         return array_merge([
-            'date' => '2017-11-23',
+            'date' => $this->date->format('Y-m-d H:i:s'),
             'customer_id' => $this->customer->id
         ], $overrides);
     }
@@ -39,7 +41,7 @@ class AddAttendanceTest extends TestCase
    }
 
    /** @test */
-   function ad_admin_can_create_an_attendance()
+   function an_admin_can_create_an_attendance()
    {
        $this->withoutExceptionHandling();
        $adminUser = factory(User::class)->states('admin', 'active')->create();
@@ -76,6 +78,34 @@ class AddAttendanceTest extends TestCase
 
         $response = $this->be($adminUser)->from(route('admin.attendances.create'))->post(route('admin.attendances.store'), $this->validParams([
             'date' => 'invalid-date',
+        ]));
+
+        $response->assertRedirect(route('admin.attendances.create'));
+        $response->assertSessionHasErrors('date');
+        $this->assertEquals(0, Attendance::count());
+    }
+
+    /** @test */
+    function date_must_have_a_valid_format()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.attendances.create'))->post(route('admin.attendances.store'), $this->validParams([
+            'date' => '2018-12-31',
+        ]));
+
+        $response->assertRedirect(route('admin.attendances.create'));
+        $response->assertSessionHasErrors('date');
+        $this->assertEquals(0, Attendance::count());
+    }
+
+    /** @test */
+    function date_must_be_less_than_today()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.attendances.create'))->post(route('admin.attendances.store'), $this->validParams([
+            'date' => now()->addDays(2)->format('Y-m-d H:i:s'),
         ]));
 
         $response->assertRedirect(route('admin.attendances.create'));

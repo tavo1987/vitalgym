@@ -17,6 +17,7 @@ return [
     'active_url'           => ':attribute no es una URL válida.',
     'after'                => ':attribute debe ser una fecha posterior a :date.',
     'after_or_equal'       => ':attribute debe ser una fecha posterior o igual a :date.',
+    'before_or_equal'       => ':attribute debe ser una fecha menor o igual a :date.',
     'alpha'                => ':attribute sólo debe contener letras.',
     'alpha_dash'           => ':attribute sólo debe contener letras, números y guiones.',
     'alpha_num'            => ':attribute sólo debe contener letras y números.',

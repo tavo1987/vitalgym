@@ -25,7 +25,7 @@ class AttendanceController extends Controller
     public function store()
     {
         $validatedData = request()->validate([
-           'date' => 'required|date',
+           'date' => 'required|date|date_format:Y-m-d H:i:s|before_or_equal:today',
            'customer_id' => 'required|exists:customers,id',
         ]);
 
