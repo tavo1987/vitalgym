@@ -1,7 +1,9 @@
 <?php
 
 // Users
-Route::get('users', 'UserController@index')->name('admin.users.index');
+Route::get('/users', 'UserController@index')->name('admin.users.index');
+Route::get('/users/create', 'UserController@create')->name('admin.users.create');
+Route::post('/users', 'UserController@store')->name('admin.users.store');
 
 //Admin Profile
 Route::get('profile', 'UserProfileController@edit')->name('admin.profile.edit');
