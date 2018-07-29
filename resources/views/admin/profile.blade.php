@@ -10,7 +10,7 @@
             <h2 class="tw-text-base">Detalles de su perfil</h2>
         </div>
         <div class="box-body">
-            <form class="tw-rounded-lg tw-shadow tw-bg-grey-lightest tw-px-10 tw-py-6" action="" method="post" enctype="multipart/form-data">
+            <form class="tw-rounded-lg tw-shadow tw-bg-grey-lightest tw-px-10 tw-py-6" action="{{ route('admin.profile.update') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('patch')
                 <h3 class="tw-mb-4 tw-mt-6 tw-text-xl tw-border-b-2 tw-border-indigo tw-pb-1 tw-text-indigo">
