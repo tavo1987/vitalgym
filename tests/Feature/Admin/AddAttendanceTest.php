@@ -18,7 +18,7 @@ class AddAttendanceTest extends TestCase
     private function  validParams($overrides = [])
     {
         $this->customer = factory(Customer::class)->create();
-        $this->date = now();
+        $this->date = now()->parse('2017-11-23');
         return array_merge([
             'date' => $this->date->format('Y-m-d H:i:s'),
             'customer_id' => $this->customer->id
