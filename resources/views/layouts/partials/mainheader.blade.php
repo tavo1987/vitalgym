@@ -48,7 +48,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="{{ route('admin.admin-profile.edit') }}" class="vg-button tw-bg-indigo tw-py-2 tw-border-indigo">
+                                    <a href="{{ route('admin.profile.edit') }}" class="vg-button tw-bg-indigo tw-py-2 tw-border-indigo">
                                         {{ trans('adminlte_lang::message.profile') }}
                                     </a>
                                 </div>

@@ -3,7 +3,8 @@
 Route::get('users', 'UserController@index')->name('admin.users.index');
 
 //Admin Profile
-Route::get('profile', 'UserProfileController@edit')->name('admin.admin-profile.edit');
+Route::get('profile', 'UserProfileController@edit')->name('admin.profile.edit');
+Route::patch('profile', 'UserProfileController@update')->name('admin.profile.update');
 
 //Levels
 Route::resource('levels', 'LevelController');

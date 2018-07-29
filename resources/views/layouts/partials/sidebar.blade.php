@@ -13,7 +13,7 @@
                 <div class="pull-left info">
                     <p>{{ Auth::user()->full_name }}</p>
                     <!-- Status -->
-                    <a href="{{ route('admin.admin-profile.edit') }}"><i class="fa fa-circle text-success"></i> Editar Perfil</a>
+                    <a href="{{ route('admin.profile.edit') }}"><i class="fa fa-circle text-success"></i> Editar Perfil</a>
                 </div>
             </div>
         @endif
