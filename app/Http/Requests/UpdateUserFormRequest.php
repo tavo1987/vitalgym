@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use App\VitalGym\Entities\User;
+use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUserFormRequest extends FormRequest
 {
