@@ -7,6 +7,11 @@ Route::get('/', 'HomeController@index');
  */
 Route::get('/plans', 'PlanController@index')->name('plans.index');
 
+/**
+ *Customers
+ */
+Route::get('/customer/memberships', 'CustomerMembershipController@index')->name('customer.memberships.index');
+
 /*
  * Removed routes belonging to admin lte package.
  */

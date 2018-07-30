@@ -23,3 +23,9 @@ $factory->define(Customer::class, function (Faker $faker) {
         },
     ];
 });
+
+$factory->state(Customer::class, 'active', [
+    'user_id' => function () {
+        return factory(User::class)->states('customer', 'active')->create()->id;
+    },
+]);

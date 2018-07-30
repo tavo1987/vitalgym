@@ -70,6 +70,11 @@ class User extends Authenticatable
         return $this->attributes['name'].' '.$this->attributes['last_name'];
     }
 
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
     public static function createWithActivationToken($data)
     {
         $user = self::create($data);

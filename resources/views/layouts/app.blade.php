@@ -7,7 +7,11 @@
             <img src="{{ asset('/img/rolling.svg') }}" alt="loader">
         </div>
         @include('layouts.partials.mainheader')
-        @include('layouts.partials.sidebar')
+        @if( auth()->user()->isAdmin())
+            @include('layouts.partials.sidebar')
+        @else
+            @include('layouts.partials.sidebar-customer')
+        @endif
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <div class="tw-container tw-mx-auto tw-px-4 tw-pt-6">
