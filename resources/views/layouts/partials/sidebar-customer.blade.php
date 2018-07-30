@@ -39,8 +39,8 @@
                     <span>Mis Pagos</span>
                 </a>
             </li>
-            <li class="{{ request()->is('/attendances') ? 'active' : '' }}">
-                <a  href="/">
+            <li class="{{ request()->is('/customer/attendances') ? 'active' : '' }}">
+                <a  href="{{ route('customer.attendances.index') }}">
                     <i class='fa fa-calendar'></i> <span>Mis Asistencias</span>
                 </a>
             </li>

@@ -19,6 +19,9 @@ Route::get('/customer/memberships', 'CustomerMembershipController@index')->name(
 //Payments
 Route::get('/customer/payments', 'CustomerPaymentController@index')->name('customer.payments.index');
 
+//Attendances
+Route::get('/customer/attendances', 'CustomerAttendanceController@index')->name('customer.attendances.index');
+
 /*
  * Removed routes belonging to admin lte package.
  */
