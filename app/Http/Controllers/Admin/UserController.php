@@ -49,7 +49,7 @@ class UserController extends Controller
     public function destroy($userId)
     {
         $user = User::findOrFail($userId);
-        if ( !$user->avatar === 'avatars/default-avatar.jpg' ) {
+        if (! $user->avatar === 'avatars/default-avatar.jpg') {
             Storage::delete($user->avatar);
         }
         $user->delete();
