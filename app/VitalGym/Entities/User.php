@@ -3,8 +3,8 @@
 namespace App\VitalGym\Entities;
 
 use App\Filters\UserFilter;
-use App\Filters\Traits\Filterable;
 use App\Traits\PerPageTrait;
+use App\Filters\Traits\Filterable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Notifications\ResetPasswordNotification;
