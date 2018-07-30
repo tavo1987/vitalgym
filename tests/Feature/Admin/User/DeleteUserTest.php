@@ -32,6 +32,23 @@ class DeleteUserTest extends TestCase
     }
     
     /** @test */
+    function dont_delete_default_avatar()
+    {
+        $adminUser = factory(User::class)->states('admin')->create();
+
+        $user = factory(User::class)->states('admin')->create([
+            'email' => 'john@example.com',
+            'avatar' => "avatars/default-avatar.jpg",
+        ]);
+
+        $response = $this->be($adminUser)->delete(route('admin.users.destroy', $user));
+
+        $response->assertRedirect(route('admin.users.index'));
+        $this->assertEquals(0, User::whereEmail('john@example.com')->count());
+        Storage::disk('public')->assertExists('avatars/default-avatar.jpg');
+    }
+    
+    /** @test */
     function see_error_404_when_try_to_delete_a_user_that_does_not_exists()
     {
         $adminUser = factory(User::class)->states('admin')->create();

@@ -50,7 +50,9 @@ class UserController extends Controller
     public function destroy($userId)
     {
         $user = User::findOrFail($userId);
-        Storage::delete($user->avatar);
+        if ( !$user->avatar === 'avatars/default-avatar.jpg' ) {
+            Storage::delete($user->avatar);
+        }
         $user->delete();
 
         return redirect()->route('admin.users.index')->with(['message' => 'Usuario Eliminado con éxito', 'alert-type' => 'success']);
