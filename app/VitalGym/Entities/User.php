@@ -4,6 +4,7 @@ namespace App\VitalGym\Entities;
 
 use App\Filters\UserFilter;
 use App\Filters\Traits\Filterable;
+use App\Traits\PerPageTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Notifications\ResetPasswordNotification;
@@ -11,7 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, SoftDeletes, Filterable;
+    use Notifiable, SoftDeletes, Filterable, PerPageTrait;
 
     /**
      * The attributes that are mass assignable.

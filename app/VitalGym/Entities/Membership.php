@@ -4,11 +4,12 @@ namespace App\VitalGym\Entities;
 
 use App\Filters\MembershipFilter;
 use App\Filters\Traits\Filterable;
+use App\Traits\PerPageTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Membership extends Model
 {
-    use Filterable;
+    use Filterable, PerPageTrait;
 
     protected $guarded = [];
 

@@ -4,11 +4,12 @@ namespace App\VitalGym\Entities;
 
 use App\Filters\CustomerFilter;
 use App\Filters\Traits\Filterable;
+use App\Traits\PerPageTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    use Filterable;
+    use Filterable, PerPageTrait;
 
     protected $filters = CustomerFilter::class;
 

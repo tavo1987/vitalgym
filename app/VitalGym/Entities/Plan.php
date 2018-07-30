@@ -2,10 +2,13 @@
 
 namespace App\VitalGym\Entities;
 
+use App\Traits\PerPageTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Plan extends Model
 {
+    use PerPageTrait;
+
     protected $guarded = [];
 
     protected $casts = [

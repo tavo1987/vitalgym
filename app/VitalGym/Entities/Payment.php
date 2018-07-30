@@ -2,10 +2,13 @@
 
 namespace App\VitalGym\Entities;
 
+use App\Traits\PerPageTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
+    use PerPageTrait;
+
     protected $guarded = [];
 
     public function user()
