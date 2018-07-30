@@ -33,8 +33,8 @@
                     <span>Mis Membresías</span>
                 </a>
             </li>
-            <li class="{{ request()->is('/payments') ? 'active' : '' }}">
-                <a  href="/">
+            <li class="{{ request()->is('/customer/payments') ? 'active' : '' }}">
+                <a  href="{{ route('customer.payments.index') }}">
                     <i class='fa fa-money'></i>
                     <span>Mis Pagos</span>
                 </a>
