@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\CreateUserFormRequest;
-use App\Http\Requests\UpdateUserFormRequest;
 use App\VitalGym\Entities\User;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateUserFormRequest;
+use App\Http\Requests\UpdateUserFormRequest;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
