@@ -11,6 +11,7 @@ class CustomerAttendanceController extends Controller
         $attendances = Attendance::where('customer_id', auth()->user()->customer->id)
                            ->orderByDesc('created_at')
                            ->paginate();
+
         return view('customer.attendances.index', compact('attendances'));
     }
 }
