@@ -27,19 +27,19 @@
                     <i class='fa fa-home'></i> <span>Inicio</span>
                 </a>
             </li>
-            <li class="{{ request()->is('/customer/memberships') ? 'active' : '' }}">
+            <li class="{{ request()->is('customer/memberships') ? 'active' : '' }}">
                 <a  href="{{ route('customer.memberships.index') }}">
                     <i class="fa fa-user-plus" aria-hidden="true"></i>
                     <span>Mis Membresías</span>
                 </a>
             </li>
-            <li class="{{ request()->is('/customer/payments') ? 'active' : '' }}">
+            <li class="{{ request()->is('customer/payments') ? 'active' : '' }}">
                 <a  href="{{ route('customer.payments.index') }}">
                     <i class='fa fa-money'></i>
                     <span>Mis Pagos</span>
                 </a>
             </li>
-            <li class="{{ request()->is('/customer/attendances') ? 'active' : '' }}">
+            <li class="{{ request()->is('customer/attendances') ? 'active' : '' }}">
                 <a  href="{{ route('customer.attendances.index') }}">
                     <i class='fa fa-calendar'></i> <span>Mis Asistencias</span>
                 </a>
