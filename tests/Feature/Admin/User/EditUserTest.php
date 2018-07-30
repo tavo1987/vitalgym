@@ -43,7 +43,6 @@ class EditUserTest extends TestCase
             'address' => 'Fake address',
             'password' => 'laravel',
             'password_confirmation' => 'laravel',
-            'role' => 'admin',
             'active' => false,
         ], $overrides);
     }

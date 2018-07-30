@@ -54,7 +54,7 @@ class UpdateUserFormRequest extends FormRequest
             'phone' => request()->get('phone'),
             'cell_phone' => request()->get('cell_phone'),
             'address' => request()->get('address'),
-            'role' => request()->get('role'),
+            'role' => 'admin',
             'active' => request()->get('active'),
             'password' => bcrypt(request()->get('password')),
         ])->toArray();

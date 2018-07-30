@@ -34,7 +34,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('admin.customers.index') }}"><i class="fa fa-circle-o"></i>Todos los clientes</a></li>
-                    <li><a href="{{ route('admin.customers.create') }}"><i class="fa fa-circle-o"></i>Añadir Nuevo</a></li>
+                    <li><a href="{{ route('admin.customers.create') }}"><i class="fa fa-circle-o"></i>Añadir nuevo</a></li>
                 </ul>
             </li>
             <li class="treeview {{ request()->is('admin/memberships') || request()->is('admin/memberships/*') ? 'active' : '' }}">
@@ -67,7 +67,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('admin.routines.index') }}"><i class="fa fa-circle-o"></i>Administrar rutinas</a></li>
-                    <li><a href="{{ route('admin.routines.create') }}"><i class="fa fa-circle-o"></i>Añadir Nueva</a></li>
+                    <li><a href="{{ route('admin.routines.create') }}"><i class="fa fa-circle-o"></i>Añadir nueva</a></li>
                 </ul>
             </li>
             <li class="treeview {{ request()->is('admin/levels') || request()->is('admin/levels/*') ? 'active' : '' }}">
@@ -78,7 +78,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('levels.index') }}"><i class="fa fa-circle-o"></i>Administrar niveles</a></li>
-                    <li><a href="{{ route('levels.create') }}"><i class="fa fa-circle-o"></i>Nuevo</a></li>
+                    <li><a href="{{ route('levels.create') }}"><i class="fa fa-circle-o"></i>Añadir nuevo</a></li>
                 </ul>
             </li>
             <li class="{{ request()->is('admin/payments') ? 'active' : '' }}">
@@ -97,8 +97,8 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('admin.users.index') }}"><i class="fa fa-circle-o"></i>Administrar usuario</a></li>
-                    <li><a href="{{ route('admin.users.create') }}"><i class="fa fa-circle-o"></i>Añadir nuevo usuario</a></li>
+                    <li><a href="{{ route('admin.users.index') }}"><i class="fa fa-circle-o"></i>Administrar usuarios</a></li>
+                    <li><a href="{{ route('admin.users.create') }}"><i class="fa fa-circle-o"></i>Añadir nuevo</a></li>
                 </ul>
             </li>
         </ul><!-- /.sidebar-menu -->

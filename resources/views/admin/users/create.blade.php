@@ -12,7 +12,6 @@
         <div class="box-body">
             <form class="tw-rounded-lg tw-shadow tw-bg-grey-lightest tw-px-10 tw-py-6" action="{{ route('admin.users.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                @method('patch')
                 <h3 class="tw-mb-4 tw-mt-6 tw-text-xl tw-border-b-2 tw-border-indigo tw-pb-1 tw-text-indigo">
                     Datos personales
                 </h3>
@@ -90,7 +89,7 @@
                     <i class="fa fa-save tw-mr-1 tw-text-base"></i>
                     Actualizar
                 </button>
-                <a href="/"
+                <a href="{{ route('admin.users.index') }}"
                    class="vg-button tw-text-black tw-bg-transparent hover:tw-text-black tw-inline-flex tw-items-center tw-border">
                     <i class="fa fa-undo tw-mr-1 tw-text-base"></i>
                     Volver
