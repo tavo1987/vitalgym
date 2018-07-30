@@ -11,6 +11,6 @@ trait PerPageTrait
      */
     public function getPerPage()
     {
-        returN env('PAGINATION_LIMIT', 10);
+        return env('PAGINATION_LIMIT', 10);
     }
 }
