@@ -7,9 +7,7 @@ Route::get('/', 'HomeController@index');
  */
 Route::get('/plans', 'PlanController@index')->name('plans.index');
 
-
-
-/**
+/*
  *Customers
  */
 
