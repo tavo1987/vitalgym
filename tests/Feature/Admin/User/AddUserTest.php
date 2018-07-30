@@ -346,4 +346,30 @@ class AddUserTest extends TestCase
         $response->assertRedirect(route('admin.users.create'));
         $response->assertSessionHasErrors('address');
     }
+
+    /** @test */
+    function active_is_required_to_create_a_user()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.users.create'))->post(route('admin.users.store'), $this->validParams([
+            'active' => ''
+        ]));
+
+        $response->assertRedirect(route('admin.users.create'));
+        $response->assertSessionHasErrors('active');
+    }
+
+    /** @test */
+    function active_must_be_boolean_to_create_a_user()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+
+        $response = $this->be($adminUser)->from(route('admin.users.create'))->post(route('admin.users.store'), $this->validParams([
+            'active' => 'no-boolean'
+        ]));
+
+        $response->assertRedirect(route('admin.users.create'));
+        $response->assertSessionHasErrors('active');
+    }
 }

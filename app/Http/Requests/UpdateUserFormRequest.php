@@ -3,8 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use App\VitalGym\Entities\User;
 
-class CreateUserFormRequest extends FormRequest
+class UpdateUserFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +28,12 @@ class CreateUserFormRequest extends FormRequest
         return [
             'name' => 'required|max:80',
             'last_name' => 'required|max:80',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|max:64|same:password_confirmation',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($this->getUserByRouteParam()->id),
+            ],
+            'password' => 'nullable|min:6|max:64|same:password_confirmation',
             'avatar' => 'nullable|image|max:1024',
             'phone' => 'required|max:10',
             'cell_phone' => 'required|max:10',
@@ -43,7 +49,7 @@ class CreateUserFormRequest extends FormRequest
             'last_name' => request()->get('last_name'),
             'avatar' => request()->hasFile('avatar')
                 ? request()->file('avatar')->store('avatars', 'public')
-                : 'avatars/default-avatar.jpg',
+                : $this->getUserByRouteParam()->avatar,
             'email' => request()->get('email'),
             'phone' => request()->get('phone'),
             'cell_phone' => request()->get('cell_phone'),
@@ -52,5 +58,10 @@ class CreateUserFormRequest extends FormRequest
             'active' => request()->get('active'),
             'password' => bcrypt(request()->get('password')),
         ])->toArray();
+    }
+
+    public function getUserByRouteParam()
+    {
+        return User::findOrFail($this->route('userId'));
     }
 }

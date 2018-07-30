@@ -3,7 +3,10 @@
 // Users
 Route::get('/users', 'UserController@index')->name('admin.users.index');
 Route::get('/users/create', 'UserController@create')->name('admin.users.create');
+Route::get('/users/{userId}/edit', 'UserController@edit')->name('admin.users.edit');
 Route::post('/users', 'UserController@store')->name('admin.users.store');
+Route::patch('/users/{userId}', 'UserController@update')->name('admin.users.update');
+Route::delete('/users/{userId}', 'UserController@destroy')->name('admin.users.destroy');
 
 //Admin Profile
 Route::get('profile', 'UserProfileController@edit')->name('admin.profile.edit');
