@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\VitalGym\Entities\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\CreateUserFormRequest;
 use App\Http\Requests\UpdateUserFormRequest;
-use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -31,7 +31,6 @@ class UserController extends Controller
 
         return view('admin.users.edit', compact('user'));
     }
-
 
     public function store(CreateUserFormRequest $request)
     {
