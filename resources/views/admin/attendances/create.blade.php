@@ -73,7 +73,7 @@
             //Select2 configuration
             function formatState (state) {
                 if (!state.id) { return state.text; }
-                var $state = $(
+                let $state = $(
                     '<span><img class="tw-rounded-full tw-w-8 tw-h-8 tw-mr-2" src="'+state.element.dataset.avatar+'"/> ' + state.text + '</span>'
                 );
                 return $state;

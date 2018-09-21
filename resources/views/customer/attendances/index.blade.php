@@ -6,13 +6,10 @@
 
 @section('main-content')
     <div class="box">
-        <div class="box-header tw-mb-3 lg:tw-flex lg:tw-items-center">
-            <h3 class="tw-pr-4 tw-mb-2">Registro asistencias:</h3>
-            <a class="vg-button tw-py-2 tw-bg-grey hover:tw-bg-indigo"
-               href="{{ route('admin.attendances.create') }}">
-                <i class=" glyphicon glyphicon-file"></i>
-                Nuevo
-            </a>
+        <div class="box-header tw-mb-3 xl:tw-flex xl:tw-justify-start">
+            <div class=" lg:tw-flex lg:tw-items-center xl:tw-w-2/5">
+                <h3 class="tw-pr-4 tw-mb-2 tw-text-lg">Mis asistencias:</h3>
+            </div>
         </div><!-- /.box-header -->
         <div class="box-body tw-px-0 tw-text-center">
             <div class="lg:tw-flex tw-flex-wrap">

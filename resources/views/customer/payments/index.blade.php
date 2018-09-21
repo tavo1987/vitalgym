@@ -10,7 +10,6 @@
             <div class=" lg:tw-flex lg:tw-items-center xl:tw-w-2/5">
                 <h3 class="tw-pr-4 tw-mb-2 tw-text-lg">Listado últimos pagos:</h3>
             </div>
-
         </div><!-- /.box-header -->
         <div class="box-body tw-px-0">
             <table class="table table-striped table-hover tw-min-w-lg">

@@ -6,9 +6,9 @@
 
 @section('main-content')
     <div class="box">
-        <div class="box-header tw-mb-3 xl:tw-flex xl:tw-justify-between">
+        <div class="box-header tw-mb-3 xl:tw-flex xl:tw-justify-start">
             <div class=" lg:tw-flex lg:tw-items-center xl:tw-w-2/5">
-                <h3 class="tw-pr-4 tw-mb-2">Detalles:</h3>
+                <h3 class="tw-pr-4 tw-mb-2 tw-text-lg">Detalles:</h3>
             </div>
         </div><!-- /.box-header -->
         <div class="box-body tw-px-0 tw-text-center">
