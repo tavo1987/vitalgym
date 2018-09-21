@@ -11,37 +11,37 @@
                 <div class="col-md-4">
                     <div class="small-box bg-green">
                         <div class="inner">
-                            <h3>10</h3>
-                            <span class="">Clientes</span>
+                            <h3>{{ \App\VitalGym\Entities\Customer::count() }}</h3>
+                            <span>Clientes</span>
                         </div>
                         <div class="icon">
                             <i class="fa fa-users"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('admin.customers.index') }}" class="small-box-footer">Más Info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="small-box bg-aqua">
                         <div class="inner">
-                            <h3>10</h3>
-                            <span class="">Membresías</span>
+                            <h3>{{ \App\VitalGym\Entities\Membership::count() }}</h3>
+                            <span>Membresías</span>
                         </div>
                         <div class="icon">
                             <i class="fa fa-users"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('admin.memberships.index') }}" class="small-box-footer">Más info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="small-box bg-red">
                         <div class="inner">
-                            <h3>10</h3>
-                            <span class="">Asistencias</span>
+                            <h3>{{ \App\VitalGym\Entities\Attendance::count() }}</h3>
+                            <span>Asistencias</span>
                         </div>
                         <div class="icon">
                             <i class="fa fa-users"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('admin.attendances.index') }}" class="small-box-footer">Más info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
