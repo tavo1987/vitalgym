@@ -2,9 +2,9 @@ let mix = require('laravel-mix');
 let tailwindcss = require('tailwindcss');
 
 mix
-    .js('resources/assets/js/app.js', 'public/js')
-    .sass('resources/assets/sass/app.scss', 'public/css')
-    .less('resources/assets/less/admin-lte/AdminLTE.less', 'public/css')
+    .js('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
+    .less('resources/less/admin-lte/AdminLTE.less', 'public/css')
     .options({
         processCssUrls:false,
         postCss: [tailwindcss('./tailwind.js')],
