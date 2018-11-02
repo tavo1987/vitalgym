@@ -67,17 +67,16 @@ return [
         ],
 
         'testing' => [
-            'driver' => 'mysql',
+            'driver' => env('DB_TEST_DRIVER', 'pgsql'),
             'host' => env('DB_TEST_HOST', 'localhost'),
-            'port' => env('DB_TEST_PORT', '3306'),
+            'port' => env('DB_TEST_PORT', '5432'),
             'database' => env('DB_TEST_DATABASE', 'forge'),
-            'username' => env('MYSQL_USER', env('DB_TEST_USERNAME', 'forge')),
-            'password' => env('MYSQL_PASSWORD', env('DB_TEST_PASSWORD', '')),
+            'username' => env('DB_TEST_USERNAME', 'homestead'),
+            'password' => env('DB_TEST_PASSWORD'),
             'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
             'prefix' => '',
-            'strict' => true,
-            'engine' => null,
+            'schema' => 'public',
+            'sslmode' => 'prefer',
         ],
 
         'pgsql' => [
