@@ -44,7 +44,7 @@ class ViewMembershipDetailsTest extends TestCase
     {
         $adminUser = factory(User::class)->states('admin', 'active')->create();
 
-        $response = $this->actingAs($adminUser)->get(route('admin.memberships.show', 'invalid-membership'));
+        $response = $this->actingAs($adminUser)->get(route('admin.memberships.show', 0));
 
         $response->assertStatus(404);
     }

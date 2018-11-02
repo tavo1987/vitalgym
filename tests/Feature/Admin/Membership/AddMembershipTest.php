@@ -28,7 +28,7 @@ class AddMembershipTest extends TestCase
     {
         return $this->actingAs($this->adminUser)->post(route('admin.memberships.store',$plan), $params);
     }
-    
+
     /** @test */
     function admin_can_view_the_membership_form_to_add_a_new_membership()
     {
@@ -147,7 +147,7 @@ class AddMembershipTest extends TestCase
             'total_days' => 30,
             'customer_id' => $customer->id,
             'membership_quantity' => 2,
-        ], 'invalid-plan');
+        ], 0);
 
         $response->assertStatus(404);
         $this->assertEquals(0, Membership::count());
