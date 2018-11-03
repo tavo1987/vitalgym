@@ -87,6 +87,20 @@ return [
     'url'                  => 'El formato :attribute es inválido.',
 
     /*
+   |--------------------------------------------------------------------------
+   | Custom Validation Rules
+   |--------------------------------------------------------------------------
+   |
+   | Here you may specify custom validation messages for custom rules
+   |
+   */
+
+    'daily_membership'     => 'El cliente ya fué registrado el día de hoy',
+    'has_membership'     => 'El cliente no tiene ninguna membresía asociada',
+    'active_membership'     => 'La membresía del cliente ha expirado, por favor adquirir una nueva',
+
+
+    /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
     |--------------------------------------------------------------------------
