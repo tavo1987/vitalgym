@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\CreateAttendanceFormRequest;
 use App\VitalGym\Entities\Customer;
 use App\Http\Controllers\Controller;
 use App\VitalGym\Entities\Attendance;
+
 
 class AttendanceController extends Controller
 {
@@ -22,14 +24,9 @@ class AttendanceController extends Controller
         return view('admin.attendances.create', compact('customers'));
     }
 
-    public function store()
+    public function store(CreateAttendanceFormRequest $request)
     {
-        $validatedData = request()->validate([
-           'date' => 'required|date|date_format:Y-m-d H:i:s|before_or_equal:today',
-           'customer_id' => 'required|exists:customers,id',
-        ]);
-
-        Attendance::create($validatedData);
+        Attendance::create($request->validated());
 
         return redirect()->route('admin.attendances.index')
                          ->with(['alert-type' => 'success', 'message' => 'Asistencia Registrada con éxito']);
