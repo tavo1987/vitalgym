@@ -39,6 +39,11 @@ class Customer extends Model
         return $this->belongsTo(Level::class);
     }
 
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
     public function getFullNameAttribute()
     {
         return "{$this->user->name} {$this->user->last_name}";

@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use Illuminate\Database\Eloquent\Collection;
 use Tests\TestCase;
 use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Customer;
@@ -40,5 +41,13 @@ class CustomerTest extends TestCase
         $customer = $customer->fresh();
 
         $this->assertContains($user->fresh()->toArray(), $customer->toArray());
+    }
+
+    /** @test */
+    function a_customer_has_many_attendances()
+    {
+        $customer = factory(Customer::class)->make();
+
+        $this->assertInstanceOf(Collection::class, $customer->attendances);
     }
 }
