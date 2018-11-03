@@ -22,7 +22,7 @@
                     <select name="customer_id" class="form-control select2" tabindex="-1">
                         @foreach($customers as $customer)
                             <option  value="{{ $customer->id }}" {{ old('customer_id') == $customer->id ? 'selected' : '' }} data-avatar="{{ Storage::url($customer->avatar) }}">
-                                {{ $customer->full_name }} {{ $customer->email }}
+                                {{ $customer->full_name }} - {{ $customer->email }}
                             </option>
                         @endforeach
                     </select>
@@ -65,7 +65,9 @@
                 locale: "es",
                 enableTime: true,
                 dateFormat: "Y-m-d H:i:S",
-                defaultDate: 'today',
+                altInput: true,
+                altFormat: "l j F, Y H:i:S",
+                defaultDate: new Date(),
                 maxDate: new Date(),
                 time_24hr: true,
             });
@@ -74,7 +76,10 @@
             function formatState (state) {
                 if (!state.id) { return state.text; }
                 let $state = $(
-                    '<span><img class="tw-rounded-full tw-w-8 tw-h-8 tw-mr-2" src="'+state.element.dataset.avatar+'"/> ' + state.text + '</span>'
+                    '<span>' +
+                        '<img class="tw-rounded-full tw-w-8 tw-h-8 tw-mr-2" src="'+state.element.dataset.avatar+'"/> ' +
+                        state.text +
+                    '</span>'
                 );
                 return $state;
             }
