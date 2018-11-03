@@ -2,8 +2,8 @@
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
 use App\VitalGym\Entities\Customer;
+use Illuminate\Contracts\Validation\Rule;
 
 class ActiveMembershipRule implements Rule
 {

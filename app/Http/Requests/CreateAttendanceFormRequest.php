@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\ActiveMembershipRule;
-use App\Rules\dailyAttendanceRule;
 use App\Rules\HasMembershipRule;
+use App\Rules\dailyAttendanceRule;
+use App\Rules\ActiveMembershipRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateAttendanceFormRequest extends FormRequest
@@ -31,7 +31,7 @@ class CreateAttendanceFormRequest extends FormRequest
                 'required',
                 'date',
                 'date_format:Y-m-d H:i:s',
-                'before_or_equal:' . now(),
+                'before_or_equal:'.now(),
             ],
             'customer_id' => [
                 'bail',

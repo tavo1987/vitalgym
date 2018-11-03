@@ -99,7 +99,6 @@ return [
     'has_membership'     => 'El cliente no tiene ninguna membresía asociada',
     'active_membership'     => 'La membresía del cliente ha expirado, por favor adquirir una nueva',
 
-
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

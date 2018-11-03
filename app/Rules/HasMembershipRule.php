@@ -5,7 +5,7 @@ namespace App\Rules;
 use App\VitalGym\Entities\Customer;
 use Illuminate\Contracts\Validation\Rule;
 
-class hasMembershipRule implements Rule
+class HasMembershipRule implements Rule
 {
     /**
      * Determine if the validation rule passes.
@@ -18,7 +18,7 @@ class hasMembershipRule implements Rule
     {
         $customer = Customer::findOrFail($customerId);
 
-        return (boolean) $customer->memberships()->count() > 0;
+        return (bool) $customer->memberships()->count() > 0;
     }
 
     /**
