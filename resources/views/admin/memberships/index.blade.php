@@ -30,7 +30,7 @@
                                class="form-control lg:tw-rounded-none tw-h-auto tw-py-2 tw-text-sm"
                                placeholder="nombre, email" id="js-input-filter">
                     </div>
-                    <button class="vg-button tw-bg-indigo hover:tw-bg-indigo lg:tw-rounded-l-none tw-text-xs">
+                    <button class="vg-button tw-bg-indigo hover:tw-bg-indigo lg:tw-rounded-l-none">
                         <i class="fa fa-search"></i>
                         Buscar
                     </button>
