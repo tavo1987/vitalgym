@@ -25,5 +25,6 @@ if (mix.inProduction()) {
     mix.version();
 }
 
-mix.purgeCss()
-    .disableNotifications();
+mix.purgeCss({
+    whitelistPatterns: [/^toast-/],
+}).disableNotifications();
