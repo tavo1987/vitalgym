@@ -21,4 +21,9 @@ class Routine extends Model
     {
         return $this->belongsTo(Level::class);
     }
+
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
 }
