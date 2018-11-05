@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Entities;
 
 use Illuminate\Database\Eloquent\Collection;
 use Tests\TestCase;
@@ -25,7 +25,7 @@ class CustomerTest extends TestCase
     /** @test */
     function a_customer_has_a_user()
     {
-        $customer = factory(Customer::class)->create();
+        $customer = factory(Customer::class)->make();
 
         $this->assertInstanceOf(
             User::class, $customer->user

@@ -1,10 +1,8 @@
 <?php
 
-namespace tests\Unit;
+namespace Tests\Unit\Entities;
 
 use Tests\TestCase;
-use Illuminate\Support\Carbon;
-use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Payment;
 use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Membership;

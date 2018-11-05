@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Entities;
 
 use App\VitalGym\Entities\ActivationToken;
 use App\VitalGym\Entities\User;

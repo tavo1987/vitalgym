@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Unit;
+namespace Tests\Unit\Entities;
 
 use Tests\TestCase;
 use App\VitalGym\Entities\User;
