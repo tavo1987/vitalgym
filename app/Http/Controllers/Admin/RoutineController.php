@@ -14,7 +14,7 @@ class RoutineController extends Controller
 {
     public function index()
     {
-        $routines = Routine::with('level')->orderByDesc('created_at')->paginate();
+        $routines = Routine::with('level')->withCount('customers')->orderByDesc('created_at')->paginate();
 
         return view('admin.routines.index', compact('routines'));
     }
