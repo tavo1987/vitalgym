@@ -11,7 +11,7 @@ class RoutineTest extends TestCase
     /** @test */
     function a_routine_has_many_users()
     {
-        $routine = factory(Routine::class)->make();
+        $routine = new Routine;
 
         $this->assertInstanceOf(Collection::class, $routine->customers);
     }
