@@ -63,7 +63,12 @@ class RoutineController extends Controller
 
     public function destroy($routineId)
     {
-        $routine = Routine::findOrFail($routineId);
+        $routine = Routine::withCount('customers')->findOrFail($routineId);
+
+        if ($routine->customers_count > 0) {
+            return redirect()->route('admin.routines.index')->with(['message' => 'No se puede eliminar una rutina asociada a clientes', 'alert-type' => 'error']);
+        }
+
         Storage::delete($routine->file);
         $routine->delete();
 
