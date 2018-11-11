@@ -13,7 +13,9 @@ Route::get('profile', 'UserProfileController@edit')->name('admin.profile.edit');
 Route::patch('profile', 'UserProfileController@update')->name('admin.profile.update');
 
 //Levels
-Route::resource('levels', 'LevelController');
+Route::resource('levels', 'LevelController')->names([
+    'index' => 'admin.levels.index'
+]);
 
 //Routines
 Route::get('/routines', 'RoutineController@index')->name('admin.routines.index');

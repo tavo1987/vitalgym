@@ -15,13 +15,14 @@
                     Nuevo
                 </a>
             </div>
-            
         </div><!-- /.box-header -->
         <div class="box-body tw-px-0 tw-text-center">
             <table class="table table-striped table-hover tw-min-w-lg tw-text-center">
                 <thead>
                     <th class="text-center">ID</th>
                     <th class="text-center">Nombre</th>
+                    <th class="text-center">Clientes</th>
+                    <th class="text-center">Rutinas</th>
                     <th class="text-center">Acciones</th>
                 </thead>
                 <tbody>
@@ -29,6 +30,8 @@
                         <tr>
                             <td>{{ $level->id }}</td>
                             <td>{{ $level->name }}</td>
+                            <td>{{ $level->customers_count }}</td>
+                            <td>{{ $level->routines_count }}</td>
                             <td class="tw-flex tw-justify-center tw-items-center">
                                 <a href="{{ route('levels.show', $level) }}" class="tw-px-2 tw-text-2xl tw-text-indigo"><i class="fa fa-eye"></i></a>
                                 <a href="{{ route('levels.edit', $level) }}" class="tw-px-2 tw-text-2xl tw-text-indigo"><i class="fa fa-edit"></i></a>
@@ -44,9 +47,6 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="text-center">
-                
-            </div>
         </div><!-- /.end box-body -->
     </div><!-- /.end box -->
 @endsection

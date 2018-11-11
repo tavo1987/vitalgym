@@ -8,14 +8,9 @@ use App\Http\Controllers\Controller;
 
 class LevelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $levels = Level::all();
+        $levels = Level::withCount('customers', 'routines')->orderByDesc('created_at')->paginate();
 
         return view('admin.levels.index', compact('levels'));
     }
