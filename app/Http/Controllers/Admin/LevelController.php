@@ -105,6 +105,7 @@ class LevelController extends Controller
         }
 
         $level->delete();
+
         return redirect()->back()->with(['message' => 'Nivel Borrado con éxito', 'alert-type' => 'success']);
     }
 }
