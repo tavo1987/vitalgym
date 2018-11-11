@@ -15,4 +15,9 @@ class Level extends Model
     {
         return $this->hasMany(Routine::class);
     }
+
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
 }
