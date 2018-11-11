@@ -92,17 +92,19 @@ class LevelController extends Controller
         return redirect()->route('levels.index')->with(['message' => 'Nivel actualizado con éxito', 'alert-type' => 'success']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $level = Level::findorFail($id);
-        $level->delete();
+        $level = Level::withCount('customers', 'routines')->findorFail($id);
 
-        return redirect()->route('levels.index')->with(['message' => 'Nivel Borrado con éxito', 'alert-type' => 'success']);
+        if ($level->customers_count > 0) {
+            return redirect()->back()->with(['message' => 'No se puede borrar un nivel que tiene clientes asociados', 'alert-type' => 'error']);
+        }
+
+        if ($level->routines_count > 0) {
+            return redirect()->back()->with(['message' => 'No se puede borrar un nivel que tiene rutinas asociadas', 'alert-type' => 'error']);
+        }
+
+        $level->delete();
+        return redirect()->back()->with(['message' => 'Nivel Borrado con éxito', 'alert-type' => 'success']);
     }
 }

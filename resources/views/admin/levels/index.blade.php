@@ -35,7 +35,7 @@
                             <td class="tw-flex tw-justify-center tw-items-center">
                                 <a href="{{ route('levels.show', $level) }}" class="tw-px-2 tw-text-2xl tw-text-indigo"><i class="fa fa-eye"></i></a>
                                 <a href="{{ route('levels.edit', $level) }}" class="tw-px-2 tw-text-2xl tw-text-indigo"><i class="fa fa-edit"></i></a>
-                                <form action="{{ route('levels.destroy', $level) }}"  method="post" class="form-delete">
+                                <form action="{{ route('admin.levels.destroy', $level) }}"  method="post" class="form-delete">
                                     @csrf
                                     @method('delete')
                                     <button class="tw-px-2 tw-text-2xl tw-text-grey hover:tw-text-red-light js-button-delete focus:tw-outline-none">

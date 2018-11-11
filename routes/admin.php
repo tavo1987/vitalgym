@@ -14,7 +14,8 @@ Route::patch('profile', 'UserProfileController@update')->name('admin.profile.upd
 
 //Levels
 Route::resource('levels', 'LevelController')->names([
-    'index' => 'admin.levels.index'
+    'index'   => 'admin.levels.index',
+    'destroy' => 'admin.levels.destroy',
 ]);
 
 //Routines
