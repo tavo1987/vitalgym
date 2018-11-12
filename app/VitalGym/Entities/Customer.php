@@ -6,10 +6,11 @@ use App\Traits\PerPageTrait;
 use App\Filters\CustomerFilter;
 use App\Filters\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Customer extends Model
 {
-    use Filterable, PerPageTrait;
+    use Filterable, PerPageTrait, Notifiable;
 
     protected $filters = CustomerFilter::class;
 
@@ -82,5 +83,14 @@ class Customer extends Model
     public function getCellPhoneAttribute()
     {
         return $this->user->cell_phone;
+    }
+
+    public static function membershipExpiredToday()
+    {
+        $memberships = Membership::with('customer')->expired()->get();
+
+        return $memberships->map(function ($membership) {
+            return $membership->customer;
+        })->unique();
     }
 }
