@@ -31,4 +31,9 @@ class Membership extends Model
     {
         return $this->belongsTo(Payment::class);
     }
+
+    public function scopeExpired($query)
+    {
+        return $query->whereDate('date_end', now()->today());
+    }
 }

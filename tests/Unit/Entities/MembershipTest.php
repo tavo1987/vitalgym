@@ -45,4 +45,19 @@ class MembershipTest extends TestCase
 
         $this->assertEquals($payment->id, $membership->payment->id);
     }
+
+    /** @test */
+    function it_return_the_only_expired_memberships()
+    {
+        $membershipA = factory(Membership::class)->create(['date_end' => now()->toDateString()]);
+        $membershipB = factory(Membership::class)->create(['date_end' => now()->toDateString()]);
+        $activeMembership = factory(Membership::class)->create(['date_end' => now()->addDays(1)->toDateString()]);
+
+        $expiredMemberships = Membership::expired()->get();
+
+        $this->assertTrue($expiredMemberships->contains($membershipA));
+        $this->assertTrue($expiredMemberships->contains($membershipB));
+        $this->assertFalse($expiredMemberships->contains($activeMembership));
+        $this->assertEquals(2, $expiredMemberships->count());
+    }
 }
