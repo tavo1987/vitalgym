@@ -9,7 +9,7 @@ use Tests\TestCase;
 use Notification;
 use App\Notifications\ExpiredMembership;
 
-class ExpiredMembershipTest extends TestCase
+class SendExpiredMembershipNotificationTest extends TestCase
 {
     use RefreshDatabase;
 

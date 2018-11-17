@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\VitalGym\Entities\Membership;
 use Illuminate\Console\Command;
 use App\VitalGym\Entities\Customer;
 use App\Notifications\ExpiredMembership;
-use function Symfony\Component\Console\Tests\Command\createClosure;
 
 class SendExpiredMembershipNotification extends Command
 {
@@ -44,14 +44,14 @@ class SendExpiredMembershipNotification extends Command
     public function handle()
     {
         $this->info('Sending notifications');
-        $customers = Customer::membershipExpiredToday();
+        $memberships = Membership::expired()->with('customer')->get();
 
-        if ($customers->count() <= 0) {
+        if ($memberships->count() <= 0) {
             return $this->info('There are no customers to notify');
         }
 
-        $customers->each(function ($customer) {
-            $customer->notify(new ExpiredMembership);
+        $memberships->unique('customer')->each(function ($membership) {
+            $membership->customer->notify(new ExpiredMembership($membership));
         });
 
         $this->info('The notification has been sent');
