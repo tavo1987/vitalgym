@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\VitalGym\Entities\Customer;
 use App\Notifications\ExpiredMembership;
-use function Symfony\Component\Console\Tests\Command\createClosure;
 
 class SendExpiredMembershipNotification extends Command
 {
