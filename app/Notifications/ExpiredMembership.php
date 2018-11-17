@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\VitalGym\Entities\Membership;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -9,15 +10,19 @@ use Illuminate\Notifications\Messages\MailMessage;
 class ExpiredMembership extends Notification
 {
     use Queueable;
+    /**
+     * @var Membership
+     */
+    public $membership;
 
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param Membership $membership
      */
-    public function __construct()
+    public function __construct(Membership $membership)
     {
-        //
+        $this->membership = $membership;
     }
 
     /**
@@ -40,9 +45,12 @@ class ExpiredMembership extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Membresía Expirada')
+                    ->greeting("Hola {$notifiable->full_name}")
+                    ->line("Tu membresía {$this->membership->plan->name} ha caducado")
+                    ->line("Fecha de inicio: {$this->membership->date_start->toDateString()}")
+                    ->line("Fecha de vencimiento: {$this->membership->date_end->toDateString()}")
+                    ->action('Notification Action', url('/'));
     }
 
     /**
