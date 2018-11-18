@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\VitalGym\Entities\Membership;
 use Illuminate\Console\Command;
 use App\VitalGym\Entities\Customer;
+use App\VitalGym\Entities\Membership;
 use App\Notifications\ExpiredMembership;
 
 class SendExpiredMembershipNotification extends Command

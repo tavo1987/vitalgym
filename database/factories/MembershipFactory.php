@@ -24,6 +24,6 @@ $factory->define(Membership::class, function (Faker $faker) {
     ];
 });
 
-$factory->state(Membership::class, 'expired' ,[
-    'date_end' => today()->toDateString()
+$factory->state(Membership::class, 'expired', [
+    'date_end' => today()->toDateString(),
 ]);
