@@ -14,7 +14,7 @@ class SendExpiredMembershipNotificationTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function it_send_an_expired_membership_notification()
+    function it_send_expired_membership_notifications()
     {
         Notification::fake();
 
