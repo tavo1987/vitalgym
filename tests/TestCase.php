@@ -1,45 +1,30 @@
 <?php
 
-use App\User;
+namespace  Tests;
 
-abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
+use Illuminate\Foundation\Testing\TestResponse;
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use PHPUnit\Framework\Assert;
+
+abstract class TestCase extends BaseTestCase
 {
-    /**
-     * The base URL to use while testing the application.
-     *
-     * @var string
-     */
-    protected $baseUrl = 'http://localhost';
+    use CreatesApplication;
 
-    /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
-     */
-    public function createApplication()
+    public function setUp()
     {
-        $app = require __DIR__.'/../bootstrap/app.php';
+        parent::setUp();
 
-        $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+        TestResponse::macro('data', function ($key) {
+            return $this->original->getData()[$key];
+        });
 
-        return $app;
-    }
+        EloquentCollection::macro('assertEquals', function ($items) {
+            Assert::assertEquals(count($this), count($items));
 
-    public function createNewUser($data = []) : User
-    {
-        $userData = collect([
-            'name'     => 'Edwin',
-            'email'    => 'tavo198718@gmail.com',
-            'password' => bcrypt('secret'),
-            'active'   => true,
-        ]);
-
-        if (! empty($data)) {
-            foreach ($data as $key => $value) {
-                $userData->put($key, $value);
-            }
-        }
-
-        return factory(User::class)->create($userData->toArray());
+            $this->zip($items)->each(function ($itemPair) {
+                Assert::assertTrue($itemPair[0]->is($itemPair[1]));
+            });
+        });
     }
 }

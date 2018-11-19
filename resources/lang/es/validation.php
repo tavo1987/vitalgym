@@ -16,11 +16,13 @@ return [
     'accepted'             => ':attribute debe ser aceptado.',
     'active_url'           => ':attribute no es una URL válida.',
     'after'                => ':attribute debe ser una fecha posterior a :date.',
+    'after_or_equal'       => ':attribute debe ser una fecha posterior o igual a :date.',
     'alpha'                => ':attribute sólo debe contener letras.',
     'alpha_dash'           => ':attribute sólo debe contener letras, números y guiones.',
     'alpha_num'            => ':attribute sólo debe contener letras y números.',
     'array'                => ':attribute debe ser un conjunto.',
     'before'               => ':attribute debe ser una fecha anterior a :date.',
+    'before_or_equal'      => ':attribute debe ser una fecha anterior o igual a :date.',
     'between'              => [
         'numeric' => ':attribute tiene que estar entre :min - :max.',
         'file'    => ':attribute debe pesar entre :min - :max kilobytes.',
@@ -40,12 +42,38 @@ return [
     'exists'               => ':attribute es inválido.',
     'file'                 => 'El campo :attribute debe ser un archivo.',
     'filled'               => 'El campo :attribute es obligatorio.',
+    'gt'                   => [
+        'numeric' => 'El campo :attribute debe ser mayor que :value.',
+        'file'    => 'El campo :attribute debe tener más de :value kilobytes.',
+        'string'  => 'El campo :attribute debe tener más de :value caracteres.',
+        'array'   => 'El campo :attribute debe tener más de :value elementos.',
+    ],
+    'gte'                  => [
+        'numeric' => 'El campo :attribute debe ser como mínimo :value.',
+        'file'    => 'El campo :attribute debe tener como mínimo :value kilobytes.',
+        'string'  => 'El campo :attribute debe tener como mínimo :value caracteres.',
+        'array'   => 'El campo :attribute debe tener como mínimo :value elementos.',
+    ],
     'image'                => ':attribute debe ser una imagen.',
     'in'                   => ':attribute es inválido.',
     'in_array'             => 'El campo :attribute no existe en :other.',
     'integer'              => ':attribute debe ser un número entero.',
     'ip'                   => ':attribute debe ser una dirección IP válida.',
+    'ipv4'                 => ':attribute debe ser un dirección IPv4 válida',
+    'ipv6'                 => ':attribute debe ser un dirección IPv6 válida.',
     'json'                 => 'El campo :attribute debe tener una cadena JSON válida.',
+    'lt'                   => [
+        'numeric' => 'El campo :attribute debe ser menor que :value.',
+        'file'    => 'El campo :attribute debe tener menos de :value kilobytes.',
+        'string'  => 'El campo :attribute debe tener menos de :value caracteres.',
+        'array'   => 'El campo :attribute debe tener menos de :value elementos.',
+    ],
+    'lte'                  => [
+        'numeric' => 'El campo :attribute debe ser como máximo :value.',
+        'file'    => 'El campo :attribute debe tener como máximo :value kilobytes.',
+        'string'  => 'El campo :attribute debe tener como máximo :value caracteres.',
+        'array'   => 'El campo :attribute debe tener como máximo :value elementos.',
+    ],
     'max'                  => [
         'numeric' => ':attribute no debe ser mayor a :max.',
         'file'    => ':attribute no debe ser mayor que :max kilobytes.',
@@ -61,6 +89,7 @@ return [
         'array'   => ':attribute debe tener al menos :min elementos.',
     ],
     'not_in'               => ':attribute es inválido.',
+    'not_regex'            => 'El formato del campo :attribute no es válido.',
     'numeric'              => ':attribute debe ser numérico.',
     'present'              => 'El campo :attribute debe estar presente.',
     'regex'                => 'El formato de :attribute es inválido.',
@@ -83,6 +112,20 @@ return [
     'unique'               => ':attribute ya ha sido registrado.',
     'uploaded'             => 'Subir :attribute ha fallado.',
     'url'                  => 'El formato :attribute es inválido.',
+    'uuid'                 => 'El campo :attribute debe ser un UUID válido.',
+
+    /*
+   |--------------------------------------------------------------------------
+   | Custom Validation Rules
+   |--------------------------------------------------------------------------
+   |
+   | Here you may specify custom validation messages for custom rules
+   |
+   */
+
+    'daily_membership'     => 'El cliente ya fué registrado el día de hoy',
+    'has_membership'     => 'El cliente no tiene ninguna membresía asociada',
+    'active_membership'     => 'La membresía del cliente ha expirado, por favor adquirir una nueva',
 
     /*
     |--------------------------------------------------------------------------
@@ -95,9 +138,12 @@ return [
     |
     */
 
-    'custom'               => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+    'custom' => [
+        'password' => [
+            'min' => 'La :attribute debe contener más de :min caracteres',
+        ],
+        'email'    => [
+            'unique' => 'El :attribute ya ha sido registrado.',
         ],
     ],
 

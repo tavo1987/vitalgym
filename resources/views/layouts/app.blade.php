@@ -1,62 +1,30 @@
 <!DOCTYPE html>
-{{--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
---}}
 <html lang="es">
-
-@section('htmlheader')
-    @include('layouts.partials.htmlheader')
-@show
-
-{{--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
---}}
-<body class="skin-black fixed">
-<div class="wrapper" id="app">
-    <div id="loader">
-        <img src="{{ asset('/img/loading.gif') }}" alt="loader">
-    </div>
-
-    @include('layouts.partials.mainheader')
-
-    @include('layouts.partials.sidebar')
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        @include('layouts.partials.contentheader')
-
-        <!-- Main content -->
-        <section class="content">
-            <!-- Your Page Content Here -->
-            @yield('main-content')
-        </section><!-- /.content -->
-    </div><!-- /.content-wrapper -->
-
-    @include('layouts.partials.footer')
-
-</div><!-- ./wrapper -->
-
-@section('scripts')
+@include('layouts.partials.htmlheader')
+<body class="skin-black fixed tw-font-sans tw-antialiased tw-text-black tw-leading-tight">
+    <div class="wrapper" id="app">
+        <div id="loader">
+            <img src="{{ asset('/img/rolling.svg') }}" alt="loader">
+        </div>
+        @include('layouts.partials.mainheader')
+        @if( auth()->user()->isAdmin())
+            @include('layouts.partials.sidebar')
+        @else
+            @include('layouts.partials.sidebar-customer')
+        @endif
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <div class="tw-container tw-mx-auto tw-px-4 tw-pt-6">
+                @include('layouts.partials.contentheader')
+                <!-- Main content -->
+                <section class="content tw-px-0 tw-pt-0">
+                    <!-- Your Page Content Here -->
+                    @yield('main-content')
+                </section><!-- /.content -->
+            </div>
+        </div><!-- /.content-wrapper -->
+        @include('layouts.partials.footer')
+    </div><!-- ./wrapper -->
     @include('layouts.partials.scripts')
-@show
-
 </body>
 </html>

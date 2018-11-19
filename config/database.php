@@ -66,18 +66,17 @@ return [
             'engine' => null,
         ],
 
-       'testing' => [
-            'driver' => 'mysql',
+        'testing' => [
+            'driver' => env('DB_TEST_DRIVER', 'pgsql'),
             'host' => env('DB_TEST_HOST', 'localhost'),
-            'port' => env('DB_TEST_PORT', '3306'),
-            'database' => env('DB_TEST_DATABASE', 'forge'),
-            'username' => env('MYSQL_USER', env('DB_TEST_USERNAME', 'forge')),
-            'password' => env('MYSQL_PASSWORD', env('DB_TEST_PASSWORD', '')),
+            'port' => env('DB_TEST_PORT', '5432'),
+            'database' => env('DB_TEST_DATABASE', 'vitalgym_tests'),
+            'username' => env('MYSQL_USER', env('DB_TEST_USERNAME', 'homestead')),
+            'password' => env('MYSQL_PASSWORD', env('DB_TEST_PASSWORD', 'secret')),
             'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
             'prefix' => '',
-            'strict' => true,
-            'engine' => null,
+            'schema' => 'public',
+            'sslmode' => 'prefer',
         ],
 
         'pgsql' => [
@@ -91,6 +90,17 @@ return [
             'prefix' => '',
             'schema' => 'public',
             'sslmode' => 'prefer',
+        ],
+
+        'sqlsrv' => [
+            'driver' => 'sqlsrv',
+            'host' => env('DB_HOST', 'localhost'),
+            'port' => env('DB_PORT', '1433'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
         ],
 
     ],
@@ -120,16 +130,21 @@ return [
     */
 
     'redis' => [
-
-        'cluster' => false,
+        'client' => 'predis',
 
         'default' => [
-            'host' => env('REDIS_HOST', 'localhost'),
+            'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', 6379),
-            'database' => 0,
+            'database' => env('REDIS_DB', 0),
         ],
 
+        'cache' => [
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'password' => env('REDIS_PASSWORD', null),
+            'port' => env('REDIS_PORT', 6379),
+            'database' => env('REDIS_CACHE_DB', 1),
+        ],
     ],
 
 ];
