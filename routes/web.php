@@ -24,7 +24,6 @@ Route::get('/customer/attendances', 'CustomerAttendanceController@index')->name(
 Route::get('profile', 'Admin\UserProfileController@edit')->name('admin.profile.edit');
 Route::patch('profile', 'Admin\UserProfileController@update')->name('admin.profile.update');
 
-
 /*
  * Removed routes belonging to admin lte package.
  */
