@@ -19,4 +19,9 @@ class Plan extends Model
     {
         return number_format($this->price / 100, 2);
     }
+
+    public function memberships()
+    {
+        return $this->hasMany(Membership::class);
+    }
 }
