@@ -29,6 +29,7 @@ class MembershipOrderConfirmationEmail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->view('emails.membership-confirmation-email');
+        return $this->subject('Nueva Membresía')
+                    ->view('emails.membership-confirmation-email');
     }
 }
