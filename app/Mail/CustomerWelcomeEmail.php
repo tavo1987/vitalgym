@@ -33,6 +33,7 @@ class CustomerWelcomeEmail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->view('emails.customer-welcome-email');
+        return $this->subject('Bienvenido a VitalGym')
+                    ->view('emails.customer-welcome-email');
     }
 }
