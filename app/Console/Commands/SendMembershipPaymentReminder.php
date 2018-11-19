@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Notifications\MembershipPaymentReminder;
-use App\VitalGym\Entities\Membership;
 use Illuminate\Console\Command;
+use App\VitalGym\Entities\Membership;
+use App\Notifications\MembershipPaymentReminder;
 
 class SendMembershipPaymentReminder extends Command
 {
@@ -41,13 +41,14 @@ class SendMembershipPaymentReminder extends Command
     {
         $memberships = Membership::with('customer')->whereDate('date_end', today()->addDays(5)->toDateString())->get();
 
-       if ($memberships->count() === 0) {
-           return $this->info('There are not customers to notify');
-       }
+        if ($memberships->count() === 0) {
+            return $this->info('There are not customers to notify');
+        }
 
-       $memberships->unique('customer')->each(function ($membership) {
+        $memberships->unique('customer')->each(function ($membership) {
             $membership->customer->notify(new MembershipPaymentReminder());
-       });
+        });
+
         return $this->info('The notification has been sent');
     }
 }
