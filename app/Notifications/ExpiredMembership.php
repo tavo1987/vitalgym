@@ -4,10 +4,11 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use App\VitalGym\Entities\Membership;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class ExpiredMembership extends Notification
+class ExpiredMembership extends Notification implements ShouldQueue
 {
     use Queueable;
     /**
