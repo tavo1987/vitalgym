@@ -50,8 +50,7 @@ class ExpiredMembership extends Notification implements ShouldQueue
                     ->greeting("Hola {$notifiable->full_name}")
                     ->line("Tu membresía {$this->membership->plan->name} ha caducado")
                     ->line("Fecha de inicio: {$this->membership->date_start->toDateString()}")
-                    ->line("Fecha de vencimiento: {$this->membership->date_end->toDateString()}")
-                    ->action('Notification Action', url('/'));
+                    ->line("Fecha de vencimiento: {$this->membership->date_end->toDateString()}");
     }
 
     /**
