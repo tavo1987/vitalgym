@@ -26,6 +26,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('notify:expired-membership')
                  ->dailyAt('7:00');
+        $schedule->command('notify:membership-payment-reminder')
+                 ->dailyAt('9:00');
     }
 
     /**
