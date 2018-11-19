@@ -83,7 +83,7 @@ class RoutineController extends Controller
             $extension = File::extension($routine->file);
             $fileName = str_slug($routine->name).'.'.$extension;
 
-            return Storage::download($routine->file, $fileName);
+            return response()->download(storage_path('app/'.$routine->file), $fileName);
         }
 
         return redirect()->back()->with(['message' => 'El archivo no se econtró', 'alert-type' => 'error']);
