@@ -15,9 +15,9 @@
             <h2 class="tw-text-base">Lenar el formulario para agregar un nivel</h2>
         </div>
         <div class="box-body">
-            <form action="{{ route('levels.store') }}" method="post" autocomplete="off">
+            <form action="{{ route('admin.levels.store') }}" method="post" autocomplete="off">
                 @csrf
-                
+
                 <div class="form-group {{ $errors->has('name') ? ' has-error': '' }}">
                     <label>Nombre</label>
                     <input class="form-control" type="text" name="name" value="{{ old('name') }}">

@@ -15,7 +15,7 @@
             <h2 class="tw-text-base">Actualizar nivel</h2>
         </div>
         <div class="box-body">
-            <form action="{{ route('levels.update', $level) }}" method="post" autocomplete="off">
+            <form action="{{ route('admin.levels.update', $level) }}" method="post" autocomplete="off">
                 @csrf
                 @method('PATCH')
                 <div class="form-group {{ $errors->has('name') ? ' has-error': '' }}">

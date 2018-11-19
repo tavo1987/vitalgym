@@ -10,7 +10,7 @@
             <div class=" lg:tw-flex lg:tw-items-center xl:tw-w-2/5">
                 <h3 class="tw-pr-4 tw-mb-2">Crear Nuevo:</h3>
                 <a class="vg-button tw-py-2 tw-bg-grey hover:tw-bg-indigo"
-                   href="{{ route('levels.create') }}">
+                   href="{{ route('admin.levels.create') }}">
                     <i class=" glyphicon glyphicon-file"></i>
                     Nuevo
                 </a>
@@ -33,8 +33,8 @@
                             <td>{{ $level->customers_count }}</td>
                             <td>{{ $level->routines_count }}</td>
                             <td class="tw-flex tw-justify-center tw-items-center">
-                                <a href="{{ route('levels.show', $level) }}" class="tw-px-2 tw-text-2xl tw-text-indigo"><i class="fa fa-eye"></i></a>
-                                <a href="{{ route('levels.edit', $level) }}" class="tw-px-2 tw-text-2xl tw-text-indigo"><i class="fa fa-edit"></i></a>
+                                <a href="{{ route('admin.levels.show', $level) }}" class="tw-px-2 tw-text-2xl tw-text-indigo"><i class="fa fa-eye"></i></a>
+                                <a href="{{ route('admin.levels.edit', $level) }}" class="tw-px-2 tw-text-2xl tw-text-indigo"><i class="fa fa-edit"></i></a>
                                 <form action="{{ route('admin.levels.destroy', $level) }}"  method="post" class="form-delete">
                                     @csrf
                                     @method('delete')

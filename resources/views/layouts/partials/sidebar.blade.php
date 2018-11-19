@@ -1,4 +1,5 @@
 <!-- Left side column. contains the logo and sidebar -->
+<!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
 
     <!-- sidebar: style can be found in sidebar.less -->
@@ -78,7 +79,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('admin.levels.index') }}"><i class="fa fa-circle-o"></i>Administrar niveles</a></li>
-                    <li><a href="{{ route('levels.create') }}"><i class="fa fa-circle-o"></i>Añadir nuevo</a></li>
+                    <li><a href="{{ route('admin.levels.create') }}"><i class="fa fa-circle-o"></i>Añadir nuevo</a></li>
                 </ul>
             </li>
             <li class="{{ request()->is('admin/payments') ? 'active' : '' }}">

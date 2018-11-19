@@ -41,7 +41,7 @@ class LevelController extends Controller
             'name' => $request->get('name'),
         ]);
 
-        return redirect()->route('levels.index')->with(['message' => 'Nivel guardado con éxito', 'alert-type' => 'success']);
+        return redirect()->route('admin.levels.index')->with(['message' => 'Nivel guardado con éxito', 'alert-type' => 'success']);
     }
 
     /**
@@ -79,9 +79,7 @@ class LevelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-        ]);
+        $request->validate(['name' => 'required']);
 
         $level = Level::findOrFail($id);
 
@@ -89,7 +87,7 @@ class LevelController extends Controller
             'name' => $request->get('name'),
         ]);
 
-        return redirect()->route('levels.index')->with(['message' => 'Nivel actualizado con éxito', 'alert-type' => 'success']);
+        return redirect()->route('admin.levels.index')->with(['message' => 'Nivel actualizado con éxito', 'alert-type' => 'success']);
     }
 
     public function destroy($id)
