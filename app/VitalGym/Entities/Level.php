@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Vitalgym\Entities;
+namespace App\VitalGym\Entities;
 
 use App\Traits\PerPageTrait;
 use Illuminate\Database\Eloquent\Model;
