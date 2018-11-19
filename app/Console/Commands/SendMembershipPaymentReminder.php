@@ -46,7 +46,7 @@ class SendMembershipPaymentReminder extends Command
         }
 
         $memberships->unique('customer')->each(function ($membership) {
-            $membership->customer->notify(new MembershipPaymentReminder());
+            $membership->customer->notify(new MembershipPaymentReminder($membership));
         });
 
         return $this->info('The notification has been sent');
