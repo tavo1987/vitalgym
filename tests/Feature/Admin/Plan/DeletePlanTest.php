@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin\Plan;
 
+use App\VitalGym\Entities\Membership;
 use App\VitalGym\Entities\Plan;
 use App\VitalGym\Entities\User;
 use Tests\TestCase;
@@ -22,6 +23,21 @@ class DeletePlanTest extends TestCase
         $response->assertRedirect(route('admin.plans.index'));
         $this->assertEquals(0, Plan::count());
         $response->assertSessionHas('alert-type', 'success');
+        $response->assertSessionHas('message');
+    }
+
+    /** @test */
+    function cannot_delete_a_plan_that_has_memberships()
+    {
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+        $plan = factory(Plan::class)->create();
+        factory(Membership::class)->create(['plan_id' => $plan->id]);
+
+        $response = $this->be($adminUser)->delete(route('admin.plans.destroy', $plan));
+
+        $response->assertRedirect(route('admin.plans.index'));
+        $this->assertEquals(1, Plan::count());
+        $response->assertSessionHas('alert-type', 'error');
         $response->assertSessionHas('message');
     }
 

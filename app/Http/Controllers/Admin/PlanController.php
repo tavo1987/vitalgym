@@ -58,7 +58,12 @@ class PlanController extends Controller
 
     public function destroy($planId)
     {
-        $plan = Plan::findOrFail($planId);
+        $plan = Plan::withCount('memberships')->findOrFail($planId);
+
+        if ($plan->memberships_count > 0) {
+            return redirect()->route('admin.plans.index')
+                             ->with(['alert-type' => 'error', 'message' => 'No se puede eliminar un plan asociado a membresías']);
+        }
         $plan->delete();
 
         return redirect()->route('admin.plans.index')
