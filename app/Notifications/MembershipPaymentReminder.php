@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\VitalGym\Entities\Membership;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,15 +11,19 @@ use Illuminate\Notifications\Messages\MailMessage;
 class MembershipPaymentReminder extends Notification implements ShouldQueue
 {
     use Queueable;
+    /**
+     * @var Membership
+     */
+    public $membership;
 
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param Membership $membership
      */
-    public function __construct()
+    public function __construct(Membership $membership)
     {
-        //
+        $this->membership = $membership;
     }
 
     /**
@@ -41,9 +46,11 @@ class MembershipPaymentReminder extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Recordatorio pago membresía')
+                    ->greeting("Hola {$notifiable->full_name}")
+                    ->line("Solo queríamos recordarte que tu membresía {$this->membership->plan->name} va a expirar muy pronto")
+                    ->line("Fecha de inicio: {$this->membership->date_start->toDateString()}")
+                    ->line("Fecha de vencimiento: {$this->membership->date_end->toDateString()}");
     }
 
     /**
