@@ -9,7 +9,7 @@ class PlanController extends Controller
 {
     public function index()
     {
-        $plans = Plan::orderByDesc('created_at')->paginate();
+        $plans = Plan::withCount('memberships')->orderByDesc('created_at')->paginate();
 
         return view('admin.plans.index', compact('plans'));
     }

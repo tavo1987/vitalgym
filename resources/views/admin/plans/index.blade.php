@@ -21,6 +21,7 @@
                         <th class="text-center">Nombre</th>
                         <th class="text-center">Precio</th>
                         <th class="text-center">Premium</th>
+                        <th class="text-center"># Membresías</th>
                         <th class="text-center">Creado</th>
                         <th class="text-center">Acciones</th>
                     </thead>
@@ -30,6 +31,7 @@
                                 <td class="tw-capitalize">{{ $plan->name }}</td>
                                 <td>${{ $plan->price_in_dollars }}</td>
                                 <td>{{ $plan->is_premium ? 'si' : 'no' }}</td>
+                                <td>{{ $plan->memberships_count }}</td>
                                 <td>{{ $plan->created_at->format('d-m-Y') }}</td>
                                 <td class="tw-flex tw-justify-center tw-items-center">
                                     <a href="{{ route('admin.plans.edit', $plan) }}" class="tw-px-2 tw-text-2xl tw-text-indigo"><i class="fa fa-edit"></i></a>
