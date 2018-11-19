@@ -8,10 +8,6 @@ Route::post('/users', 'UserController@store')->name('admin.users.store');
 Route::patch('/users/{userId}', 'UserController@update')->name('admin.users.update');
 Route::delete('/users/{userId}', 'UserController@destroy')->name('admin.users.destroy');
 
-//Admin Profile
-Route::get('profile', 'UserProfileController@edit')->name('admin.profile.edit');
-Route::patch('profile', 'UserProfileController@update')->name('admin.profile.update');
-
 //Levels
 Route::resource('levels', 'LevelController')->names([
     'create'   => 'admin.levels.create',
