@@ -87,7 +87,7 @@
 
                 <button type="submit" class="vg-button tw-bg-indigo tw-inline-flex tw-items-center tw-border-indigo tw-mr-1">
                     <i class="fa fa-save tw-mr-1 tw-text-base"></i>
-                    Actualizar
+                    Guardar
                 </button>
                 <a href="{{ route('admin.users.index') }}"
                    class="vg-button tw-text-black tw-bg-transparent hover:tw-text-black tw-inline-flex tw-items-center tw-border">

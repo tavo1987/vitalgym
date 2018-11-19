@@ -32,7 +32,6 @@ class CreateUserFormRequest extends FormRequest
             'phone' => 'required|max:10',
             'cell_phone' => 'required|max:10',
             'address' => 'required|max:255',
-            'active' => 'required|boolean',
         ];
     }
 
@@ -48,8 +47,8 @@ class CreateUserFormRequest extends FormRequest
             'phone' => request()->get('phone'),
             'cell_phone' => request()->get('cell_phone'),
             'address' => request()->get('address'),
-            'role' => request()->get('role'),
-            'active' => request()->get('active'),
+            'role' => 'admin',
+            'active' => false,
             'password' => bcrypt(request()->get('password')),
         ])->toArray();
     }
