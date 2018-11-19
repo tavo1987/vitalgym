@@ -15,9 +15,10 @@ class VerifyAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (!auth()->user()->isAdmin()) {
+        if (! auth()->user()->isAdmin()) {
             abort(403, 'Accesso denegado');
         }
+
         return $next($request);
     }
 }
