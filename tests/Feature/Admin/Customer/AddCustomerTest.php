@@ -72,7 +72,7 @@ class AddCustomerTest extends TestCase
         $levels->assertEquals($response->data('levels'));
         $routines->assertEquals($response->data('routines'));
     }
-    
+
     /** @test */
     function an_admin_can_create_a_new_customer()
     {
@@ -113,7 +113,7 @@ class AddCustomerTest extends TestCase
                   && $mail->customer->id = $customer->id;
         });
     }
-    
+
     /** @test */
     function name_is_required()
     {
@@ -511,7 +511,7 @@ class AddCustomerTest extends TestCase
         $this->assertEquals(0, Customer::count());
         Mail::assertNotQueued(CustomerWelcomeEmail::class);
     }
-    
+
     /** @test */
     function routine_id_must_be_exist()
     {
@@ -525,6 +525,22 @@ class AddCustomerTest extends TestCase
         $response->assertSessionHasErrors('routine_id');
         $this->assertEquals(0, Customer::count());
         Mail::assertNotQueued(CustomerWelcomeEmail::class);
+    }
+
+    /** @test */
+    function medical_observation_is_optional()
+    {
+        $this->withoutExceptionHandling();
+        $adminUser = factory(User::class)->states('admin', 'active')->create();
+        $response = $this->be($adminUser)->from(route('admin.customers.create'))->post(route('admin.customers.store'), $this->validParams([
+            'medical_observations' => null
+        ]));
+
+        $response->assertRedirect(route('admin.customers.index'));
+
+        $this->assertEquals(1, Customer::count());
+        $response->assertSessionHas('alert-type', 'success');
+        $response->assertSessionHas('message');
     }
 
     /** @test */

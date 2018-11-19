@@ -18,7 +18,7 @@ class CreateCustomersTable extends Migration
             $table->string('ci')->nullable();
             $table->date('birthdate');
             $table->string('gender');
-            $table->mediumText('medical_observations');
+            $table->mediumText('medical_observations')->nullable();
             $table->unsignedInteger('routine_id');
             $table->unsignedInteger('level_id');
             $table->unsignedInteger('user_id');
