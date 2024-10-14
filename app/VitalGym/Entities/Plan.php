@@ -12,7 +12,7 @@ class Plan extends Model
     protected $guarded = [];
 
     protected $casts = [
-      'is_premium' => 'boolean',
+        'is_premium' => 'boolean',
     ];
 
     public function getPriceInDollarsAttribute()

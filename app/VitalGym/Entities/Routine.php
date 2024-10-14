@@ -3,8 +3,8 @@
 namespace App\VitalGym\Entities;
 
 use App\Filters\LevelFilter;
-use App\Traits\PerPageTrait;
 use App\Filters\Traits\Filterable;
+use App\Traits\PerPageTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Routine extends Model

@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\VitalGym\Entities\Membership;
 use App\Notifications\MembershipPaymentReminder;
+use App\VitalGym\Entities\Membership;
+use Illuminate\Console\Command;
 
 class SendMembershipPaymentReminder extends Command
 {

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -41,8 +41,9 @@ class LoginController extends Controller
     /**
      * The user has been authenticated.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return mixed
+     *
      * @internal param mixed $user
      */
     protected function authenticated(Request $request, $user)

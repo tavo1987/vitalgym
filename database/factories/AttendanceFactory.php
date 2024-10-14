@@ -1,8 +1,8 @@
 <?php
 
-use Faker\Generator as Faker;
-use App\VitalGym\Entities\Customer;
 use App\VitalGym\Entities\Attendance;
+use App\VitalGym\Entities\Customer;
+use Faker\Generator as Faker;
 
 $factory->define(Attendance::class, function (Faker $faker) {
     return [

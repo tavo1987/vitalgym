@@ -25,12 +25,12 @@ class CreateMembershipFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'date_start'          => 'required|date|date_format:Y-m-d|after_or_equal:today',
-            'date_end'            => 'required|date|date_format:Y-m-d|after_or_equal:date_start',
-            'total_days'          => optional(Plan::find($this->route('planId')))->is_premium
+            'date_start' => 'required|date|date_format:Y-m-d|after_or_equal:today',
+            'date_end' => 'required|date|date_format:Y-m-d|after_or_equal:date_start',
+            'total_days' => optional(Plan::find($this->route('planId')))->is_premium
                                      ? 'required|integer|min:1'
                                      : '',
-            'customer_id'         => 'required|exists:customers,id',
+            'customer_id' => 'required|exists:customers,id',
             'membership_quantity' => 'required|integer|min:1',
         ];
     }

@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use App\VitalGym\Entities\Routine;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Storage;
 
 class UpdateRoutineFormRequest extends FormRequest
 {
@@ -26,10 +26,10 @@ class UpdateRoutineFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  =>  'required|min:3|max:20',
-            'file'  =>   'nullable|max:2048|mimes:jpeg,png,jpg,doc,docx,pdf,xlsx',
-            'description'   =>  'required|max:255',
-            'level_id'  =>  'required|exists:levels,id',
+            'name' => 'required|min:3|max:20',
+            'file' => 'nullable|max:2048|mimes:jpeg,png,jpg,doc,docx,pdf,xlsx',
+            'description' => 'required|max:255',
+            'level_id' => 'required|exists:levels,id',
         ];
     }
 

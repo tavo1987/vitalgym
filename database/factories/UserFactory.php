@@ -1,7 +1,7 @@
 <?php
 
-use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\ActivationToken;
+use App\VitalGym\Entities\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,16 +18,16 @@ $factory->define(User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name'           => $faker->firstName,
-        'last_name'      => $faker->lastName,
-        'avatar'         => 'avatars/default-avatar.jpg',
-        'email'          => $faker->unique()->safeEmail,
-        'phone'          => $faker->phoneNumber,
-        'cell_phone'     => $faker->phoneNumber,
-        'address'         => $faker->address,
-        'password'       => $password ?: $password = bcrypt('secret'),
-        'active'         => $faker->randomElement([true, false, true]),
-        'role'           => $faker->randomElement(['admin', 'customer', 'customer']),
+        'name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'avatar' => 'avatars/default-avatar.jpg',
+        'email' => $faker->unique()->safeEmail,
+        'phone' => $faker->phoneNumber,
+        'cell_phone' => $faker->phoneNumber,
+        'address' => $faker->address,
+        'password' => $password ?: $password = bcrypt('secret'),
+        'active' => $faker->randomElement([true, false, true]),
+        'role' => $faker->randomElement(['admin', 'customer', 'customer']),
         'remember_token' => str_random(10),
     ];
 });
@@ -46,7 +46,7 @@ $factory->state(User::class, 'active', [
 
 $factory->define(ActivationToken::class, function (Faker\Generator $faker) {
     return [
-        'token'   => str_random(128),
+        'token' => str_random(128),
         'user_id' => function () {
             return factory(User::class)->create()->id;
         },
