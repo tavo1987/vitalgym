@@ -2,8 +2,8 @@
 
 namespace App\Filters;
 
-use App\VitalGym\Entities\User;
 use App\VitalGym\Entities\Customer;
+use App\VitalGym\Entities\User;
 
 class MembershipFilter extends Filter
 {

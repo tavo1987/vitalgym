@@ -2,11 +2,11 @@
 
 namespace App\Mail;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
 use App\VitalGym\Entities\Customer;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
 
 class CustomerWelcomeEmail extends Mailable implements ShouldQueue
 {
@@ -19,7 +19,7 @@ class CustomerWelcomeEmail extends Mailable implements ShouldQueue
     /**
      * Create a new message instance.
      *
-     * @param Customer $customer
+     * @param  Customer  $customer
      */
     public function __construct(Customer $customer)
     {

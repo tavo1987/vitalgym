@@ -2,11 +2,11 @@
 
 namespace App\Notifications;
 
-use Illuminate\Bus\Queueable;
 use App\VitalGym\Entities\Membership;
-use Illuminate\Notifications\Notification;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class ExpiredMembership extends Notification implements ShouldQueue
 {
@@ -19,7 +19,7 @@ class ExpiredMembership extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      *
-     * @param Membership $membership
+     * @param  Membership  $membership
      */
     public function __construct(Membership $membership)
     {

@@ -2,9 +2,9 @@
 
 namespace App\Mail;
 
+use App\VitalGym\Entities\ActivationToken;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\VitalGym\Entities\ActivationToken;
 
 class SendActivationToken extends Mailable
 {
@@ -14,7 +14,8 @@ class SendActivationToken extends Mailable
 
     /**
      * SendActivationToken constructor.
-     * @param ActivationToken $token
+     *
+     * @param  ActivationToken  $token
      */
     public function __construct(ActivationToken $token)
     {

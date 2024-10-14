@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\HasMembershipRule;
-use App\Rules\dailyAttendanceRule;
 use App\Rules\ActiveMembershipRule;
+use App\Rules\dailyAttendanceRule;
+use App\Rules\HasMembershipRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateAttendanceFormRequest extends FormRequest
