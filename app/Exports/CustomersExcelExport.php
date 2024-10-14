@@ -4,15 +4,14 @@ namespace App\Exports;
 
 use App\VitalGym\Entities\Customer;
 use Maatwebsite\Excel\Concerns\FromQuery;
-use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
 class CustomersExcelExport implements FromQuery, WithMapping, WithHeadings, ShouldAutoSize
 {
     /**
-     * @param \App\VitalGym\Entities\Customer $customer
-     *
+     * @param  \App\VitalGym\Entities\Customer  $customer
      * @return array
      */
     public function map($customer): array

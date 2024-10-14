@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Maatwebsite\Excel\Exporter;
-use App\Http\Controllers\Controller;
 use App\Exports\CustomersExcelExport;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Exporter;
 
 class CustomerExportController extends Controller
 {
@@ -13,7 +13,7 @@ class CustomerExportController extends Controller
      */
     private $excel;
 
-    public function __construct(Exporter  $excel)
+    public function __construct(Exporter $excel)
     {
         $this->excel = $excel;
     }

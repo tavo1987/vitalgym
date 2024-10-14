@@ -2,8 +2,8 @@
 
 namespace App\Filters;
 
-use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 abstract class Filter
 {
@@ -24,7 +24,7 @@ abstract class Filter
     /**
      * Filter constructor.
      *
-     * @param Request $request
+     * @param  Request  $request
      */
     public function __construct(Request $request)
     {
@@ -34,7 +34,7 @@ abstract class Filter
     /**
      * Apply the filters on the query.
      *
-     * @param $builder
+     * @param  $builder
      * @return Builder
      */
     public function apply($builder)
@@ -51,8 +51,9 @@ abstract class Filter
     /**
      * Fetch all relevant filters from the request.
      *
-     * @throws FiltersNotDefinedException
      * @return array
+     *
+     * @throws FiltersNotDefinedException
      */
     protected function getFilters()
     {
