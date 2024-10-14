@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
+use App\Events\UserRequestedActivationEmail;
 use App\Mail\SendActivationToken;
 use Illuminate\Support\Facades\Mail;
-use App\Events\UserRequestedActivationEmail;
 
 class SendActivationEmail
 {

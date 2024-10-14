@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\VitalGym\Entities\User;
+use App\Events\UserRequestedActivationEmail;
 use App\Http\Controllers\Controller;
 use App\VitalGym\Entities\ActivationToken;
-use App\Events\UserRequestedActivationEmail;
+use App\VitalGym\Entities\User;
 
 class ActivationController extends Controller
 {

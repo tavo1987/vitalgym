@@ -1,7 +1,7 @@
 <?php
 
-use Faker\Generator as Faker;
 use App\VitalGym\Entities\Plan;
+use Faker\Generator as Faker;
 
 $factory->define(Plan::class, function (Faker $faker) {
     return [
@@ -11,4 +11,4 @@ $factory->define(Plan::class, function (Faker $faker) {
     ];
 });
 
-$factory->state(Plan::class, 'premium', ['is_premium' =>true]);
+$factory->state(Plan::class, 'premium', ['is_premium' => true]);

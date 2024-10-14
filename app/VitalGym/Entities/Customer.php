@@ -2,9 +2,9 @@
 
 namespace App\VitalGym\Entities;
 
-use App\Traits\PerPageTrait;
 use App\Filters\CustomerFilter;
 use App\Filters\Traits\Filterable;
+use App\Traits\PerPageTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 

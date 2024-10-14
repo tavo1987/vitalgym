@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\VitalGym\Entities\Plan;
 use App\Http\Controllers\Controller;
+use App\VitalGym\Entities\Plan;
 
 class PlanController extends Controller
 {
@@ -43,9 +43,9 @@ class PlanController extends Controller
     public function update($planId)
     {
         $validatedData = request()->validate([
-           'name' => 'required|max:60',
-           'price' => 'required|integer',
-           'is_premium' => 'required|boolean',
+            'name' => 'required|max:60',
+            'price' => 'required|integer',
+            'is_premium' => 'required|boolean',
         ]);
 
         $plan = Plan::findOrfail($planId);

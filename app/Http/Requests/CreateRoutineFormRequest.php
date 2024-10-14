@@ -24,10 +24,10 @@ class CreateRoutineFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'  =>  'required|min:3|max:20',
-            'file'  =>   'required|max:2048|mimes:jpeg,png,jpg,doc,docx,pdf,xlsx',
-            'description'   =>  'required|max:255',
-            'level_id'  =>  'required|exists:levels,id',
+            'name' => 'required|min:3|max:20',
+            'file' => 'required|max:2048|mimes:jpeg,png,jpg,doc,docx,pdf,xlsx',
+            'description' => 'required|max:255',
+            'level_id' => 'required|exists:levels,id',
         ];
     }
 }
