@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\VitalGym\Entities\Customer;
 use App\Http\Controllers\Controller;
-use App\VitalGym\Entities\Attendance;
 use App\Http\Requests\CreateAttendanceFormRequest;
+use App\VitalGym\Entities\Attendance;
+use App\VitalGym\Entities\Customer;
 
 class AttendanceController extends Controller
 {

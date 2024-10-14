@@ -4,17 +4,16 @@ namespace App\Exports;
 
 use App\VitalGym\Entities\Membership;
 use Maatwebsite\Excel\Concerns\FromQuery;
-use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
 class MembershipsExcelExport implements FromQuery, WithMapping, WithHeadings, ShouldAutoSize, WithColumnFormatting
 {
     /**
-     * @param mixed $membership
-     *
+     * @param  mixed  $membership
      * @return array
      */
     public function map($membership): array

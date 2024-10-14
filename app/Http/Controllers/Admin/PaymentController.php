@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\VitalGym\Entities\Payment;
 use App\Http\Controllers\Controller;
+use App\VitalGym\Entities\Payment;
 
 class PaymentController extends Controller
 {

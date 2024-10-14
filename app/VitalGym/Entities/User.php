@@ -2,13 +2,13 @@
 
 namespace App\VitalGym\Entities;
 
-use App\Filters\UserFilter;
-use App\Traits\PerPageTrait;
 use App\Filters\Traits\Filterable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Filters\UserFilter;
 use App\Notifications\ResetPasswordNotification;
+use App\Traits\PerPageTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {

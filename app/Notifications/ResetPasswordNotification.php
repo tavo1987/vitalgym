@@ -3,8 +3,8 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class ResetPasswordNotification extends Notification
 {
@@ -17,7 +17,7 @@ class ResetPasswordNotification extends Notification
     /**
      * Create a new notification instance.
      *
-     * @param $token
+     * @param  $token
      */
     public function __construct($token)
     {

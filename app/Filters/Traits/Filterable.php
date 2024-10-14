@@ -10,8 +10,9 @@ trait Filterable
     /**
      * Apply all filters on the model.
      *
-     * @param Builder $query
+     * @param  Builder  $query
      * @return Builder
+     *
      * @throws Exception
      */
     public function scopeFilter($query)

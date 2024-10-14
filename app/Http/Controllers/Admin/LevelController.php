@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\VitalGym\Entities\Level;
 use App\Http\Controllers\Controller;
+use App\VitalGym\Entities\Level;
+use Illuminate\Http\Request;
 
 class LevelController extends Controller
 {
