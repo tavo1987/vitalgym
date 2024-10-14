@@ -19,3 +19,4 @@ Si descubre una vulnerabilidad de seguridad dentro de este software, envía un c
 Vital Gym es un software de código abierto bajo licencia [MIT license](http://opensource.org/licenses/MIT). Desarrollado bajo el Framework [Laravel](https://laravel.com/)
 
 ## Pdf de la documentación
+## Download the documentation in PDF format
